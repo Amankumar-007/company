@@ -1,5 +1,6 @@
 import React, { useCallback, useLayoutEffect, useRef, useState, useEffect } from 'react';
 import { gsap } from 'gsap';
+import Image from 'next/image';
 import './StaggeredMenu.css';
 
 export interface StaggeredMenuItem {
@@ -141,7 +142,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
     // Add color animations for pre-layers
     if (layers.length > 0) {
       const targetColors = colors && colors.length ? colors.slice(0, 4) : ['#1e1e22', '#35353c'];
-      let colorArray = [...targetColors];
+      const colorArray = [...targetColors];
       if (colorArray.length >= 3) {
         const mid = Math.floor(colorArray.length / 2);
         colorArray.splice(mid, 1);
@@ -225,7 +226,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
 
     openTlRef.current = tl;
     return tl;
-  }, [position]);
+  }, [accentColor, colors]);
 
   const playOpen = useCallback(() => {
     if (busyRef.current) return;
@@ -262,7 +263,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
 
     // CSS transitions now handle panel positioning, no GSAP needed
     busyRef.current = false;
-  }, [position]);
+  }, []);
 
   const animateIcon = useCallback((opening: boolean) => {
     const icon = iconRef.current;
@@ -350,7 +351,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
     animateIcon(target);
     animateColor(target);
     animateText(target);
-  }, [playOpen, playClose, animateIcon, animateColor, animateText]);
+  }, [playOpen, playClose, animateIcon, animateColor, animateText, onMenuOpen, onMenuClose]);
 
   // Add click outside detection
   useEffect(() => {
@@ -382,7 +383,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
   return (
     <div
       className={(className ? className + ' ' : '') + 'staggered-menu-wrapper'}
-      style={accentColor ? { ['--sm-accent' as any]: accentColor } : undefined}
+      style={accentColor ? { ['--sm-accent' as string]: accentColor } : undefined}
       data-position={position}
       data-open={open || undefined}
     >
@@ -397,7 +398,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
       </div>
       <header className="staggered-menu-header" aria-label="Main navigation header">
         <div className="sm-logo" aria-label="Logo">
-          <img
+          <Image
             src={logoUrl || '/src/assets/logos/reactbits-gh-white.svg'}
             alt="Logo"
             className="sm-logo-img"

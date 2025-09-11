@@ -4,13 +4,13 @@ import FeaturedProjects from "../components/FeaturedProjects"
 import Services from "../components/Services"
 import BlogPreview from "../components/BlogPreview"
 import ContactFooter from "../components/ContactFooter"
-import logo from "../../pages/logo.svg"
 
 import { useScroll } from "@/context/ScrollContext"
 import { useEffect, useRef } from "react"
 
 export default function Home() {
-  const { gsap, ScrollTrigger } = useScroll()
+  const scrollContext = useScroll()
+  const { gsap, ScrollTrigger } = scrollContext || { gsap: undefined, ScrollTrigger: undefined }
   const mainRef = useRef(null)
 
 
@@ -22,8 +22,9 @@ export default function Home() {
     ScrollTrigger.refresh()
 
     // Enhanced fade-up animations
-    gsap.utils.toArray(".fade-up").forEach(el => {
-      gsap.fromTo(el, 
+    gsap.utils.toArray(".fade-up").forEach((el: unknown) => {
+      const element = el as HTMLElement
+      gsap.fromTo(element, 
         { y: 80, opacity: 0, scale: 0.95 },
         {
           y: 0,
@@ -32,7 +33,7 @@ export default function Home() {
           duration: 1.2,
           ease: "power3.out",
           scrollTrigger: {
-            trigger: el,
+            trigger: element,
             start: "top 85%",
             end: "bottom 15%",
             toggleActions: "play none none reverse",
@@ -43,14 +44,15 @@ export default function Home() {
     })
 
     // Parallax effect for sections
-    gsap.utils.toArray("section").forEach((section: Element) => {
-      const bg = section.querySelector(".parallax-bg")
+    gsap.utils.toArray("section").forEach((section: unknown) => {
+      const sectionElement = section as Element
+      const bg = sectionElement.querySelector(".parallax-bg")
       if (bg) {
         gsap.to(bg, {
           yPercent: -20,
           ease: "none",
           scrollTrigger: {
-            trigger: section,
+            trigger: sectionElement,
             start: "top bottom",
             end: "bottom top",
             scrub: true
@@ -60,8 +62,9 @@ export default function Home() {
     })
 
     // Staggered animations for grid items
-    gsap.utils.toArray(".grid > *").forEach((item: Element, index: number) => {
-      gsap.fromTo(item,
+    gsap.utils.toArray(".grid > *").forEach((item: unknown, index: number) => {
+      const itemElement = item as Element
+      gsap.fromTo(itemElement,
         { y: 60, opacity: 0, rotationX: 15 },
         {
           y: 0,
@@ -71,7 +74,7 @@ export default function Home() {
           delay: index * 0.1,
           ease: "power2.out",
           scrollTrigger: {
-            trigger: item,
+            trigger: itemElement,
             start: "top 85%",
             toggleActions: "play none none reverse"
           }
@@ -87,7 +90,8 @@ export default function Home() {
 
     // Cleanup
     return () => {
-      ScrollTrigger.getAll().forEach((trigger: any) => trigger.kill())
+      const triggers = ScrollTrigger.getAll() as Array<{kill: () => void}>
+      triggers.forEach(trigger => trigger.kill())
     }
   }, [gsap, ScrollTrigger])
 
