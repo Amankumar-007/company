@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import "../styles/curve.css";
 
-// 👇 import the ScrollProvider
+// 👇 import the ScrollProvider, Curve component, and AnimatePresence
 import { ScrollProvider } from "../context/ScrollContext";
+import Curve from "../components/Curve";
+import { AnimatePresence } from 'framer-motion';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -30,8 +33,14 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {/* 👇 Wrap everything with ScrollProvider */}
-        <ScrollProvider>{children}</ScrollProvider>
+        {/* 👇 Wrap everything with ScrollProvider and AnimatePresence */}
+        <ScrollProvider>
+          <AnimatePresence mode="wait">
+            <Curve backgroundColor="#ffffff">
+              {children}
+            </Curve>
+          </AnimatePresence>
+        </ScrollProvider>
       </body>
     </html>
   );
