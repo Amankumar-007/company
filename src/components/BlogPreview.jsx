@@ -97,10 +97,10 @@ export default function BlogPreview() {
   }, [gsap, ScrollTrigger])
 
   return (
-    <section ref={sectionRef} className="py-20 px-4 bg-white rounded-[50px] overflow-hidden">
+    <section ref={sectionRef} className="py-20 px-4 bg-black rounded-t-[50px] overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
         <div className="section-header text-center mb-16">
-          <h2 className="fade-up text-4xl md:text-5xl font-bold text-black mb-6">
+          <h2 className="fade-up text-4xl md:text-5xl font-bold text-white mb-6">
             Latest Insights
           </h2>
           <p className="fade-up text-lg text-gray-800 max-w-2xl mx-auto">

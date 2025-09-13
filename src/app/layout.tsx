@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import "../styles/curve.css";
+import Header from "../components/Header";
 
 // 👇 import the ScrollProvider, Curve component, and AnimatePresence
 import { ScrollProvider } from "../context/ScrollContext";
@@ -35,12 +36,15 @@ export default function RootLayout({
       >
         {/* 👇 Wrap everything with ScrollProvider and AnimatePresence */}
         <ScrollProvider>
-          <AnimatePresence mode="wait">
+          <AnimatePresence mode="wait">s
             <Curve backgroundColor="#ffffff">
+              <Header/>
               {children}
             </Curve>
           </AnimatePresence>
         </ScrollProvider>
+        
+        {/* 👇 Global Staggered Menu that appears on scroll */}
       </body>
     </html>
   );

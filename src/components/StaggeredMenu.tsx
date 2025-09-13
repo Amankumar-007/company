@@ -1,6 +1,8 @@
+'use client'
 import React, { useCallback, useLayoutEffect, useRef, useState, useEffect } from 'react';
 import { gsap } from 'gsap';
 import Image from 'next/image';
+import Link from 'next/link';
 import './StaggeredMenu.css';
 
 export interface StaggeredMenuItem {
@@ -438,9 +440,24 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
             {items && items.length ? (
               items.map((it, idx) => (
                 <li className="sm-panel-itemWrap" key={it.label + idx}>
-                  <a className="sm-panel-item" href={it.link} aria-label={it.ariaLabel} data-index={idx + 1}>
+                  <Link 
+                    className="sm-panel-item" 
+                    href={it.link} 
+                    aria-label={it.ariaLabel} 
+                    data-index={idx + 1}
+                    prefetch={true}
+                    onClick={() => {
+                      setOpen(false);
+                      openRef.current = false;
+                      onMenuClose?.();
+                      playClose();
+                      animateIcon(false);
+                      animateColor(false);
+                      animateText(false);
+                    }}
+                  >
                     <span className="sm-panel-itemLabel">{it.label}</span>
-                  </a>
+                  </Link>
                 </li>
               ))
             ) : (

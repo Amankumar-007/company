@@ -1,6 +1,7 @@
 "use client"
 import { useEffect, useRef } from "react"
 import { useScroll } from "@/context/ScrollContext"
+import Link from "next/link"
 
 const services = [
   {
@@ -142,7 +143,7 @@ export default function Services() {
                 {service.description}
               </p>
               
-              <div className="flex items-center justify-between pt-4 border-t border-gray-800">
+              <Link href="/services" prefetch={true} className="flex items-center justify-between pt-4 border-t border-gray-800 group-hover:border-blue-600 transition-colors duration-300">
                 <span className="text-sm font-medium text-blue-400 group-hover:text-blue-300 transition-colors duration-300">
                   Learn More
                 </span>
@@ -151,7 +152,7 @@ export default function Services() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
                   </svg>
                 </div>
-              </div>
+              </Link>
               
               <div className="absolute inset-0 bg-gradient-to-br from-blue-600/5 to-purple-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl pointer-events-none"></div>
             </div>
