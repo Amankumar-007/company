@@ -1,3 +1,4 @@
+// animation.js (unchanged)
 export const slideUp = {
     initial: {
         y: "100%"

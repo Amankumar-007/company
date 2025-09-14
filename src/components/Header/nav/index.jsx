@@ -13,12 +13,12 @@ const navItems = [
     href: "/",
   },
   {
-    title: "Services",
-    href: "/services",
-  },
-  {
     title: "Work",
     href: "/work",
+  },
+  {
+    title: "Services",
+    href: "/services",
   },
   {
     title: "About",

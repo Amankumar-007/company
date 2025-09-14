@@ -1,16 +1,16 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import Rounded from "../common/RoundedButton/index";
+
 
 export default function HeroSection() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const { scrollYProgress } = useScroll();
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
   useEffect(() => {
-    const handleMouseMove = (e) => {
+    const handleMouseMove = (e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
     };
     window.addEventListener('mousemove', handleMouseMove);
@@ -20,13 +20,12 @@ export default function HeroSection() {
   const letters = "Agile-Driven".split('');
 
   return (
-    <motion.section 
+    <section 
       className="relative min-h-screen mt-12 bg-white text-black overflow-hidden flex items-center justify-center"
-      style={{ opacity }}
     >
       {/* Interactive background elements */}
       <div className="absolute inset-0">
-        <motion.div 
+        <div 
           className="absolute w-96 h-96 border border-black rounded-full opacity-10"
           style={{
             left: mousePosition.x - 200,
@@ -69,7 +68,7 @@ export default function HeroSection() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 3.2, duration: 0.8 }}
             >
-              WORLD'S FIRST
+              WORLD&apos;S FIRST
             </motion.span>
             
             {/* Animated letters for Agile-Driven */}
@@ -127,43 +126,23 @@ export default function HeroSection() {
             transition={{ delay: 4.3, duration: 0.8 }}
           >
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="inline-block">
-              <Link 
-                href="/get-started" 
-                className="relative px-12 py-4 bg-black text-white font-medium text-sm tracking-widest uppercase overflow-hidden group inline-block"
-              >
-                <span className="relative z-10">Get Started</span>
-                <motion.div 
-                  className="absolute inset-0 bg-white"
-                  initial={{ x: "-100%" }}
-                  whileHover={{ x: 0 }}
-                  transition={{ duration: 0.3 }}
-                />
-                <span className="absolute inset-0 flex items-center justify-center text-black opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
-                  Get Started
-                </span>
+              <Link href="/get-started">
+                <Rounded backgroundColor="#000000" data-shape="square">
+                  <p>Get Started</p>
+                </Rounded>
               </Link>
             </motion.div>
 
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="inline-block">
-              <Link 
-                href="/portfolio" 
-                className="relative px-12 py-4 border-2 border-black text-black font-medium text-sm tracking-widest uppercase overflow-hidden group inline-block"
-              >
-                <span className="relative z-10">See Our Work</span>
-                <motion.div 
-                  className="absolute inset-0 bg-black"
-                  initial={{ x: "100%" }}
-                  whileHover={{ x: 0 }}
-                  transition={{ duration: 0.3 }}
-                />
-                <span className="absolute inset-0 flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
-                  See Our Work
-                </span>
+              <Link href="/portfolio">
+                <Rounded backgroundColor="#ffffff" data-hover-color="#4169E1" data-shape="square">
+                  <p>See Our Work</p>
+                </Rounded>
               </Link>
             </motion.div>
           </motion.div>
         </motion.div>
       </div>
-    </motion.section>
+    </section>
   );
 }

@@ -142,7 +142,7 @@ const ServicesPage = () => {
       )
 
       // Services cards animation with ScrollTrigger
-      serviceCardsRef.current.forEach((card, index) => {
+      serviceCardsRef.current.forEach((card) => {
         if (card) {
           gsap.fromTo(card,
             { opacity: 0, y: 50 },

@@ -6,6 +6,24 @@
     flex-direction: column;
     margin-top: 300px;
 
+    @media (max-width: 1024px) {
+        padding-left: 100px;
+        padding-right: 100px;
+        margin-top: 200px;
+    }
+
+    @media (max-width: 768px) {
+        padding-left: 50px;
+        padding-right: 50px;
+        margin-top: 150px;
+    }
+
+    @media (max-width: 480px) {
+        padding-left: 20px;
+        padding-right: 20px;
+        margin-top: 100px;
+    }
+
     .body{
         max-width: 1400px;
         width: 100%;
@@ -14,6 +32,63 @@
         align-items: center;
         justify-content: center;
         margin-bottom: 100px;
+
+        .title{
+            font-size: 56px;
+            font-weight: 700;
+            margin: 0 0 80px 0;
+            text-align: left;
+            color: #1a1a1a;
+            letter-spacing: -1px;
+            line-height: 1.1;
+            position: relative;
+            align-self: flex-start;
+            width: 100%;
+
+            &::after {
+                content: '';
+                position: absolute;
+                bottom: -20px;
+                left: 0;
+                width: 80px;
+                height: 4px;
+                background: linear-gradient(90deg, #455CE9 0%, #6C63FF 100%);
+                border-radius: 2px;
+            }
+
+            @media (max-width: 1024px) {
+                font-size: 48px;
+                margin-bottom: 70px;
+
+                &::after {
+                    width: 60px;
+                    height: 3px;
+                    bottom: -15px;
+                }
+            }
+
+            @media (max-width: 768px) {
+                font-size: 40px;
+                margin-bottom: 60px;
+
+                &::after {
+                    width: 50px;
+                    height: 3px;
+                    bottom: -12px;
+                }
+            }
+
+            @media (max-width: 480px) {
+                font-size: 32px;
+                margin-bottom: 50px;
+
+                &::after {
+                    width: 40px;
+                    height: 2px;
+                    bottom: -10px;
+                }
+            }
+        }
     }
     
     .modalContainer{
@@ -26,6 +101,16 @@
         pointer-events: none;
         overflow: hidden;
         z-index: 3;
+
+        @media (max-width: 768px) {
+            height: 250px;
+            width: 300px;
+        }
+
+        @media (max-width: 480px) {
+            height: 200px;
+            width: 250px;
+        }
     }
     
     .modalSlider{
@@ -45,6 +130,19 @@
     
     .modal img{
         height: auto;
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+
+        @media (max-width: 768px) {
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        @media (max-width: 480px) {
+            max-width: 85%;
+            max-height: 85%;
+        }
     }
     
     .cursor, .cursorLabel{
@@ -61,55 +159,20 @@
         font-size: 14px;
         font-weight: 300;
         pointer-events: none;
+
+        @media (max-width: 768px) {
+            display: none;
+        }
     }
     
     .cursorLabel{
         background-color: transparent;
-    }
 
-    // Mobile responsive styles
-    @media (max-width: 768px) {
-        padding-left: 20px;
-        padding-right: 20px;
-        margin-top: 150px;
-        
-        .body {
-            margin-bottom: 60px;
-        }
-        
-        .modalContainer {
-            height: 250px;
-            width: 300px;
-        }
-        
-        .cursor, .cursorLabel {
-            width: 60px;
-            height: 60px;
-            font-size: 12px;
+        @media (max-width: 768px) {
+            display: none;
         }
     }
-
-    // Extra small mobile screens
-    @media (max-width: 480px) {
-        padding-left: 15px;
-        padding-right: 15px;
-        margin-top: 100px;
-        
-        .body {
-            margin-bottom: 40px;
-        }
-        
-        .modalContainer {
-            height: 200px;
-            width: 250px;
-        }
-        
-        .cursor, .cursorLabel {
-            width: 50px;
-            height: 50px;
-            font-size: 10px;
-        }
-    }
+    
     
 }
 

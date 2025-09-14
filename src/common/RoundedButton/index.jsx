@@ -18,22 +18,40 @@ export default function index({children, backgroundColor="#455CE9", ...attribute
   
   const manageMouseEnter = () => {
     if(timeoutId) clearTimeout(timeoutId)
+    const hoverColor = attributes['data-hover-color'];
+    if (hoverColor) {
+      circle.current.style.backgroundColor = hoverColor;
+    }
     timeline.current.tweenFromTo('enter', 'exit');
   }
 
   const manageMouseLeave = () => {
     timeoutId = setTimeout( () => {
+      const hoverColor = attributes['data-hover-color'];
+      if (hoverColor) {
+        circle.current.style.backgroundColor = backgroundColor;
+      }
       timeline.current.play();
     }, 300)
   }
 
   return (
     <Magnetic>
-      <div className={styles.roundedButton} style={{overflow: "hidden"}} onMouseEnter={() => {manageMouseEnter()}} onMouseLeave={() => {manageMouseLeave()}} {...attributes}>
+      <div 
+        className={attributes['data-shape'] === 'square' ? styles.squareButton : styles.roundedButton} 
+        style={{overflow: "hidden"}} 
+        onMouseEnter={() => {manageMouseEnter()}} 
+        onMouseLeave={() => {manageMouseLeave()}} 
+        {...attributes}
+      >
           {
             children
           }
-        <div ref={circle} style={{backgroundColor}} className={styles.circle}></div>
+        <div 
+          ref={circle} 
+          style={{backgroundColor}} 
+          className={attributes['data-shape'] === 'square' ? styles.squareCircle : styles.circle}
+        ></div>
       </div>
     </Magnetic>
   )

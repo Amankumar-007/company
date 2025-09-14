@@ -2,12 +2,12 @@
     position: absolute;
     display: flex;
     z-index: 1;
-    top: 0;
+    top: -2;
     color: black;
-    padding: 20px 35px;
+    padding: 25px;
     justify-content: space-between;
     width: 100%;
-    font-weight: 400;
+    font-weight: 300;
     box-sizing: border-box;
     align-items: center;
     
@@ -74,8 +74,8 @@
             }
             .indicator{
                 position: absolute;
-                width: 6px;
-                height: 6px;
+                width: 5px;
+                height: 5px;
                 top: 45px;
                 left: 50%;
                 background-color: black;
@@ -86,22 +86,60 @@
         }
         a{
             cursor: pointer;
-            font-size: 18px;
-            font-weight: 500;
-            color: black;
-            text-decoration: none;
-            transition: opacity 0.2s ease;
-            &:hover{
-                opacity: 0.7;
-            }
         }
     } 
-}
+    
+    // Mobile responsive styles
+    @media (max-width: 768px) {
+        padding: 20px;
+        
+        .logo{
+            .name{
+                p{
+                    &:nth-of-type(3){
+                        left: 80px;
+                    }
+                }
+            }
+        }
+        
+        .nav{
+            .el{
+                padding: 10px;
+                
+                .indicator{
+                    top: 35px;
+                }
+            }
+        }
+    }
+    
+    @media (max-width: 480px) {
+        padding: 15px;
+        
+        .logo{
+            .name{
+                margin-left: 3px;
+                
+                p{
+                    font-size: 14px;
+                    
+                    &:nth-of-type(3){
+                        left: 60px;
+                    }
+                }
+            }
+        }
+        
+        .nav{
+            display: none; // Hide nav links on mobile, use hamburger menu instead
+        }
+    }
+} 
 .headerButtonContainer{
     transform: scale(0);
     position: fixed;
     right: 0px;
-    top: 0px;
     z-index: 4;
 
     .button{
@@ -154,64 +192,21 @@
         }
         
     }
-}
-
-// Mobile responsive styles
-@media (max-width: 768px) {
-    .header {
-        padding: 20px;
-        
-        .logo {
-            .name {
-                display: none;
-            }
-            
-            &:hover {
-                .copyright {
-                    transform: rotate(360deg);
-                }
-            }
-        }
-        
-        .nav {
-            display: none;
-        }
-    }
     
-    .headerButtonContainer {
-        transform: scale(1);
-        
-        .button {
+    // Mobile responsive styles for hamburger button
+    @media (max-width: 768px) {
+        .button{
             width: 60px;
             height: 60px;
             margin: 15px;
-            
-            .burger {
-                &::after, &::before {
-                    width: 50%;
-                }
-            }
         }
     }
-}
-
-// Extra small mobile screens
-@media (max-width: 480px) {
-    .header {
-        padding: 15px;
-    }
     
-    .headerButtonContainer {
-        .button {
+    @media (max-width: 480px) {
+        .button{
             width: 50px;
             height: 50px;
             margin: 10px;
-            
-            .burger {
-                &::after, &::before {
-                    width: 60%;
-                }
-            }
         }
     }
 }

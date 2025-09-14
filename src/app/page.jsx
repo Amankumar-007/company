@@ -1,14 +1,15 @@
 'use client';
 import styles from './page.module.scss'
 import { useEffect, useState } from 'react'
-import { AnimatePresence, motionValue } from 'framer-motion';
+import { AnimatePresence, motionValue, useScroll } from 'framer-motion';
 import Preloader from '../components/Preloader';
-import Card from '../components/Card/index.jsx';
+import Landing from '../components/Landing';
 import Projects from '../components/Projects';
 import Description from '../components/Description';
-import Contact from '../components/Contact';
 import SlidingImages from '../components/SlidingImages';
-import HeroSection from '../components/HeroSection';
+import Contact from '../components/Contact';
+import HeroSection from '@/components/HeroSection';
+import Card from '../components/Card';
 
 export default function Home() {
 
@@ -93,7 +94,7 @@ export default function Home() {
         range={[0.9, 1.1]}
         targetScale={1.2}
       />
-      <SlidingImages/>
+            <SlidingImages />
       <Contact />
     </main>
   )
