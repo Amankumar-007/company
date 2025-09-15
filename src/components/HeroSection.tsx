@@ -1,148 +1,47 @@
-"use client";
-
-import { motion } from "framer-motion";
-import Link from "next/link";
-import { useEffect, useState } from "react";
-import Rounded from "../common/RoundedButton/index";
-
+import React from 'react';
 
 export default function HeroSection() {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
-    };
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
-
-  const letters = "Agile-Driven".split('');
-
   return (
-    <section 
-      className="relative min-h-screen mt-12 bg-white text-black overflow-hidden flex items-center justify-center"
-    >
-      {/* Interactive background elements */}
-      <div className="absolute inset-0">
-        <div 
-          className="absolute w-96 h-96 border border-black rounded-full opacity-10"
-          style={{
-            left: mousePosition.x - 200,
-            top: mousePosition.y - 200,
-          }}
-        />
-        <motion.div 
-          className="absolute w-64 h-64 border border-black rounded-full opacity-5"
-          style={{
-            left: mousePosition.x - 150,
-            top: mousePosition.y - 150,
-          }}
-        />
+    <div className="min-h-[50vh] mb-15 mt-10  flex items-center justify-center px-4 sm:px-6 lg:px-8 pt-20">
+      <div className="max-w-6xl mx-auto text-center">
+        {/* Main Heading */}
+        <h1 className="text-[2.7rem] sm:text-[3.6rem] lg:text-[4.5rem] xl:text-[5.4rem] font-bold text-gray-900 leading-tight mb-8 tracking-tight">
+          <span className="block">Design agency focused</span>
+          <span className="block">on AI-driven products</span>
+        </h1>
+        
+        {/* Subtitle */}
+        <p className="text-lg sm:text-xl lg:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed mb-12 font-light">
+          Cuberto is a digital design and technology partner focused on smart
+          interactions, delightful UX, and cutting-edge AI solutions.
+        </p>
+        
+        {/* CTA Buttons */}
+        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <button className="bg-black text-white px-8 py-4 rounded-full text-lg font-medium hover:bg-gray-800 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
+            Start Your Project
+          </button>
+          <button className="border-2 border-gray-300 text-gray-700 px-8 py-4 rounded-full text-lg font-medium hover:border-gray-400 hover:bg-gray-50 transition-all duration-300 transform hover:scale-105">
+            View Our Work
+          </button>
+        </div>
+        
+        {/* Decorative Elements */}
+        <div className="absolute top-10 right-10 w-24 h-24 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full opacity-10 animate-pulse"></div>
+        <div className="absolute bottom-20 left-10 w-16 h-16 bg-gradient-to-br from-pink-400 to-red-500 rounded-full opacity-10 animate-bounce"></div>
+        <div className="absolute top-1/2 right-20 w-8 h-8 bg-gradient-to-br from-green-400 to-blue-500 rounded-full opacity-20"></div>
+        
+        
+        
+        {/* Scroll Indicator */}
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
+          <div className="animate-bounce">
+            <svg className="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+            </svg>
+          </div>
+        </div>
       </div>
-
-      {/* Grid pattern overlay */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="w-full h-full" style={{
-          backgroundImage: `linear-gradient(to right, black 1px, transparent 1px), linear-gradient(to bottom, black 1px, transparent 1px)`,
-          backgroundSize: '50px 50px'
-        }} />
-      </div>
-
-      {/* Main content */}
-      <div className="relative z-10 text-center max-w-7xl mx-auto px-6 w-full flex items-center justify-center min-h-screen">
-        <motion.div
-          initial={{ opacity: 0, y: 60 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 3, duration: 1.2, ease: "easeOut" }}
-          className="space-y-12 flex flex-col items-center justify-center"
-        >
-          {/* Main heading with staggered animation */}
-          <motion.h2 
-            className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight leading-[0.85] text-center w-full"
-            style={{ fontFamily: "'Playfair Display', 'Georgia', serif" }}
-          >
-            <motion.span 
-              className="block mb-4 tracking-wider"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 3.2, duration: 0.8 }}
-            >
-              WORLD&apos;S FIRST
-            </motion.span>
-            
-            {/* Animated letters for Agile-Driven */}
-            <div className="block my-6">
-              {letters.map((letter, index) => (
-                <motion.span
-                  key={index}
-                  className="inline-block mx-1"
-                  initial={{ opacity: 0, y: 50, rotateX: 90 }}
-                  animate={{ opacity: 1, y: 0, rotateX: 0 }}
-                  transition={{ 
-                    delay: 3.5 + index * 0.1, 
-                    duration: 0.6, 
-                    type: "spring",
-                    stiffness: 150
-                  }}
-                  whileHover={{ 
-                    scale: 1.2, 
-                    color: "#666",
-                    transition: { duration: 0.2 }
-                  }}
-                >
-                  {letter}
-                </motion.span>
-              ))}
-            </div>
-            
-           
-            <motion.span 
-              className="block tracking-wider"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 3.7, duration: 0.8 }}
-            >
-              Agency
-            </motion.span>
-          </motion.h2>
-
-          {/* Subtitle with typewriter effect */}
-          <motion.p 
-            className="text-lg sm:text-xl md:text-2xl font-light tracking-wide text-gray-600 max-w-4xl mx-auto leading-relaxed text-center"
-            style={{ fontFamily: "'Playfair Display', 'Georgia', serif" }}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 4, duration: 1 }}
-          >
-            Creating scalable digital experiences with speed, flexibility, and innovation that transforms your business.
-          </motion.p>
-
-          {/* Interactive CTA buttons */}
-          <motion.div 
-            className="flex flex-col sm:flex-row gap-8 justify-center items-center "
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 4.3, duration: 0.8 }}
-          >
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="inline-block">
-              <Link href="/get-started">
-                <Rounded backgroundColor="#000000" data-shape="square">
-                  <p>Get Started</p>
-                </Rounded>
-              </Link>
-            </motion.div>
-
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="inline-block">
-              <Link href="/portfolio">
-                <Rounded backgroundColor="#ffffff" data-hover-color="#4169E1" data-shape="square">
-                  <p>See Our Work</p>
-                </Rounded>
-              </Link>
-            </motion.div>
-          </motion.div>
-        </motion.div>
-      </div>
-    </section>
+    </div>
   );
 }

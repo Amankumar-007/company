@@ -1,0 +1,135 @@
+@font-face {
+  font-family: 'Suisse Intl';
+  src: url('/fonts/fonnts.com-Suisse_Intl_Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+.heroSection {
+  position: relative;
+  min-height: 100vh;
+  margin-top: 3rem;
+  background: white;
+  color: black;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.backgroundElements {
+  position: absolute;
+  inset: 0;
+}
+
+.mouseCircle {
+  position: absolute;
+  border: 1px solid black;
+  border-radius: 50%;
+  opacity: 0.1;
+}
+
+.mouseCircleLarge {
+  width: 24rem;
+  height: 24rem;
+}
+
+.mouseCircleSmall {
+  width: 16rem;
+  height: 16rem;
+  opacity: 0.05;
+}
+
+.gridPattern {
+  position: absolute;
+  inset: 0;
+  opacity: 0.05;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: 
+      linear-gradient(to right, black 1px, transparent 1px),
+      linear-gradient(to bottom, black 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+}
+
+.content {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.textContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+}
+
+.mainHeading {
+  font-size: clamp(3rem, 8vw, 5rem);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 0.85;
+  text-align: center;
+  width: 100%;
+  font-family: 'Suisse Intl', 'Playfair Display', 'Georgia', serif;
+}
+
+.headingLine {
+  display: block;
+  letter-spacing: 0.1em;
+  margin-bottom: 1rem;
+}
+
+.animatedLetters {
+  display: block;
+  margin: 1.5rem 0;
+  
+  .letter {
+    display: inline-block;
+    margin: 0 0.25rem;
+  }
+}
+
+.subtitle {
+  font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  color: #666;
+  max-width: 64rem;
+  margin: 0 auto;
+  line-height: 1.6;
+  text-align: center;
+  font-family: 'Suisse Intl', 'Playfair Display', 'Georgia', serif;
+}
+
+.ctaButtons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  
+  @media (min-width: 640px) {
+    flex-direction: row;
+    gap: 2rem;
+  }
+}
+
+.ctaButton {
+  display: inline-block;
+}

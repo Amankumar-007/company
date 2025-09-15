@@ -3,13 +3,13 @@ import styles from './page.module.scss'
 import { useEffect, useState } from 'react'
 import { AnimatePresence, motionValue, useScroll } from 'framer-motion';
 import Preloader from '../components/Preloader';
-import Landing from '../components/Landing';
 import Projects from '../components/Projects';
 import Description from '../components/Description';
 import SlidingImages from '../components/SlidingImages';
 import Contact from '../components/Contact';
 import HeroSection from '@/components/HeroSection';
 import Card from '../components/Card';
+import VideoComponent from '@/components/VideoComponent';
 
 export default function Home() {
 
@@ -37,6 +37,7 @@ export default function Home() {
         {isLoading && <Preloader />}
       </AnimatePresence>
       <HeroSection />
+      <VideoComponent />
       <Description />
       <Projects />
       <Card 
