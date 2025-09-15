@@ -2,6 +2,7 @@ import './globals.css'
 import { Inter, Space_Grotesk } from 'next/font/google'
 import Header from '../components/Header';
 import { ReactNode } from 'react';
+import { CursorProvider } from '../components/Cursor';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 const spaceGrotesk = Space_Grotesk({ 
@@ -19,8 +20,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <body className={`${inter.className} ${spaceGrotesk.variable}`}>
+      <CursorProvider>
         <Header />
         {children}
+      </CursorProvider>
       </body>
     </html>
   )

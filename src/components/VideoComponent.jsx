@@ -1,55 +1,80 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { useCursor } from './Cursor/index';
 
 const VideoComponent = () => {
-  const [isHovered, setIsHovered] = useState(false);
-  const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
-  const [smoothPosition, setSmoothPosition] = useState({ x: 0, y: 0 });
-  const animationRef = useRef(null);
-
-  const handleMouseMove = (e) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    setCursorPosition({ x, y });
-  };
-
-  // Smooth cursor following animation
-  useEffect(() => {
-    if (!isHovered) return;
-
-    const animate = () => {
-      setSmoothPosition(prev => ({
-        x: prev.x + (cursorPosition.x - prev.x) * 0.15,
-        y: prev.y + (cursorPosition.y - prev.y) * 0.15
-      }));
-      animationRef.current = requestAnimationFrame(animate);
-    };
-
-    animationRef.current = requestAnimationFrame(animate);
-    return () => {
-      if (animationRef.current) {
-        cancelAnimationFrame(animationRef.current);
-      }
-    };
-  }, [cursorPosition, isHovered]);
+  const { setCursorHover } = useCursor();
+  const videoRef = useRef(null);
 
   const handleMouseEnter = () => {
-    setIsHovered(true);
+    // Create orange play button SVG
+    const playIcon = (
+      <svg 
+        className="w-5 h-5" 
+        fill="currentColor" 
+        viewBox="0 0 20 20"
+      >
+        <path 
+          fillRule="evenodd" 
+          d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" 
+          clipRule="evenodd" 
+        />
+      </svg>
+    );
+    
+    setCursorHover(true, '', 60, '#ff6b35', playIcon);
   };
 
   const handleMouseLeave = () => {
-    setIsHovered(false);
+    setCursorHover(false);
   };
+
+  const handleClick = () => {
+    if (videoRef.current) {
+      if (videoRef.current.requestFullscreen) {
+        videoRef.current.requestFullscreen();
+      } else if (videoRef.current.webkitRequestFullscreen) {
+        videoRef.current.webkitRequestFullscreen();
+      } else if (videoRef.current.msRequestFullscreen) {
+        videoRef.current.msRequestFullscreen();
+      }
+    }
+  };
+
+  const handleFullscreenChange = () => {
+    const isFullscreen = document.fullscreenElement ||
+      document.webkitFullscreenElement ||
+      document.msFullscreenElement;
+    
+    if (!isFullscreen && videoRef.current) {
+      // Exit fullscreen handling if needed
+      videoRef.current.play();
+    }
+  };
+
+  useEffect(() => {
+    // Add fullscreen change event listeners
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
+    document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
+    document.addEventListener('msfullscreenchange', handleFullscreenChange);
+    
+    return () => {
+      // Clean up event listeners
+      document.removeEventListener('fullscreenchange', handleFullscreenChange);
+      document.removeEventListener('webkitfullscreenchange', handleFullscreenChange);
+      document.removeEventListener('msfullscreenchange', handleFullscreenChange);
+    };
+  }, []);
   return (
     <div className="relative w-full max-w-6xl mx-auto">
       {/* Video container with curved corners and shadow */}
       <div 
-        className="relative overflow-hidden rounded-3xl shadow-2xl"
-        onMouseMove={handleMouseMove}
+        className="relative overflow-hidden rounded-3xl shadow-2xl cursor-pointer"
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
+        onClick={handleClick}
       >
         <video
+          ref={videoRef}
           className="w-full h-auto object-cover"
           autoPlay
           loop
@@ -67,32 +92,6 @@ const VideoComponent = () => {
           </div>
         </video>
         
-        {/* Play Button Overlay */}
-        <div className={`absolute inset-0 transition-all duration-300 ease-in-out ${isHovered ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
-          <div 
-            className="absolute transform -translate-x-1/2 -translate-y-1/2 transition-all duration-100 ease-out"
-            style={{
-              left: `${smoothPosition.x}px`,
-              top: `${smoothPosition.y}px`,
-              opacity: isHovered ? 1 : 0,
-              transform: `translate(-50%, -50%) scale(${isHovered ? 1 : 0.5})`
-            }}
-          >
-            <div className="w-14 h-14 bg-white bg-opacity-95 rounded-full flex items-center justify-center shadow-xl hover:bg-opacity-100 transition-all duration-200 backdrop-blur-sm border border-white border-opacity-30">
-              <svg 
-                className="w-5 h-5 text-gray-800 ml-0.5" 
-                fill="currentColor" 
-                viewBox="0 0 20 20"
-              >
-                <path 
-                  fillRule="evenodd" 
-                  d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" 
-                  clipRule="evenodd" 
-                />
-              </svg>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   );

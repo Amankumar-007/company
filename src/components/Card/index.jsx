@@ -3,9 +3,11 @@ import Image from 'next/image';
 import styles from './style.module.css';
 import { useTransform, useScroll, motion } from 'framer-motion';
 import { useRef } from 'react';
+import { useCursor } from '../Cursor';
 
 const Card = ({ title, description, src, url, color, i, progress, range, targetScale }) => {
   const container = useRef(null);
+  const { setCursorHover } = useCursor();
   const { scrollYProgress } = useScroll({
     target: container,
     offset: ['start end', 'start start']
@@ -19,6 +21,14 @@ const Card = ({ title, description, src, url, color, i, progress, range, targetS
   // Subtle parallax effect for the content
   const y = useTransform(scrollYProgress, [0, 1], [0, -50]);
 
+  const handleMouseEnter = () => {
+    setCursorHover(true, 'explore', 80, '#1a1a1a');
+  };
+
+  const handleMouseLeave = () => {
+    setCursorHover(false);
+  };
+
   return (
     <div ref={container} className={styles.cardContainer}>
       <motion.div 
@@ -29,6 +39,8 @@ const Card = ({ title, description, src, url, color, i, progress, range, targetS
           top: `calc(-2vh + ${i * 20}px)`,
           y
         }}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
       >
         <div className={styles.cardContent}>
           <div className={styles.textSection}>
