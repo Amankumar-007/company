@@ -37,4 +37,41 @@
             
         }
     }
+    
+    // Mobile responsive styles for navigation menu
+    @media (max-width: 768px) {
+        .body{
+            padding: 80px 40px;
+            
+            .nav{
+                font-size: 42px;
+                gap: 16px;
+                
+                .header{
+                    font-size: 10px;
+                    margin-bottom: 30px;
+                }
+            }
+        }
+    }
+    
+    @media (max-width: 480px) {
+        .body{
+            padding: 60px 30px;
+            
+            .nav{
+                font-size: 32px;
+                gap: 20px;
+                
+                .header{
+                    font-size: 9px;
+                    margin-bottom: 25px;
+                }
+                
+                a{
+                    font-weight: 400;
+                }
+            }
+        }
+    }
 }

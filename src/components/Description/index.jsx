@@ -5,12 +5,13 @@ import { slideUp, opacity } from './animation';
 import Rounded from '../../common/RoundedButton';
 export default function index() {
 
-    const phrase = "Helping brands to stand out in the digital era. Together we will set the new status quo. No nonsense, always on the cutting edge.";
+    const phrase = "Transforming digital visions into reality. We create innovative web and mobile solutions that elevate your brand. Excellence in every pixel, every line of code.";
     const description = useRef(null);
     const isInView = useInView(description)
     return (
         <div ref={description} className={styles.description}>
             <div className={styles.body}>
+                <h2 className={styles.headline}>WHAT WE DO</h2>
                 <p>
                 {
                     phrase.split(" ").map( (word, index) => {
@@ -18,10 +19,10 @@ export default function index() {
                     })
                 }
                 </p>
-                <motion.p variants={opacity} animate={isInView ? "open" : "closed"}>The combination of my passion for design, code & interaction positions me in a unique place in the web design world.</motion.p>
+                <motion.p variants={opacity} animate={isInView ? "open" : "closed"}>Our comprehensive services include website development, app creation, SEO marketing, and social media management - all designed to give your business the digital edge it deserves.</motion.p>
                 <div data-scroll data-scroll-speed={0.1}>
                     <Rounded className={styles.button}>
-                        <p>About me</p>
+                        <p>Our Services</p>
                     </Rounded>
                 </div>
             </div>

@@ -1,8 +1,19 @@
 "use client"
 import React, { useState, useEffect, useRef } from 'react';
+import { useCursor } from '@/components/Cursor';
+import { useRouter } from 'next/navigation';
 
 const CubertoProjectsPage = () => {
   const containerRef = useRef(null);
+
+  useEffect( () => {
+    (
+      async () => {
+          const LocomotiveScroll = (await import('locomotive-scroll')).default
+          const locomotiveScroll = new LocomotiveScroll();
+      }
+    )()
+  }, [])
 
   const projects = [
     {
@@ -47,6 +58,8 @@ const CubertoProjectsPage = () => {
     const [isVisible, setIsVisible] = useState(false);
     const [isHovered, setIsHovered] = useState(false);
     const cardRef = useRef(null);
+    const { setCursorHover } = useCursor();
+    const router = useRouter();
 
     useEffect(() => {
       const observer = new IntersectionObserver(
@@ -82,7 +95,20 @@ const CubertoProjectsPage = () => {
         onMouseLeave={() => setIsHovered(false)}
       >
         {/* Image */}
-        <div className="relative mb-8 overflow-hidden rounded-2xl bg-gray-100 aspect-[4/3] group cursor-pointer">
+        <div 
+          className="relative mb-8 overflow-hidden rounded-2xl bg-gray-100 aspect-[4/3] group cursor-pointer"
+          onMouseEnter={() => {
+            setIsHovered(true);
+            setCursorHover(true, 'Explore', 80, '#000000');
+          }}
+          onMouseLeave={() => {
+            setIsHovered(false);
+            setCursorHover(false);
+          }}
+          onClick={() => {
+            router.push(`/projects/${project.id}`);
+          }}
+        >
           <img
             src={project.image}
             alt={project.title}
