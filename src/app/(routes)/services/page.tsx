@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import { useState, useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import Image from 'next/image'
 
 // Register GSAP plugins
 if (typeof window !== 'undefined') {
@@ -352,9 +353,11 @@ const ServicesPage = () => {
                         title={tech}
                       >
                         {getTechIcon(tech) ? (
-                          <img 
+                          <Image 
                             src={getTechIcon(tech)} 
                             alt={tech}
+                            width={24}
+                            height={24}
                             className="w-6 h-6 object-contain"
                           />
                         ) : (

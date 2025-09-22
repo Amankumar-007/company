@@ -13,7 +13,7 @@ export default function HeroSection() {
         {/* Subtitle */}
         <p className="text-lg sm:text-xl lg:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed mb-12 font-light">
           We use agile methodology to build exceptional websites. 
-          <span className="block mt-2">Get your <span className="font-semibold text-orange-500">free</span> first wireframe - let's create something amazing together.</span>
+          <span className="block mt-2">Get your <span className="font-semibold text-orange-500">free</span> first wireframe - let&apos;s create something amazing together.</span>
         </p>
         
         {/* CTA Buttons */}
