@@ -1,6 +1,6 @@
 'use client';
 import styles from './page.module.scss'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, Suspense } from 'react'
 import { AnimatePresence, motionValue, useScroll } from 'framer-motion';
 import Preloader from '../components/Preloader';
 import Projects from '../components/Projects';
@@ -37,7 +37,9 @@ export default function Home() {
         {isLoading && <Preloader />}
       </AnimatePresence>
       <HeroSection />
-      <VideoComponent />
+      <Suspense fallback={<div>Loading video...</div>}>
+        <VideoComponent />
+      </Suspense>
       <Description />
       <Projects />
       <Card 

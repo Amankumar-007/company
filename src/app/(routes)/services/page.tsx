@@ -1,6 +1,6 @@
 'use client'
 
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { useState, useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -11,8 +11,7 @@ if (typeof window !== 'undefined') {
 }
 
 const ServicesPage = () => {
-  const [hoveredService, setHoveredService] = useState<number | null>(null)
-  const [expandedService, setExpandedService] = useState<number | null>(null)
+  const [hoveredService, setHoveredService] = useState<string | null>(null)
   
   // Refs for GSAP animations
   const heroRef = useRef(null)
@@ -23,7 +22,7 @@ const ServicesPage = () => {
 
   const services = [
     {
-      id: 1,
+      id: "web-development",
       title: "Web Development",
       subtitle: "Full-Stack Solutions",
       description: "Creating responsive, scalable web applications using modern technologies like React, Next.js, Node.js, and cutting-edge frameworks.",
@@ -40,7 +39,7 @@ const ServicesPage = () => {
       stats: { projects: "150+", experience: "5+ Years", satisfaction: "98%" }
     },
     {
-      id: 2,
+      id: "mobile-development",
       title: "Mobile Development",
       subtitle: "iOS & Android Apps",
       description: "Native and cross-platform mobile applications that deliver exceptional user experiences.",
@@ -57,7 +56,7 @@ const ServicesPage = () => {
       stats: { projects: "80+", experience: "4+ Years", satisfaction: "95%" }
     },
     {
-      id: 3,
+      id: "seo-marketing",
       title: "SEO & Marketing",
       subtitle: "Digital Growth Strategy",
       description: "Comprehensive digital marketing strategies that boost your online presence and drive organic traffic.",
@@ -74,7 +73,7 @@ const ServicesPage = () => {
       stats: { projects: "200+", experience: "6+ Years", satisfaction: "97%" }
     },
     {
-      id: 4,
+      id: "ui-ux-design",
       title: "UI/UX Design",
       subtitle: "User-Centered Design",
       description: "Creating intuitive and visually stunning user interfaces that enhance user experience.",
@@ -91,7 +90,7 @@ const ServicesPage = () => {
       stats: { projects: "120+", experience: "5+ Years", satisfaction: "99%" }
     },
     {
-      id: 5,
+      id: "cloud-solutions",
       title: "Cloud Solutions",
       subtitle: "Scalable Infrastructure",
       description: "Robust cloud infrastructure solutions that scale with your business needs.",
@@ -108,7 +107,7 @@ const ServicesPage = () => {
       stats: { projects: "90+", experience: "4+ Years", satisfaction: "96%" }
     },
     {
-      id: 6,
+      id: "ecommerce-solutions",
       title: "E-commerce Solutions",
       subtitle: "Online Store Development", 
       description: "Complete e-commerce solutions that drive sales and provide seamless shopping experiences.",
@@ -248,7 +247,7 @@ const ServicesPage = () => {
                   className="bg-white border-2 border-black p-8 cursor-pointer transition-all duration-500 h-full"
                   onMouseEnter={() => setHoveredService(service.id)}
                   onMouseLeave={() => setHoveredService(null)}
-                  onClick={() => setExpandedService(service.id)}
+                  onClick={() => window.location.href = `/service-detail?id=${service.id}`}
                   animate={{
                     boxShadow: hoveredService === service.id ? '0 20px 60px rgba(0,0,0,0.15)' : '0 0px 0px rgba(0,0,0,0)',
                     scale: hoveredService === service.id ? 1.02 : 1
@@ -258,7 +257,7 @@ const ServicesPage = () => {
                   {/* Service Number */}
                   <div className="flex items-center justify-between mb-6">
                     <span className="text-sm font-mono text-gray-500 tracking-wider">
-                      SERVICE {String(service.id).padStart(2, '0')}
+                      SERVICE {String(services.findIndex(s => s.id === service.id) + 1).padStart(2, '0')}
                     </span>
                     <motion.div
                       className="w-8 h-8 border-2 border-black flex items-center justify-center"
@@ -323,128 +322,6 @@ const ServicesPage = () => {
             ))}
           </div>
         </div>
-
-        {/* Full Screen Expanded Service */}
-        <AnimatePresence>
-          {expandedService && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className="fixed inset-0 bg-black bg-opacity-60 backdrop-blur-sm z-50 flex items-center justify-center p-4"
-              onClick={() => setExpandedService(null)}
-            >
-              <motion.div
-                initial={{ scale: 0.8, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                exit={{ scale: 0.8, opacity: 0 }}
-                transition={{ duration: 0.4, ease: 'easeOut' }}
-                className="bg-white w-full max-w-4xl h-fit rounded-tr-2xl rounded-br-2xl shadow-2xl"
-                onClick={(e) => e.stopPropagation()}
-              >
-                {(() => {
-                  const service = services.find(s => s.id === expandedService)
-                  if (!service) return null
-                  
-                  return (
-                    <div className="p-8">
-                      {/* Header */}
-                      <div className="flex items-start justify-between mb-8">
-                        <div className="flex-1">
-                          <span className="text-xs font-mono text-black tracking-widest block mb-2 uppercase">
-                            Service {String(service.id).padStart(2, '0')}
-                          </span>
-                          <h2 className="text-5xl lg:text-6xl font-black mb-3 leading-tight">
-                            {service.title}
-                          </h2>
-                          <p className="text-xl text-black font-medium">
-                            {service.subtitle}
-                          </p>
-                        </div>
-                        
-                        {/* Close Button */}
-                        <motion.button
-                          onClick={() => setExpandedService(null)}
-                          className="w-12 h-12 border-2 border-black flex items-center justify-center ml-6 bg-white hover:bg-black transition-colors"
-                          whileHover={{ rotate: 90 }}
-                          transition={{ duration: 0.2 }}
-                        >
-                          <div className="w-5 h-0.5 bg-black absolute rotate-45" />
-                          <div className="w-0.5 h-5 bg-black absolute rotate-45" />
-                        </motion.button>
-                      </div>
-
-                      {/* Main Content */}
-                      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-6">
-                        {/* Left Column - Description and Stats */}
-                        <div>
-                          <h3 className="text-2xl font-black mb-6 text-black">Overview</h3>
-                          <p className="text-base text-black leading-relaxed mb-8 font-medium">
-                            {service.fullDescription}
-                          </p>
-                          
-                          {/* Enhanced Stats */}
-                          <div className="grid grid-cols-3 gap-3 mb-8">
-                            <div className="text-center p-4 bg-black text-white border-2 border-black">
-                              <div className="text-2xl font-black mb-1">{service.stats.projects}</div>
-                              <div className="text-xs font-medium uppercase tracking-wide">Projects</div>
-                            </div>
-                            <div className="text-center p-4 bg-white text-black border-2 border-black">
-                              <div className="text-2xl font-black mb-1">{service.stats.experience}</div>
-                              <div className="text-xs font-medium uppercase tracking-wide">Experience</div>
-                            </div>
-                            <div className="text-center p-4 bg-black text-white border-2 border-black">
-                              <div className="text-2xl font-black mb-1">{service.stats.satisfaction}</div>
-                              <div className="text-xs font-medium uppercase tracking-wide">Satisfaction</div>
-                            </div>
-                          </div>
-
-                          {/* Action Buttons */}
-                          <div className="flex gap-3">
-                            <motion.button
-                              className="bg-black text-white px-6 py-3 font-black text-base border-2 border-black hover:bg-white hover:text-black transition-all flex-1"
-                              whileHover={{ scale: 1.02 }}
-                              whileTap={{ scale: 0.98 }}
-                            >
-                              Get Quote
-                            </motion.button>
-                            <motion.button
-                              className="bg-white text-black px-6 py-3 font-black text-base border-2 border-black hover:bg-black hover:text-white transition-all flex-1"
-                              whileHover={{ scale: 1.02 }}
-                              whileTap={{ scale: 0.98 }}
-                            >
-                              Portfolio
-                            </motion.button>
-                          </div>
-                        </div>
-
-                        {/* Right Column - Technologies */}
-                        <div>
-                          <h3 className="text-2xl font-black mb-6 text-black">Technologies</h3>
-                          <div className="grid grid-cols-2 gap-2">
-                            {service.technologies.map((tech, techIndex) => (
-                              <motion.div
-                                key={tech}
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: techIndex * 0.1 }}
-                                className="flex items-center p-3 bg-white border-2 border-black hover:bg-black hover:text-white transition-all duration-200"
-                              >
-                                <div className="w-1.5 h-1.5 bg-black mr-2 rounded-full" />
-                                <span className="text-sm font-medium">{tech}</span>
-                              </motion.div>
-                            ))}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  )
-                })()}
-              </motion.div>
-            </motion.div>
-          )}
-        </AnimatePresence>
       </section>
 
       {/* Process Section */}

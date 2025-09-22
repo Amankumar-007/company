@@ -1,8 +1,10 @@
 import styles from './style.module.scss';
 import { useInView, motion } from 'framer-motion';
 import { useRef } from 'react';
+import Link from 'next/link';
 import { slideUp, opacity } from './animation';
 import Rounded from '../../common/RoundedButton';
+
 export default function index() {
 
     const phrase = "Transforming digital visions into reality. We create innovative web and mobile solutions that elevate your brand. Excellence in every pixel, every line of code.";
@@ -21,9 +23,11 @@ export default function index() {
                 </p>
                 <motion.p variants={opacity} animate={isInView ? "open" : "closed"}>Our comprehensive services include website development, app creation, SEO marketing, and social media management - all designed to give your business the digital edge it deserves.</motion.p>
                 <div data-scroll data-scroll-speed={0.1}>
-                    <Rounded className={styles.button}>
-                        <p>Our Services</p>
-                    </Rounded>
+                    <Link href="/services">
+                        <Rounded className={styles.button} >
+                            <p>Our Services</p>
+                        </Rounded>
+                    </Link>
                 </div>
             </div>
         </div>

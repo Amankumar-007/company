@@ -20,16 +20,19 @@ export default function index() {
     }, [pathname])
 
     useLayoutEffect( () => {
-        gsap.registerPlugin(ScrollTrigger)
-        gsap.to(button.current, {
-            scrollTrigger: {
-                trigger: document.documentElement,
-                start: 0,
-                end: window.innerHeight,
-                onLeave: () => {gsap.to(button.current, {scale: 1, duration: 0.25, ease: "power1.out"})},
-                onEnterBack: () => {gsap.to(button.current, {scale: 0, duration: 0.25, ease: "power1.out"},setIsActive(false))}
-            }
-        })
+        // Only run on client side
+        if (typeof window !== 'undefined') {
+            gsap.registerPlugin(ScrollTrigger)
+            gsap.to(button.current, {
+                scrollTrigger: {
+                    trigger: document.documentElement,
+                    start: 0,
+                    end: window.innerHeight,
+                    onLeave: () => {gsap.to(button.current, {scale: 1, duration: 0.25, ease: "power1.out"})},
+                    onEnterBack: () => {gsap.to(button.current, {scale: 0, duration: 0.25, ease: "power1.out"},setIsActive(false))}
+                }
+            })
+        }
     }, [])
 
     return (
@@ -37,28 +40,38 @@ export default function index() {
         <div ref={header} className={styles.header}>
             <div className={styles.logo}>
                 <p className={styles.copyright}>©</p>
-                <div className={styles.name}>
+                <div className={styles.name} onClick={() => {
+                    if (typeof window !== 'undefined') {
+                        window.location.href = "/";
+                    }
+                }}>
                     <p className={styles.codeBy}>Code by</p>
-                    <p className={styles.dennis}>Dennis</p>
-                    <p className={styles.snellenberg}>Snellenberg</p>
+                    <p className={styles.dennis}>Aman</p>
+                    <p className={styles.snellenberg}>Kumar</p>
                 </div>
             </div>
             <div className={styles.nav}>
                 <Magnetic>
                     <div className={styles.el}>
-                        <a>Work</a>
+                        <a href="/services">services</a>
                         <div className={styles.indicator}></div>
                     </div>
                 </Magnetic>
                 <Magnetic>
                     <div className={styles.el}>
-                        <a>About</a>
+                        <a href="/projects">projects</a>
                         <div className={styles.indicator}></div>
                     </div>
                 </Magnetic>
                 <Magnetic>
                     <div className={styles.el}>
-                        <a>Contact</a>
+                        <a href="/about">About</a>
+                        <div className={styles.indicator}></div>
+                    </div>
+                </Magnetic>
+                <Magnetic>
+                    <div className={styles.el}>
+                        <a href="/contact">Contact</a>
                         <div className={styles.indicator}></div>
                     </div>
                 </Magnetic>

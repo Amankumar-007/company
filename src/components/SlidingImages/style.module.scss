@@ -7,6 +7,10 @@
     background-color: white;
     z-index: 1;
     overflow-x: hidden;
+    will-change: transform;
+    backface-visibility: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 
     @media (max-width: 1024px) {
         margin-top: 150px;
@@ -21,6 +25,8 @@
     @media (max-width: 480px) {
         margin-top: 80px;
         gap: 1vw;
+        transform: translateZ(0);
+        perspective: 1000px;
     }
     .slider{
         display: flex;
@@ -28,6 +34,10 @@
         gap: 3vw;
         width: 120vw;
         left: -10vw;
+        will-change: transform;
+        backface-visibility: hidden;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
 
         @media (max-width: 1024px) {
             gap: 2vw;
@@ -45,6 +55,9 @@
             gap: 1vw;
             width: 102vw;
             left: -1vw;
+            transform: translateZ(0);
+            perspective: 1000px;
+            will-change: auto;
         }
 
         .project{
@@ -72,6 +85,8 @@
                 position: relative;
                 width: 80%;
                 height: 80%;
+                will-change: transform;
+                backface-visibility: hidden;
 
                 @media (max-width: 768px) {
                     width: 90%;
@@ -81,12 +96,21 @@
                 @media (max-width: 480px) {
                     width: 95%;
                     height: 95%;
+                    transform: translateZ(0);
+                    perspective: 1000px;
                 }
 
                 img{
                     object-fit: cover;
                     width: 100%;
                     height: 100%;
+                    backface-visibility: hidden;
+                    -webkit-font-smoothing: antialiased;
+                    -moz-osx-font-smoothing: grayscale;
+                    @media (max-width: 480px) {
+                        transform: translateZ(0);
+                        perspective: 1000px;
+                    }
                 }
             }
         }

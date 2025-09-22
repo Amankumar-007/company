@@ -18,12 +18,30 @@ export default function HeroSection() {
         
         {/* CTA Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <button className="bg-black text-white px-8 py-4 rounded-full text-lg font-medium hover:bg-gray-800 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
-            Start Your Project
-          </button>
-          <button className="border-2 border-gray-300 text-gray-700 px-8 py-4 rounded-full text-lg font-medium hover:border-gray-400 hover:bg-gray-50 transition-all duration-300 transform hover:scale-105">
-            View Our Work
-          </button>
+          <a 
+            href="#" 
+            className="relative overflow-hidden px-8 py-4 border border-gray-600 rounded-full text-black transition-all duration-300 hover:border-black group"
+          >
+            {/* Water fill effect */}
+            <div className="absolute inset-0 bg-black transform translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out"></div>
+            
+            {/* Text */}
+            <span className="bg relative z-10 group-hover:text-white transition-colors duration-300 font-medium text-lg">
+              Start Your Project
+            </span>
+          </a>
+          <a 
+            href="#" 
+            className="relative overflow-hidden px-8 py-4 border border-gray-600 rounded-full text- black transition-all duration-300 hover:border-black group"
+          >
+            {/* Water fill effect */}
+            <div className="absolute inset-0 bg-black transform translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out"></div>
+            
+            {/* Text */}
+            <span className="relative z-10 group-hover:text-white transition-colors duration-300 font-medium text-lg">
+              View Our Work
+            </span>
+          </a>
         </div>
         
         {/* Decorative Elements */}

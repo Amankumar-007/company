@@ -10,23 +10,27 @@ import Rounded from '../../common/RoundedButton';
 const projects = [
   {
     title: "Web Development",
-    src: "webdevelopment.png",
-    color: "#000000"
+    src: "web.png",
+    color: "#000000",
+    description: "Creating powerful, scalable web applications with cutting-edge technologies. We build responsive, fast, and secure websites that drive business growth and deliver exceptional user experiences across all devices."
   },
   {
-    title: "Mobile Development",
-    src: "mobiledevelopment.png",
-    color: "#8C8C8C"
+    title: "App development",
+    src: "mobile.png",
+    color: "#8C8C8C",
+    description: "Transforming ideas into intuitive mobile applications. Our native and cross-platform solutions combine stunning design with robust functionality to engage users and accelerate your business in the mobile-first world."
   },
   {
-    title: "SEO & Marketing",
-    src: "seomarketing.png",
-    color: "#EFE8D3"
+    title: "UI/UX design",
+    src: "locomotive.png",
+    color: "#EFE8D3",
+    description: "Crafting beautiful, user-centered designs that captivate and convert. We blend creativity with usability to create seamless digital experiences that delight users and achieve your business objectives."
   },
   {
-    title: "UI/UX Design",
-    src: "uiuxdesign.png",
-    color: "#706D63"
+    title: "SEO",
+    src: "silencio.png",
+    color: "#706D63",
+    description: "Boosting your online visibility and driving organic traffic. Our data-driven SEO strategies combine technical excellence with compelling content to rank higher, attract quality leads, and grow your digital presence."
   }
 ]
 
@@ -41,13 +45,10 @@ export default function Home() {
   const [modal, setModal] = useState({active: false, index: 0})
   const { active, index } = modal;
   const modalContainer = useRef(null);
-  const cursor = useRef(null);
   const cursorLabel = useRef(null);
 
   let xMoveContainer = useRef(null);
   let yMoveContainer = useRef(null);
-  let xMoveCursor = useRef(null);
-  let yMoveCursor = useRef(null);
   let xMoveCursorLabel = useRef(null);
   let yMoveCursorLabel = useRef(null);
 
@@ -55,9 +56,6 @@ export default function Home() {
     //Move Container
     xMoveContainer.current = gsap.quickTo(modalContainer.current, "left", {duration: 0.8, ease: "power3"})
     yMoveContainer.current = gsap.quickTo(modalContainer.current, "top", {duration: 0.8, ease: "power3"})
-    //Move cursor
-    xMoveCursor.current = gsap.quickTo(cursor.current, "left", {duration: 0.5, ease: "power3"})
-    yMoveCursor.current = gsap.quickTo(cursor.current, "top", {duration: 0.5, ease: "power3"})
     //Move cursor label
     xMoveCursorLabel.current = gsap.quickTo(cursorLabel.current, "left", {duration: 0.45, ease: "power3"})
     yMoveCursorLabel.current = gsap.quickTo(cursorLabel.current, "top", {duration: 0.45, ease: "power3"})
@@ -66,8 +64,6 @@ export default function Home() {
   const moveItems = (x, y) => {
     xMoveContainer.current(x)
     yMoveContainer.current(y)
-    xMoveCursor.current(x)
-    yMoveCursor.current(y)
     xMoveCursorLabel.current(x)
     yMoveCursorLabel.current(y)
   }
@@ -79,7 +75,6 @@ export default function Home() {
   return (
   <main onMouseMove={(e) => {moveItems(e.clientX, e.clientY)}} className={styles.projects}>
     <div className={styles.body}>
-      <h1 className={styles.title}>Our Services</h1>
       {
         projects.map( (project, index) => {
           return <Project index={index} title={project.title} manageModal={manageModal} key={index}/>
@@ -94,21 +89,26 @@ export default function Home() {
             <div style={{top: index * -100 + "%"}} className={styles.modalSlider}>
             {
                 projects.map( (project, index) => {
-                const { src, color } = project
+                const { description, color } = project
                 return <div className={styles.modal} style={{backgroundColor: color}} key={`modal_${index}`}>
-                    <Image 
-                    src={`/images/${src}`}
-                    width={300}
-                    height={0}
-                    alt="image"
-                    />
+                    <div className={styles.descriptionContainer}>
+                        <div className={styles.descriptionHeader}>
+                            <h3 className={styles.descriptionTitle}>{project.title}</h3>
+                            <div className={styles.descriptionLine}></div>
+                        </div>
+                        <div className={styles.descriptionContent}>
+                            <p className={styles.descriptionText}>{description}</p>
+                        </div>
+                        <div className={styles.descriptionFooter}>
+                            <div className={styles.descriptionIcon}>→</div>
+                        </div>
+                    </div>
                 </div>
                 })
             }
             </div>
         </motion.div>
-        <motion.div ref={cursor} className={styles.cursor} variants={scaleAnimation} initial="initial" animate={active ? "enter" : "closed"}></motion.div>
-        <motion.div ref={cursorLabel} className={styles.cursorLabel} variants={scaleAnimation} initial="initial" animate={active ? "enter" : "closed"}>View</motion.div>
+        <motion.div ref={cursorLabel} className={styles.cursorLabel} variants={scaleAnimation} initial="initial" animate={active ? "enter" : "closed"}>Explore</motion.div>
     </>
   </main>
   )

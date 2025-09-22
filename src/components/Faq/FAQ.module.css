@@ -1,0 +1,228 @@
+.faqContainer {
+    width: 70vw;
+    margin: 0 auto;
+    background: white;
+    border-radius: 20px;
+    padding: 60px 40px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    transform: translateY(50px);
+    animation: fadeInUp 0.8s ease-out forwards;
+  }
+  
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .faqHeader {
+    text-align: center;
+    margin-bottom: 50px;
+  }
+  
+  .faqTitle {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #000;
+    margin-bottom: 15px;
+    opacity: 0;
+    animation: slideIn 0.8s ease-out 0.3s forwards;
+  }
+  
+  .faqSubtitle {
+    font-size: 1rem;
+    color: #666;
+    line-height: 1.6;
+    max-width: 400px;
+    margin: 0 auto;
+    opacity: 0;
+    animation: slideIn 0.8s ease-out 0.5s forwards;
+  }
+  
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .faqItem {
+    margin-bottom: 15px;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    opacity: 0;
+    transform: translateX(-30px);
+    animation: slideInLeft 0.6s ease-out forwards;
+    transition: all 0.3s ease;
+    animation-fill-mode: both;
+  }
+  
+  @keyframes slideInLeft {
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  .faqItem:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  }
+  
+  .faqItem.animate {
+    animation-play-state: running;
+  }
+  
+  .faqQuestion {
+    background: white;
+    border: 1px solid #e2e8f0;
+    padding: 25px;
+    width: 100%;
+    text-align: left;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: #000;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .faqQuestion:hover {
+    background: #f8f9fa;
+    border-color: #000;
+  }
+  
+  .faqQuestion.active {
+    border-color: #000;
+    background: #f8f9fa;
+  }
+  
+  .faqArrow {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+    margin-left: 15px;
+  }
+  
+  .faqArrow.active {
+    transform: rotate(180deg);
+  }
+  
+  .arrowIcon {
+    width: 8px;
+    height: 8px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+    transition: all 0.3s ease;
+  }
+  
+  .faqAnswer {
+    max-height: 0;
+    overflow: hidden;
+    background: #f8f9fa;
+    transition: all 0.4s ease;
+    border-left: 1px solid #e2e8f0;
+    border-right: 1px solid #e2e8f0;
+    border-bottom: 1px solid #e2e8f0;
+  }
+  
+  .faqAnswer.active {
+    max-height: 200px;
+  }
+  
+  .faqAnswerContent {
+    padding: 25px;
+    color: #333;
+    line-height: 1.7;
+    font-size: 0.95rem;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .faqContainer {
+      width: 90vw;
+      padding: 40px 25px;
+      margin: 20px auto;
+    }
+    
+    .faqTitle {
+      font-size: 1.8rem;
+    }
+    
+    .faqQuestion {
+      padding: 20px;
+      font-size: 1rem;
+    }
+    
+    .faqArrow {
+      width: 28px;
+      height: 28px;
+      margin-left: 10px;
+    }
+    
+    .faqAnswerContent {
+      padding: 20px;
+    }
+  }
+  
+  /* Override any dark mode to maintain white background */
+  @media (prefers-color-scheme: dark) {
+    .faqContainer {
+      background: white;
+      color: black;
+    }
+    
+    .faqTitle {
+      color: black;
+    }
+    
+    .faqSubtitle {
+      color: #666;
+    }
+    
+    .faqQuestion {
+      background: white;
+      color: black;
+      border-color: #e2e8f0;
+    }
+    
+    .faqQuestion:hover,
+    .faqQuestion.active {
+      background: #f8f9fa;
+      border-color: #000;
+    }
+    
+    .faqAnswer {
+      background: #f8f9fa;
+      border-color: #e2e8f0;
+    }
+    
+    .faqAnswerContent {
+      color: #333;
+    }
+    
+    .faqArrow {
+      background: black;
+    }
+    
+    .arrowIcon {
+      border-color: white;
+    }
+  }

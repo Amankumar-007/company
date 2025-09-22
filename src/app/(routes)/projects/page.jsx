@@ -2,6 +2,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useCursor } from '@/components/Cursor';
 import { useRouter } from 'next/navigation';
+import FAQ from '@/components/Faq';
+import ProjectTimeline from '@/components/ProjectTimeline';
+import { getAllProjects } from '@/data/projects';
 
 const CubertoProjectsPage = () => {
   const containerRef = useRef(null);
@@ -15,44 +18,7 @@ const CubertoProjectsPage = () => {
     )()
   }, [])
 
-  const projects = [
-    {
-      id: 1,
-      title: "Punto Pago",
-      description: "The First Super-App in Latin America",
-      image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=800&h=600&fit=crop",
-    },
-    {
-      id: 2,
-      title: "Kelvin Zero",
-      description: "A digital product for passwordless authentication",
-      image: "https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=800&h=600&fit=crop",
-    },
-    {
-      id: 3,
-      title: "DaoWay",
-      description: "Astrology planner app: plan, achieve, thrive",
-      image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop",
-    },
-    {
-      id: 4,
-      title: "Neural Dashboard",
-      description: "AI-powered analytics platform for modern businesses",
-      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop",
-    },
-    {
-      id: 5,
-      title: "Flux Design",
-      description: "Comprehensive design system for scalable applications",
-      image: "https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=800&h=600&fit=crop",
-    },
-    {
-      id: 6,
-      title: "Orbit Social",
-      description: "Next-generation social platform for content creators",
-      image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=800&h=600&fit=crop",
-    }
-  ];
+  const projects = getAllProjects();
 
   const ProjectCard = ({ project, index }) => {
     const [isVisible, setIsVisible] = useState(false);
@@ -89,7 +55,7 @@ const CubertoProjectsPage = () => {
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
         }`}
         style={{
-          transitionDelay: isVisible ? `${index * 150}ms` : '0ms'
+          transitionDelay: isVisible ? `${index * 50}ms` : '0ms'
         }}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
@@ -106,11 +72,11 @@ const CubertoProjectsPage = () => {
             setCursorHover(false);
           }}
           onClick={() => {
-            router.push(`/projects/${project.id}`);
+            router.push(`/project-detail?id=${project.id}`);
           }}
         >
           <img
-            src={project.image}
+            src={project.screenshots[0]?.url || 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop'}
             alt={project.title}
             className={`w-full h-full object-cover transition-transform duration-500 ease-out ${
               isHovered ? 'scale-105' : 'scale-100'
@@ -161,6 +127,9 @@ const CubertoProjectsPage = () => {
           </div>
         </div>
       </main>
+      <ProjectTimeline />
+
+      <FAQ />
 
       {/* Call to Action */}
       <section className="py-20 lg:py-24">
