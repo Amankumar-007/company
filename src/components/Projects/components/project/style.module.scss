@@ -25,14 +25,17 @@
     }
 
     &:hover{
-        opacity: 0.5;
+        background-color: rgba(0, 0, 0, 0.8);
+        color: white;
 
         h2{
             transform: translateX(-10px);
+            color: white;
         }
 
         p{
             transform: translateX(10px);
+            color: white;
         }
     }
 
@@ -74,18 +77,6 @@
         p{
             font-size: 14px;
             align-self: flex-end;
-        }
-
-        &:hover{
-            opacity: 0.7;
-
-            h2{
-                transform: translateX(-5px);
-            }
-
-            p{
-                transform: translateX(5px);
-            }
         }
     }
 }

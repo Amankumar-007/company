@@ -2,6 +2,11 @@
 import React, { useEffect, useRef, useState, createContext, useContext } from 'react'
 import gsap from 'gsap';
 
+// Helper function to detect mobile devices
+const isMobile = () => {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth <= 768;
+};
+
 // Create context for cursor state management
 export const CursorContext = createContext();
 
@@ -43,6 +48,7 @@ export const CursorProvider = ({ children }) => {
 };
 
 export default function Cursor({ state }) {
+    const [isMobileDevice, setIsMobileDevice] = useState(false);
     const mouse = useRef({x: 0, y: 0});
     const delayedMouse = useRef({x: 0, y: 0});
     const cursor = useRef();
@@ -121,7 +127,24 @@ export default function Cursor({ state }) {
         }
     }
 
+    useEffect(() => {
+        // Check if mobile device on mount and on resize
+        const checkMobile = () => {
+            setIsMobileDevice(isMobile());
+        };
+        
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        
+        return () => {
+            window.removeEventListener('resize', checkMobile);
+        };
+    }, []);
+    
     useEffect( () => {
+        // Don't initialize cursor animations on mobile devices
+        if (isMobileDevice) return;
+        
         // Set initial position with hardware acceleration
         if (cursor.current) {
             gsap.set(cursor.current, { 
@@ -142,8 +165,13 @@ export default function Cursor({ state }) {
             window.removeEventListener("mousemove", manageMouseMove);
             window.cancelAnimationFrame(rafId.current);
         }
-    }, [state])
+    }, [state, isMobileDevice])
 
+    // Don't render cursor on mobile devices
+    if (isMobileDevice) {
+        return null;
+    }
+    
     return (
         <>
             <div 
