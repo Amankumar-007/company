@@ -6,14 +6,14 @@ export default function HeroSection() {
       <div className="max-w-6xl mx-auto text-center">
         {/* Main Heading */}
         <h1 className="text-[2.7rem] sm:text-[3.6rem] lg:text-[4.5rem] xl:text-[5.4rem] font-bold text-gray-900 leading-tight mb-8 tracking-tight">
-          <span className="block">Design agency focused</span>
-          <span className="block">on AI-driven products</span>
+          <span className="block">Building Digital Excellence</span>
+          <span className="block">the <span className="text-orange-500">Agile</span> Way</span>
         </h1>
         
         {/* Subtitle */}
         <p className="text-lg sm:text-xl lg:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed mb-12 font-light">
-          Cuberto is a digital design and technology partner focused on smart
-          interactions, delightful UX, and cutting-edge AI solutions.
+          We use agile methodology to build exceptional websites. 
+          <span className="block mt-2">Get your <span className="font-semibold text-orange-500">free</span> first wireframe - let's create something amazing together.</span>
         </p>
         
         {/* CTA Buttons */}

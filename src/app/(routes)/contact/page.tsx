@@ -19,7 +19,7 @@ export default function ContactForm() {
     (
       async () => {
         const LocomotiveScroll = (await import('locomotive-scroll')).default;
-        new LocomotiveScroll();
+        const locomotiveScroll = new LocomotiveScroll();
 
         setTimeout(() => {
           setIsLoading(false);
