@@ -18,6 +18,89 @@ function ServiceDetailsContent() {
   const [activeTab, setActiveTab] = useState('overview');
   const [hoveredFeature, setHoveredFeature] = useState(null);
   
+  // SVG icon mapping for technologies
+  const getTechIcon = (techName) => {
+    const iconMap = {
+      'React': '/tech/7423888_react_react native_icon.svg',
+      'Next.js': '/tech/9118036_nextjs_fill_icon.svg',
+      'TypeScript': '/tech/11120662_fi_brands_typescript_icon.svg',
+      'Node.js': '/tech/1012818_code_development_logo_nodejs_icon.svg',
+      'MongoDB': '/tech/1012822_code_development_logo_mongodb_programming_icon.svg',
+      'PostgreSQL': '/tech/4691328_postgresql_icon.svg',
+      'GraphQL': '/tech/4691403_graphql_icon.svg',
+      'AWS': '/tech/4923041_aws_icon.svg',
+      'Docker': '/tech/8725837_docker_icon.svg',
+      'JavaScript': '/tech/652581_code_command_develop_javascript_language_icon.svg',
+      'HTML5': '/tech/104494_html5_html_icon.svg',
+      'Angular': '/tech/4373284_angular_logo_logos_icon.svg',
+      'Tailwind CSS': '/tech/9055799_bxl_tailwind_css_icon.svg',
+      'Flutter': '/tech/9055802_bxl_flutter_icon.svg',
+      'Swift': '', // No SVG available
+      'Kotlin': '', // No SVG available
+      'React Native': '/tech/7423888_react_react native_icon.svg',
+      'Figma': '', // No SVG available
+      'Sketch': '', // No SVG available
+      'Adobe XD': '', // No SVG available
+      'Shopify': '', // No SVG available
+      'WooCommerce': '', // No SVG available
+      'Magento': '', // No SVG available
+      'Meta Business Suite': '', // No SVG available
+      'Hootsuite': '', // No SVG available
+      'Buffer': '', // No SVG available
+      'Google Analytics': '', // No SVG available
+      'Google Ads': '', // No SVG available
+      'SEMrush': '', // No SVG available
+      'Ahrefs': '', // No SVG available
+      'Google Cloud': '', // No SVG available
+      'Azure': '', // No SVG available
+      'Firebase': '', // No SVG available
+      'Stripe': '', // No SVG available
+      'PayPal': '', // No SVG available
+      'Default': '' // Fallback
+    };
+    
+    return iconMap[techName] || iconMap['Default'];
+  };
+
+  // Service image mapping - use images according to their names
+  const getServiceImages = (serviceId) => {
+    const imageMap = {
+      'web-development': [
+        '/service-png/frontend.png',
+        '/service-png/backend.png',
+        '/service-png/cross.png'
+      ],
+      'mobile-development': [
+        '/service-png/native.png',
+        '/service-png/native2.png',
+        '/service-png/cross.png'
+      ],
+      'ui-ux-design': [
+        '/service-png/frontend.png',
+        '/service-png/cross.png',
+        '/service-png/backend.png'
+      ],
+      'ecommerce-solutions': [
+        '/service-png/frontend.png',
+        '/service-png/backend.png',
+        '/service-png/cross.png'
+      ],
+      'social-media': [
+        '/service-png/cross.png',
+        '/service-png/frontend.png',
+        '/service-png/backend.png'
+      ],
+      'digital-marketing': [
+        '/service-png/cross.png',
+        '/service-png/frontend.png',
+        '/service-png/backend.png'
+      ]
+    };
+    return imageMap[serviceId] || ['/service-png/frontend.png', '/service-png/backend.png', '/service-png/cross.png'];
+  };
+  
+  const serviceImages = getServiceImages(serviceId);
+  
   const sectionRefs = {
     overview: useRef(null),
     provide: useRef(null),
@@ -321,14 +404,11 @@ function ServiceDetailsContent() {
                     ))}
                   </div>
                 </div>
-                <div className="bg-gray-100 border-2 border-black h-80 flex items-center justify-center">
-                  <div className="text-center">
-                    <div className="text-6xl mb-4">
-                      {index === 0 ? '💻' : index === 1 ? '⚙️' : '🛒'}
-                    </div>
-                    <p className="text-gray-600 font-medium">Service Visualization</p>
-                  </div>
-                </div>
+                <img
+                  src={serviceImages[index] || '/service-png/frontend.png'}
+                  alt={`${serviceItem.title}`}
+                  className="w-full h-[28rem] object-contain"
+                />
               </motion.div>
             ))}
           </div>
@@ -436,7 +516,17 @@ function ServiceDetailsContent() {
                 
                 {/* Content */}
                 <div className="relative z-10 group-hover:text-white transition-colors duration-300">
-                  <div className="text-3xl mb-3">{tech.icon}</div>
+                  <div className="w-12 h-12 mx-auto mb-3 flex items-center justify-center">
+                    {getTechIcon(tech.name) ? (
+                      <img 
+                        src={getTechIcon(tech.name)} 
+                        alt={tech.name}
+                        className="w-full h-full object-contain group-hover:brightness-0 group-hover:invert transition-all duration-300"
+                      />
+                    ) : (
+                      <div className="text-3xl">{tech.icon}</div>
+                    )}
+                  </div>
                   <h4 className="font-bold text-lg mb-1">{tech.name}</h4>
                   <p className="text-sm opacity-75 group-hover:opacity-100">{tech.category}</p>
                 </div>

@@ -440,6 +440,886 @@ export const services = [
         { label: "SEE CASE STUDIES", icon: "ExternalLink" }
       ]
     }
+  },
+  {
+    id: "ui-ux-design",
+    title: "UI/UX Design",
+    subtitle: "User-Centered Design",
+    category: "Design",
+    heroDescription: "Creating intuitive, beautiful, and user-friendly interfaces that delight users and drive engagement.",
+    overview: {
+      title: "Design That Drives Results",
+      description: "We create stunning user interfaces and experiences that not only look beautiful but also function flawlessly. Our user-centered design approach ensures that every interaction is meaningful, intuitive, and aligned with your business goals. From wireframes to high-fidelity prototypes, we craft designs that users love and that convert.",
+      highlights: [
+        "User research and persona development",
+        "Wireframing and interactive prototyping",
+        "Visual design and brand consistency",
+        "Usability testing and optimization",
+        "Responsive design for all devices",
+        "Accessibility compliance (WCAG standards)"
+      ]
+    },
+    whatWeProvide: [
+      {
+        title: "User Interface Design",
+        description: "Creating visually appealing and intuitive interfaces that provide excellent user experiences across all platforms and devices.",
+        features: [
+          "Custom visual design systems",
+          "Component-based UI libraries",
+          "Interactive design prototypes",
+          "Design system development",
+          "Brand identity integration",
+          "Cross-platform consistency"
+        ]
+      },
+      {
+        title: "User Experience Design",
+        description: "Designing seamless user journeys and interactions that solve real problems and create meaningful connections with users.",
+        features: [
+          "User research and analysis",
+          "Information architecture",
+          "User flow mapping",
+          "Interaction design",
+          "Usability testing",
+          "Experience optimization"
+        ]
+      },
+      {
+        title: "Design Systems",
+        description: "Building comprehensive design systems that ensure consistency, scalability, and efficiency across all your digital products.",
+        features: [
+          "Component libraries",
+          "Style guides and documentation",
+          "Design tokens and variables",
+          "Pattern libraries",
+          "Design-to-development handoff",
+          "Cross-team collaboration tools"
+        ]
+      }
+    ],
+    howWeDoIt: [
+      {
+        phase: "Research & Discovery",
+        description: "Understanding your users, business goals, and market landscape to inform design decisions.",
+        activities: [
+          "User interviews and surveys",
+          "Competitor analysis",
+          "Market research",
+          "Stakeholder workshops",
+          "User persona creation",
+          "Requirements gathering"
+        ]
+      },
+      {
+        phase: "Strategy & Planning",
+        description: "Developing a comprehensive design strategy that aligns with business objectives and user needs.",
+        activities: [
+          "Design strategy development",
+          "Information architecture",
+          "User flow mapping",
+          "Content strategy",
+          "Technical feasibility assessment",
+          "Design roadmap creation"
+        ]
+      },
+      {
+        phase: "Design & Prototyping",
+        description: "Creating wireframes, mockups, and interactive prototypes to visualize and test design concepts.",
+        activities: [
+          "Wireframing and layout design",
+          "Visual design and branding",
+          "Interactive prototyping",
+          "Usability testing",
+          "Design iteration and refinement",
+          "Stakeholder feedback integration"
+        ]
+      },
+      {
+        phase: "Implementation & Testing",
+        description: "Collaborating with development teams and conducting final testing to ensure design quality.",
+        activities: [
+          "Design handoff to developers",
+          "Development collaboration",
+          "Quality assurance testing",
+          "User acceptance testing",
+          "Performance optimization",
+          "Launch support and monitoring"
+        ]
+      }
+    ],
+    technologies: [
+      { name: 'Figma', category: 'Design Tool', icon: '🎨' },
+      { name: 'Sketch', category: 'Design Tool', icon: '✏️' },
+      { name: 'Adobe XD', category: 'Design Tool', icon: '🟦' },
+      { name: 'Photoshop', category: 'Design Tool', icon: '🖼️' },
+      { name: 'Illustrator', category: 'Design Tool', icon: '🎭' },
+      { name: 'InVision', category: 'Prototyping', icon: '🔮' },
+      { name: 'Principle', category: 'Animation', icon: '🎬' },
+      { name: 'Framer', category: 'Interactive Design', icon: '🎯' },
+      { name: 'Maze', category: 'User Testing', icon: '🧪' },
+      { name: 'Hotjar', category: 'Analytics', icon: '🔥' },
+      { name: 'Storybook', category: 'Documentation', icon: '📚' },
+      { name: 'Zeplin', category: 'Handoff', icon: '📤' }
+    ],
+    process: [
+      {
+        step: "01",
+        title: "Research",
+        description: "Understanding users and business needs",
+        details: "We conduct thorough research to understand your target audience, business objectives, and competitive landscape. This foundation ensures our designs solve real problems."
+      },
+      {
+        step: "02",
+        title: "Strategy",
+        description: "Planning the design approach",
+        details: "Based on research insights, we develop a comprehensive design strategy including user personas, journey maps, and information architecture."
+      },
+      {
+        step: "03",
+        title: "Design",
+        description: "Creating visual and interactive designs",
+        details: "Our designers create wireframes, mockups, and interactive prototypes that bring your vision to life while ensuring optimal user experience."
+      },
+      {
+        step: "04",
+        title: "Test",
+        description: "Validating designs with real users",
+        details: "We conduct usability testing and gather feedback to ensure our designs meet user needs and business objectives before final implementation."
+      },
+      {
+        step: "05",
+        title: "Implement",
+        description: "Collaborating on development",
+        details: "We work closely with development teams to ensure designs are implemented accurately and maintain design integrity throughout the process."
+      },
+      {
+        step: "06",
+        title: "Optimize",
+        description: "Continuous improvement",
+        details: "Post-launch, we analyze user behavior and feedback to continuously optimize and improve the design for better performance and user satisfaction."
+      }
+    ],
+    stats: [
+      { value: "200+", label: "Design Projects", icon: "🎨" },
+      { value: "96%", label: "User Satisfaction", icon: "😊" },
+      { value: "6+", label: "Years Experience", icon: "📅" },
+      { value: "50+", label: "Happy Clients", icon: "👥" }
+    ],
+    pricing: [
+      {
+        title: "Basic Design",
+        price: "$1,999",
+        duration: "Starting from",
+        description: "Essential design services",
+        features: [
+          "Wireframing and mockups",
+          "Basic UI design",
+          "Style guide creation",
+          "Design assets delivery",
+          "2 rounds of revisions",
+          "Basic usability testing"
+        ],
+        popular: false
+      },
+      {
+        title: "Professional Design",
+        price: "$4,999",
+        duration: "Starting from",
+        description: "Comprehensive design solutions",
+        features: [
+          "Complete UI/UX design",
+          "Interactive prototypes",
+          "Design system development",
+          "User research and testing",
+          "4 rounds of revisions",
+          "Development collaboration"
+        ],
+        popular: true
+      },
+      {
+        title: "Enterprise Design",
+        price: "Custom",
+        duration: "Tailored Solution",
+        description: "Full-scale design services",
+        features: [
+          "End-to-end design strategy",
+          "Comprehensive design system",
+          "Multi-platform design",
+          "Advanced user research",
+          "Unlimited revisions",
+          "Dedicated design team"
+        ],
+        popular: false
+      }
+    ],
+    callToAction: {
+      title: "Ready to Transform Your User Experience?",
+      subtitle: "Let's create stunning designs that users love and that drive your business forward. Our expert design team is ready to bring your vision to life.",
+      buttons: [
+        { label: "START DESIGN PROJECT", icon: "ArrowRight" },
+        { label: "VIEW PORTFOLIO", icon: "ExternalLink" }
+      ]
+    }
+  },
+  {
+    id: "ecommerce-solutions",
+    title: "E-commerce Solutions",
+    subtitle: "Online Store Development",
+    category: "E-commerce",
+    heroDescription: "Building powerful, scalable, and user-friendly online stores that drive sales and growth for your business.",
+    overview: {
+      title: "E-commerce Excellence",
+      description: "We create comprehensive e-commerce solutions that combine stunning design with powerful functionality. From product catalogs to payment processing, we build online stores that provide exceptional shopping experiences and drive conversions. Our solutions are scalable, secure, and optimized for performance across all devices.",
+      highlights: [
+        "Custom online store development",
+        "Multi-platform e-commerce solutions",
+        "Secure payment gateway integration",
+        "Inventory management systems",
+        "Mobile-optimized shopping experience",
+        "Advanced analytics and reporting"
+      ]
+    },
+    whatWeProvide: [
+      {
+        title: "Custom E-commerce Development",
+        description: "Building tailored e-commerce platforms from scratch to meet your specific business requirements and scale with your growth.",
+        features: [
+          "Custom shopping cart development",
+          "Product catalog management",
+          "Advanced search and filtering",
+          "Multi-vendor marketplace support",
+          "Custom checkout flows",
+          "Scalable architecture design"
+        ]
+      },
+      {
+        title: "Platform-Based Solutions",
+        description: "Implementing and customizing leading e-commerce platforms like Shopify, WooCommerce, Magento, and BigCommerce.",
+        features: [
+          "Shopify store development",
+          "WooCommerce customization",
+          "Magento implementation",
+          "BigCommerce solutions",
+          "Theme customization",
+          "Plugin and extension development"
+        ]
+      },
+      {
+        title: "E-commerce Integration",
+        description: "Integrating your e-commerce store with essential business systems and third-party services for seamless operations.",
+        features: [
+          "Payment gateway integration",
+          "Shipping and logistics integration",
+          "CRM and ERP integration",
+          "Email marketing automation",
+          "Accounting software integration",
+          "Third-party API connections"
+        ]
+      }
+    ],
+    howWeDoIt: [
+      {
+        phase: "Strategy & Planning",
+        description: "Understanding your e-commerce goals, target audience, and technical requirements for successful online store development.",
+        activities: [
+          "Business requirements analysis",
+          "Target audience research",
+          "Competitor analysis",
+          "Platform selection",
+          "Feature prioritization",
+          "Project roadmap creation"
+        ]
+      },
+      {
+        phase: "Design & UX",
+        description: "Creating user-friendly e-commerce designs that optimize the shopping experience and drive conversions.",
+        activities: [
+          "E-commerce UX design",
+          "Product page optimization",
+          "Checkout flow design",
+          "Mobile shopping experience",
+          "Conversion rate optimization",
+          "Brand identity integration"
+        ]
+      },
+      {
+        phase: "Development",
+        description: "Building the e-commerce platform with robust functionality, security, and performance optimization.",
+        activities: [
+          "Frontend development",
+          "Backend development",
+          "Database design",
+          "Payment system integration",
+          "Security implementation",
+          "Performance optimization"
+        ]
+      },
+      {
+        phase: "Launch & Optimization",
+        description: "Deploying your e-commerce store and continuously optimizing for better performance and sales.",
+        activities: [
+          "Store deployment",
+          "Payment testing",
+          "Security auditing",
+          "Performance monitoring",
+          "Conversion rate optimization",
+          "Ongoing maintenance and support"
+        ]
+      }
+    ],
+    technologies: [
+      { name: 'Shopify', category: 'E-commerce Platform', icon: '🛍️' },
+      { name: 'WooCommerce', category: 'E-commerce Platform', icon: '🛒' },
+      { name: 'Magento', category: 'E-commerce Platform', icon: '🏪' },
+      { name: 'BigCommerce', category: 'E-commerce Platform', icon: '🏬' },
+      { name: 'React', category: 'Frontend', icon: '⚛️' },
+      { name: 'Next.js', category: 'Framework', icon: '🚀' },
+      { name: 'Node.js', category: 'Backend', icon: '🟢' },
+      { name: 'Stripe', category: 'Payment', icon: '💳' },
+      { name: 'PayPal', category: 'Payment', icon: '💰' },
+      { name: 'AWS', category: 'Cloud', icon: '☁️' },
+      { name: 'Docker', category: 'Containerization', icon: '🐳' },
+      { name: 'Redis', category: 'Cache', icon: '🔴' }
+    ],
+    process: [
+      {
+        step: "01",
+        title: "Consultation",
+        description: "Understanding your e-commerce vision",
+        details: "We begin with a comprehensive consultation to understand your business model, target audience, product offerings, and e-commerce goals."
+      },
+      {
+        step: "02",
+        title: "Strategy",
+        description: "Planning your online store",
+        details: "Based on your requirements, we develop a detailed strategy including platform selection, feature roadmap, timeline, and resource allocation."
+      },
+      {
+        step: "03",
+        title: "Design",
+        description: "Creating your store's look and feel",
+        details: "Our designers create a beautiful, user-friendly interface that reflects your brand and provides an exceptional shopping experience."
+      },
+      {
+        step: "04",
+        title: "Development",
+        description: "Building your e-commerce platform",
+        details: "We develop your online store with robust functionality, secure payment processing, and seamless user experience across all devices."
+      },
+      {
+        step: "05",
+        title: "Testing",
+        description: "Ensuring quality and security",
+        details: "Comprehensive testing including functionality, security, payment processing, and user experience to ensure your store is ready for launch."
+      },
+      {
+        step: "06",
+        title: "Launch",
+        description: "Going live and growing",
+        details: "We handle the complete launch process and provide ongoing support, optimization, and maintenance to ensure your store's success."
+      }
+    ],
+    stats: [
+      { value: "100+", label: "Stores Built", icon: "🏪" },
+      { value: "40%", label: "Avg. Sales Increase", icon: "📈" },
+      { value: "5+", label: "Years Experience", icon: "📅" },
+      { value: "99.9%", label: "Uptime", icon: "⚡" }
+    ],
+    pricing: [
+      {
+        title: "Basic Store",
+        price: "$3,999",
+        duration: "Starting from",
+        description: "Essential e-commerce features",
+        features: [
+          "Custom store design",
+          "Product catalog setup",
+          "Payment integration",
+          "Basic SEO optimization",
+          "3 months support",
+          "Mobile responsive design"
+        ],
+        popular: false
+      },
+      {
+        title: "Professional Store",
+        price: "$8,999",
+        duration: "Starting from",
+        description: "Advanced e-commerce solution",
+        features: [
+          "Complete custom development",
+          "Advanced features",
+          "Multi-payment options",
+          "Inventory management",
+          "6 months support",
+          "Analytics integration"
+        ],
+        popular: true
+      },
+      {
+        title: "Enterprise Store",
+        price: "Custom",
+        duration: "Tailored Solution",
+        description: "Large-scale e-commerce platform",
+        features: [
+          "Multi-vendor marketplace",
+          "Advanced integrations",
+          "Custom API development",
+          "Enterprise security",
+          "12 months support",
+          "Dedicated team"
+        ],
+        popular: false
+      }
+    ],
+    callToAction: {
+      title: "Ready to Launch Your Online Store?",
+      subtitle: "Let's build a powerful e-commerce solution that drives sales and grows your business. Our expert team is ready to create your perfect online store.",
+      buttons: [
+        { label: "START E-COMMERCE PROJECT", icon: "ArrowRight" },
+        { label: "SEE STORE EXAMPLES", icon: "ExternalLink" }
+      ]
+    }
+  },
+  {
+    id: "social-media",
+    title: "Social Media Marketing",
+    subtitle: "Brand Engagement",
+    category: "Marketing",
+    heroDescription: "Building powerful social media strategies that connect with your audience and drive meaningful engagement across all platforms.",
+    overview: {
+      title: "Social Media That Works",
+      description: "We create comprehensive social media strategies that build brand awareness, engage your target audience, and drive business results. From content creation to community management, we handle all aspects of your social media presence to ensure consistent growth and meaningful connections with your customers.",
+      highlights: [
+        "Comprehensive social media strategy",
+        "Content creation and curation",
+        "Community management and engagement",
+        "Social media advertising campaigns",
+        "Influencer partnerships",
+        "Analytics and performance tracking"
+      ]
+    },
+    whatWeProvide: [
+      {
+        title: "Social Media Strategy",
+        description: "Developing data-driven social media strategies that align with your business goals and target audience preferences.",
+        features: [
+          "Platform selection and optimization",
+          "Content strategy development",
+          "Audience targeting and segmentation",
+          "Competitor analysis",
+          "Campaign planning and scheduling",
+          "ROI measurement frameworks"
+        ]
+      },
+      {
+        title: "Content Creation",
+        description: "Creating engaging, high-quality content that resonates with your audience and drives engagement across all social platforms.",
+        features: [
+          "Visual content creation",
+          "Video production and editing",
+          "Copywriting and caption creation",
+          "Story and reel content",
+          "Brand consistency management",
+          "Content calendar development"
+        ]
+      },
+      {
+        title: "Community Management",
+        description: "Building and nurturing active communities around your brand through consistent engagement and relationship building.",
+        features: [
+          "Daily community engagement",
+          "Customer service support",
+          "Comment and message management",
+          "User-generated content curation",
+          "Crisis management",
+          "Brand advocacy programs"
+        ]
+      }
+    ],
+    howWeDoIt: [
+      {
+        phase: "Audit & Research",
+        description: "Analyzing your current social media presence and researching your target audience and competitors.",
+        activities: [
+          "Social media audit",
+          "Competitor analysis",
+          "Audience research",
+          "Platform performance analysis",
+          "Content gap analysis",
+          "Industry trend research"
+        ]
+      },
+      {
+        phase: "Strategy Development",
+        description: "Creating a comprehensive social media strategy tailored to your business goals and target audience.",
+        activities: [
+          "Goal setting and KPI definition",
+          "Platform selection",
+          "Content strategy creation",
+          "Campaign planning",
+          "Budget allocation",
+          "Timeline development"
+        ]
+      },
+      {
+        phase: "Content Creation & Publishing",
+        description: "Creating and publishing engaging content across all selected social media platforms.",
+        activities: [
+          "Content calendar creation",
+          "Visual content production",
+          "Copywriting and editing",
+          "Content scheduling",
+          "Hashtag strategy",
+          "Platform optimization"
+        ]
+      },
+      {
+        phase: "Engagement & Optimization",
+        description: "Managing community engagement and continuously optimizing campaigns for better performance.",
+        activities: [
+          "Community management",
+          "Performance monitoring",
+          "A/B testing",
+          "Strategy refinement",
+          "Reporting and analysis",
+          "Campaign optimization"
+        ]
+      }
+    ],
+    technologies: [
+      { name: 'Meta Business Suite', category: 'Management', icon: '📘' },
+      { name: 'Hootsuite', category: 'Management', icon: '🦉' },
+      { name: 'Buffer', category: 'Scheduling', icon: '📋' },
+      { name: 'Canva', category: 'Design', icon: '🎨' },
+      { name: 'Adobe Creative Suite', category: 'Design', icon: '🎭' },
+      { name: 'Later', category: 'Scheduling', icon: '⏰' },
+      { name: 'Sprout Social', category: 'Analytics', icon: '🌱' },
+      { name: 'Google Analytics', category: 'Analytics', icon: '📊' },
+      { name: 'Facebook Ads', category: 'Advertising', icon: '📢' },
+      { name: 'Instagram Ads', category: 'Advertising', icon: '📷' },
+      { name: 'LinkedIn Ads', category: 'Advertising', icon: '💼' },
+      { name: 'TikTok Ads', category: 'Advertising', icon: '🎵' }
+    ],
+    process: [
+      {
+        step: "01",
+        title: "Audit",
+        description: "Analyzing current presence",
+        details: "We conduct a thorough audit of your current social media presence, analyzing performance, audience engagement, and competitive positioning."
+      },
+      {
+        step: "02",
+        title: "Strategy",
+        description: "Planning your approach",
+        details: "Based on audit findings, we develop a comprehensive social media strategy including platform selection, content themes, and campaign goals."
+      },
+      {
+        step: "03",
+        title: "Create",
+        description: "Producing engaging content",
+        details: "Our creative team produces high-quality, engaging content tailored to each platform and optimized for your target audience."
+      },
+      {
+        step: "04",
+        title: "Publish",
+        description: "Sharing with your audience",
+        details: "We schedule and publish content across all platforms at optimal times to maximize reach and engagement with your audience."
+      },
+      {
+        step: "05",
+        title: "Engage",
+        description: "Building relationships",
+        details: "We actively engage with your community, responding to comments, messages, and fostering meaningful connections with your audience."
+      },
+      {
+        step: "06",
+        title: "Analyze",
+        description: "Measuring and optimizing",
+        details: "We continuously monitor performance, analyze results, and optimize strategies to ensure continuous improvement and ROI."
+      }
+    ],
+    stats: [
+      { value: "500+", label: "Campaigns Managed", icon: "📢" },
+      { value: "2M+", label: "Reach Generated", icon: "👥" },
+      { value: "4+", label: "Years Experience", icon: "📅" },
+      { value: "85%", label: "Engagement Rate", icon: "💬" }
+    ],
+    pricing: [
+      {
+        title: "Basic Package",
+        price: "$999",
+        duration: "Per month",
+        description: "Essential social media management",
+        features: [
+          "3 platforms management",
+          "12 posts per month",
+          "Basic community engagement",
+          "Monthly reporting",
+          "Content calendar",
+          "Basic analytics"
+        ],
+        popular: false
+      },
+      {
+        title: "Professional Package",
+        price: "$2,499",
+        duration: "Per month",
+        description: "Comprehensive social media solution",
+        features: [
+          "5 platforms management",
+          "24 posts per month",
+          "Advanced engagement",
+          "Weekly reporting",
+          "Content creation",
+          "Paid ad management"
+        ],
+        popular: true
+      },
+      {
+        title: "Enterprise Package",
+        price: "Custom",
+        duration: "Tailored Solution",
+        description: "Full-scale social media strategy",
+        features: [
+          "Unlimited platforms",
+          "Custom content volume",
+          "Full community management",
+          "Real-time reporting",
+          "Video production",
+          "Strategy consulting"
+        ],
+        popular: false
+      }
+    ],
+    callToAction: {
+      title: "Ready to Boost Your Social Media Presence?",
+      subtitle: "Let's create a powerful social media strategy that connects with your audience and drives real business results. Our social media experts are ready to help you succeed.",
+      buttons: [
+        { label: "START SOCIAL MEDIA CAMPAIGN", icon: "ArrowRight" },
+        { label: "SEE CASE STUDIES", icon: "ExternalLink" }
+      ]
+    }
+  },
+  {
+    id: "digital-marketing",
+    title: "Digital Marketing",
+    subtitle: "Growth Marketing",
+    category: "Marketing",
+    heroDescription: "Comprehensive digital marketing solutions that drive traffic, generate leads, and accelerate business growth across all online channels.",
+    overview: {
+      title: "Digital Growth Experts",
+      description: "We deliver end-to-end digital marketing solutions that help businesses thrive in the digital landscape. From SEO and content marketing to paid advertising and email campaigns, we create integrated strategies that drive measurable results. Our data-driven approach ensures every marketing dollar is optimized for maximum ROI and sustainable business growth.",
+      highlights: [
+        "Search Engine Optimization (SEO)",
+        "Pay-Per-Click (PPC) advertising",
+        "Content marketing strategy",
+        "Email marketing campaigns",
+        "Marketing automation",
+        "Analytics and performance tracking"
+      ]
+    },
+    whatWeProvide: [
+      {
+        title: "Search Engine Optimization",
+        description: "Improving your website's visibility and ranking on search engines through comprehensive SEO strategies and technical optimization.",
+        features: [
+          "On-page SEO optimization",
+          "Technical SEO audits",
+          "Content strategy and creation",
+          "Link building and outreach",
+          "Local SEO optimization",
+          "SEO performance tracking"
+        ]
+      },
+      {
+        title: "Paid Advertising",
+        description: "Creating and managing targeted paid advertising campaigns across Google, social media, and other digital platforms.",
+        features: [
+          "Google Ads management",
+          "Social media advertising",
+          "Display advertising",
+          "Remarketing campaigns",
+          "A/B testing and optimization",
+          "Budget management and ROI tracking"
+        ]
+      },
+      {
+        title: "Content Marketing",
+        description: "Developing and executing content strategies that attract, engage, and convert your target audience across multiple channels.",
+        features: [
+          "Content strategy development",
+          "Blog and article writing",
+          "Video content production",
+          "Infographic creation",
+          "Whitepaper and ebook development",
+          "Content distribution and promotion"
+        ]
+      }
+    ],
+    howWeDoIt: [
+      {
+        phase: "Discovery & Analysis",
+        description: "Understanding your business, target audience, and current digital marketing performance to identify opportunities and challenges.",
+        activities: [
+          "Business goal analysis",
+          "Target audience research",
+          "Competitor analysis",
+          "Current performance audit",
+          "Market opportunity assessment",
+          "Technology stack evaluation"
+        ]
+      },
+      {
+        phase: "Strategy Development",
+        description: "Creating a comprehensive digital marketing strategy that aligns with your business objectives and target audience needs.",
+        activities: [
+          "Marketing channel selection",
+          "Campaign strategy development",
+          "Budget allocation",
+          "KPI definition and tracking",
+          "Content planning",
+          "Technology integration planning"
+        ]
+      },
+      {
+        phase: "Implementation",
+        description: "Executing the digital marketing strategy across all selected channels with continuous optimization and monitoring.",
+        activities: [
+          "Campaign setup and launch",
+          "Content creation and publishing",
+          "Ad campaign management",
+          "Email campaign deployment",
+          "SEO implementation",
+          "Marketing automation setup"
+        ]
+      },
+      {
+        phase: "Optimization & Reporting",
+        description: "Continuously monitoring performance, analyzing results, and optimizing campaigns for better results and ROI.",
+        activities: [
+          "Performance monitoring",
+          "Data analysis and insights",
+          "Campaign optimization",
+          "A/B testing",
+          "ROI calculation",
+          "Regular reporting and reviews"
+        ]
+      }
+    ],
+    technologies: [
+      { name: 'Google Analytics', category: 'Analytics', icon: '📊' },
+      { name: 'Google Ads', category: 'Advertising', icon: '🔍' },
+      { name: 'SEMrush', category: 'SEO', icon: '🔧' },
+      { name: 'Ahrefs', category: 'SEO', icon: '🔗' },
+      { name: 'HubSpot', category: 'Marketing Automation', icon: '🎯' },
+      { name: 'Mailchimp', category: 'Email Marketing', icon: '📧' },
+      { name: 'ActiveCampaign', category: 'Marketing Automation', icon: '⚡' },
+      { name: 'Facebook Ads', category: 'Social Advertising', icon: '📘' },
+      { name: 'LinkedIn Ads', category: 'Social Advertising', icon: '💼' },
+      { name: 'Google Tag Manager', category: 'Tracking', icon: '🏷️' },
+      { name: 'Hotjar', category: 'User Behavior', icon: '🔥' },
+      { name: 'Canva', category: 'Design', icon: '🎨' }
+    ],
+    process: [
+      {
+        step: "01",
+        title: "Audit",
+        description: "Analyzing current performance",
+        details: "We conduct a comprehensive audit of your current digital marketing efforts, analyzing performance across all channels and identifying opportunities for improvement."
+      },
+      {
+        step: "02",
+        title: "Strategy",
+        description: "Planning your marketing approach",
+        details: "Based on audit findings, we develop a comprehensive digital marketing strategy including channel selection, budget allocation, and campaign planning."
+      },
+      {
+        step: "03",
+        title: "Execute",
+        description: "Implementing marketing campaigns",
+        details: "We execute your digital marketing strategy across all selected channels, creating and launching campaigns that drive results and meet your objectives."
+      },
+      {
+        step: "04",
+        title: "Monitor",
+        description: "Tracking performance metrics",
+        details: "We continuously monitor campaign performance, tracking key metrics and gathering data to understand what's working and what needs improvement."
+      },
+      {
+        step: "05",
+        title: "Optimize",
+        description: "Improving campaign performance",
+        details: "Using data-driven insights, we continuously optimize campaigns for better performance, testing new approaches and refining strategies."
+      },
+      {
+        step: "06",
+        title: "Report",
+        description: "Measuring success and ROI",
+        details: "We provide detailed reports on campaign performance, ROI analysis, and strategic recommendations for continued growth and improvement."
+      }
+    ],
+    stats: [
+      { value: "300+", label: "Campaigns Managed", icon: "📈" },
+      { value: "250%", label: "Avg. ROI Increase", icon: "💰" },
+      { value: "6+", label: "Years Experience", icon: "📅" },
+      { value: "95%", label: "Client Retention", icon: "🤝" }
+    ],
+    pricing: [
+      {
+        title: "Starter Package",
+        price: "$1,499",
+        duration: "Per month",
+        description: "Essential digital marketing services",
+        features: [
+          "Basic SEO optimization",
+          "Google Ads management",
+          "Content creation",
+          "Email marketing",
+          "Monthly reporting",
+          "Basic analytics"
+        ],
+        popular: false
+      },
+      {
+        title: "Growth Package",
+        price: "$3,999",
+        duration: "Per month",
+        description: "Comprehensive marketing solution",
+        features: [
+          "Advanced SEO strategy",
+          "Multi-platform advertising",
+          "Content marketing",
+          "Marketing automation",
+          "Weekly reporting",
+          "Conversion optimization"
+        ],
+        popular: true
+      },
+      {
+        title: "Enterprise Package",
+        price: "Custom",
+        duration: "Tailored Solution",
+        description: "Full-scale digital marketing",
+        features: [
+          "Enterprise SEO strategy",
+          "Full advertising management",
+          "Comprehensive content strategy",
+          "Advanced automation",
+          "Real-time reporting",
+          "Dedicated team"
+        ],
+        popular: false
+      }
+    ],
+    callToAction: {
+      title: "Ready to Accelerate Your Digital Growth?",
+      subtitle: "Let's create a comprehensive digital marketing strategy that drives traffic, generates leads, and grows your business. Our marketing experts are ready to help you succeed online.",
+      buttons: [
+        { label: "START MARKETING CAMPAIGN", icon: "ArrowRight" },
+        { label: "SEE SUCCESS STORIES", icon: "ExternalLink" }
+      ]
+    }
   }
 ];
 
