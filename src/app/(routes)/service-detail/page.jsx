@@ -126,7 +126,7 @@ function ServiceDetailsContent() {
   return (
     <div className="min-h-screen bg-white text-black">
       {/* Hero Section */}
-      <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden bg-white">
+      <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden p-5 mb-5">
         {/* Professional Background */}
         <div className="absolute inset-0">
           {/* Subtle Gradient Overlay */}
@@ -166,16 +166,7 @@ function ServiceDetailsContent() {
             className="space-y-8"
           >
             {/* Professional Category Badge */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-              className="inline-block"
-            >
-              <span className="inline-block px-6 py-2 border border-gray-300 text-gray-700 text-sm font-mono tracking-wider font-medium rounded-lg bg-white/80 backdrop-blur-sm">
-                {service.category}
-              </span>
-            </motion.div>
+          
 
             {/* Professional Main Title */}
             <div className="relative">
@@ -263,7 +254,7 @@ function ServiceDetailsContent() {
 
       {/* Navigation Tabs */}
       <section className="sticky top-0 z-40 bg-white border-b-2 border-black">
-        <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-24">
+        <div className="max-w-7xl mx-auto px-5 md:px-10 lg:px-24">
           <nav className="flex space-x-8 overflow-x-auto">
             {[
               { key: 'overview', label: 'OVERVIEW' },

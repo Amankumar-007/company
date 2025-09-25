@@ -1,11 +1,12 @@
 import React from 'react';
+import Link from 'next/link';
 
 export default function HeroSection() {
   return (
-    <div className="min-h-[50vh] mb-15 mt-10  flex items-center justify-center px-4 sm:px-6 lg:px-8 pt-20">
+    <div className="min-h-[50vh] mb-10 mt-5  flex items-center justify-center px-4 sm:px-6 lg:px-8 pt-4">
       <div className="max-w-6xl mx-auto text-center">
         {/* Main Heading */}
-        <h1 className="text-[2.7rem] sm:text-[3.6rem] lg:text-[4.5rem] xl:text-[5.4rem] font-bold text-gray-900 leading-tight mb-8 tracking-tight">
+        <h1 className="text-[2.6rem] sm:text-[3.5rem] lg:text-[4.4rem] xl:text-[5.3rem] font-bold text-gray-900 leading-tight mb-8 tracking-tight">
           <span className="block">Building Digital Excellence</span>
           <span className="block">the <span className="text-orange-500">Agile</span> Way</span>
         </h1>
@@ -18,8 +19,8 @@ export default function HeroSection() {
         
         {/* CTA Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <a 
-            href="#" 
+          <Link 
+            href="/contact" 
             className="relative overflow-hidden px-8 py-4 border border-gray-600 rounded-full text-black transition-all duration-300 hover:border-black group"
           >
             {/* Water fill effect */}
@@ -29,9 +30,9 @@ export default function HeroSection() {
             <span className="bg relative z-10 group-hover:text-white transition-colors duration-300 font-medium text-lg">
               Start Your Project
             </span>
-          </a>
-          <a 
-            href="#" 
+          </Link>
+          <Link 
+            href="/projects" 
             className="relative overflow-hidden px-8 py-4 border border-gray-600 rounded-full text- black transition-all duration-300 hover:border-black group"
           >
             {/* Water fill effect */}
@@ -41,7 +42,7 @@ export default function HeroSection() {
             <span className="relative z-10 group-hover:text-white transition-colors duration-300 font-medium text-lg">
               View Our Work
             </span>
-          </a>
+          </Link>
         </div>
         
         {/* Decorative Elements */}

@@ -36,14 +36,14 @@ export const projects = [
       }
     ],
     technologies: [
-      { name: 'Next.js', category: 'Frontend Framework', icon: '⚛️' },
-      { name: 'React', category: 'UI Library', icon: '⚛️' },
-      { name: 'TypeScript', category: 'Language', icon: '📝' },
-      { name: 'Tailwind CSS', category: 'Styling', icon: '🎨' },
-      { name: 'Node.js', category: 'Backend', icon: '🟢' },
-      { name: 'Python', category: 'AI/ML', icon: '🐍' },
-      { name: 'TensorFlow', category: 'ML Framework', icon: '🧠' },
-      { name: 'PostgreSQL', category: 'Database', icon: '🗄️' }
+      { name: 'Next.js', category: 'Frontend Framework', icon: '/tech/9118036_nextjs_fill_icon.svg' },
+      { name: 'React', category: 'UI Library', icon: '/tech/7423888_react_react native_icon.svg' },
+      { name: 'TypeScript', category: 'Language', icon: '/tech/11120662_fi_brands_typescript_icon.svg' },
+      { name: 'Tailwind CSS', category: 'Styling', icon: '/tech/9055799_bxl_tailwind_css_icon.svg' },
+      { name: 'Node.js', category: 'Backend', icon: '/tech/1012818_code_development_logo_nodejs_icon.svg' },
+      { name: 'Python', category: 'AI/ML', icon: '/tech/652581_code_command_develop_javascript_language_icon.svg' },
+      { name: 'TensorFlow', category: 'ML Framework', icon: '/tech/652581_code_command_develop_javascript_language_icon.svg' },
+      { name: 'PostgreSQL', category: 'Database', icon: '/tech/4691328_postgresql_icon.svg' }
     ],
     caseStudy: {
       challenge: {
@@ -138,14 +138,14 @@ export const projects = [
       }
     ],
     technologies: [
-      { name: 'Next.js', category: 'Frontend Framework', icon: '⚛️' },
-      { name: 'React', category: 'UI Library', icon: '⚛️' },
-      { name: 'TypeScript', category: 'Language', icon: '📝' },
-      { name: 'Stripe', category: 'Payment', icon: '💳' },
-      { name: 'Node.js', category: 'Backend', icon: '🟢' },
-      { name: 'MongoDB', category: 'Database', icon: '🍃' },
-      { name: 'Redis', category: 'Cache', icon: '🔴' },
-      { name: 'Docker', category: 'DevOps', icon: '🐳' }
+      { name: 'Next.js', category: 'Frontend Framework', icon: '/tech/9118036_nextjs_fill_icon.svg' },
+      { name: 'React', category: 'UI Library', icon: '/tech/7423888_react_react native_icon.svg' },
+      { name: 'TypeScript', category: 'Language', icon: '/tech/11120662_fi_brands_typescript_icon.svg' },
+      { name: 'Stripe', category: 'Payment', icon: '/tech/4923041_aws_icon.svg' },
+      { name: 'Node.js', category: 'Backend', icon: '/tech/1012818_code_development_logo_nodejs_icon.svg' },
+      { name: 'MongoDB', category: 'Database', icon: '/tech/1012822_code_development_logo_mongodb_programming_icon.svg' },
+      { name: 'Redis', category: 'Cache', icon: '/tech/8725837_docker_icon.svg' },
+      { name: 'Docker', category: 'DevOps', icon: '/tech/8725837_docker_icon.svg' }
     ],
     caseStudy: {
       challenge: {
@@ -240,14 +240,14 @@ export const projects = [
       }
     ],
     technologies: [
-      { name: 'Next.js', category: 'Frontend Framework', icon: '⚛️' },
-      { name: 'React', category: 'UI Library', icon: '⚛️' },
-      { name: 'TypeScript', category: 'Language', icon: '📝' },
-      { name: 'Socket.io', category: 'Real-time', icon: '⚡' },
-      { name: 'Node.js', category: 'Backend', icon: '🟢' },
-      { name: 'PostgreSQL', category: 'Database', icon: '🗄️' },
-      { name: 'Redis', category: 'Cache', icon: '🔴' },
-      { name: 'Docker', category: 'DevOps', icon: '🐳' }
+      { name: 'Next.js', category: 'Frontend Framework', icon: '/tech/9118036_nextjs_fill_icon.svg' },
+      { name: 'React', category: 'UI Library', icon: '/tech/7423888_react_react native_icon.svg' },
+      { name: 'TypeScript', category: 'Language', icon: '/tech/11120662_fi_brands_typescript_icon.svg' },
+      { name: 'Socket.io', category: 'Real-time', icon: '/tech/652581_code_command_develop_javascript_language_icon.svg' },
+      { name: 'Node.js', category: 'Backend', icon: '/tech/1012818_code_development_logo_nodejs_icon.svg' },
+      { name: 'PostgreSQL', category: 'Database', icon: '/tech/4691328_postgresql_icon.svg' },
+      { name: 'Redis', category: 'Cache', icon: '/tech/8725837_docker_icon.svg' },
+      { name: 'Docker', category: 'DevOps', icon: '/tech/8725837_docker_icon.svg' }
     ],
     caseStudy: {
       challenge: {

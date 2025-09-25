@@ -11,6 +11,7 @@
     backface-visibility: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow: hidden;
 
     @media (max-width: 1024px) {
         margin-top: 150px;

@@ -268,7 +268,7 @@ const ServicesPage = () => {
   return (
     <div className="min-h-screen bg-white text-black">
       {/* Hero Section */}
-      <section ref={heroRef} className="py-24 px-6 md:px-12 lg:px-24 bg-gradient-to-b from-white to-gray-50">
+      <section ref={heroRef} className="pt-5 md:px-12 lg:px-24 bg-gradient-to-b from-white to-gray-50">
         <div className="max-w-7xl mx-auto">
           <div className="mb-8">
             <h1 className="text-6xl md:text-8xl lg:text-9xl font-black mb-6 leading-tight">
@@ -284,7 +284,7 @@ const ServicesPage = () => {
       </section>
 
       {/* Services Section */}
-      <section ref={servicesRef} className="py-24 px-6 md:px-12 lg:px-24 bg-white">
+      <section ref={servicesRef} className="py-14 px-6 md:px-12 lg:px-24 bg-white">
         <div className="max-w-7xl mx-auto">
           {/* Services Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">

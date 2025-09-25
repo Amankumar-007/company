@@ -4,10 +4,12 @@ import Rounded from '../../common/RoundedButton';
 import { useRef, useState, useEffect } from 'react';
 import { useScroll, motion, useTransform, useSpring } from 'framer-motion';
 import Magnetic from '../../common/Magnetic';
+import { useRouter } from 'next/navigation';
 
 export default function index() {
     const container = useRef(null);
     const [isMobile, setIsMobile] = useState(false);
+    const router = useRouter();
     
     useEffect(() => {
         const checkMobile = () => {
@@ -45,7 +47,7 @@ export default function index() {
                             <Image 
                             fill={true}
                             alt={"image"}
-                            src={`/images/background.jpg`}
+                            src={`/about.png`}
                             />
                         </div>
                         <h2>Let's work</h2>
@@ -58,8 +60,8 @@ export default function index() {
                         }} 
                         className={styles.buttonContainer}
                     >
-                        <Rounded  backgroundColor={"#334BD3"} className={styles.button}>
-                            <p>Get in touch</p>
+                        <Rounded  backgroundColor={"#334BD3"} className={styles.button} onClick={() => router.push('/contact')}>
+                            <p>Get a quote</p>
                         </Rounded>
                     </motion.div>
                     <motion.svg 
@@ -79,23 +81,17 @@ export default function index() {
                 </div>
                 <div className={styles.nav}>
                         <Rounded>
-                            <p>info@dennissnellenberg.com</p>
+                            <a href="mailto:amanr3388@gmail.com" className={styles.contactLink}>
+                                <p>amanr3388@gmail.com</p>
+                            </a>
                         </Rounded>
                         <Rounded>
-                            <p>+31 6 27 84 74 30</p>
+                            <a href="tel:7906753589" className={styles.contactLink}>
+                                <p>7906753589</p>
+                            </a>
                         </Rounded>
                 </div>
                 <div className={styles.info}>
-                    <div>
-                        <span>
-                            <h3>Version</h3>
-                            <p>2022 © Edition</p>
-                        </span>
-                        <span>
-                            <h3>Version</h3>
-                            <p>11:49 PM GMT+2</p>
-                        </span>
-                    </div>
                     <div>
                         <span>
                             <h3>socials</h3>

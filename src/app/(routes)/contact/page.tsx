@@ -1,8 +1,7 @@
 "use client"
 import Footer from '@/components/Footer';
 import { useState, useEffect } from 'react';
-import { AnimatePresence } from 'framer-motion';
-import Preloader from '@/components/Preloader';
+
 
 export default function ContactForm() {
   const [isLoading, setIsLoading] = useState(true);
@@ -76,10 +75,9 @@ export default function ContactForm() {
 
   return (
     <div className="min-h-screen bg-white text-black">
-      <AnimatePresence mode='wait'>
-        {isLoading && <Preloader />}
-      </AnimatePresence>
-      <div className="max-w-4xl mx-auto px-6 py-16 mt-12">
+      
+      
+      <div className="max-w-4xl mx-auto px-6 py-8">
         {/* Header */}
         <div className="text-center mb-20">
           <h1 className="text-6xl md:text-7xl font-bold mb-8 leading-tight tracking-tight">

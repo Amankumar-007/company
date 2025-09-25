@@ -102,7 +102,7 @@ const CubertoProjectsPage = () => {
   return (
     <div ref={containerRef} className="min-h-screen bg-white">
       {/* Header */}
-      <header className="pt-20 pb-16 lg:pt-24 lg:pb-20">
+      <header className="pb-16 lg:pt-14 lg:pb-20">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto">
             <h1 className="text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
