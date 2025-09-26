@@ -1,10 +1,32 @@
 .projects{
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     padding-left: 200px;
     padding-right: 200px;
     flex-direction: column;
     margin-top: 300px;
+
+    .title{
+        align-self: flex-start;
+        font-size: 3.5rem;
+        font-weight: 800;
+        margin-bottom: 60px;
+        color: #000;
+        letter-spacing: -1px;
+        line-height: 1.1;
+
+        // Tablet styles
+        @media (max-width: 1024px) {
+            font-size: 2.8rem;
+            margin-bottom: 50px;
+        }
+
+        // Mobile styles
+        @media (max-width: 768px) {
+            font-size: 2.2rem;
+            margin-bottom: 40px;
+        }
+    }
 
     .body{
         max-width: 1400px;

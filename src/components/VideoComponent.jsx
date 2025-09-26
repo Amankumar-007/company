@@ -97,7 +97,7 @@ const VideoComponent = () => {
     };
   }, []);
   return (
-    <div className="relative w-full max-w-6xl mx-auto">
+    <div className="relative w-full max-w-6xl mx-auto ml-auto mr-auto">
       {/* Video container with curved corners and shadow */}
       <div 
         className="relative overflow-hidden rounded-3xl shadow-2xl cursor-pointer"

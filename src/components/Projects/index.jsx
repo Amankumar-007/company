@@ -74,6 +74,7 @@ export default function Home() {
 
   return (
   <main onMouseMove={(e) => {moveItems(e.clientX, e.clientY)}} className={styles.projects}>
+    <h1 className={styles.title}>Our Services</h1>
     <div className={styles.body}>
       {
         projects.map( (project, index) => {

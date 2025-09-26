@@ -11,12 +11,12 @@ export default function Footer() {
             {/* Contact Buttons */}
             <div className="flex flex-col sm:flex-row gap-4">
               <WaterFillButton 
-                href="mailto:info@cuberto.com"
-                text="info@cuberto.com"
+                href="mailto:amanr3388@gmail.com"
+                text="amanr3388@gmail.com"
               />
               <WaterFillButton 
-                href="tel:+13015499309"
-                text="+1 301 549 9309"
+                href="tel:7906753589"
+                text="7906753589"
               />
             </div>
           </div>
@@ -32,18 +32,14 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Office Addresses */}
-        <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 mb-16">
-          <div>
-            <p className="text-gray-400 text-sm mb-2">MAIN OFFICE</p>
-            <p className="text-white">901 N Pitt Street</p>
-            <p className="text-white">Alexandria VA, 22314</p>
-          </div>
-          <div>
-            <p className="text-gray-400 text-sm mb-2">SECOND OFFICE</p>
-            <p className="text-white">Na Perstyne</p>
-            <p className="text-white">342/1, 11000 Prague</p>
-          </div>
+        {/* Company Description */}
+        <div className="text-center mb-16">
+          <p className="text-gray-400 text-lg mb-4">Digital Solutions for Modern Businesses</p>
+          <p className="text-white max-w-3xl mx-auto">
+            We specialize in creating innovative web and mobile applications that drive business growth. 
+            Our team of experts delivers cutting-edge solutions tailored to your unique needs, 
+            ensuring exceptional results and customer satisfaction.
+          </p>
         </div>
 
         {/* Bottom Section */}
@@ -56,7 +52,7 @@ export default function Footer() {
             >
               Privacy Policy
             </a>
-            <span className="text-gray-500">2025, Cuberto</span>
+            <span className="text-gray-500">2025, TwoflowW</span>
           </div>
 
           {/* Social Links */}

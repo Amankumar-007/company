@@ -50,17 +50,20 @@ export default function Header() {
           transition={{ type: 'spring', stiffness: 400, damping: 10 }}
         >
           <a href="/" className={styles.logoLink}>
-            <motion.div 
-              className={styles.logoText}
-              onMouseEnter={() => setCursorHover(true, '', 35, '#455CE9')}
-              onMouseLeave={() => setCursorHover(false)}
-            >
+            <motion.div className={styles.logoContainer}>
+              <motion.img
+                src="/ChatGPT Image Sep 26, 2025, 10_19_02 AM.png"
+                alt="FlowW Logo"
+                className={styles.logoImage}
+                whileHover={{ rotate: 5 }}
+                transition={{ type: 'spring', stiffness: 400, damping: 10 }}
+              />
               <motion.span 
-                className={styles.logoMain}
-              whileHover={{ rotate: 5 }}
-              transition={{ type: 'spring', stiffness: 400, damping: 10 }}
+                className={styles.logoText}
+                whileHover={{ scale: 1.1 }}
+                transition={{ type: 'spring', stiffness: 400, damping: 10 }}
               >
-                TwoflowW
+                flowW
               </motion.span>
             </motion.div>
           </a>

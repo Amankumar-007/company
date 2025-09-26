@@ -101,7 +101,7 @@ function ProjectDetailsContent() {
   return (
     <div className="min-h-screen bg-white">
       {/* Minimal Hero Section */}
-      <div className="max-w-6xl mx-auto px-6 py-16 md:py-24">
+      <div className="max-w-6xl mx-auto px-4 py-12 md:py-18">
         <div className="text-center space-y-8">
           {/* Status Badge */}
           <motion.div
