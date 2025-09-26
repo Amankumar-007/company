@@ -4,7 +4,7 @@ export const projects = [
     title: "TomatoTool AI",
     subtitle: "WEB APP",
     status: "LIVE PROJECT",
-    video: "/video3.mp4",
+    video: "/video1.mp4",
     description: "An AI-powered web application designed to enhance productivity through intelligent task automation and data analysis.",
     category: "Web Application",
     developmentTime: "5 Months Development",
