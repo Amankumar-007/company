@@ -1,4 +1,6 @@
-import React from 'react';
+'use client';
+import React, { useEffect, useState } from 'react';
+import styles from './page.module.scss';
 
 // Navbar Component
 
@@ -43,7 +45,7 @@ const HeroSection = () => {
   };
 
   return (
-    <section className="relative py-20 lg:py-32 bg-white overflow-hidden">
+    <section className="relative py-20 lg:py-32 bg-white overflow-hidden" data-scroll-section>
       <CurvedSwirl />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="text-center max-w-4xl mx-auto">
@@ -90,11 +92,19 @@ const TeamMemberCard = ({ member, isFounder = false }) => {
   return (
     <div className={cardClasses}>
       <div className={imageContainerClasses}>
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-200 to-gray-300 group-hover:scale-105 transition-transform duration-300 ease-out">
-          <div className={initialsClasses}>
-            {member.name.split(' ').map(n => n[0]).join('')}
+        {member.image && member.image.startsWith('/') ? (
+          <img 
+            src={member.image} 
+            alt={member.name}
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 ease-out"
+          />
+        ) : (
+          <div className="absolute inset-0 bg-gradient-to-br from-gray-200 to-gray-300 group-hover:scale-105 transition-transform duration-300 ease-out">
+            <div className={initialsClasses}>
+              {member.name.split(' ').map(n => n[0]).join('')}
+            </div>
           </div>
-        </div>
+        )}
       </div>
       <div className={textContainerClasses}>
         <h3 className={nameClasses}>
@@ -111,15 +121,15 @@ const TeamMemberCard = ({ member, isFounder = false }) => {
 // Team Section Component
 const TeamSection = () => {
   const founders = [
-    { name: "Mia Ward", role: "Founder & CEO", image: "mia.jpg", type: "founder" },
-    { name: "Phoenix Baker", role: "Co-Founder & CTO", image: "phoenix.jpg", type: "founder" }
+    { name: "Aman Kumar", role: "Founder & CEO", image: "/about.PNG", type: "founder" },
+    { name: "Anshu Kumar", role: "Co-Founder & CTO", image: "anshu.jpg", type: "founder" }
   ];
 
   const employees = [
-    { name: "Lana Steiner", role: "Chief Operating Officer", image: "lana.jpg", type: "employee" },
-    { name: "John Carter", role: "Product Designer", image: "john.jpg", type: "employee" },
-    { name: "Alex Morgan", role: "Marketing Manager", image: "alex.jpg", type: "employee" },
-    { name: "Sophia Turner", role: "Customer Success Lead", image: "sophia.jpg", type: "employee" }
+    { name: "Mahak Kushwah", role: "Chief Operating Officer", image: "mahak.jpg", type: "employee" },
+    { name: "Hariom", role: "Product Designer", image: "hariom.jpg", type: "employee" },
+    { name: "Sarthak Bhatnagar", role: "Marketing Manager", image: "sarthak.jpg", type: "employee" },
+    { name: "Mohit Kumar", role: "Customer Success Lead", image: "mohit.jpg", type: "employee" }
   ];
 
   return (
@@ -289,8 +299,23 @@ const WhatWeDoSection = () => {
 
 // Main About Page Component
 const AboutPage = () => {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    (async () => {
+      const LocomotiveScroll = (await import('locomotive-scroll')).default;
+      const locomotiveScroll = new LocomotiveScroll();
+
+      setTimeout(() => {
+        setIsLoading(false);
+        document.body.style.cursor = 'default';
+        window.scrollTo(0, 0);
+      }, 1000);
+    })();
+  }, []);
+
   return (
-    <div className="min-h-screen bg-white">
+    <div className={`${styles.main} min-h-screen bg-white`} data-scroll-container>
       <HeroSection />
       <TeamSection />
       <HowWeWorkSection />

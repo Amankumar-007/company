@@ -4,6 +4,7 @@ import { useCursor } from '@/components/Cursor';
 import { useRouter } from 'next/navigation';
 import FAQ from '@/components/Faq';
 import ProjectTimeline from '@/components/ProjectTimeline';
+import VideoThumbnail from '@/components/VideoThumbnail';
 import { getAllProjects } from '@/data/projects';
 
 const CubertoProjectsPage = () => {
@@ -60,7 +61,7 @@ const CubertoProjectsPage = () => {
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
-        {/* Image */}
+        {/* Video Thumbnail */}
         <div 
           className="relative mb-8 overflow-hidden rounded-2xl bg-gray-100 aspect-[4/3] group cursor-pointer"
           onMouseEnter={() => {
@@ -75,16 +76,13 @@ const CubertoProjectsPage = () => {
             router.push(`/project-detail?id=${project.id}`);
           }}
         >
-          <img
-            src={project.screenshots[0]?.url || 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop'}
+          <VideoThumbnail
+            videoSrc={project.video}
+            posterSrc={project.screenshots[0]?.url || 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop'}
             alt={project.title}
-            className={`w-full h-full object-cover transition-transform duration-500 ease-out ${
-              isHovered ? 'scale-105' : 'scale-100'
-            }`}
+            className="w-full h-full"
+            isHovered={isHovered}
           />
-          <div className={`absolute inset-0 bg-black transition-opacity duration-300 ${
-            isHovered ? 'opacity-5' : 'opacity-0'
-          }`} />
         </div>
 
         {/* Text */}

@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 export default function HeroSection() {
   return (
-    <div className="min-h-[50vh] mb-10 mt-5  flex items-center justify-center px-4 sm:px-6 lg:px-8 pt-4">
+    <div className="min-h-[50vh] mb-10 mt-5  flex items-center justify-center px-4 sm:px-5 lg:px-7 pt-4">
       <div className="max-w-6xl mx-auto text-center">
         {/* Main Heading */}
         <h1 className="text-[2.6rem] sm:text-[3.5rem] lg:text-[4.4rem] xl:text-[5.3rem] font-bold text-gray-900 leading-tight mb-8 tracking-tight">

@@ -1,0 +1,51 @@
+.main {
+  // Locomotive Scroll container styles
+  [data-scroll-container] {
+    position: relative;
+  }
+  
+  // Smooth scrolling for all sections
+  [data-scroll-section] {
+    position: relative;
+    will-change: transform;
+  }
+  
+  // Scroll speed variations
+  [data-scroll-speed="1"] {
+    will-change: transform;
+  }
+  
+  [data-scroll-speed="2"] {
+    will-change: transform;
+  }
+  
+  [data-scroll-speed="3"] {
+    will-change: transform;
+  }
+  
+  // Scroll direction classes
+  [data-scroll-direction="vertical"] {
+    will-change: transform;
+  }
+  
+  [data-scroll-direction="horizontal"] {
+    will-change: transform;
+  }
+  
+  // Smooth appearance animations
+  [data-scroll] {
+    opacity: 0;
+    will-change: opacity, transform;
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+  
+  [data-scroll="in"] {
+    opacity: 1;
+  }
+  
+  // Parallax effects
+  [data-scroll-parallax] {
+    will-change: transform;
+    transition: transform 0.1s linear;
+  }
+}

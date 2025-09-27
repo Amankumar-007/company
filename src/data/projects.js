@@ -4,7 +4,7 @@ export const projects = [
     title: "TomatoTool AI",
     subtitle: "WEB APP",
     status: "LIVE PROJECT",
-    video: "/video1.mp4",
+    video: "/tomato-tool.mp4",
     description: "An AI-powered web application designed to enhance productivity through intelligent task automation and data analysis.",
     category: "Web Application",
     developmentTime: "5 Months Development",
@@ -106,7 +106,7 @@ export const projects = [
     title: "Restaurant Web App",
     subtitle: "PLATFORM",
     status: "LIVE PROJECT",
-    video: "/video2.mp4",
+    video: "/restro1.mp4",
     description: "A comprehensive restaurant management platform for seamless order processing, reservations, and customer engagement.",
     category: "Web Application",
     developmentTime: "7 Months Development",
@@ -208,7 +208,7 @@ export const projects = [
     title: "Hotel Finder",
     subtitle: "WEB APP",
     status: "LIVE PROJECT",
-    video: "/video3.mp4",
+    video: "/cafe-finder.mp4",
     description: "A comprehensive hotel booking platform with advanced search filters, real-time availability, and competitive pricing for travelers worldwide.",
     category: "Web Application",
     developmentTime: "4 Months Development",
@@ -307,37 +307,38 @@ export const projects = [
   },
   {
     id: 4,
-    title: "Learning Management System",
-    subtitle: "WEB APP",
+    title: "Zelt",
+    subtitle: "PEOPLE PLATFORM",
     status: "LIVE PROJECT",
-    video: "/video3.mp4",
-    description: "A robust learning management system for delivering online courses and tracking student progress.",
-    category: "Web Application",
-    developmentTime: "6 Months Development",
+    video: "/zelt.mp4",
+    liveLink: "https://zelt.app/",
+    description: "All-in-one people platform for startups in the UK that makes onboarding employees an easy process: setup, device management, employee leave, payroll management etc.",
+    category: "HR Platform",
+    developmentTime: "8 Months Development",
     metrics: [
-      { value: "20K+", label: "Active Users", color: "purple" },
-      { value: "94%", label: "Satisfaction", color: "green" },
-      { value: "70%", label: "Course Completion", color: "blue" }
+      { value: "5K+", label: "Active Users", color: "blue" },
+      { value: "96%", label: "Satisfaction", color: "green" },
+      { value: "85%", label: "Onboarding Efficiency", color: "purple" }
     ],
     features: [
       {
-        title: "Course Creation",
-        description: "Easy tools for creating and managing online courses.",
-        color: "purple"
-      },
-      {
-        title: "Progress Tracking",
-        description: "Real-time tracking of student progress and performance.",
-        color: "green"
-      },
-      {
-        title: "Interactive Quizzes",
-        description: "Engaging quizzes and assessments for learning.",
+        title: "Employee Onboarding",
+        description: "Streamlined onboarding process for new employees.",
         color: "blue"
       },
       {
-        title: "Mobile Access",
-        description: "Optimized for learning on any device.",
+        title: "Device Management",
+        description: "Comprehensive device setup and management tools.",
+        color: "green"
+      },
+      {
+        title: "Leave Management",
+        description: "Easy tracking and approval of employee leave requests.",
+        color: "purple"
+      },
+      {
+        title: "Payroll Management",
+        description: "Automated payroll processing and management.",
         color: "orange"
       }
     ],
@@ -355,55 +356,55 @@ export const projects = [
       challenge: {
         title: "THE CHALLENGE",
         content: [
-          "Educational institutions needed a scalable platform for online learning.",
-          "Existing LMS platforms were complex and lacked mobile optimization.",
-          "The challenge was to create an intuitive and engaging learning platform."
+          "UK startups needed a comprehensive people management platform.",
+          "Existing solutions were fragmented and lacked integration between HR, IT, and Finance.",
+          "The challenge was to create an all-in-one platform that simplifies employee management."
         ]
       },
       solution: {
         title: "THE SOLUTION",
         content: [
-          "Developed a user-friendly LMS with robust course management tools.",
-          "Included features for interactive learning and mobile accessibility."
+          "Developed Zelt as an all-in-one people platform for UK startups.",
+          "Integrated HR, IT, and Finance functions into a single, easy-to-use platform."
         ],
         features: [
-          { title: 'Course Management', description: 'Easy course creation tools' },
-          { title: 'Student Analytics', description: 'Track progress and performance' },
-          { title: 'Interactive Tools', description: 'Quizzes and assessments' },
-          { title: 'Mobile Support', description: 'Learn on any device' }
+          { title: 'Unified Platform', description: 'HR, IT & Finance in one place' },
+          { title: 'Easy Onboarding', description: 'Streamlined employee setup process' },
+          { title: 'Device Management', description: 'Complete IT asset management' },
+          { title: 'Payroll Integration', description: 'Automated payroll processing' }
         ]
       },
       results: {
         title: "THE RESULTS",
         metrics: [
-          { value: "20K+", label: "Active Users" },
-          { value: "94%", label: "User Satisfaction" },
-          { value: "70%", label: "Course Completion" }
+          { value: "5K+", label: "Active Users" },
+          { value: "96%", label: "User Satisfaction" },
+          { value: "85%", label: "Onboarding Efficiency" }
         ]
       }
     },
     technicalSpecs: {
-      responseTime: "< 120ms",
-      uptime: "99.9%",
+      responseTime: "< 100ms",
+      uptime: "99.95%",
       dataProcessing: "Real-time",
       security: "Enterprise Grade"
     },
     screenshots: [
       {
-        title: "Course Dashboard",
-        url: "https://images.unsplash.com/photo-1516321310762-479437144403?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+        title: "Dashboard Overview",
+        url: "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
       },
       {
-        title: "Student Progress",
-        url: "https://images.unsplash.com/photo-1501504901894-7c8f1a5332d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+        title: "Employee Management",
+        url: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
       }
     ],
     callToAction: {
-      title: "Transform Online Learning",
-      subtitle: "Empower educators and students with our LMS. Start your free trial today.",
+      title: "Run HR, IT & Finance in One Place",
+      subtitle: "Experience the power of Zelt's all-in-one people platform. Transform your startup operations today.",
       buttons: [
-        { label: "GET STARTED FREE", icon: "ArrowRight" },
-        { label: "WATCH DEMO", icon: "ExternalLink" }
+        { label: "GET STARTED", icon: "ArrowRight" },
+        { label: "VISIT ZELT.APP", icon: "ExternalLink" }
       ]
     }
   },
@@ -412,7 +413,7 @@ export const projects = [
     title: "Real Estate Web App",
     subtitle: "PLATFORM",
     status: "LIVE PROJECT",
-    video: "/video4.mp4",
+    video: "/estate.mp4",
     description: "A modern real estate platform for property listings, virtual tours, and client management.",
     category: "Web Application",
     developmentTime: "8 Months Development",
@@ -514,7 +515,7 @@ export const projects = [
     title: "Watchlo Movie Website",
     subtitle: "PLATFORM",
     status: "LIVE PROJECT",
-    video: "/video5.mp4",
+    video: "/movie.mp4",
     description: "A movie streaming and review platform with personalized recommendations and community features.",
     category: "Web Application",
     developmentTime: "6 Months Development",
@@ -616,7 +617,7 @@ export const projects = [
     title: "Open Resume",
     subtitle: "WEB APP",
     status: "LIVE PROJECT",
-    video: "/video1.mp4",
+    video: "/resume.mp4",
     description: "A professional resume builder web app with modern templates, real-time editing, and export functionality for job seekers.",
     category: "Web Application",
     developmentTime: "3 Months Development",
@@ -718,7 +719,7 @@ export const projects = [
     title: "Typing Practice",
     subtitle: "WEB APP",
     status: "LIVE PROJECT",
-    video: "/video2.mp4",
+    video: "/typing.mp4",
     description: "An engaging typing practice web app with interactive lessons, speed tests, and progress tracking for users of all skill levels.",
     category: "Web Application",
     developmentTime: "3 Months Development",
