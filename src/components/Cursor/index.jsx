@@ -57,9 +57,9 @@ export default function Cursor({ state }) {
     const rafId = useRef();
     
     useEffect(() => {
-        // Initialize with window dimensions after component mounts
-        mouse.current = {x: window.innerWidth / 2, y: window.innerHeight / 2};
-        delayedMouse.current = {x: window.innerWidth / 2, y: window.innerHeight / 2};
+        // Initialize with window dimensions after component mounts - start at bottom of screen
+        mouse.current = {x: window.innerWidth / 2, y: window.innerHeight - 100};
+        delayedMouse.current = {x: window.innerWidth / 2, y: window.innerHeight - 100};
     }, []);
     
     const lerp = (x, y, a) => x * (1 - a) + y * a;
@@ -145,11 +145,11 @@ export default function Cursor({ state }) {
         // Don't initialize cursor animations on mobile devices
         if (isMobileDevice) return;
         
-        // Set initial position with hardware acceleration
+        // Set initial position with hardware acceleration - start at bottom of screen
         if (cursor.current) {
             gsap.set(cursor.current, { 
                 x: window.innerWidth / 2, 
-                y: window.innerHeight / 2,
+                y: window.innerHeight - 100,
                 xPercent: -50, 
                 yPercent: -50,
                 width: state.size,

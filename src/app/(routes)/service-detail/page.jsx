@@ -17,6 +17,22 @@ function ServiceDetailsContent() {
   
   const [activeTab, setActiveTab] = useState('overview');
   const [hoveredFeature, setHoveredFeature] = useState(null);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const mobileMenuRef = useRef(null);
+
+  // Close mobile menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (mobileMenuRef.current && !mobileMenuRef.current.contains(event.target)) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
   
   // SVG icon mapping for technologies
   const getTechIcon = (techName) => {
@@ -165,7 +181,6 @@ function ServiceDetailsContent() {
             transition={{ duration: 1.2, ease: 'easeOut' }}
             className="space-y-8"
           >
-            {/* Professional Category Badge */}
           
 
             {/* Professional Main Title */}
@@ -215,15 +230,15 @@ function ServiceDetailsContent() {
               {service.heroDescription}
             </motion.p>
 
-            {/* Professional CTA Buttons */}
+            {/* Professional CTA Button */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.2, duration: 0.6 }}
-              className="flex flex-col sm:flex-row gap-4 justify-center mt-8 items-center"
+              className="flex justify-center mt-8 items-center"
             >
               <motion.a
-                href="#"
+                href="/contact"
                 className="px-8 py-3 bg-black text-white rounded-lg font-medium transition-all duration-300 hover:bg-gray-800"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -231,18 +246,6 @@ function ServiceDetailsContent() {
                 <span className="flex items-center space-x-2">
                   <span>Get Started</span>
                   <ArrowRight className="w-4 h-4" />
-                </span>
-              </motion.a>
-              
-              <motion.a
-                href="#"
-                className="px-8 py-3 border border-gray-300 text-gray-700 rounded-lg font-medium transition-all duration-300 hover:border-gray-400 hover:bg-gray-50"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <span className="flex items-center space-x-2">
-                  <span>View Portfolio</span>
-                  <ExternalLink className="w-4 h-4" />
                 </span>
               </motion.a>
             </motion.div>
@@ -255,7 +258,70 @@ function ServiceDetailsContent() {
       {/* Navigation Tabs */}
       <section className="sticky top-0 z-40 bg-white border-b-2 border-black">
         <div className="max-w-7xl mx-auto px-5 md:px-10 lg:px-24">
-          <nav className="flex space-x-8 overflow-x-auto">
+          {/* Mobile Dropdown Navigation */}
+          <div className="md:hidden" ref={mobileMenuRef}>
+            <div className="relative">
+              <button
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className="w-full py-4 px-4 flex items-center justify-between bg-white border-2 border-black rounded-lg font-mono text-sm font-medium tracking-wider transition-all duration-300 hover:bg-gray-50"
+              >
+                <span className="text-black">
+                  {[
+                    { key: 'overview', label: 'OVERVIEW' },
+                    { key: 'provide', label: 'WHAT WE PROVIDE' },
+                    { key: 'process', label: 'HOW WE DO IT' },
+                    { key: 'technologies', label: 'TECHNOLOGIES' }
+                  ].find(tab => tab.key === activeTab)?.label || 'OVERVIEW'}
+                </span>
+                <motion.div
+                  animate={{ rotate: isMobileMenuOpen ? 180 : 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="ml-2"
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </motion.div>
+              </button>
+              
+              <AnimatePresence>
+                {isMobileMenuOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10, height: 0 }}
+                    animate={{ opacity: 1, y: 0, height: 'auto' }}
+                    exit={{ opacity: 0, y: -10, height: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="absolute top-full left-0 right-0 mt-2 bg-white border-2 border-black rounded-lg shadow-lg overflow-hidden z-50"
+                  >
+                    {[
+                      { key: 'overview', label: 'OVERVIEW' },
+                      { key: 'provide', label: 'WHAT WE PROVIDE' },
+                      { key: 'process', label: 'HOW WE DO IT' },
+                      { key: 'technologies', label: 'TECHNOLOGIES' }
+                    ].map((tab) => (
+                      <button
+                        key={tab.key}
+                        onClick={() => {
+                          scrollToSection(tab.key);
+                          setIsMobileMenuOpen(false);
+                        }}
+                        className={`w-full py-4 px-6 font-mono text-sm font-medium tracking-wider transition-all duration-300 text-left ${
+                          activeTab === tab.key 
+                            ? 'bg-black text-white' 
+                            : 'text-gray-700 hover:bg-gray-100'
+                        }`}
+                      >
+                        {tab.label}
+                      </button>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          </div>
+          
+          {/* Desktop Horizontal Navigation */}
+          <nav className="hidden md:flex space-x-8 overflow-x-auto">
             {[
               { key: 'overview', label: 'OVERVIEW' },
               { key: 'provide', label: 'WHAT WE PROVIDE' },
@@ -265,7 +331,7 @@ function ServiceDetailsContent() {
               <button
                 key={tab.key}
                 onClick={() => scrollToSection(tab.key)}
-                className={`py-4 px-2 font-mono text-sm font-medium tracking-wider transition-all duration-300 relative ${
+                className={`py-4 px-2 font-mono text-sm font-medium tracking-wider transition-all duration-300 relative whitespace-nowrap ${
                   activeTab === tab.key 
                     ? 'text-black' 
                     : 'text-gray-500 hover:text-black'
@@ -542,16 +608,17 @@ function ServiceDetailsContent() {
             <p className="text-xl mb-12 text-gray-300 leading-relaxed">
               {service.callToAction.subtitle}
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex justify-center">
               {service.callToAction.buttons.map((button, index) => (
-                <motion.button
+                <motion.a
                   key={index}
+                  href="/contact"
                   className="bg-white text-black px-8 py-4 font-bold text-lg hover:bg-gray-100 transition-all duration-300"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
                   {button.label}
-                </motion.button>
+                </motion.a>
               ))}
             </div>
           </motion.div>

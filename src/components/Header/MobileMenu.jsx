@@ -28,10 +28,34 @@ const overlayVariants = {
   exit: { opacity: 0 }
 };
 
-const menuItemVariants = {
-  initial: { y: 50, opacity: 0 },
+const mobileMenuVariants = {
+  initial: { x: '100%', opacity: 0 },
   animate: { 
-    y: 0, 
+    x: 0, 
+    opacity: 1,
+    transition: { 
+      type: 'spring',
+      damping: 25,
+      stiffness: 200,
+      duration: 0.4
+    }
+  },
+  exit: { 
+    x: '100%', 
+    opacity: 0,
+    transition: { 
+      type: 'spring',
+      damping: 25,
+      stiffness: 200,
+      duration: 0.3
+    }
+  }
+};
+
+const menuItemVariants = {
+  initial: { x: 30, opacity: 0 },
+  animate: { 
+    x: 0, 
     opacity: 1,
     transition: { 
       type: 'spring',
@@ -40,7 +64,7 @@ const menuItemVariants = {
     }
   },
   exit: { 
-    y: 50, 
+    x: 30, 
     opacity: 0,
     transition: { duration: 0.2 }
   }
@@ -169,7 +193,7 @@ export default function MobileMenu({ navItems, onClose, pathname, isDesktop = fa
       {/* Mobile Menu Container */}
       <motion.div
         className={styles.mobileMenu}
-        variants={menuVariants}
+        variants={mobileMenuVariants}
         initial="initial"
         animate="animate"
         exit="exit"
@@ -179,7 +203,7 @@ export default function MobileMenu({ navItems, onClose, pathname, isDesktop = fa
           className={styles.menuHeader}
           variants={menuItemVariants}
         >
-          <h2 className={styles.menuTitle}>Navigation</h2>
+          <h2 className={styles.menuTitle}>Menu</h2>
           <motion.button
             className={styles.closeButton}
             onClick={onClose}
@@ -204,25 +228,17 @@ export default function MobileMenu({ navItems, onClose, pathname, isDesktop = fa
                 custom={index}
                 onClick={handleLinkClick}
                 whileHover={{ 
-                  scale: 1.05,
-                  x: 10,
+                  scale: 1.02,
+                  x: -5,
                   transition: { type: 'spring', stiffness: 400, damping: 10 }
                 }}
-                whileTap={{ scale: 0.95 }}
+                whileTap={{ scale: 0.98 }}
               >
-                <motion.span
-                  className={styles.navNumber}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: index * 0.1 + 0.5 }}
-                >
-                  {String(index + 1).padStart(2, '0')}
-                </motion.span>
                 <motion.span
                   className={styles.navText}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  transition={{ delay: index * 0.1 + 0.6 }}
+                  transition={{ delay: index * 0.1 + 0.3 }}
                 >
                   {item.title}
                 </motion.span>
@@ -230,7 +246,7 @@ export default function MobileMenu({ navItems, onClose, pathname, isDesktop = fa
                   className={styles.navIndicator}
                   initial={{ scaleX: 0 }}
                   animate={{ scaleX: pathname === item.href ? 1 : 0 }}
-                  transition={{ delay: index * 0.1 + 0.7, duration: 0.3 }}
+                  transition={{ delay: index * 0.1 + 0.4, duration: 0.3 }}
                 />
               </motion.a>
             </Magnetic>
@@ -253,7 +269,7 @@ export default function MobileMenu({ navItems, onClose, pathname, isDesktop = fa
               <motion.a
                 href="#"
                 className={styles.socialLink}
-                whileHover={{ scale: 1.2, rotate: 5 }}
+                whileHover={{ scale: 1.1, rotate: 5 }}
                 whileTap={{ scale: 0.9 }}
               >
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
@@ -265,7 +281,7 @@ export default function MobileMenu({ navItems, onClose, pathname, isDesktop = fa
               <motion.a
                 href="#"
                 className={styles.socialLink}
-                whileHover={{ scale: 1.2, rotate: 5 }}
+                whileHover={{ scale: 1.1, rotate: 5 }}
                 whileTap={{ scale: 0.9 }}
               >
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
@@ -277,7 +293,7 @@ export default function MobileMenu({ navItems, onClose, pathname, isDesktop = fa
               <motion.a
                 href="#"
                 className={styles.socialLink}
-                whileHover={{ scale: 1.2, rotate: 5 }}
+                whileHover={{ scale: 1.1, rotate: 5 }}
                 whileTap={{ scale: 0.9 }}
               >
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">

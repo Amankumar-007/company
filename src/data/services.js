@@ -216,8 +216,7 @@ export const services = [
       title: "Ready to Build Your Dream Website?",
       subtitle: "Let's discuss your project and create a web solution that drives your business forward. Our expert team is ready to turn your vision into reality.",
       buttons: [
-        { label: "GET A QUOTE", icon: "ArrowRight" },
-        { label: "VIEW PORTFOLIO", icon: "ExternalLink" }
+        { label: "GET A QUOTE", icon: "ArrowRight" }
       ]
     }
   },
