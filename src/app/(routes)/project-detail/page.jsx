@@ -281,13 +281,35 @@ function ProjectDetailsContent() {
             {project.callToAction.subtitle}
           </p>
           <div className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6">
-            {project.callToAction.buttons.map((button, index) => (
-              <button key={index} className="flex items-center space-x-2 sm:space-x-3 px-6 sm:px-8 py-3 sm:py-4 bg-white text-black rounded-full hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-xl w-full sm:w-auto">
-                <span className="font-bold text-base sm:text-lg">{button.label}</span>
-                {button.icon === 'ArrowRight' && <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />}
-                {button.icon === 'ExternalLink' && <ExternalLink className="w-4 h-4 sm:w-5 sm:h-5" />}
-              </button>
-            ))}
+            {project.callToAction.buttons.map((button, index) => {
+              // Check if this is a demo/external link button and project has live link
+              const isDemoButton = button.label.includes('DEMO') || button.label.includes('VIEW') || button.icon === 'ExternalLink';
+              const shouldRedirectToLive = isDemoButton && project.liveLink;
+              
+              if (shouldRedirectToLive) {
+                return (
+                  <a 
+                    key={index}
+                    href={project.liveLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center space-x-2 sm:space-x-3 px-6 sm:px-8 py-3 sm:py-4 bg-white text-black rounded-full hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-xl w-full sm:w-auto"
+                  >
+                    <span className="font-bold text-base sm:text-lg">{button.label}</span>
+                    {button.icon === 'ArrowRight' && <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />}
+                    {button.icon === 'ExternalLink' && <ExternalLink className="w-4 h-4 sm:w-5 sm:h-5" />}
+                  </a>
+                );
+              }
+              
+              return (
+                <button key={index} className="flex items-center space-x-2 sm:space-x-3 px-6 sm:px-8 py-3 sm:py-4 bg-white text-black rounded-full hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-xl w-full sm:w-auto">
+                  <span className="font-bold text-base sm:text-lg">{button.label}</span>
+                  {button.icon === 'ArrowRight' && <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />}
+                  {button.icon === 'ExternalLink' && <ExternalLink className="w-4 h-4 sm:w-5 sm:h-5" />}
+                </button>
+              );
+            })}
           </div>
         </div>
       </div>
