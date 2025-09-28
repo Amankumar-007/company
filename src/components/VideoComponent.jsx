@@ -97,17 +97,17 @@ const VideoComponent = () => {
     };
   }, []);
   return (
-    <div className="relative w-full max-w-6xl mx-auto ml-auto mr-auto">
+    <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6">
       {/* Video container with curved corners and shadow */}
       <div 
-        className="relative overflow-hidden rounded-3xl shadow-2xl cursor-pointer"
+        className="relative overflow-hidden rounded-3xl shadow-2xl cursor-pointer h-[55vh] md:h-auto"
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         onClick={handleClick}
       >
         <video
           ref={videoRef}
-          className="w-full h-auto object-cover"
+          className="w-full h-full md:h-auto object-cover"
           autoPlay
           loop
           muted
@@ -119,7 +119,7 @@ const VideoComponent = () => {
             type="video/mp4"
           />
           {/* Fallback for browsers that don't support video */}
-          <div className="bg-gradient-to-br from-purple-500 to-pink-500 h-[500px] flex items-center justify-center text-white text-xl font-semibold">
+          <div className="bg-gradient-to-br from-purple-500 to-pink-500 h-full min-h-[360px] md:min-h-[500px] flex items-center justify-center text-white text-xl font-semibold">
             Video Preview
           </div>
         </video>
