@@ -1,5 +1,5 @@
 "use client"
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
 import { useCursor } from '@/components/Cursor';
 import { useRouter } from 'next/navigation';
 import FAQ from '@/components/Faq';
@@ -7,95 +7,115 @@ import ProjectTimeline from '@/components/ProjectTimeline';
 import VideoThumbnail from '@/components/VideoThumbnail';
 import { getAllProjects } from '@/data/projects';
 
+// Memoized ProjectCard component to prevent unnecessary re-renders
+const ProjectCard = React.memo(({ project, index }) => {
+  const [isVisible, setIsVisible] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+  const cardRef = useRef(null);
+  const { setCursorHover } = useCursor();
+  const router = useRouter();
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.3, rootMargin: "-20px" }
+    );
+
+    if (cardRef.current) {
+      observer.observe(cardRef.current);
+    }
+
+    return () => {
+      if (cardRef.current) {
+        observer.unobserve(cardRef.current);
+      }
+    };
+  }, []);
+
+  // Memoized event handlers to prevent unnecessary re-renders
+  const handleMouseEnter = useCallback(() => {
+    setIsHovered(true);
+    setCursorHover(true, 'Explore', 80, '#000000');
+  }, [setCursorHover]);
+
+  const handleMouseLeave = useCallback(() => {
+    setIsHovered(false);
+    setCursorHover(false);
+  }, [setCursorHover]);
+
+  const handleClick = useCallback(() => {
+    router.push(`/project-detail?id=${project.id}`);
+  }, [router, project.id]);
+
+  return (
+    <div
+      ref={cardRef}
+      className={`transition-all duration-700 ease-out ${
+        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+      }`}
+      style={{
+        transitionDelay: isVisible ? `${index * 50}ms` : '0ms'
+      }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      {/* Video Thumbnail */}
+      <div 
+        className="relative mb-8 overflow-hidden rounded-2xl bg-gray-100 aspect-[4/3] group cursor-pointer"
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        onClick={handleClick}
+      >
+        <VideoThumbnail
+          videoSrc={project.video}
+          posterSrc={project.screenshots[0]?.url || 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop'}
+          alt={project.title}
+          className="w-full h-full"
+          isHovered={isHovered}
+        />
+      </div>
+
+      {/* Text */}
+      <div className="space-y-2">
+        <p className="text-lg leading-relaxed text-gray-900">
+          <span className="font-bold text-black">{project.title}</span>
+          {" – "}
+          <span className="font-normal text-gray-600">{project.description}</span>
+        </p>
+      </div>
+    </div>
+  );
+});
+
+ProjectCard.displayName = 'ProjectCard';
+
 const CubertoProjectsPage = () => {
   const containerRef = useRef(null);
 
-  useEffect( () => {
-    (
-      async () => {
-          const LocomotiveScroll = (await import('locomotive-scroll')).default
-          const locomotiveScroll = new LocomotiveScroll();
+  // Memoize projects data to load only once
+  const projects = useMemo(() => getAllProjects(), []);
+
+  // Initialize Locomotive Scroll only once
+  useEffect(() => {
+    let locomotiveScroll;
+    
+    const initScroll = async () => {
+      const LocomotiveScroll = (await import('locomotive-scroll')).default;
+      locomotiveScroll = new LocomotiveScroll();
+    };
+    
+    initScroll();
+    
+    return () => {
+      if (locomotiveScroll) {
+        locomotiveScroll.destroy();
       }
-    )()
-  }, [])
-
-  const projects = getAllProjects();
-
-  const ProjectCard = ({ project, index }) => {
-    const [isVisible, setIsVisible] = useState(false);
-    const [isHovered, setIsHovered] = useState(false);
-    const cardRef = useRef(null);
-    const { setCursorHover } = useCursor();
-    const router = useRouter();
-
-    useEffect(() => {
-      const observer = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) {
-            setIsVisible(true);
-          }
-        },
-        { threshold: 0.3, rootMargin: "-20px" }
-      );
-
-      if (cardRef.current) {
-        observer.observe(cardRef.current);
-      }
-
-      return () => {
-        if (cardRef.current) {
-          observer.unobserve(cardRef.current);
-        }
-      };
-    }, []);
-
-    return (
-      <div
-        ref={cardRef}
-        className={`transition-all duration-700 ease-out ${
-          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-        }`}
-        style={{
-          transitionDelay: isVisible ? `${index * 50}ms` : '0ms'
-        }}
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-      >
-        {/* Video Thumbnail */}
-        <div 
-          className="relative mb-8 overflow-hidden rounded-2xl bg-gray-100 aspect-[4/3] group cursor-pointer"
-          onMouseEnter={() => {
-            setIsHovered(true);
-            setCursorHover(true, 'Explore', 80, '#000000');
-          }}
-          onMouseLeave={() => {
-            setIsHovered(false);
-            setCursorHover(false);
-          }}
-          onClick={() => {
-            router.push(`/project-detail?id=${project.id}`);
-          }}
-        >
-          <VideoThumbnail
-            videoSrc={project.video}
-            posterSrc={project.screenshots[0]?.url || 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop'}
-            alt={project.title}
-            className="w-full h-full"
-            isHovered={isHovered}
-          />
-        </div>
-
-        {/* Text */}
-        <div className="space-y-2">
-          <p className="text-lg leading-relaxed text-gray-900">
-            <span className="font-bold text-black">{project.title}</span>
-            {" – "}
-            <span className="font-normal text-gray-600">{project.description}</span>
-          </p>
-        </div>
-      </div>
-    );
-  };
+    };
+  }, []);
 
   return (
     <div ref={containerRef} className="min-h-screen bg-white">
