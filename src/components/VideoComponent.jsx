@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useMemo, useCallback } from 'react';
 import { useCursor } from './Cursor/index';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { getProjectById } from '@/data/projects';
@@ -8,6 +8,30 @@ const VideoComponent = () => {
   const videoRef = useRef(null);
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const [isMobileOrTablet, setIsMobileOrTablet] = useState(false);
+  
+  // Memoize device detection to avoid recalculating
+  const checkIsMobileOrTablet = useCallback(() => {
+    if (typeof window === 'undefined') return false;
+    
+    const userAgent = navigator.userAgent.toLowerCase();
+    const isMobile = /iphone|ipod|android|blackberry|opera|mini|windows\sce|palm|smartphone|iemobile/i.test(userAgent);
+    const isTablet = /ipad|android(?!.*mobile)|tablet|kindle|silk|playbook|nexus\s7|nexus\s9|nexus\s10/i.test(userAgent);
+    
+    return isMobile || isTablet;
+  }, []);
+  
+  // Initialize device detection
+  useEffect(() => {
+    setIsMobileOrTablet(checkIsMobileOrTablet());
+    
+    const handleResize = () => {
+      setIsMobileOrTablet(checkIsMobileOrTablet());
+    };
+    
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [checkIsMobileOrTablet]);
   
   // Determine current page and get appropriate video
   const getCurrentVideo = () => {
@@ -35,7 +59,8 @@ const VideoComponent = () => {
     return '/video1.mp4';
   };
   
-  const videoSource = getCurrentVideo();
+  // Memoize video source to prevent unnecessary re-renders
+  const videoSource = useMemo(() => getCurrentVideo(), [pathname, searchParams]);
 
   const handleMouseEnter = () => {
     // Create orange play button SVG
@@ -112,6 +137,9 @@ const VideoComponent = () => {
           loop
           muted
           playsInline
+          preload="auto"
+          disablePictureInPicture
+          onContextMenu={(e) => isMobileOrTablet && e.preventDefault()}
         >
           {/* Dynamic video source based on current page */}
           <source
