@@ -45,34 +45,40 @@ export default function index() {
 
     const container = useRef(null);
     const [isMobile, setIsMobile] = useState(false);
+    const [isTablet, setIsTablet] = useState(false);
     
     useEffect(() => {
-        const checkMobile = () => {
-            setIsMobile(window.innerWidth <= 768);
+        const checkDevice = () => {
+            const width = window.innerWidth;
+            setIsMobile(width <= 768);
+            setIsTablet(width > 768 && width <= 1024);
         };
         
-        checkMobile();
-        window.addEventListener('resize', checkMobile);
+        checkDevice();
+        window.addEventListener('resize', checkDevice);
         
-        return () => window.removeEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkDevice);
     }, []);
+    
+    // Only enable scroll animations for desktop, disable for mobile and tablet
+    const shouldAnimate = !isMobile && !isTablet;
     
     const { scrollYProgress } = useScroll({
         target: container,
         offset: ["start end", "end start"]
     })
 
-    // Reduce animation intensity for mobile devices
-    const x1 = useTransform(scrollYProgress, [0, 1], isMobile ? [0, 50] : [0, 150])
-    const x2 = useTransform(scrollYProgress, [0, 1], isMobile ? [0, -50] : [0, -150])
-    const height = useTransform(scrollYProgress, [0, 0.9], [50, 0])
+    // Reduce animation intensity for mobile devices, disable for tablets
+    const x1 = useTransform(scrollYProgress, [0, 1], shouldAnimate ? [0, 150] : [0, 0])
+    const x2 = useTransform(scrollYProgress, [0, 1], shouldAnimate ? [0, -150] : [0, 0])
+    const height = useTransform(scrollYProgress, [0, 0.9], shouldAnimate ? [50, 0] : [0, 0])
 
     return (
         <div ref={container} className={styles.slidingImages}>
             <motion.div 
                 style={{
-                    x: isMobile ? 0 : x1,
-                    transition: isMobile ? 'none' : 'inherit'
+                    x: shouldAnimate ? x1 : 0,
+                    transition: shouldAnimate ? 'inherit' : 'none'
                 }} 
                 className={styles.slider}
             >
@@ -91,8 +97,8 @@ export default function index() {
                 </motion.div>
                 <motion.div 
                     style={{
-                        x: isMobile ? 0 : x2,
-                        transition: isMobile ? 'none' : 'inherit'
+                        x: shouldAnimate ? x2 : 0,
+                        transition: shouldAnimate ? 'inherit' : 'none'
                     }} 
                     className={styles.slider}
                 >
@@ -109,7 +115,13 @@ export default function index() {
                         })
                     }
                 </motion.div>
-                <motion.div style={{height}} className={styles.circleContainer}>
+                <motion.div 
+                    style={{
+                        height: shouldAnimate ? height : 0,
+                        transition: shouldAnimate ? 'inherit' : 'none'
+                    }} 
+                    className={styles.circleContainer}
+                >
                     <div className={styles.circle}></div>
                 </motion.div>
         </div>

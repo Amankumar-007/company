@@ -9,33 +9,39 @@ import { useRouter } from 'next/navigation';
 export default function index() {
     const container = useRef(null);
     const [isMobile, setIsMobile] = useState(false);
+    const [isTablet, setIsTablet] = useState(false);
     const router = useRouter();
     
     useEffect(() => {
-        const checkMobile = () => {
-            setIsMobile(window.innerWidth <= 768);
+        const checkDevice = () => {
+            const width = window.innerWidth;
+            setIsMobile(width <= 768);
+            setIsTablet(width > 768 && width <= 1024);
         };
         
-        checkMobile();
-        window.addEventListener('resize', checkMobile);
+        checkDevice();
+        window.addEventListener('resize', checkDevice);
         
-        return () => window.removeEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkDevice);
     }, []);
+    
+    // Only enable scroll animations for desktop, disable for mobile and tablet
+    const shouldAnimate = !isMobile && !isTablet;
     
     const { scrollYProgress } = useScroll({
         target: container,
         offset: ["start end", "end end"]
     })
     
-    // Reduce animation intensity for mobile devices
-    const x = useTransform(scrollYProgress, [0, 1], isMobile ? [0, 20] : [0, 100])
-    const y = useTransform(scrollYProgress, [0, 1], isMobile ? [-100, 0] : [-500, 0])
-    const rotate = useTransform(scrollYProgress, [0, 1], isMobile ? [100, 90] : [120, 90])
+    // Reduce animation intensity for mobile devices, disable for tablets
+    const x = useTransform(scrollYProgress, [0, 1], shouldAnimate ? [0, 100] : [0, 0])
+    const y = useTransform(scrollYProgress, [0, 1], shouldAnimate ? [-500, 0] : [0, 0])
+    const rotate = useTransform(scrollYProgress, [0, 1], shouldAnimate ? [120, 90] : [90, 90])
     return (
         <motion.div 
             style={{
-                y: isMobile ? 0 : y,
-                transition: isMobile ? 'none' : 'inherit'
+                y: shouldAnimate ? y : 0,
+                transition: shouldAnimate ? 'inherit' : 'none'
             }} 
             ref={container} 
             className={styles.contact}
@@ -55,8 +61,8 @@ export default function index() {
                     <h2>together</h2>
                     <motion.div 
                         style={{
-                            x: isMobile ? 0 : x,
-                            transition: isMobile ? 'none' : 'inherit'
+                            x: shouldAnimate ? x : 0,
+                            transition: shouldAnimate ? 'inherit' : 'none'
                         }} 
                         className={styles.buttonContainer}
                     >
@@ -66,9 +72,9 @@ export default function index() {
                     </motion.div>
                     <motion.svg 
                         style={{
-                            rotate: isMobile ? 90 : rotate,
-                            scale: isMobile ? 1 : 2,
-                            transition: isMobile ? 'none' : 'inherit'
+                            rotate: shouldAnimate ? rotate : 90,
+                            scale: shouldAnimate ? 2 : 1,
+                            transition: shouldAnimate ? 'inherit' : 'none'
                         }} 
                         width="9" 
                         height="9" 
