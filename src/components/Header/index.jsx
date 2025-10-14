@@ -52,7 +52,7 @@ export default function Header() {
           <a href="/" className={styles.logoLink}>
             <motion.div className={styles.logoContainer}>
               <motion.img
-                src="/ChatGPT Image Sep 26, 2025, 10_19_02 AM.png"
+                src="/brandlogo.png"
                 alt="FlowW Logo"
                 className={styles.logoImage}
                 whileHover={{ rotate: 5 }}
@@ -63,7 +63,8 @@ export default function Header() {
                 whileHover={{ scale: 1.1 }}
                 transition={{ type: 'spring', stiffness: 400, damping: 10 }}
               >
-                flowW
+                flow
+                <span className='bg-[#7ED348]'>W</span>
               </motion.span>
             </motion.div>
           </a>

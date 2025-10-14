@@ -53,7 +53,7 @@ export default function index() {
                             <Image 
                             fill={true}
                             alt={"image"}
-                            src={`/about.png`}
+                            src={`/brandlogo.png`}
                             />
                         </div>
                         <h2>Let's work</h2>
