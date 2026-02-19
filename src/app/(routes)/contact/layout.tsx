@@ -19,12 +19,23 @@ export const metadata: Metadata = {
         canonical: `${BASE_URL}/contact`,
     },
     openGraph: {
+        type: 'website',
+        locale: 'en_IN',
+        siteName: 'Twofloww Digital Agency',
         title: 'Contact Twofloww – Start Your Project',
         description:
-            'Tell us about your project and we\'ll get back to you within 24 hours. Let\'s build something amazing.',
+            "Tell us about your project and we'll get back to you within 24 hours. Let's build something amazing.",
         url: `${BASE_URL}/contact`,
-        type: 'website',
         images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Contact Twofloww' }],
+    },
+    twitter: {
+        card: 'summary_large_image',
+        title: 'Contact Twofloww – Start Your Project',
+        description:
+            "Tell us about your project and we'll get back to you within 24 hours. Let's build something amazing.",
+        images: ['/og-image.png'],
+        creator: '@twofloww',
+        site: '@twofloww',
     },
 }
 

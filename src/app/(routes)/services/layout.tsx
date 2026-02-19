@@ -21,12 +21,23 @@ export const metadata: Metadata = {
         canonical: `${BASE_URL}/services`,
     },
     openGraph: {
+        type: 'website',
+        locale: 'en_IN',
+        siteName: 'Twofloww Digital Agency',
         title: 'Our Services – Web, Mobile, SEO & Design | Twofloww',
         description:
             'Full-range digital services — web development, mobile apps, UI/UX design, SEO, cloud, and e-commerce.',
         url: `${BASE_URL}/services`,
-        type: 'website',
         images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Twofloww Services' }],
+    },
+    twitter: {
+        card: 'summary_large_image',
+        title: 'Our Services – Web, Mobile, SEO & Design | Twofloww',
+        description:
+            'Full-range digital services — web development, mobile apps, UI/UX design, SEO, cloud, and e-commerce.',
+        images: ['/og-image.png'],
+        creator: '@twofloww',
+        site: '@twofloww',
     },
 }
 
