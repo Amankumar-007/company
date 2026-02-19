@@ -24,7 +24,7 @@
     "lucide-react": "^0.543.0",
     "motion": "^12.23.12",
     "multer": "^2.0.2",
-    "next": "^16.1.6",
+    "next": "^16.2.0-canary.51",
     "nodemailer": "^6.9.15",
     "ogl": "^1.0.11",
     "postcss": "^8.5.6",
