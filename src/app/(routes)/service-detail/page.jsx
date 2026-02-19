@@ -10,11 +10,11 @@ function ServiceDetailsContent() {
   const searchParams = useSearchParams();
   const serviceId = searchParams.get('id');
   const service = getServiceById(serviceId);
-  
+
   if (!service) {
     notFound();
   }
-  
+
   const [activeTab, setActiveTab] = useState('overview');
   const [hoveredFeature, setHoveredFeature] = useState(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -33,7 +33,7 @@ function ServiceDetailsContent() {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
-  
+
   // SVG icon mapping for technologies
   const getTechIcon = (techName) => {
     const iconMap = {
@@ -74,7 +74,7 @@ function ServiceDetailsContent() {
       'PayPal': '', // No SVG available
       'Default': '' // Fallback
     };
-    
+
     return iconMap[techName] || iconMap['Default'];
   };
 
@@ -114,9 +114,9 @@ function ServiceDetailsContent() {
     };
     return imageMap[serviceId] || ['/service-png/frontend.png', '/service-png/backend.png', '/service-png/cross.png'];
   };
-  
+
   const serviceImages = getServiceImages(serviceId);
-  
+
   const sectionRefs = {
     overview: useRef(null),
     provide: useRef(null),
@@ -126,9 +126,9 @@ function ServiceDetailsContent() {
 
   const scrollToSection = (section) => {
     setActiveTab(section);
-    sectionRefs[section]?.current?.scrollIntoView({ 
-      behavior: 'smooth', 
-      block: 'start' 
+    sectionRefs[section]?.current?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start'
     });
   };
 
@@ -142,117 +142,121 @@ function ServiceDetailsContent() {
   return (
     <div className="min-h-screen bg-white text-black">
       {/* Hero Section */}
-      <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden p-5 mb-5">
-        {/* Professional Background */}
-        <div className="absolute inset-0">
-          {/* Subtle Gradient Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-br from-gray-50 via-white to-gray-100 opacity-60"></div>
-          
-          {/* Minimal Geometric Pattern */}
-          <div className="absolute inset-0 opacity-5">
-            <div className="absolute inset-0" style={{
-              backgroundImage: `radial-gradient(circle at 25% 25%, black 1px, transparent 1px), 
-                               radial-gradient(circle at 75% 75%, black 1px, transparent 1px)`,
-              backgroundSize: '40px 40px'
-            }} />
-          </div>
-          
-          {/* Single Subtle Floating Element */}
-          <motion.div 
-            className="absolute top-1/4 right-1/4 w-64 h-64 bg-gradient-to-r from-blue-50 to-gray-100 rounded-full filter blur-3xl opacity-30"
-            animate={{
-              x: [0, 20, 0],
-              y: [0, -20, 0],
-              scale: [1, 1.05, 1]
-            }}
-            transition={{
-              duration: 12,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-          />
+      <section className="relative min-h-[60vh] flex flex-col justify-center overflow-hidden bg-white">
+        {/* Modern Grid Background */}
+        <div className="absolute inset-0 z-0">
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+          <div className="absolute left-0 right-0 top-0 -z-10 m-auto h-[310px] w-[310px] rounded-full bg-gray-200 opacity-20 blur-[100px]"></div>
         </div>
 
-        {/* Main Content */}
-        <div className="relative z-20 max-w-7xl mx-auto px-6 md:px-12 lg:px-24 text-center">
+        {/* Abstract Organic Shapes */}
+        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
           <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.2, ease: 'easeOut' }}
-            className="space-y-8"
+            className="absolute -right-20 top-[10%] w-96 h-96 border border-gray-200 rounded-full opacity-40"
+            animate={{
+              scale: [1, 1.1, 1],
+              rotate: [0, 180, 0],
+              borderRadius: ["50%", "40%", "50%"],
+            }}
+            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+          />
+          <motion.div
+            className="absolute -left-20 bottom-[10%] w-72 h-72 border border-gray-200 rounded-full opacity-40 text-gray-100 flex items-center justify-center text-9xl font-black select-none"
+            animate={{
+              scale: [1, 1.2, 1],
+              rotate: [0, -90, 0],
+            }}
+            transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
           >
-          
-
-            {/* Professional Main Title */}
-            <div className="relative">
-              <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight tracking-tight">
-                {service.title.split(' ').map((word, wordIndex) => (
-                  <div key={wordIndex} className="block mb-2">
-                    {word.split('').map((char, charIndex) => (
-                      <motion.span
-                        key={`${wordIndex}-${charIndex}`}
-                        initial={{ opacity: 0, y: 60, rotateX: 90 }}
-                        animate={{ opacity: 1, y: 0, rotateX: 0 }}
-                        transition={{
-                          duration: 0.6,
-                          delay: 0.4 + (wordIndex * 0.15) + (charIndex * 0.03),
-                          type: "spring",
-                          stiffness: 120,
-                          damping: 25
-                        }}
-                        className="inline-block hover:text-gray-700 transition-colors duration-300"
-                      >
-                        {char}
-                      </motion.span>
-                    ))}
-                  </div>
-                ))}
-              </h1>
-            </div>
-
-            {/* Professional Subtitle */}
-            <motion.p
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.8, duration: 0.6 }}
-              className="text-xl md:text-2xl lg:text-3xl font-normal text-gray-600 mb-6 leading-relaxed max-w-4xl mx-auto px-4"
-            >
-              {service.subtitle}
-            </motion.p>
-
-            {/* Professional Description */}
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.0, duration: 0.6 }}
-              className="text-lg md:text-xl text-gray-500 max-w-3xl mx-auto leading-relaxed px-4"
-            >
-              {service.heroDescription}
-            </motion.p>
-
-            {/* Professional CTA Button */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.2, duration: 0.6 }}
-              className="flex justify-center mt-8 items-center"
-            >
-              <motion.a
-                href="/contact"
-                className="px-8 py-3 bg-black text-white rounded-lg font-medium transition-all duration-300 hover:bg-gray-800"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <span className="flex items-center space-x-2">
-                  <span>Get Started</span>
-                  <ArrowRight className="w-4 h-4" />
-                </span>
-              </motion.a>
-            </motion.div>
+            *
           </motion.div>
         </div>
 
-        {/* Remove pulse animation CSS */}
+        {/* Main Content */}
+        <div className="relative z-10 w-full max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20 pt-20">
+          <div className="flex flex-col items-start max-w-6xl">
+            {/* Animated Badge */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+              className="mb-8 flex items-center gap-3"
+            >
+              <span className="flex h-2 w-2 relative">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-black opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-black"></span>
+              </span>
+              <span className="text-sm font-mono font-medium tracking-[0.2em] uppercase text-gray-500">
+                Premium Service
+              </span>
+            </motion.div>
+
+            {/* Massive Editorial Title */}
+            <h1 className="text-[10vw] md:text-[6rem] lg:text-[8rem] font-black text-black leading-[0.95] tracking-tighter mb-10 -ml-1 md:-ml-2 select-none">
+              {service.title.split(' ').map((word, i) => (
+                <div key={i} className="overflow-hidden pb-4 -mb-4">
+                  <motion.div
+                    initial={{ y: "110%" }}
+                    animate={{ y: 0 }}
+                    transition={{
+                      duration: 1,
+                      delay: 0.1 * i,
+                      ease: [0.16, 1, 0.3, 1] // Custom refined bezier
+                    }}
+                  >
+                    {word}
+                  </motion.div>
+                </div>
+              ))}
+            </h1>
+
+            <div className="flex flex-col md:flex-row md:items-end gap-10 md:gap-20 w-full border-t border-gray-200 pt-10 mt-4">
+              {/* Description */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.6 }}
+                className="max-w-xl"
+              >
+                <p className="text-xl md:text-2xl text-gray-800 font-light leading-relaxed">
+                  {service.subtitle}
+                </p>
+
+              </motion.div>
+
+              {/* Actions */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.8 }}
+                className="flex flex-wrap gap-4 md:ml-auto"
+              >
+                <motion.a
+                  href="/contact"
+                  className="group relative px-10 py-5 bg-black text-white text-lg font-bold overflow-hidden rounded-full shadow-2xl shadow-black/20"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <div className="absolute inset-0 bg-gray-900 translate-y-[100%] group-hover:translate-y-[0%] transition-transform duration-300 ease-in-out" />
+                  <span className="relative flex items-center gap-3">
+                    Start Project
+                    <ArrowRight className="w-5 h-5 -rotate-45 group-hover:rotate-0 transition-transform duration-300" />
+                  </span>
+                </motion.a>
+
+                <motion.button
+                  onClick={() => scrollToSection('overview')}
+                  className="px-8 py-5 text-black text-lg font-medium hover:bg-gray-50 rounded-full transition-colors duration-300 flex items-center gap-2"
+                >
+                  <div className="w-8 h-8 rounded-full border border-black flex items-center justify-center">
+                    <ArrowRight className="w-4 h-4 rotate-90" />
+                  </div>
+                  Explore
+                </motion.button>
+              </motion.div>
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* Navigation Tabs */}
@@ -283,7 +287,7 @@ function ServiceDetailsContent() {
                   </svg>
                 </motion.div>
               </button>
-              
+
               <AnimatePresence>
                 {isMobileMenuOpen && (
                   <motion.div
@@ -305,11 +309,10 @@ function ServiceDetailsContent() {
                           scrollToSection(tab.key);
                           setIsMobileMenuOpen(false);
                         }}
-                        className={`w-full py-4 px-6 font-mono text-sm font-medium tracking-wider transition-all duration-300 text-left ${
-                          activeTab === tab.key 
-                            ? 'bg-black text-white' 
-                            : 'text-gray-700 hover:bg-gray-100'
-                        }`}
+                        className={`w-full py-4 px-6 font-mono text-sm font-medium tracking-wider transition-all duration-300 text-left ${activeTab === tab.key
+                          ? 'bg-black text-white'
+                          : 'text-gray-700 hover:bg-gray-100'
+                          }`}
                       >
                         {tab.label}
                       </button>
@@ -319,7 +322,7 @@ function ServiceDetailsContent() {
               </AnimatePresence>
             </div>
           </div>
-          
+
           {/* Desktop Horizontal Navigation */}
           <nav className="hidden md:flex space-x-8 overflow-x-auto">
             {[
@@ -331,11 +334,10 @@ function ServiceDetailsContent() {
               <button
                 key={tab.key}
                 onClick={() => scrollToSection(tab.key)}
-                className={`py-4 px-2 font-mono text-sm font-medium tracking-wider transition-all duration-300 relative whitespace-nowrap ${
-                  activeTab === tab.key 
-                    ? 'text-black' 
-                    : 'text-gray-500 hover:text-black'
-                }`}
+                className={`py-4 px-2 font-mono text-sm font-medium tracking-wider transition-all duration-300 relative whitespace-nowrap ${activeTab === tab.key
+                  ? 'text-black'
+                  : 'text-gray-500 hover:text-black'
+                  }`}
               >
                 {tab.label}
                 {activeTab === tab.key && (
@@ -436,9 +438,8 @@ function ServiceDetailsContent() {
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, delay: index * 0.2 }}
                 viewport={{ once: true }}
-                className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center ${
-                  index % 2 === 0 ? '' : 'lg:flex-row-reverse'
-                }`}
+                className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center ${index % 2 === 0 ? '' : 'lg:flex-row-reverse'
+                  }`}
               >
                 <div>
                   <h3 className="text-3xl font-black mb-4">{serviceItem.title}</h3>
@@ -493,7 +494,7 @@ function ServiceDetailsContent() {
           <div className="relative">
             {/* Process Line */}
             <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gray-300" />
-            
+
             <div className="space-y-12">
               {service.howWeDoIt.map((phase, index) => (
                 <motion.div
@@ -508,7 +509,7 @@ function ServiceDetailsContent() {
                   <div className="relative z-10 w-16 h-16 bg-black text-white rounded-full flex items-center justify-center font-black text-xl flex-shrink-0">
                     {String(index + 1).padStart(2, '0')}
                   </div>
-                  
+
                   <div className="flex-1">
                     <h3 className="text-2xl font-black mb-3">{phase.phase}</h3>
                     <p className="text-lg text-gray-700 mb-4 leading-relaxed">
@@ -570,13 +571,13 @@ function ServiceDetailsContent() {
               >
                 {/* Water fill effect */}
                 <div className="absolute inset-0 bg-black transform translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out"></div>
-                
+
                 {/* Content */}
                 <div className="relative z-10 group-hover:text-white transition-colors duration-300">
                   <div className="w-12 h-12 mx-auto mb-3 flex items-center justify-center">
                     {getTechIcon(tech.name) ? (
-                      <img 
-                        src={getTechIcon(tech.name)} 
+                      <img
+                        src={getTechIcon(tech.name)}
                         alt={tech.name}
                         className="w-full h-full object-contain group-hover:brightness-0 group-hover:invert transition-all duration-300"
                       />

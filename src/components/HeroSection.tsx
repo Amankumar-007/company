@@ -3,10 +3,10 @@ import Link from 'next/link';
 
 export default function HeroSection() {
   return (
-    <div className="min-h-[50vh] mb-10 mt-5  flex items-center justify-center px-4 sm:px-5 lg:px-7 pt-4">
+    <div className="min-h-[50vh] mb-10 mt-5  flex items-center justify-center px-4 sm:px-5 lg:px-7 pt-6">
       <div className="max-w-6xl mx-auto text-center">
         {/* Main Heading */}
-        <h1 className="text-[2.6rem] sm:text-[3.5rem] lg:text-[4.4rem] xl:text-[5.3rem] font-bold text-gray-900 leading-tight mb-8 tracking-tight">
+        <h1 className="text-[2.0rem] sm:text-[3.0rem] lg:text-[3.2rem] xl:text-[4.2rem] font-bold text-gray-900 leading-tight mb-8 tracking-tight">
           <span className="block">Building Digital Excellence</span>
           <span className="block">the <span className="bg-[#7ED348] text-black px-2 pt-0.5 pb-1 rounded-md">Agile</span> Way</span>
         </h1>
