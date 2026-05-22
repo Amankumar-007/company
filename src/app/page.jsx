@@ -1,7 +1,7 @@
 'use client';
 import styles from './page.module.scss'
-import { useEffect, useState, Suspense } from 'react'
-import { AnimatePresence, motionValue, useScroll } from 'framer-motion';
+import { useEffect, useState } from 'react'
+import { AnimatePresence, motionValue } from 'framer-motion';
 import Preloader from '../components/Preloader';
 import Projects from '../components/Projects';
 import Description from '../components/Description';
@@ -12,24 +12,23 @@ import Card from '../components/Card';
 import VideoComponent from '@/components/VideoComponent';
 
 export default function Home() {
-
   const [isLoading, setIsLoading] = useState(true);
   const progress = motionValue(0);
 
-  useEffect( () => {
-    (
-      async () => {
-          const LocomotiveScroll = (await import('locomotive-scroll')).default
-          const locomotiveScroll = new LocomotiveScroll();
+  useEffect(() => {
+    (async () => {
+      const LocomotiveScroll = (await import('locomotive-scroll')).default;
+      const locomotiveScroll = new LocomotiveScroll();
 
-          setTimeout( () => {
-            setIsLoading(false);
-            document.body.style.cursor = 'default'
-            window.scrollTo(0,0);
-          }, 2000)
-      }
-    )()
-  }, [])
+      setTimeout(() => {
+        setIsLoading(false);
+        document.body.style.cursor = 'default';
+        window.scrollTo(0, 0);
+      }, 2000);
+
+      return () => locomotiveScroll.destroy();
+    })();
+  }, []);
 
   return (
     <main className={styles.main}>
@@ -37,12 +36,10 @@ export default function Home() {
         {isLoading && <Preloader />}
       </AnimatePresence>
       <HeroSection />
-      <Suspense fallback={<div>Loading video...</div>}>
-        <VideoComponent />
-      </Suspense>
+      <VideoComponent />
       <Description />
       <Projects />
-      <Card 
+      <Card
         title="Sample Project 1"
         description="This is the first sample card component to showcase the project details."
         src="locomotive.png"
@@ -53,7 +50,7 @@ export default function Home() {
         range={[0, 0.25]}
         targetScale={1.2}
       />
-      <Card 
+      <Card
         title="Sample Project 2"
         description="This is the second sample card component to showcase the project details."
         src="google.jpg"
@@ -64,7 +61,7 @@ export default function Home() {
         range={[0.25, 0.5]}
         targetScale={1.2}
       />
-      <Card 
+      <Card
         title="Sample Project 3"
         description="This is the third sample card component to showcase the project details."
         src="wix.jpg"
@@ -75,7 +72,7 @@ export default function Home() {
         range={[0.5, 0.75]}
         targetScale={1.2}
       />
-      <Card 
+      <Card
         title="Sample Project 4"
         description="This is the fourth sample card component to showcase the project details."
         src="maven.jpg"
@@ -86,7 +83,7 @@ export default function Home() {
         range={[0.75, 1]}
         targetScale={1.2}
       />
-      <Card 
+      <Card
         title="Sample Project 5"
         description="This is the fifth sample card component to showcase the project details."
         src="panda.jpg"
@@ -97,7 +94,7 @@ export default function Home() {
         range={[0.9, 1.1]}
         targetScale={1.2}
       />
-            <SlidingImages />
+      <SlidingImages />
       <Contact />
     </main>
   )

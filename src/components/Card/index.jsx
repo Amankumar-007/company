@@ -71,7 +71,7 @@ const Card = ({ title, description, src, url, color, i, progress, range, targetS
           <div className={styles.imageSection}>
             <motion.div 
               className={styles.imageWrapper}
-              style={{ scale: imageScale }}
+              style={{ scale: imageScale, willChange: 'transform' }}
             >
               <div className={styles.imageOverlay} />
               <Image
@@ -79,6 +79,8 @@ const Card = ({ title, description, src, url, color, i, progress, range, targetS
                 src={`/images/${src}`}
                 alt={title}
                 className={styles.projectImage}
+                sizes="(max-width: 768px) 100vw, 60vw"
+                priority={i === 0}
               />
             </motion.div>
           </div>

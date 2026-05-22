@@ -1,9 +1,8 @@
 'use client'
-import React, { useState, useRef, useEffect, Suspense } from 'react';
+import React, { Suspense } from 'react';
 import { motion } from 'framer-motion';
-import { Code, Database, Brain, Zap, Globe, Users, ArrowRight, ExternalLink, Play } from 'lucide-react';
+import { ArrowRight, ExternalLink } from 'lucide-react';
 import VideoComponent from '@/components/VideoComponent';
-import SplitText from '@/components/SplitText';
 import { useSearchParams } from 'next/navigation';
 import { getProjectById } from '@/data/projects';
 import { notFound } from 'next/navigation';
@@ -17,86 +16,6 @@ function ProjectDetailsContent() {
     notFound();
   }
   
-  const [activeTab, setActiveTab] = useState('overview');
-  const [isVideoLoaded, setIsVideoLoaded] = useState(false);
-  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
-  const videoRef = useRef(null);
-
-  const handleVideoClick = () => {
-    if (videoRef.current) {
-      if (videoRef.current.requestFullscreen) {
-        videoRef.current.requestFullscreen();
-      } else if (videoRef.current.webkitRequestFullscreen) {
-        videoRef.current.webkitRequestFullscreen();
-      } else if (videoRef.current.msRequestFullscreen) {
-        videoRef.current.msRequestFullscreen();
-      }
-    }
-  };
-
-  const handleFullscreenChange = () => {
-    const isFullscreen = document.fullscreenElement ||
-      document.webkitFullscreenElement ||
-      document.msFullscreenElement;
-    
-    if (!isFullscreen && videoRef.current) {
-      videoRef.current.play();
-    }
-  };
-
-  useEffect(() => {
-    document.addEventListener('fullscreenchange', handleFullscreenChange);
-    document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
-    document.addEventListener('msfullscreenchange', handleFullscreenChange);
-    
-    // Auto-play video when component mounts
-    if (videoRef.current) {
-      videoRef.current.play().catch(console.log);
-      setIsVideoPlaying(true);
-    }
-    
-    return () => {
-      document.removeEventListener('fullscreenchange', handleFullscreenChange);
-      document.removeEventListener('webkitfullscreenchange', handleFullscreenChange);
-      document.removeEventListener('msfullscreenchange', handleFullscreenChange);
-    };
-  }, []);
-
-  const handleVideoLoad = () => {
-    setIsVideoLoaded(true);
-  };
-
-  const handleVideoPlay = () => {
-    setIsVideoPlaying(true);
-  };
-
-  const handleVideoPause = () => {
-    setIsVideoPlaying(false);
-  };
-
-  const technologies = [
-    { name: 'Next.js', category: 'Frontend Framework', icon: '⚛️' },
-    { name: 'React', category: 'UI Library', icon: '⚛️' },
-    { name: 'TypeScript', category: 'Language', icon: '📘' },
-    { name: 'Tailwind CSS', category: 'Styling', icon: '🎨' },
-    { name: 'GSAP', category: 'Animation', icon: '✨' },
-    { name: 'Framer Motion', category: 'Animation', icon: '🎭' },
-    { name: 'Three.js', category: '3D Graphics', icon: '🎲' },
-    { name: 'Node.js', category: 'Runtime', icon: '💚' },
-    { name: 'OpenAI API', category: 'AI Integration', icon: '🤖' },
-    { name: 'Vercel', category: 'Deployment', icon: '🚀' },
-    { name: 'MongoDB', category: 'Database', icon: '🍃' },
-    { name: 'Prisma', category: 'ORM', icon: '🔺' }
-  ];
-
-  const features = [
-    { title: 'AI-Powered Analysis', description: 'Advanced machine learning algorithms for intelligent data processing' },
-    { title: 'Real-time Processing', description: 'Lightning-fast response times with optimized performance' },
-    { title: 'Interactive UI', description: 'Intuitive user interface with smooth animations and transitions' },
-    { title: 'Scalable Architecture', description: 'Built to handle growing user demands and data volumes' },
-    { title: 'Cross-platform', description: 'Works seamlessly across all devices and browsers' },
-    { title: 'API Integration', description: 'Seamless integration with external APIs and services' }
-  ];
 
   return (
     <div className="min-h-screen bg-white">
@@ -139,7 +58,9 @@ function ProjectDetailsContent() {
           </motion.p>
         </div>
       </div>
-      <VideoComponent />
+      <Suspense fallback={<div className="w-full h-[55vh] bg-gray-100 rounded-3xl animate-pulse" />}>
+        <VideoComponent videoSrc={project.video || '/video1.mp4'} />
+      </Suspense>
 
       {/* Content Section */}
       <div className="max-w-7xl mx-auto mt-12 sm:mt-16 md:mt-20 px-4 sm:px-6 pb-12 sm:pb-18">

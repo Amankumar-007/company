@@ -1,13 +1,9 @@
-import React, { useState, useRef, useEffect, useMemo, useCallback } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { useCursor } from './Cursor/index';
-import { usePathname, useSearchParams } from 'next/navigation';
-import { getProjectById } from '@/data/projects';
 
-const VideoComponent = () => {
+const VideoComponent = ({ videoSrc = '/video1.mp4' }) => {
   const { setCursorHover } = useCursor();
   const videoRef = useRef(null);
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
   const [isMobileOrTablet, setIsMobileOrTablet] = useState(false);
   
   // Memoize device detection to avoid recalculating
@@ -33,34 +29,6 @@ const VideoComponent = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, [checkIsMobileOrTablet]);
   
-  // Determine current page and get appropriate video
-  const getCurrentVideo = () => {
-    // Check if we're on project detail page
-    if (pathname === '/project-detail') {
-      const projectId = searchParams.get('id');
-      const project = getProjectById(projectId);
-      
-      // Return project-specific video or fallback
-      if (project && project.video) {
-        return project.video;
-      }
-      
-      // Fallback videos based on project ID (using only available videos)
-      const projectVideos = {
-        '1': '/video1.mp4',     // AI Tool project
-        '2': '/video2.mp4',     // Ecommerce project
-        '3': '/video1.mp4',     // Task Manager project (fallback to video1 since video3 doesn't exist)
-      };
-      
-      return projectVideos[projectId] || '/video1.mp4';
-    }
-    
-    // Default video for homepage and other pages
-    return '/video1.mp4';
-  };
-  
-  // Memoize video source to prevent unnecessary re-renders
-  const videoSource = useMemo(() => getCurrentVideo(), [pathname, searchParams]);
 
   const handleMouseEnter = () => {
     // Create orange play button SVG
@@ -143,7 +111,7 @@ const VideoComponent = () => {
         >
           {/* Dynamic video source based on current page */}
           <source
-            src={videoSource}
+            src={videoSrc}
             type="video/mp4"
           />
           {/* Fallback for browsers that don't support video */}
