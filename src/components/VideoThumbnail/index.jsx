@@ -130,10 +130,11 @@ const VideoThumbnail = ({
       <video
         ref={videoRef}
         src={memoizedVideoSrc}
+        poster={posterSrc}
         muted
         loop
         playsInline
-        preload="auto"
+        preload="none"
         className={`w-full h-full object-cover transition-transform duration-500 ease-out ${
           !isMobileOrTablet && isHovered ? 'scale-105' : 'scale-100'
         }`}

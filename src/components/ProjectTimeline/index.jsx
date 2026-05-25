@@ -58,7 +58,7 @@ const ProjectTimeline = () => {
   return (
     <div className="w-full bg-white">
       <div className="max-w-7xl mx-auto px-6 py-12">
-        
+
         {/* Header */}
         <div className="mb-16">
           <div className="flex flex-col lg:flex-row lg:justify-between lg:items-start gap-8">
@@ -77,28 +77,27 @@ const ProjectTimeline = () => {
 
         {/* Timeline */}
         <div className="relative">
-          
+
           {/* Main Timeline Structure */}
           <div className="grid grid-cols-5 gap-4 lg:gap-8 relative">
-            
+
             {/* Timeline Line */}
             <div className="absolute top-8 left-0 right-0 h-0.5 bg-gray-200 z-10"></div>
-            
+
             {timelineData.stages.map((stage, stageIndex) => (
               <div
                 key={stageIndex}
-                className={`relative transition-all duration-300 cursor-pointer group ${
-                  stageIndex % 2 === 1 ? 'mt-32' : ''
-                }`}
+                className={`relative transition-all duration-300 cursor-pointer group ${stageIndex % 2 === 1 ? 'mt-32' : ''
+                  }`}
                 onMouseEnter={() => setActiveStage(stageIndex)}
               >
-                
+
                 {/* Stage Circle */}
                 <div className="relative flex justify-center mb-6">
                   <div className={`
                     w-4 h-4 rounded-full border-2 z-20 transition-all duration-300 transform group-hover:scale-125
-                    ${stageIndex <= activeStage 
-                      ? 'bg-black border-black shadow-lg' 
+                    ${stageIndex <= activeStage
+                      ? 'bg-black border-black shadow-lg'
                       : 'bg-white border-gray-300'
                     }
                   `}>
@@ -106,7 +105,7 @@ const ProjectTimeline = () => {
                       <div className="absolute inset-0 w-4 h-4 rounded-full bg-black opacity-20 animate-ping"></div>
                     )}
                   </div>
-                  
+
                   {/* Connecting Line for alternating layout */}
                   {stageIndex % 2 === 1 && (
                     <div className="absolute top-0 left-1/2 w-0.5 h-32 bg-gray-200 transform -translate-x-0.5 -translate-y-32"></div>
@@ -115,7 +114,7 @@ const ProjectTimeline = () => {
 
                 {/* Stage Content */}
                 <div className="space-y-4">
-                  
+
                   {/* Stage Title */}
                   <div className="text-center lg:text-left">
                     <h3 className="text-lg font-bold text-black mb-2 group-hover:text-gray-700 transition-colors">
@@ -130,11 +129,11 @@ const ProjectTimeline = () => {
                         key={taskIndex}
                         className={`
                           p-3 rounded-lg border transition-all duration-300 transform hover:shadow-md hover:-translate-y-0.5
-                          ${task.highlighted 
-                            ? 'bg-orange-50 border-orange-200 text-orange-700' 
+                          ${task.highlighted
+                            ? 'bg-orange-50 border-orange-200 text-orange-700'
                             : task.active
-                            ? 'bg-gray-50 border-gray-200 text-black shadow-sm relative'
-                            : 'bg-gray-50 border-gray-200 text-gray-700'
+                              ? 'bg-gray-50 border-gray-200 text-black shadow-sm relative'
+                              : 'bg-gray-50 border-gray-200 text-gray-700'
                           }
                           ${stageIndex <= activeStage ? 'opacity-100' : 'opacity-60'}
                         `}
@@ -144,11 +143,11 @@ const ProjectTimeline = () => {
                         {task.active && (
                           <div className="absolute -top-1 -right-1 w-3 h-3 bg-green-400 rounded-full animate-pulse shadow-sm"></div>
                         )}
-                        
+
                         <p className="text-sm font-medium leading-tight">
                           {task.name}
                         </p>
-                        
+
                         {/* Task Step Info */}
                         <div className="mt-2 flex items-center justify-between">
                           <span className="text-xs font-semibold text-gray-500 bg-white px-2 py-1 rounded-full border">
@@ -181,19 +180,18 @@ const ProjectTimeline = () => {
             {timelineData.stages.map((_, index) => (
               <button
                 key={index}
-                className={`w-3 h-3 rounded-full transition-all duration-300 transform hover:scale-125 ${
-                  index <= activeStage ? 'bg-black' : 'bg-gray-300'
-                }`}
+                className={`w-3 h-3 rounded-full transition-all duration-300 transform hover:scale-125 ${index <= activeStage ? 'bg-black' : 'bg-gray-300'
+                  }`}
                 onClick={() => setActiveStage(index)}
               />
             ))}
           </div>
-          
+
           {/* Progress Bar */}
           <div className="w-full max-w-md mx-auto h-1 bg-gray-200 rounded-full overflow-hidden">
-            <div 
+            <div
               className="h-full bg-black transition-all duration-1000 ease-out"
-              style={{ 
+              style={{
                 width: `${((activeStage + 1) / timelineData.stages.length) * 100}%`
               }}
             />
@@ -202,9 +200,9 @@ const ProjectTimeline = () => {
 
         {/* Navigation */}
         <div className="text-center mt-12">
-          
+
           <p className="mt-4 text-sm text-gray-500">
-           • Hover to explore {timelineData.timelineScale}
+            • Hover to explore {timelineData.timelineScale}
           </p>
         </div>
 

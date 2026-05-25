@@ -105,7 +105,7 @@ const VideoComponent = ({ videoSrc = '/video1.mp4' }) => {
           loop
           muted
           playsInline
-          preload="auto"
+          preload="metadata"
           disablePictureInPicture
           onContextMenu={(e) => isMobileOrTablet && e.preventDefault()}
         >

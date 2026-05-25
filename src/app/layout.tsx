@@ -164,7 +164,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
         />
       </head>
-      <body className={`${inter.className} ${spaceGrotesk.variable}`}>
+      <body className={`${inter.className} ${spaceGrotesk.variable}`} suppressHydrationWarning>
         <CursorProvider>
           <Header />
           {children}

@@ -1,5 +1,5 @@
 'use client'
-import React, { Suspense } from 'react';
+import React, { Suspense, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, ExternalLink } from 'lucide-react';
 import VideoComponent from '@/components/VideoComponent';
@@ -15,6 +15,83 @@ function ProjectDetailsContent() {
   if (!project) {
     notFound();
   }
+  
+  useEffect(() => {
+    (async () => {
+      const LocomotiveScroll = (await import('locomotive-scroll')).default;
+      const locomotiveScroll = new LocomotiveScroll();
+      return () => locomotiveScroll.destroy();
+    })();
+  }, []);
+
+  const getDomainForTech = (techName) => {
+    const domains = {
+      'React': 'react.dev',
+      'Next.js': 'nextjs.org',
+      'TypeScript': 'typescriptlang.org',
+      'Node.js': 'nodejs.org',
+      'Express.js': 'expressjs.com',
+      'MongoDB': 'mongodb.com',
+      'PostgreSQL': 'postgresql.org',
+      'Tailwind CSS': 'tailwindcss.com',
+      'GraphQL': 'graphql.org',
+      'Docker': 'docker.com',
+      'AWS': 'aws.amazon.com',
+      'Vercel': 'vercel.com',
+      'Swift': 'swift.org',
+      'Kotlin': 'kotlinlang.org',
+      'React Native': 'reactnative.dev',
+      'Flutter': 'flutter.dev',
+      'Firebase': 'firebase.google.com',
+      'Jest': 'jestjs.io',
+      'Fastlane': 'fastlane.tools',
+      'Sentry': 'sentry.io',
+      'Figma': 'figma.com',
+      'Sketch': 'sketch.com',
+      'Adobe XD': 'adobe.com',
+      'Photoshop': 'adobe.com',
+      'Illustrator': 'adobe.com',
+      'InVision': 'invisionapp.com',
+      'Principle': 'principleformac.com',
+      'Framer': 'framer.com',
+      'Maze': 'maze.co',
+      'Hotjar': 'hotjar.com',
+      'Storybook': 'storybook.js.org',
+      'Zeplin': 'zeplin.io',
+      'Shopify': 'shopify.com',
+      'WooCommerce': 'woocommerce.com',
+      'Magento': 'magento.com',
+      'BigCommerce': 'bigcommerce.com',
+      'Stripe': 'stripe.com',
+      'PayPal': 'paypal.com',
+      'Redis': 'redis.io',
+      'AWS Mobile': 'aws.amazon.com',
+      'Google Analytics': 'analytics.google.com',
+      'SEMrush': 'semrush.com',
+      'Ahrefs': 'ahrefs.com',
+      'Google Ads': 'ads.google.com',
+      'Facebook Ads': 'facebook.com',
+      'Content CMS': 'wordpress.org',
+      'Google Cloud': 'cloud.google.com',
+      'Azure': 'azure.microsoft.com',
+      'Kubernetes': 'kubernetes.io',
+      'Terraform': 'terraform.io',
+      'Inventory APIs': 'postman.com',
+      'Angular': 'angular.io',
+      'HTML5': 'w3.org',
+      'JavaScript': 'javascript.info',
+      'Meta Business Suite': 'business.facebook.com',
+      'Hootsuite': 'hootsuite.com',
+      'Buffer': 'buffer.com',
+      'Default': 'github.com'
+    };
+    return domains[techName] || domains['Default'];
+  };
+
+  const getFaviconUrl = (techName) => {
+    const domain = getDomainForTech(techName);
+    return `https://www.google.com/s2/favicons?domain=${domain}&sz=128`;
+  };
   
 
   return (
@@ -170,15 +247,11 @@ function ProjectDetailsContent() {
               <div key={index} className="bg-white rounded-2xl p-4 sm:p-6 md:p-8 shadow-sm hover:shadow-lg transition-all duration-300 transform hover:-translate-y-2 group">
                 <div className="flex flex-col items-center text-center space-y-3 sm:space-y-4">
                   <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 group-hover:scale-110 transition-transform duration-300 flex items-center justify-center">
-                    {tech.icon.startsWith('/tech/') ? (
-                      <img 
-                        src={tech.icon} 
-                        alt={tech.name} 
-                        className="w-full h-full object-contain"
-                      />
-                    ) : (
-                      <div className="text-2xl sm:text-3xl">{tech.icon}</div>
-                    )}
+                    <img 
+                      src={getFaviconUrl(tech.name)} 
+                      alt={tech.name} 
+                      className="w-full h-full object-contain"
+                    />
                   </div>
                   <div className="space-y-1 sm:space-y-2">
                     <h3 className="font-bold text-black text-base sm:text-lg">{tech.name}</h3>

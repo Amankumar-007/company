@@ -34,48 +34,81 @@ function ServiceDetailsContent() {
     };
   }, []);
 
-  // SVG icon mapping for technologies
-  const getTechIcon = (techName) => {
-    const iconMap = {
-      'React': '/tech/7423888_react_react native_icon.svg',
-      'Next.js': '/tech/9118036_nextjs_fill_icon.svg',
-      'TypeScript': '/tech/11120662_fi_brands_typescript_icon.svg',
-      'Node.js': '/tech/1012818_code_development_logo_nodejs_icon.svg',
-      'MongoDB': '/tech/1012822_code_development_logo_mongodb_programming_icon.svg',
-      'PostgreSQL': '/tech/4691328_postgresql_icon.svg',
-      'GraphQL': '/tech/4691403_graphql_icon.svg',
-      'AWS': '/tech/4923041_aws_icon.svg',
-      'Docker': '/tech/8725837_docker_icon.svg',
-      'JavaScript': '/tech/652581_code_command_develop_javascript_language_icon.svg',
-      'HTML5': '/tech/104494_html5_html_icon.svg',
-      'Angular': '/tech/4373284_angular_logo_logos_icon.svg',
-      'Tailwind CSS': '/tech/9055799_bxl_tailwind_css_icon.svg',
-      'Flutter': '/tech/9055802_bxl_flutter_icon.svg',
-      'Swift': '', // No SVG available
-      'Kotlin': '', // No SVG available
-      'React Native': '/tech/7423888_react_react native_icon.svg',
-      'Figma': '', // No SVG available
-      'Sketch': '', // No SVG available
-      'Adobe XD': '', // No SVG available
-      'Shopify': '', // No SVG available
-      'WooCommerce': '', // No SVG available
-      'Magento': '', // No SVG available
-      'Meta Business Suite': '', // No SVG available
-      'Hootsuite': '', // No SVG available
-      'Buffer': '', // No SVG available
-      'Google Analytics': '', // No SVG available
-      'Google Ads': '', // No SVG available
-      'SEMrush': '', // No SVG available
-      'Ahrefs': '', // No SVG available
-      'Google Cloud': '', // No SVG available
-      'Azure': '', // No SVG available
-      'Firebase': '', // No SVG available
-      'Stripe': '', // No SVG available
-      'PayPal': '', // No SVG available
-      'Default': '' // Fallback
-    };
+  useEffect(() => {
+    (async () => {
+      const LocomotiveScroll = (await import('locomotive-scroll')).default;
+      const locomotiveScroll = new LocomotiveScroll();
+      return () => locomotiveScroll.destroy();
+    })();
+  }, []);
 
-    return iconMap[techName] || iconMap['Default'];
+  const getDomainForTech = (techName) => {
+    const domains = {
+      'React': 'react.dev',
+      'Next.js': 'nextjs.org',
+      'TypeScript': 'typescriptlang.org',
+      'Node.js': 'nodejs.org',
+      'Express.js': 'expressjs.com',
+      'MongoDB': 'mongodb.com',
+      'PostgreSQL': 'postgresql.org',
+      'Tailwind CSS': 'tailwindcss.com',
+      'GraphQL': 'graphql.org',
+      'Docker': 'docker.com',
+      'AWS': 'aws.amazon.com',
+      'Vercel': 'vercel.com',
+      'Swift': 'swift.org',
+      'Kotlin': 'kotlinlang.org',
+      'React Native': 'reactnative.dev',
+      'Flutter': 'flutter.dev',
+      'Firebase': 'firebase.google.com',
+      'Jest': 'jestjs.io',
+      'Fastlane': 'fastlane.tools',
+      'Sentry': 'sentry.io',
+      'Figma': 'figma.com',
+      'Sketch': 'sketch.com',
+      'Adobe XD': 'adobe.com',
+      'Photoshop': 'adobe.com',
+      'Illustrator': 'adobe.com',
+      'InVision': 'invisionapp.com',
+      'Principle': 'principleformac.com',
+      'Framer': 'framer.com',
+      'Maze': 'maze.co',
+      'Hotjar': 'hotjar.com',
+      'Storybook': 'storybook.js.org',
+      'Zeplin': 'zeplin.io',
+      'Shopify': 'shopify.com',
+      'WooCommerce': 'woocommerce.com',
+      'Magento': 'magento.com',
+      'BigCommerce': 'bigcommerce.com',
+      'Stripe': 'stripe.com',
+      'PayPal': 'paypal.com',
+      'Redis': 'redis.io',
+      'AWS Mobile': 'aws.amazon.com',
+      'Google Analytics': 'analytics.google.com',
+      'SEMrush': 'semrush.com',
+      'Ahrefs': 'ahrefs.com',
+      'Google Ads': 'ads.google.com',
+      'Facebook Ads': 'facebook.com',
+      'Content CMS': 'wordpress.org',
+      'Google Cloud': 'cloud.google.com',
+      'Azure': 'azure.microsoft.com',
+      'Kubernetes': 'kubernetes.io',
+      'Terraform': 'terraform.io',
+      'Inventory APIs': 'postman.com',
+      'Angular': 'angular.io',
+      'HTML5': 'w3.org',
+      'JavaScript': 'javascript.info',
+      'Meta Business Suite': 'business.facebook.com',
+      'Hootsuite': 'hootsuite.com',
+      'Buffer': 'buffer.com',
+      'Default': 'github.com'
+    };
+    return domains[techName] || domains['Default'];
+  };
+
+  const getFaviconUrl = (techName) => {
+    const domain = getDomainForTech(techName);
+    return `https://www.google.com/s2/favicons?domain=${domain}&sz=128`;
   };
 
   // Service image mapping - use images according to their names
@@ -137,6 +170,17 @@ function ServiceDetailsContent() {
       Code, Database, Smartphone, Globe, Shield, Palette, Cpu, Zap
     };
     return iconMap[iconName] || Code;
+  };
+
+  const getStatIcon = (label) => {
+    const labelLower = label.toLowerCase();
+    if (labelLower.includes('project') || labelLower.includes('app')) return <Code className="w-10 h-10 mx-auto text-black" />;
+    if (labelLower.includes('satisfaction') || labelLower.includes('rating')) return <Star className="w-10 h-10 mx-auto text-black" />;
+    if (labelLower.includes('experience')) return <Award className="w-10 h-10 mx-auto text-black" />;
+    if (labelLower.includes('support')) return <Zap className="w-10 h-10 mx-auto text-black" />;
+    if (labelLower.includes('download')) return <Smartphone className="w-10 h-10 mx-auto text-black" />;
+    if (labelLower.includes('client')) return <Users className="w-10 h-10 mx-auto text-black" />;
+    return <Award className="w-10 h-10 mx-auto text-black" />;
   };
 
   return (
@@ -401,7 +445,7 @@ function ServiceDetailsContent() {
           >
             {service.stats.map((stat, index) => (
               <div key={index} className="text-center">
-                <div className="text-4xl mb-2">{stat.icon}</div>
+                <div className="text-4xl mb-2 flex justify-center">{getStatIcon(stat.label)}</div>
                 <div className="text-3xl font-black mb-1">{stat.value}</div>
                 <div className="text-sm text-gray-600 font-medium uppercase tracking-wide">
                   {stat.label}
@@ -575,15 +619,11 @@ function ServiceDetailsContent() {
                 {/* Content */}
                 <div className="relative z-10 group-hover:text-white transition-colors duration-300">
                   <div className="w-12 h-12 mx-auto mb-3 flex items-center justify-center">
-                    {getTechIcon(tech.name) ? (
-                      <img
-                        src={getTechIcon(tech.name)}
-                        alt={tech.name}
-                        className="w-full h-full object-contain group-hover:brightness-0 group-hover:invert transition-all duration-300"
-                      />
-                    ) : (
-                      <div className="text-3xl">{tech.icon}</div>
-                    )}
+                    <img
+                      src={getFaviconUrl(tech.name)}
+                      alt={tech.name}
+                      className="w-full h-full object-contain transition-transform duration-300 group-hover:scale-110"
+                    />
                   </div>
                   <h4 className="font-bold text-lg mb-1">{tech.name}</h4>
                   <p className="text-sm opacity-75 group-hover:opacity-100">{tech.category}</p>
