@@ -19,10 +19,6 @@ const nextConfig: NextConfig = {
   // Remove X-Powered-By header (security + cleanliness)
   poweredByHeader: false,
 
-  experimental: {
-    optimizePackageImports: ['lucide-react'],
-  },
-
   // Image optimization config
   images: {
     formats: ['image/avif', 'image/webp'],

@@ -256,20 +256,15 @@ const AboutPage = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    (async () => {
-      const LocomotiveScroll = (await import('locomotive-scroll')).default;
-      const locomotiveScroll = new LocomotiveScroll();
-
       setTimeout(() => {
         setIsLoading(false);
         document.body.style.cursor = 'default';
         window.scrollTo(0, 0);
       }, 1000);
-    })();
   }, []);
 
   return (
-    <div className={`${styles.main} min-h-screen bg-white`} data-scroll-container>
+    <div className={`${styles.main} min-h-screen bg-white`}>
       <HeroSection />
       <TeamSection />
       <HowWeWorkSection />

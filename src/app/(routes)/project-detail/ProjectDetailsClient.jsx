@@ -5,13 +5,7 @@ import { ArrowRight, ExternalLink } from 'lucide-react';
 import VideoComponent from '@/components/VideoComponent';
 
 export default function ProjectDetailsClient({ project }) {
-  useEffect(() => {
-    (async () => {
-      const LocomotiveScroll = (await import('locomotive-scroll')).default;
-      const locomotiveScroll = new LocomotiveScroll();
-      return () => locomotiveScroll.destroy();
-    })();
-  }, []);
+
 
   const getDomainForTech = (techName) => {
     const domains = {

@@ -1,8 +1,22 @@
 import { MetadataRoute } from 'next'
+import { createClient } from '@/utils/supabase/server'
 
 const BASE_URL = 'https://www.twofloww.in'
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+    const supabase = await createClient()
+    const { data: blogs } = await supabase
+      .from('blogs')
+      .select('slug, updated_at')
+      .eq('status', 'published')
+
+    const blogPages = blogs?.map((blog) => ({
+        url: `${BASE_URL}/blog/${blog.slug}`,
+        lastModified: blog.updated_at ? new Date(blog.updated_at) : new Date(),
+        changeFrequency: 'weekly' as const,
+        priority: 0.8,
+    })) || []
+
     // Service IDs from services/page.tsx
     const serviceIds = [
         'web-development',
@@ -114,5 +128,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
         ...projectDetailPages,
         ...categoryPages,
         ...skillPages,
+        ...blogPages,
     ]
 }

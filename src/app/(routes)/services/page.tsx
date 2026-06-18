@@ -276,13 +276,7 @@ const ServicesPage = () => {
     }
   }, [])
 
-  useEffect(() => {
-    (async () => {
-      const LocomotiveScroll = (await import('locomotive-scroll')).default;
-      const locomotiveScroll = new LocomotiveScroll();
-      return () => locomotiveScroll.destroy();
-    })();
-  }, []);
+
 
   return (
     <div className="min-h-screen bg-white text-black">

@@ -16,6 +16,7 @@ export default function Home() {
   let direction = -1;
 
   useLayoutEffect( () => {
+    if (!slider.current) return;
     gsap.registerPlugin(ScrollTrigger);
     gsap.to(slider.current, {
       scrollTrigger: {
@@ -48,6 +49,7 @@ export default function Home() {
       <Image 
         src="/images/background.jpg"
         fill={true}
+        sizes="100vw"
         alt="background"
       />
       <div className={styles.sliderContainer}>

@@ -18,6 +18,7 @@ export default function ContactForm() {
   const [isLoading, setIsLoading] = useState(true);
   const [selectedServices, setSelectedServices] = useState<string[]>([]);
   const [selectedBudget, setSelectedBudget] = useState('');
+  const [currency, setCurrency] = useState('USD');
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -42,18 +43,12 @@ export default function ContactForm() {
   const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
-    (
-      async () => {
-        const LocomotiveScroll = (await import('locomotive-scroll')).default;
-        const locomotiveScroll = new LocomotiveScroll();
-
-        setTimeout(() => {
-          setIsLoading(false);
-          document.body.style.cursor = 'default';
-          window.scrollTo(0, 0);
-        }, 2000);
-      }
-    )()
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+      document.body.style.cursor = 'default';
+      window.scrollTo(0, 0);
+    }, 2000);
+    return () => clearTimeout(timer);
   }, []);
 
   const services = [
@@ -73,6 +68,51 @@ export default function ContactForm() {
     '50-100k',
     '> 100k'
   ];
+
+  const formatBudget = (budgetRange: string) => {
+    if (currency === 'USD') return budgetRange + ' USD';
+    if (currency === 'INR') {
+        const ranges: Record<string, string> = {
+            '10-20k': '8L - 16L INR',
+            '30-40k': '25L - 33L INR',
+            '40-50k': '33L - 41L INR',
+            '50-100k': '41L - 83L INR',
+            '> 100k': '> 83L INR'
+        };
+        return ranges[budgetRange] || budgetRange;
+    }
+    if (currency === 'EUR') {
+        const ranges: Record<string, string> = {
+            '10-20k': '9k - 18k EUR',
+            '30-40k': '27k - 37k EUR',
+            '40-50k': '37k - 46k EUR',
+            '50-100k': '46k - 92k EUR',
+            '> 100k': '> 92k EUR'
+        };
+        return ranges[budgetRange] || budgetRange;
+    }
+    if (currency === 'GBP') {
+        const ranges: Record<string, string> = {
+            '10-20k': '8k - 16k GBP',
+            '30-40k': '24k - 32k GBP',
+            '40-50k': '32k - 40k GBP',
+            '50-100k': '40k - 80k GBP',
+            '> 100k': '> 80k GBP'
+        };
+        return ranges[budgetRange] || budgetRange;
+    }
+    if (currency === 'AUD') {
+        const ranges: Record<string, string> = {
+            '10-20k': '15k - 30k AUD',
+            '30-40k': '45k - 60k AUD',
+            '40-50k': '60k - 75k AUD',
+            '50-100k': '75k - 150k AUD',
+            '> 100k': '> 150k AUD'
+        };
+        return ranges[budgetRange] || budgetRange;
+    }
+    return budgetRange;
+  };
 
   const toggleService = (service: string) => {
     setSelectedServices(prev =>
@@ -194,7 +234,8 @@ export default function ContactForm() {
       const formDataToSend = {
         ...formData,
         services: selectedServices,
-        budget: selectedBudget,
+        budget: formatBudget(selectedBudget),
+        currency: currency,
         attachments: uploadedFiles
       };
 
@@ -306,7 +347,20 @@ export default function ContactForm() {
 
           {/* Budget Selection */}
           <div>
-            <h3 className="text-xl mb-6">Project budget (USD)</h3>
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6">
+              <h3 className="text-xl font-medium">Project budget</h3>
+              <select
+                value={currency}
+                onChange={(e) => setCurrency(e.target.value)}
+                className="mt-2 sm:mt-0 px-4 py-2 border-2 border-gray-300 rounded-lg focus:border-black focus:outline-none bg-white text-lg font-medium"
+              >
+                <option value="USD">USD ($)</option>
+                <option value="EUR">EUR (€)</option>
+                <option value="GBP">GBP (£)</option>
+                <option value="INR">INR (₹)</option>
+                <option value="AUD">AUD (A$)</option>
+              </select>
+            </div>
             <div className="flex flex-wrap gap-4 mb-8">
               {budgetRanges.map((budget) => (
                 <button
@@ -319,7 +373,7 @@ export default function ContactForm() {
                       : 'bg-white text-black border-gray-300 hover:border-gray-400 hover:shadow-md'
                   }`}
                 >
-                  {budget}
+                  {formatBudget(budget)}
                 </button>
               ))}
             </div>

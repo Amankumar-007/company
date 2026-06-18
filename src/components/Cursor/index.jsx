@@ -1,6 +1,7 @@
 'use client';
 import React, { useEffect, useRef, useState, createContext, useContext } from 'react'
 import gsap from 'gsap';
+import { usePathname } from 'next/navigation';
 
 // Helper function to detect mobile devices
 const isMobile = () => {
@@ -19,6 +20,9 @@ export const useCursor = () => {
 };
 
 export const CursorProvider = ({ children }) => {
+    const pathname = usePathname();
+    const isAdmin = pathname?.startsWith('/admin');
+    
     const [cursorState, setCursorState] = useState({
         isHovering: false,
         text: '',
@@ -29,6 +33,7 @@ export const CursorProvider = ({ children }) => {
     });
 
     const setCursorHover = (isHovering, text = '', size = 60, backgroundColor = '#ec4e39', icon = null) => {
+        if (isAdmin) return;
         setCursorState({
             isHovering,
             text,
@@ -42,7 +47,7 @@ export const CursorProvider = ({ children }) => {
     return (
         <CursorContext.Provider value={{ setCursorHover }}>
             {children}
-            <Cursor state={cursorState} />
+            {!isAdmin && <Cursor state={cursorState} />}
         </CursorContext.Provider>
     );
 };

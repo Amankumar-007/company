@@ -20,27 +20,17 @@ export default function ScrollToTop() {
 
     window.addEventListener('scroll', toggleVisibility, { passive: true });
     
-    // Fallback for locomotive scroll which might dispatch custom scroll events
-    // or just listen to all scroll events on document
-    document.addEventListener('scroll', toggleVisibility, { capture: true, passive: true });
-    
+
     return () => {
       window.removeEventListener('scroll', toggleVisibility);
-      document.removeEventListener('scroll', toggleVisibility, { capture: true });
     };
   }, []);
 
   const scrollToTop = () => {
-    // Attempt standard scroll
     window.scrollTo({
       top: 0,
       behavior: 'smooth'
     });
-    
-    // For locomotive-scroll specifically if it's running
-    if (window.locomotiveScroll) {
-      window.locomotiveScroll.scrollTo(0, { duration: 1000 });
-    }
   };
 
   return (

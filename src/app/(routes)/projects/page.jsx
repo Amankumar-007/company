@@ -111,23 +111,7 @@ const CubertoProjectsPage = () => {
   // Memoize projects data to load only once
   const projects = useMemo(() => getAllProjects(), []);
 
-  // Initialize Locomotive Scroll only once
-  useEffect(() => {
-    let locomotiveScroll;
-    
-    const initScroll = async () => {
-      const LocomotiveScroll = (await import('locomotive-scroll')).default;
-      locomotiveScroll = new LocomotiveScroll();
-    };
-    
-    initScroll();
-    
-    return () => {
-      if (locomotiveScroll) {
-        locomotiveScroll.destroy();
-      }
-    };
-  }, []);
+
 
   return (
     <div ref={containerRef} className="min-h-screen bg-white">

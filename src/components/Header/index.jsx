@@ -9,6 +9,7 @@ import MobileMenu from './MobileMenu';
 const navItems = [
   { title: 'Services', href: '/services' },
   { title: 'Projects', href: '/projects' },
+  { title: 'Blog', href: '/blog' },
   { title: 'About', href: '/about' },
   { title: 'Contact', href: '/contact' },
 ];
@@ -18,6 +19,8 @@ export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
   const headerRef = useRef(null);
+
+  if (pathname?.startsWith('/admin')) return null;
 
   useEffect(() => {
     if (isMobileMenuOpen) {

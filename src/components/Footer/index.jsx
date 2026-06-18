@@ -1,9 +1,13 @@
 "use client";
 
 import { useState } from 'react';
+import { usePathname } from 'next/navigation';
 
 export default function Footer() {
   const [email, setEmail] = useState('');
+  const pathname = usePathname();
+
+  if (pathname?.startsWith('/admin')) return null;
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -15,7 +19,7 @@ export default function Footer() {
   return (
     <footer
       style={{
-        backgroundColor: '#ECECEE',
+
         borderRadius: '2.5rem 2.5rem 0 0',
         overflow: 'hidden',
         position: 'relative',
@@ -123,6 +127,7 @@ export default function Footer() {
               <a href="/about" className="text-gray-600 hover:text-[#DE5D26] text-[14px] transition-colors font-medium">About Us</a>
               <a href="/services" className="text-gray-600 hover:text-[#DE5D26] text-[14px] transition-colors font-medium">Services</a>
               <a href="/projects" className="text-gray-600 hover:text-[#DE5D26] text-[14px] transition-colors font-medium">Projects</a>
+              <a href="/blog" className="text-gray-600 hover:text-[#DE5D26] text-[14px] transition-colors font-medium">Blog</a>
               <a href="/contact" className="text-gray-600 hover:text-[#DE5D26] text-[14px] transition-colors font-medium">Contact</a>
             </div>
 

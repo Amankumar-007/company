@@ -1,12 +1,15 @@
 import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
+import { createClient } from '@/utils/supabase/server';
 
 interface ContactFormData {
   name: string;
   email: string;
   projectDescription: string;
+  projectDescription: string;
   services: string[];
   budget: string;
+  currency?: string;
   attachments?: Array<{
     url: string;
     publicId: string;
@@ -22,9 +25,9 @@ export async function POST(request: Request) {
   try {
     const body = await request.json() as ContactFormData;
     
-    const { name, email, projectDescription, services, budget, attachments } = body;
+    const { name, email, projectDescription, services, budget, currency, attachments } = body;
 
-    console.log('Received form data:', { name, email, projectDescription, services, budget });
+    console.log('Received form data:', { name, email, projectDescription, services, budget, currency });
 
     // Validate required fields
     if (!name || !email || !projectDescription) {
@@ -33,6 +36,27 @@ export async function POST(request: Request) {
         { message: 'Please fill in all required fields' },
         { status: 400 }
       );
+    }
+
+    // Save to Supabase
+    const supabase = await createClient();
+    const { error: dbError } = await supabase
+      .from('contacts')
+      .insert([
+        {
+          name,
+          email,
+          project_description: projectDescription,
+          services,
+          budget,
+          currency,
+          attachments,
+        }
+      ]);
+
+    if (dbError) {
+      console.error('Failed to save contact to database:', dbError);
+      // We log but continue, to not fail the email sending if db fails, or we could fail early
     }
 
     // Check if environment variables are set
@@ -101,7 +125,7 @@ export async function POST(request: Request) {
         ${budget ? `
         <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
           <h2 style="color: #333; margin-top: 0; border-bottom: 2px solid #667eea; padding-bottom: 10px;">Project Budget</h2>
-          <p style="margin: 0; color: #333; font-size: 16px;">$${budget} USD</p>
+          <p style="margin: 0; color: #333; font-size: 16px;">${budget}</p>
         </div>
         ` : ''}
 

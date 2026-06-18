@@ -54,6 +54,7 @@ export default function Home() {
   let yMoveCursorLabel = useRef(null);
 
   useEffect( () => {
+    if (!modalContainer.current || !cursorLabel.current) return;
     //Move Container
     xMoveContainer.current = gsap.quickTo(modalContainer.current, "left", {duration: 0.8, ease: "power3"})
     yMoveContainer.current = gsap.quickTo(modalContainer.current, "top", {duration: 0.8, ease: "power3"})
