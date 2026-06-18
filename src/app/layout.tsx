@@ -1,6 +1,8 @@
 import './globals.css'
 import { Inter, Space_Grotesk } from 'next/font/google'
 import Header from '../components/Header';
+import ScrollToTop from '../components/ScrollToTop';
+import Footer from '../components/Footer';
 import { ReactNode } from 'react';
 import { CursorProvider } from '../components/Cursor';
 import type { Metadata, Viewport } from 'next';
@@ -164,10 +166,16 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
         />
       </head>
-      <body className={`${inter.className} ${spaceGrotesk.variable}`} suppressHydrationWarning>
+      <body className={`${inter.className} ${spaceGrotesk.variable} bg-white text-black min-h-screen`} suppressHydrationWarning>
         <CursorProvider>
           <Header />
-          {children}
+          <div className="relative z-20 bg-white min-h-screen">
+            {children}
+          </div>
+          <div className="sticky bottom-0 z-10">
+            <Footer />
+          </div>
+          <ScrollToTop />
         </CursorProvider>
       </body>
     </html>

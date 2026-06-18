@@ -7,6 +7,18 @@ import ProjectTimeline from '@/components/ProjectTimeline';
 import VideoThumbnail from '@/components/VideoThumbnail';
 import { getAllProjects } from '@/data/projects';
 
+// Pattern Component for Projects
+const ProjectsPattern = () => (
+  <div className="absolute top-0 right-0 w-64 h-64 opacity-10 pointer-events-none text-black z-0">
+    <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+      <path d="M 20 40 C 80 0 120 200 180 40" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+      <path d="M 40 70 C 90 40 110 160 160 70" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+      <path d="M 60 100 C 100 80 100 120 140 100" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+      <circle cx="100" cy="100" r="80" stroke="currentColor" strokeWidth="2" strokeDasharray="5 15"/>
+    </svg>
+  </div>
+);
+
 // Memoized ProjectCard component to prevent unnecessary re-renders
 const ProjectCard = React.memo(({ project, index }) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -120,8 +132,9 @@ const CubertoProjectsPage = () => {
   return (
     <div ref={containerRef} className="min-h-screen bg-white">
       {/* Header */}
-      <header className="pb-16 lg:pt-14 lg:pb-20">
-        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+      <header className="relative pb-16 lg:pt-14 lg:pb-20">
+        <ProjectsPattern />
+        <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto">
             <h1 className="text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
               Our Projects
@@ -158,7 +171,7 @@ const CubertoProjectsPage = () => {
           <p className="text-xl text-gray-600 mb-10">
             Let's work together to bring your vision to life.
           </p>
-          <button className="bg-gray-900 text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-gray-800 transition-all duration-300 hover:scale-105">
+          <button onClick={() => window.location.assign('/contact')} className="relative z-50 cursor-pointer bg-gray-900 text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-gray-800 transition-all duration-300 hover:scale-105">
             Start a Project
           </button>
         </div>

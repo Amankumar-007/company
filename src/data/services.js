@@ -127,7 +127,7 @@ export const services = [
         details: "We begin with an in-depth consultation to understand your business objectives, target audience, and specific requirements. This helps us create a tailored solution that aligns with your goals."
       },
       {
-        step: "02", 
+        step: "02",
         title: "Strategy",
         description: "Developing a comprehensive technical strategy",
         details: "Our technical team creates a detailed strategy including technology stack selection, architecture design, project timeline, and resource allocation to ensure successful project delivery."
@@ -180,7 +180,7 @@ export const services = [
         popular: false
       },
       {
-        title: "Professional", 
+        title: "Professional",
         price: "$7,999",
         duration: "Starting from",
         description: "Ideal for growing businesses",
@@ -403,7 +403,7 @@ export const services = [
       {
         title: "Advanced App",
         price: "$12,999",
-        duration: "Starting from", 
+        duration: "Starting from",
         description: "Feature-rich applications",
         features: [
           "Native platform development",
@@ -1319,13 +1319,236 @@ export const services = [
         { label: "SEE SUCCESS STORIES", icon: "ExternalLink" }
       ]
     }
+  },
+  {
+    id: "cloud-solutions",
+    title: "Cloud Solutions",
+    subtitle: "Scalable Infrastructure",
+    category: "Cloud",
+    heroDescription: "Robust cloud infrastructure solutions that scale with your business needs, ensuring high availability, security, and cost-effectiveness.",
+    overview: {
+      title: "Empower Your Applications with Cloud Scale",
+      description: "We design, build, and manage highly reliable and secure cloud architectures. Whether you need to migrate from on-premise servers, optimize your cloud spend, or implement a multi-region disaster recovery plan, our certified cloud architect team delivers state-of-the-art solutions on AWS, Google Cloud, and Azure. With automated deployment pipelines and container orchestration, we make your infrastructure resilient, cost-effective, and blazing fast.",
+      highlights: [
+        "Custom cloud infrastructure design and deployment",
+        "Zero-downtime migrations and database replication",
+        "Auto-scaling systems built for extreme traffic spikes",
+        "Continuous monitoring, logging, and security auditing",
+        "Cost optimization to reduce your monthly cloud bill",
+        "Infrastructure as Code (IaC) with Terraform and CloudFormation"
+      ]
+    },
+    whatWeProvide: [
+      {
+        title: "Cloud Migration & Architecture",
+        description: "Seamlessly migrate your legacy applications and databases to major cloud platforms. We design secure, multi-zone architectures that eliminate single points of failure.",
+        features: [
+          "Lift-and-shift migrations",
+          "Database replication and syncing",
+          "Multi-AZ architecture design",
+          "Load balancing and autoscaling",
+          "Cloud security hardening",
+          "Data backup and disaster recovery"
+        ]
+      },
+      {
+        title: "DevOps & CI/CD Automation",
+        description: "Automate your software delivery lifecycle with continuous integration and continuous deployment pipelines, reducing release cycles and human errors.",
+        features: [
+          "Docker containerization",
+          "Kubernetes orchestration",
+          "GitHub Actions and Jenkins pipelines",
+          "Terraform infrastructure provisioning",
+          "Automated unit and integration testing",
+          "Microservices deployment systems"
+        ]
+      },
+      {
+        title: "Managed Infrastructure & Security",
+        description: "24/7 monitoring, security patching, and log analysis to ensure your applications stay online, secure, and performant at all times.",
+        features: [
+          "24/7 uptime monitoring",
+          "CloudWatch and Prometheus dashboard setup",
+          "SSL/TLS certificate management",
+          "VPC and firewall configuration",
+          "Intrusion detection and prevention",
+          "IAM policy and access control audit"
+        ]
+      }
+    ],
+    howWeDoIt: [
+      {
+        phase: "Assessment & Audit",
+        description: "We audit your existing servers, applications, and monthly spending to identify bottlenecks, security risks, and cost-saving opportunities.",
+        activities: [
+          "Architecture and security audit",
+          "Resource usage and spending review",
+          "Bottleneck and latency analysis",
+          "Migration readiness assessment",
+          "Compliance and standards check",
+          "Cost optimization plan"
+        ]
+      },
+      {
+        phase: "Design & IaC Setup",
+        description: "Designing the new target architecture and writing Infrastructure as Code to ensure reproducible deployments.",
+        activities: [
+          "Target cloud architecture design",
+          "Terraform scripts development",
+          "VPC, subnet, and routing setup",
+          "IAM roles and policy writing",
+          "CI/CD pipeline configuration",
+          "Disaster recovery planning"
+        ]
+      },
+      {
+        phase: "Migration & Testing",
+        description: "Executing the migration in phases with zero-downtime and running comprehensive security and load tests.",
+        activities: [
+          "Phased data migration",
+          "Database replication setup",
+          "DNS failover configuration",
+          "Load and stress testing",
+          "Vulnerability assessments",
+          "User acceptance testing"
+        ]
+      },
+      {
+        phase: "Go-Live & Support",
+        description: "Switching traffic to the cloud infrastructure, monitoring performance, and providing 24/7 support.",
+        activities: [
+          "Final DNS switch",
+          "Uptime and error monitoring",
+          "Alerting thresholds tuning",
+          "Spend monitoring and capping",
+          "Security log analysis",
+          "Continuous DevOps support"
+        ]
+      }
+    ],
+    technologies: [
+      { name: 'AWS', category: 'Cloud Platform', icon: '☁️' },
+      { name: 'Google Cloud', category: 'Cloud Platform', icon: '☁️' },
+      { name: 'Azure', category: 'Cloud Platform', icon: '☁️' },
+      { name: 'Docker', category: 'Containerization', icon: '🐳' },
+      { name: 'Kubernetes', category: 'Orchestration', icon: '☸️' },
+      { name: 'Terraform', category: 'IaC', icon: '🛠️' },
+      { name: 'GitHub Actions', category: 'CI/CD', icon: '🔄' },
+      { name: 'Prometheus', category: 'Monitoring', icon: '📈' },
+      { name: 'Grafana', category: 'Visualization', icon: '📊' },
+      { name: 'CloudWatch', category: 'AWS Tool', icon: '👀' },
+      { name: 'Nginx', category: 'Web Server', icon: '🌐' },
+      { name: 'Redis', category: 'Caching', icon: '🔴' }
+    ],
+    process: [
+      {
+        step: "01",
+        title: "Assessment",
+        description: "Auditing your current setups",
+        details: "We start by analyzing your application requirements and current infrastructure to design the optimal cloud path."
+      },
+      {
+        step: "02",
+        title: "Design",
+        description: "Planning secure architecture",
+        details: "We design a high-availability architecture using best practices, ensuring scalability, security, and cost efficiency."
+      },
+      {
+        step: "03",
+        title: "IaC Writing",
+        description: "Coding your infrastructure",
+        details: "We write Terraform configurations to provision your servers, databases, and network dynamically and reliably."
+      },
+      {
+        step: "04",
+        title: "Migration",
+        description: "Migrating with zero downtime",
+        details: "We copy data and mirror transactions, moving your services to the cloud without interrupting your operations."
+      },
+      {
+        step: "05",
+        title: "Validation",
+        description: "Running rigorous stress tests",
+        details: "We run penetration and performance load testing to ensure your cloud stack handles high traffic and security challenges."
+      },
+      {
+        step: "06",
+        title: "Launch",
+        description: "Uptime and spend monitoring",
+        details: "We switch DNS to go live and configure 24/7 monitoring dashboards with automated alerts to guarantee stability."
+      }
+    ],
+    stats: [
+      { value: "90+", label: "Architectures Built", icon: "🏗️" },
+      { value: "99.99%", label: "Uptime Guaranteed", icon: "⚡" },
+      { value: "40%", label: "Avg. Cloud Cost Saved", icon: "💰" },
+      { value: "24/7", label: "DevOps Monitoring", icon: "🚨" }
+    ],
+    pricing: [
+      {
+        title: "Basic Setup",
+        price: "$2,499",
+        duration: "Starting from",
+        description: "Ideal for simple application hosting",
+        features: [
+          "Single cloud account setup",
+          "VPC & network design",
+          "Single database setup",
+          "Automated daily backups",
+          "3 months support",
+          "Basic monitoring alerts"
+        ],
+        popular: false
+      },
+      {
+        title: "DevOps Package",
+        price: "$5,999",
+        duration: "Starting from",
+        description: "Perfect for scaling startups",
+        features: [
+          "Docker containerization",
+          "CI/CD pipeline setup",
+          "Auto-scaling server setup",
+          "Terraform codebase delivery",
+          "6 months support",
+          "Advanced monitoring alerts"
+        ],
+        popular: true
+      },
+      {
+        title: "Enterprise Architecture",
+        price: "Custom",
+        duration: "Tailored Solution",
+        description: "For high-volume business systems",
+        features: [
+          "Kubernetes cluster deployment",
+          "Multi-cloud redundancy",
+          "Strict data compliance setup",
+          "Zero-downtime migration execution",
+          "12 months support",
+          "Dedicated DevOps architect"
+        ],
+        popular: false
+      }
+    ],
+    callToAction: {
+      title: "Ready to Scale Your Infrastructure?",
+      subtitle: "Let's build a secure, resilient, and optimized cloud infrastructure that empowers your digital products. Our DevOps team is ready to scale your success.",
+      buttons: [
+        { label: "GET CLOUD ARCHITECTURE PLAN", icon: "ArrowRight" }
+      ]
+    }
   }
 ];
 
 export const getServiceById = (id) => {
+  if (id === 'seo-marketing') {
+    return services.find(service => service.id === 'digital-marketing');
+  }
   return services.find(service => service.id === id);
 };
 
 export const getAllServices = () => {
   return services;
 };
+

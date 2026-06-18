@@ -1,6 +1,7 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import styles from './page.module.scss';
+import { Globe, Smartphone, Palette, ShieldCheck } from 'lucide-react';
 
 // Navbar Component
 
@@ -35,7 +36,7 @@ const CurvedSwirl = () => {
 const HeroSection = () => {
   const highlightWords = ['creators', 'designers', 'problem solvers'];
   const title = "Meet our team of creators, designers, and world-class problem solvers";
-  
+
   const renderHighlightedTitle = () => {
     let result = title;
     highlightWords.forEach(word => {
@@ -49,12 +50,12 @@ const HeroSection = () => {
       <CurvedSwirl />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="text-center max-w-4xl mx-auto">
-          <h1 
+          <h1
             className="text-4xl lg:text-5xl xl:text-6xl font-bold text-black leading-tight mb-6"
             dangerouslySetInnerHTML={{ __html: renderHighlightedTitle() }}
           />
           <p className="text-lg lg:text-xl text-gray-600 leading-relaxed max-w-3xl mx-auto">
-            To be the company our customers want us to be, it takes an eclectic group of passionate operators. 
+            To be the company our customers want us to be, it takes an eclectic group of passionate operators.
             Get to know the people leading the way at Untitled.
           </p>
         </div>
@@ -64,39 +65,27 @@ const HeroSection = () => {
 };
 
 // Team Member Card Component
-const TeamMemberCard = ({ member, isFounder = false }) => {
-  const cardClasses = isFounder 
-    ? "group cursor-pointer"
-    : "group cursor-pointer";
-    
-  const imageContainerClasses = isFounder
-    ? "relative overflow-hidden rounded-2xl mb-6 bg-gray-100 aspect-square lg:aspect-[4/3]"
-    : "relative overflow-hidden rounded-2xl mb-4 bg-gray-100 aspect-square";
-    
-  const textContainerClasses = isFounder
-    ? "text-center"
-    : "text-center";
-    
-  const nameClasses = isFounder
-    ? "text-2xl lg:text-3xl font-semibold text-black mb-3 group-hover:text-gray-700 transition-colors duration-200"
-    : "text-lg font-semibold text-black mb-2 group-hover:text-gray-700 transition-colors duration-200";
-    
-  const roleClasses = isFounder
-    ? "text-gray-600 text-base"
-    : "text-gray-600 text-sm";
-    
-  const initialsClasses = isFounder
-    ? "flex items-center justify-center h-full text-gray-500 text-7xl lg:text-8xl font-bold"
-    : "flex items-center justify-center h-full text-gray-500 text-5xl font-bold";
+const TeamMemberCard = ({ member }) => {
+  const cardClasses = "group cursor-pointer";
+
+  const imageContainerClasses = "relative overflow-hidden rounded-2xl mb-6 bg-gray-100 aspect-square";
+
+  const textContainerClasses = "text-center";
+
+  const nameClasses = "text-2xl font-semibold text-black mb-2 group-hover:text-gray-700 transition-colors duration-200";
+
+  const roleClasses = "text-gray-600 text-base";
+
+  const initialsClasses = "flex items-center justify-center h-full text-gray-500 text-6xl font-bold";
 
   return (
     <div className={cardClasses}>
       <div className={imageContainerClasses}>
         {member.image && member.image.startsWith('/') ? (
-          <img 
-            src={member.image} 
+          <img
+            src={member.image}
             alt={member.name}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 ease-out"
+            className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-300 ease-out"
           />
         ) : (
           <div className="absolute inset-0 bg-gradient-to-br from-gray-200 to-gray-300 group-hover:scale-105 transition-transform duration-300 ease-out">
@@ -120,37 +109,23 @@ const TeamMemberCard = ({ member, isFounder = false }) => {
 
 // Team Section Component
 const TeamSection = () => {
-  const founders = [
-    { name: "Aman Kumar", role: "Founder & CEO", image: "/about.PNG", type: "founder" },
-    { name: "Anshu Kumar", role: "Co-Founder & CTO", image: "anshu.jpg", type: "founder" }
-  ];
-
-  const employees = [
-    { name: "Mahak Kushwah", role: "Chief Operating Officer", image: "mahak.jpg", type: "employee" },
-    { name: "Hariom", role: "Product Designer", image: "hariom.jpg", type: "employee" },
-    { name: "Sarthak Bhatnagar", role: "Marketing Manager", image: "sarthak.jpg", type: "employee" },
-    { name: "Mohit Kumar", role: "Customer Success Lead", image: "mohit.jpg", type: "employee" }
+  const team = [
+    { name: "Aman Kumar", role: "Founder & CEO", image: "/about.PNG" },
+    { name: "Anshu Kumar", role: "Co-Founder & CTO", image: "/anshu.jpg" },
+    { name: "Mahak Kushwah", role: "Chief Operating Officer", image: "/mahak.jpg" },
+    { name: "Hariom", role: "Product Designer", image: "/hariom.jpg" },
+    { name: "Sarthak Bhatnagar", role: "Marketing Manager", image: "/sarthak.jpg" },
+    { name: "Mohit Kumar", role: "Customer Success Lead", image: "/mohit.jpg" }
   ];
 
   return (
     <section className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Founders Section - Larger Cards */}
-        <div className="mb-16">
-          <h2 className="text-3xl lg:text-4xl font-bold text-black mb-12 text-center">Our Founders</h2>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
-            {founders.map((founder, index) => (
-              <TeamMemberCard key={`founder-${index}`} member={founder} isFounder={true} />
-            ))}
-          </div>
-        </div>
-        
-        {/* Employees Section - Smaller Cards */}
         <div>
-          <h2 className="text-3xl lg:text-4xl font-bold text-black mb-12 text-center">Our Team</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6">
-            {employees.map((employee, index) => (
-              <TeamMemberCard key={`employee-${index}`} member={employee} isFounder={false} />
+          <h2 className="text-4xl lg:text-5xl font-bold text-black mb-16 text-center">Meet Our Family</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 lg:gap-16">
+            {team.map((member, index) => (
+              <TeamMemberCard key={`member-${index}`} member={member} />
             ))}
           </div>
         </div>
@@ -159,28 +134,7 @@ const TeamSection = () => {
   );
 };
 
-// Footer Component
-const Footer = () => {
-  return (
-    <footer className="bg-white border-t border-gray-100 py-8">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row justify-between items-center">
-          <p className="text-gray-600 text-sm mb-4 md:mb-0">
-            © Untitled. All rights reserved.
-          </p>
-          <div className="flex space-x-6">
-            <a href="#" className="text-gray-600 hover:text-gray-900 text-sm transition-colors duration-200">
-              Privacy Policy
-            </a>
-            <a href="#" className="text-gray-600 hover:text-gray-900 text-sm transition-colors duration-200">
-              Terms of Service
-            </a>
-          </div>
-        </div>
-      </div>
-    </footer>
-  );
-};
+
 
 // How We Work Section Component
 const HowWeWorkSection = () => {
@@ -188,22 +142,22 @@ const HowWeWorkSection = () => {
     {
       title: "Web App Development",
       description: "We create powerful, scalable web applications using cutting-edge technologies like React, Next.js, and Node.js. Our process includes requirement analysis, design, development, testing, and deployment to ensure robust and user-friendly solutions.",
-      icon: "🌐"
+      icon: <Globe className="w-12 h-12 text-black" strokeWidth={1.5} />
     },
     {
       title: "Mobile App Development",
       description: "We build native and cross-platform mobile applications for iOS and Android using React Native, Flutter, and native technologies. From concept to app store deployment, we handle the entire mobile development lifecycle.",
-      icon: "📱"
+      icon: <Smartphone className="w-12 h-12 text-black" strokeWidth={1.5} />
     },
     {
       title: "UI/UX Design",
       description: "Our design process focuses on creating intuitive, beautiful, and user-centered interfaces. We conduct user research, create wireframes and prototypes, and deliver stunning designs that enhance user experience.",
-      icon: "🎨"
+      icon: <Palette className="w-12 h-12 text-black" strokeWidth={1.5} />
     },
     {
       title: "Quality Assurance",
       description: "We ensure your applications are bug-free and perform optimally through comprehensive testing strategies including manual testing, automated testing, and performance optimization.",
-      icon: "🔍"
+      icon: <ShieldCheck className="w-12 h-12 text-black" strokeWidth={1.5} />
     }
   ];
 
@@ -216,11 +170,11 @@ const HowWeWorkSection = () => {
             Our streamlined process ensures we deliver exceptional results for every project, from concept to completion.
           </p>
         </div>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {workProcesses.map((process, index) => (
             <div key={index} className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow duration-300">
-              <div className="text-5xl mb-6">{process.icon}</div>
+              <div className="mb-6">{process.icon}</div>
               <h3 className="text-xl font-semibold text-black mb-4">{process.title}</h3>
               <p className="text-gray-600 leading-relaxed">{process.description}</p>
             </div>
@@ -275,7 +229,7 @@ const WhatWeDoSection = () => {
             We offer comprehensive digital solutions to help your business thrive in the modern landscape.
           </p>
         </div>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service, index) => (
             <div key={index} className="bg-gray-50 rounded-2xl p-8 hover:bg-gray-100 transition-colors duration-300">
@@ -320,7 +274,6 @@ const AboutPage = () => {
       <TeamSection />
       <HowWeWorkSection />
       <WhatWeDoSection />
-      <Footer />
     </div>
   );
 };

@@ -23,13 +23,13 @@ const projects = [
   },
   {
     title: "UI/UX design",
-    src: "locomotive.png",
-    color: "#EFE8D3",
+    src: "uiux.png",
+    color: "#5C6B73",
     description: "Crafting beautiful, user-centered designs that captivate and convert. We blend creativity with usability to create seamless digital experiences that delight users and achieve your business objectives."
   },
   {
     title: "SEO",
-    src: "silencio.png",
+    src: "seo.png",
     color: "#706D63",
     description: "Boosting your online visibility and driving organic traffic. Our data-driven SEO strategies combine technical excellence with compelling content to rank higher, attract quality leads, and grow your digital presence."
   }
@@ -62,12 +62,20 @@ export default function Home() {
     yMoveCursorLabel.current = gsap.quickTo(cursorLabel.current, "top", {duration: 0.45, ease: "power3"})
   }, [])
 
+  const rafRef = useRef(null);
+  const pendingPos = useRef({x: 0, y: 0});
+
   const moveItems = (x, y) => {
-    xMoveContainer.current(x)
-    yMoveContainer.current(y)
-    xMoveCursorLabel.current(x)
-    yMoveCursorLabel.current(y)
-  }
+    pendingPos.current = {x, y};
+    if (rafRef.current) return;
+    rafRef.current = requestAnimationFrame(() => {
+      xMoveContainer.current(pendingPos.current.x);
+      yMoveContainer.current(pendingPos.current.y);
+      xMoveCursorLabel.current(pendingPos.current.x);
+      yMoveCursorLabel.current(pendingPos.current.y);
+      rafRef.current = null;
+    });
+  };
   const manageModal = (active, index, x, y) => {
     moveItems(x, y)
     setModal({active, index})
@@ -93,20 +101,15 @@ export default function Home() {
             <div style={{top: index * -100 + "%"}} className={styles.modalSlider}>
             {
                 projects.map( (project, index) => {
-                const { description, color } = project
+                const { src, color } = project
                 return <div className={styles.modal} style={{backgroundColor: color}} key={`modal_${index}`}>
-                    <div className={styles.descriptionContainer}>
-                        <div className={styles.descriptionHeader}>
-                            <h3 className={styles.descriptionTitle}>{project.title}</h3>
-                            <div className={styles.descriptionLine}></div>
-                        </div>
-                        <div className={styles.descriptionContent}>
-                            <p className={styles.descriptionText}>{description}</p>
-                        </div>
-                        <div className={styles.descriptionFooter}>
-                            <div className={styles.descriptionIcon}>→</div>
-                        </div>
-                    </div>
+                    <Image 
+                        src={`/${src}`}
+                        width={420}
+                        height={380}
+                        alt={project.title}
+                        style={{ objectFit: 'cover', width: '100%', height: '100%' }}
+                    />
                 </div>
                 })
             }

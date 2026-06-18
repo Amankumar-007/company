@@ -19,6 +19,10 @@ const nextConfig: NextConfig = {
   // Remove X-Powered-By header (security + cleanliness)
   poweredByHeader: false,
 
+  experimental: {
+    optimizePackageImports: ['lucide-react'],
+  },
+
   // Image optimization config
   images: {
     formats: ['image/avif', 'image/webp'],
@@ -37,7 +41,9 @@ const nextConfig: NextConfig = {
 
   // Security + performance HTTP headers
   async headers() {
-    return [
+    const isProd = process.env.NODE_ENV === 'production';
+    
+    const headersList: any[] = [
       {
         source: '/(.*)',
         headers: [
@@ -50,28 +56,36 @@ const nextConfig: NextConfig = {
             key: 'Permissions-Policy',
             value: 'camera=(), microphone=(), geolocation=()',
           },
-          // Caching: HTML pages (no-store for dynamic pages)
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=0, must-revalidate',
-          },
-        ],
-      },
-      {
-        // Cache static assets aggressively
-        source: '/(.*)\\.(ico|png|jpg|jpeg|gif|svg|webp|avif|woff2|woff|ttf)',
-        headers: [
-          { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' },
-        ],
-      },
-      {
-        // Cache Next.js static chunks
-        source: '/_next/static/(.*)',
-        headers: [
-          { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' },
         ],
       },
     ];
+
+    if (isProd) {
+      // Add caching headers for production only
+      headersList[0].headers.push({
+        key: 'Cache-Control',
+        value: 'public, max-age=0, must-revalidate',
+      });
+
+      headersList.push(
+        {
+          // Cache static assets aggressively
+          source: '/(.*)\\.(ico|png|jpg|jpeg|gif|svg|webp|avif|woff2|woff|ttf)',
+          headers: [
+            { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' },
+          ],
+        },
+        {
+          // Cache Next.js static chunks
+          source: '/_next/static/(.*)',
+          headers: [
+            { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' },
+          ],
+        }
+      );
+    }
+
+    return headersList;
   },
 };
 

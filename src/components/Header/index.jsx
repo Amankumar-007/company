@@ -58,7 +58,7 @@ export default function Header() {
                 whileHover={{ rotate: 5 }}
                 transition={{ type: 'spring', stiffness: 400, damping: 10 }}
               />
-              <motion.span 
+              <motion.span
                 className={styles.logoText}
                 whileHover={{ scale: 1.1 }}
                 transition={{ type: 'spring', stiffness: 400, damping: 10 }}

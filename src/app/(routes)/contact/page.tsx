@@ -1,7 +1,18 @@
 "use client"
-import Footer from '@/components/Footer';
 import { useState, useEffect } from 'react';
 
+// Pattern Component for Contact
+const ContactPattern = () => (
+  <div className="absolute top-0 right-0 w-[500px] h-[500px] opacity-[0.12] pointer-events-none text-black translate-x-20 -translate-y-10">
+    <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+      <path d="M-10 50 Q 25 10 60 50 T 130 50" stroke="currentColor" strokeWidth="0.5"/>
+      <path d="M-10 40 Q 25 0 60 40 T 130 40" stroke="currentColor" strokeWidth="0.5"/>
+      <path d="M-10 60 Q 25 20 60 60 T 130 60" stroke="currentColor" strokeWidth="0.5"/>
+      <path d="M-10 30 Q 25 -10 60 30 T 130 30" stroke="currentColor" strokeWidth="0.25"/>
+      <path d="M-10 70 Q 25 30 60 70 T 130 70" stroke="currentColor" strokeWidth="0.25"/>
+    </svg>
+  </div>
+);
 
 export default function ContactForm() {
   const [isLoading, setIsLoading] = useState(true);
@@ -220,10 +231,9 @@ export default function ContactForm() {
   };
 
   return (
-    <div className="min-h-screen bg-white text-black">
-      
-      
-      <div className="max-w-4xl mx-auto px-6 py-8">
+    <div className="min-h-screen bg-white text-black relative">
+      <ContactPattern />
+      <div className="relative z-10 max-w-4xl mx-auto px-6 py-8">
         {/* Header */}
         <div className="text-center mb-20">
           <h1 className="text-6xl md:text-7xl font-bold mb-8 leading-tight tracking-tight">
@@ -492,9 +502,9 @@ export default function ContactForm() {
           <div className="text-sm text-gray-500 pt-8">
             <p>
               This site is protected by reCAPTCHA and the Google{' '}
-              <a href="#" className="underline hover:text-black">Privacy Policy</a>{' '}
+              <a href="/" className="underline hover:text-black">Privacy Policy</a>{' '}
               and{' '}
-              <a href="#" className="underline hover:text-black">Terms of Service</a>{' '}
+              <a href="/" className="underline hover:text-black">Terms of Service</a>{' '}
               apply.
             </p>
           </div>
@@ -509,7 +519,6 @@ export default function ContactForm() {
           </div>
         </div>
       </div>
-      <Footer />
     </div>
   );
 }

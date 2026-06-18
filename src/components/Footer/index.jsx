@@ -1,187 +1,189 @@
+"use client";
+
 import { useState } from 'react';
 
 export default function Footer() {
+  const [email, setEmail] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log('Newsletter subscription email:', email);
+    setEmail('');
+    alert('Thank you for subscribing!');
+  };
+
   return (
-    <footer className="bg-black text-white py-16 px-6 rounded-t-3xl">
-      <div className="max-w-7xl mx-auto">
-        {/* Contact Information and Navigation */}
-        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-16">
-          {/* Left Section - Contact Info */}
-          <div className="flex flex-col lg:flex-row gap-8 mb-8 lg:mb-0">
-            {/* Contact Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4">
-              <WaterFillButton 
-                href="mailto:amanr3388@gmail.com"
-                text="amanr3388@gmail.com"
+    <footer
+      style={{
+        backgroundColor: '#ECECEE',
+        borderRadius: '2.5rem 2.5rem 0 0',
+        overflow: 'hidden',
+        position: 'relative',
+      }}
+      className="w-full text-[#0B0D17] font-sans"
+    >
+      {/* Main Content Container */}
+      <div className="max-w-[1400px] mx-auto px-8 md:px-12 pt-20 pb-16 relative z-10">
+
+        {/* Become an Affiliate Card (3D Glassmorphic floating card) */}
+
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-start justify-between">
+
+          {/* LEFT — Newsletter + Socials (5 cols) */}
+          <div className="lg:col-span-5 flex flex-col gap-6 w-full">
+            <h3 className="text-[#0B0D17] font-semibold text-[16px] md:text-[17px] leading-tight max-w-[340px]">
+              Join our newsletter to stay up to date on the latest news and updates.
+            </h3>
+
+            {/* Newsletter Input Form */}
+            <form onSubmit={handleSubmit} className="flex items-center bg-white rounded-full p-1.5 border border-gray-200/50 shadow-sm max-w-[420px] w-full relative">
+              <input
+                type="email"
+                required
+                placeholder="Enter your email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-full pl-5 pr-32 py-3 text-[14px] bg-transparent outline-none text-[#0B0D17] placeholder-gray-400 font-sans"
               />
-              <WaterFillButton 
-                href="tel:7906753589"
-                text="7906753589"
-              />
+              <button
+                type="submit"
+                className="absolute right-1.5 top-1.5 bottom-1.5 bg-[#0A2535] hover:bg-[#12364c] text-white px-6 rounded-full font-medium text-[13px] tracking-wide transition-all duration-300 active:scale-95"
+              >
+                Subscribe
+              </button>
+            </form>
+
+            {/* Disclaimer text */}
+            <p className="text-[12px] text-gray-500/90 leading-relaxed max-w-[380px] -mt-2">
+              By subscribing, you agree to our Privacy Policy and consent to receive updates from us.
+            </p>
+
+            {/* Social Icons with border outline */}
+            <div className="flex items-center gap-3.5 mt-2">
+              {/* Facebook */}
+              <a
+                href="https://www.facebook.com/twofloww"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Facebook"
+                className="w-9 h-9 rounded-full border border-gray-300 hover:border-[#DE5D26] hover:text-[#DE5D26] flex items-center justify-center text-gray-600 hover:scale-105 transition-all duration-300"
+              >
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c4.56-.93 8-4.96 8-9.75z" />
+                </svg>
+              </a>
+              {/* Instagram */}
+              <a
+                href="https://www.instagram.com/twofloww"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram"
+                className="w-9 h-9 rounded-full border border-gray-300 hover:border-[#DE5D26] hover:text-[#DE5D26] flex items-center justify-center text-gray-600 hover:scale-105 transition-all duration-300"
+              >
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                </svg>
+              </a>
+              {/* LinkedIn */}
+              <a
+                href="https://www.linkedin.com/company/twofloww"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn"
+                className="w-9 h-9 rounded-full border border-gray-300 hover:border-[#DE5D26] hover:text-[#DE5D26] flex items-center justify-center text-gray-600 hover:scale-105 transition-all duration-300"
+              >
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z" />
+                </svg>
+              </a>
+              {/* X / Twitter */}
+              <a
+                href="https://twitter.com/twofloww"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="X / Twitter"
+                className="w-9 h-9 rounded-full border border-gray-300 hover:border-[#DE5D26] hover:text-[#DE5D26] flex items-center justify-center text-gray-600 hover:scale-105 transition-all duration-300"
+              >
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.259 5.631L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117L19.083 19.77z" />
+                </svg>
+              </a>
             </div>
           </div>
 
-          {/* Right Section - Navigation */}
-          <div className="grid grid-cols-2 gap-x-16 gap-y-2 text-right">
-            <NavLink href="/services">Services</NavLink>
-            <NavLink href="/blog">Blog</NavLink>
-            <NavLink href="/projects">Projects</NavLink>
-            <NavLink href="/workflow">Workflow</NavLink>
-            <NavLink href="/company">Company</NavLink>
-            <NavLink href="/contacts">Contacts</NavLink>
+          {/* RIGHT — 3 Sitemap Columns (7 cols) */}
+          <div className="lg:col-span-7 grid grid-cols-3 gap-8 justify-between w-full">
+
+            {/* Sitemap */}
+            <div className="flex flex-col gap-3">
+              <h4 className="text-[#0B0D17] font-semibold text-[15px] tracking-wide mb-2">Sitemap</h4>
+              <a href="/about" className="text-gray-600 hover:text-[#DE5D26] text-[14px] transition-colors font-medium">About Us</a>
+              <a href="/services" className="text-gray-600 hover:text-[#DE5D26] text-[14px] transition-colors font-medium">Services</a>
+              <a href="/projects" className="text-gray-600 hover:text-[#DE5D26] text-[14px] transition-colors font-medium">Projects</a>
+              <a href="/contact" className="text-gray-600 hover:text-[#DE5D26] text-[14px] transition-colors font-medium">Contact</a>
+            </div>
+
+            {/* Partners */}
+            <div className="flex flex-col gap-3">
+              <h4 className="text-[#0B0D17] font-semibold text-[15px] tracking-wide mb-2">Partners</h4>
+              <a href="#" className="text-gray-600 hover:text-[#DE5D26] text-[14px] transition-colors font-medium">Architects</a>
+              <a href="#" className="text-gray-600 hover:text-[#DE5D26] text-[14px] transition-colors font-medium">Co-Working</a>
+              <a href="#" className="text-[#DE5D26] hover:opacity-85 text-[14px] transition-opacity font-semibold">Real Estate</a>
+            </div>
+
+            {/* Services */}
+            <div className="flex flex-col gap-3">
+              <h4 className="text-[#0B0D17] font-semibold text-[15px] tracking-wide mb-2">Services</h4>
+              <a href="#" className="text-gray-600 hover:text-[#DE5D26] text-[14px] transition-colors font-medium">Web Development</a>
+              <a href="#" className="text-gray-600 hover:text-[#DE5D26] text-[14px] transition-colors font-medium">Mobile Apps</a>
+              <a href="#" className="text-gray-600 hover:text-[#DE5D26] text-[14px] transition-colors font-medium">UI/UX Design</a>
+              <a href="#" className="text-gray-600 hover:text-[#DE5D26] text-[14px] transition-colors font-medium">SEO & Marketing</a>
+            </div>
+
           </div>
+
         </div>
 
-        {/* Company Description */}
-        <div className="text-center mb-16">
-          <p className="text-gray-400 text-lg mb-4">Digital Solutions for Modern Businesses</p>
-          <p className="text-white max-w-3xl mx-auto">
-            We specialize in creating innovative web and mobile applications that drive business growth. 
-            Our team of experts delivers cutting-edge solutions tailored to your unique needs, 
-            ensuring exceptional results and customer satisfaction.
-          </p>
-        </div>
-
-        {/* Bottom Section */}
-        <div className="flex flex-col lg:flex-row justify-between items-center pt-8 border-t border-gray-800">
-          {/* Copyright */}
-          <div className="flex items-center gap-8 mb-8 lg:mb-0">
-            <a 
-              href="/privacy" 
-              className="text-gray-400 hover:text-white transition-colors duration-300"
+        {/* Bottom Logo section */}
+        <div className="w-full overflow-hidden select-none pointer-events-none mt-16 flex items-center justify-center relative z-10">
+          <h1
+            style={{
+              fontFamily: 'Unbounded, sans-serif',
+              fontWeight: 900,
+              color: '#DE5D26',
+              fontSize: 'clamp(50px, 12.5vw, 190px)',
+              lineHeight: '0.86',
+              letterSpacing: '-0.04em',
+              whiteSpace: 'nowrap',
+            }}
+            className="text-center font-black relative flex items-center justify-center"
+          >
+            twofloww
+            <span
+              style={{
+                fontSize: '0.14em',
+                border: '2px solid #DE5D26',
+                borderRadius: '50%',
+                width: '1.25em',
+                height: '1.25em',
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                lineHeight: 1,
+                fontWeight: 800,
+                transform: 'translateY(-0.7em)',
+                marginLeft: '0.08em',
+              }}
+              className="pb-0.5"
             >
-              Privacy Policy
-            </a>
-            <span className="text-gray-500">2025, TwoflowW</span>
-          </div>
-
-          {/* Social Links */}
-          <div className="flex gap-4">
-            <SocialButton 
-              href="https://instagram.com" 
-              icon={<InstagramIcon />}
-              label="Instagram"
-            />
-            <SocialButton 
-              href="https://youtube.com" 
-              icon={<YouTubeIcon />}
-              label="YouTube"
-            />
-            <SocialButton 
-              href="https://github.com" 
-              icon={<GitHubIcon />}
-              label="GitHub"
-            />
-            <SocialButton 
-              href="https://facebook.com" 
-              icon={<FacebookIcon />}
-              label="Facebook"
-            />
-            <SocialButton 
-              href="https://dribbble.com" 
-              icon={<DribbbleIcon />}
-              label="Dribbble"
-            />
-            <SocialButton 
-              href="https://behance.net" 
-              icon={<BehanceIcon />}
-              label="Behance"
-            />
-          </div>
+              R
+            </span>
+          </h1>
         </div>
       </div>
     </footer>
-  );
-}
-
-// Water Fill Button Component
-function WaterFillButton({ href, text }) {
-  return (
-    <a 
-      href={href}
-      className="relative overflow-hidden px-6 py-3 border border-gray-600 rounded-full text-white transition-all duration-300 hover:border-white group"
-    >
-      {/* Water fill effect */}
-      <div className="absolute inset-0 bg-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out"></div>
-      
-      {/* Text */}
-      <span className="relative z-10 group-hover:text-black transition-colors duration-300">
-        {text}
-      </span>
-    </a>
-  );
-}
-
-// Navigation Link Component
-function NavLink({ href, children }) {
-  return (
-    <a 
-      href={href}
-      className="text-white hover:text-gray-300 transition-colors duration-300 text-lg"
-    >
-      {children}
-    </a>
-  );
-}
-
-// Social Button Component
-function SocialButton({ href, icon, label }) {
-  return (
-    <a
-      href={href}
-      className="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center text-white hover:bg-gray-700 transition-colors duration-300"
-      aria-label={label}
-    >
-      {icon}
-    </a>
-  );
-}
-
-// Social Media Icons
-function InstagramIcon() {
-  return (
-    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-    </svg>
-  );
-}
-
-function YouTubeIcon() {
-  return (
-    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-      <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-    </svg>
-  );
-}
-
-function GitHubIcon() {
-  return (
-    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-      <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-    </svg>
-  );
-}
-
-function FacebookIcon() {
-  return (
-    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-      <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-    </svg>
-  );
-}
-
-function DribbbleIcon() {
-  return (
-    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-      <path d="M12 0C5.374 0 0 5.374 0 12s5.374 12 12 12 12-5.374 12-12S18.626 0 12 0zm7.568 5.302c1.4 1.5 2.252 3.5 2.273 5.683-.653-.126-1.542-.254-2.812-.254-.211 0-.436.008-.677.018-.014-.032-.084-.193-.154-.37a31.186 31.186 0 00-.845-2.267c1.497-.608 2.507-1.408 3.215-2.81zM12 2.259c2.83 0 5.417 1.1 7.312 2.876-.593.949-1.4 1.657-2.673 2.178a29.552 29.552 0 00-2.496-3.777c-.14-.188-.56-.667-.56-.667s.14.265.56.667a29.55 29.55 0 012.496 3.777c1.273-.521 2.08-1.229 2.673-2.178C17.417 3.359 14.83 2.259 12 2.259z"/>
-    </svg>
-  );
-}
-
-function BehanceIcon() {
-  return (
-    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-      <path d="M22 7h-7v-2h7v2zm1.726 10c-.442 1.297-2.029 3-5.101 3-3.074 0-5.564-1.729-5.564-5.675 0-3.91 2.325-5.92 5.466-5.92 3.082 0 4.964 1.782 5.375 4.426.078.506.109 1.188.095 2.14H15.97c.13 3.211 3.483 3.312 4.588 2.029h3.168zm-7.686-4h4.965c-.105-1.547-1.136-2.219-2.477-2.219-1.466 0-2.277.768-2.488 2.219zm-9.574 6.988h-6.466v-14.967h6.953c5.476.081 5.58 5.444 2.72 6.906 3.461 1.26 3.577 8.061-3.207 8.061zm-3.466-8.988h3.584c2.508 0 2.906-3-.312-3h-3.272v3zm3.391 3h-3.391v3.016h3.341c3.055 0 2.868-3.016.05-3.016z"/>
-    </svg>
   );
 }

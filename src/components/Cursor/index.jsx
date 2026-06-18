@@ -55,117 +55,94 @@ export default function Cursor({ state }) {
     const cursorText = useRef();
     const cursorIcon = useRef();
     const rafId = useRef();
-    
+    // Keep a ref to state so animate() always reads latest without re-registering
+    const stateRef = useRef(state);
+
     useEffect(() => {
-        // Initialize with window dimensions after component mounts - start at bottom of screen
-        mouse.current = {x: window.innerWidth / 2, y: window.innerHeight - 100};
-        delayedMouse.current = {x: window.innerWidth / 2, y: window.innerHeight - 100};
-    }, []);
-    
-    const lerp = (x, y, a) => x * (1 - a) + y * a;
-    
-    const manageMouseMove = (e) => {
-        const { clientX, clientY } = e;
-    
-        mouse.current = {
-            x: clientX,
-            y: clientY
-        }
-    }
-
-    const animate = () => {
-        const { x, y } = delayedMouse.current;
-
-        delayedMouse.current = {
-            x: lerp(x, mouse.current.x, 0.15),
-            y: lerp(y, mouse.current.y, 0.15)
-        }
-
-        moveCircle(delayedMouse.current.x, delayedMouse.current.y);
-        rafId.current = window.requestAnimationFrame(animate);
-    }
-
-    const moveCircle = (x, y) => {
-        // Use gsap.set for immediate position updates to avoid animation conflicts
-        gsap.set(cursor.current, { 
-            x, 
-            y, 
-            force3D: true, // Hardware acceleration
-            xPercent: -50, 
-            yPercent: -50
-        });
-        
-        // Only animate size and color changes, not position
-        gsap.to(cursor.current, { 
+        stateRef.current = state;
+        if (!cursor.current) return;
+        // Animate size/color/opacity on state change only
+        gsap.to(cursor.current, {
             width: state.size,
             height: state.size,
             backgroundColor: state.backgroundColor,
-            duration: 0.2,
-            ease: "power1.out",
-            force3D: true
+            duration: 0.18,
+            ease: "power2.out",
+            overwrite: 'auto'
         });
-        
-        // Animate text opacity
         if (cursorText.current) {
             gsap.to(cursorText.current, {
                 opacity: state.isHovering && state.text ? 1 : 0,
-                duration: 0.2,
-                ease: "power1.out",
-                force3D: true
+                duration: 0.18,
+                ease: "power2.out",
+                overwrite: 'auto'
             });
         }
-        
-        // Animate icon
         if (cursorIcon.current) {
             gsap.to(cursorIcon.current, {
                 opacity: state.showIcon ? 1 : 0,
                 scale: state.showIcon ? 1 : 0.8,
-                duration: 0.2,
-                ease: "power1.out",
-                force3D: true
+                duration: 0.18,
+                ease: "power2.out",
+                overwrite: 'auto'
             });
         }
-    }
+    }, [state]);
+    
+    const lerp = (x, y, a) => x * (1 - a) + y * a;
 
     useEffect(() => {
         // Check if mobile device on mount and on resize
-        const checkMobile = () => {
-            setIsMobileDevice(isMobile());
-        };
-        
+        const checkMobile = () => setIsMobileDevice(isMobile());
         checkMobile();
         window.addEventListener('resize', checkMobile);
-        
-        return () => {
-            window.removeEventListener('resize', checkMobile);
-        };
+        return () => window.removeEventListener('resize', checkMobile);
     }, []);
     
-    useEffect( () => {
+    useEffect(() => {
         // Don't initialize cursor animations on mobile devices
         if (isMobileDevice) return;
         
-        // Set initial position with hardware acceleration - start at bottom of screen
+        mouse.current = {x: window.innerWidth / 2, y: window.innerHeight - 100};
+        delayedMouse.current = {x: window.innerWidth / 2, y: window.innerHeight - 100};
+
         if (cursor.current) {
             gsap.set(cursor.current, { 
-                x: window.innerWidth / 2, 
-                y: window.innerHeight - 100,
+                x: mouse.current.x,
+                y: mouse.current.y,
                 xPercent: -50, 
                 yPercent: -50,
-                width: state.size,
-                height: state.size,
-                backgroundColor: state.backgroundColor,
                 force3D: true
             });
         }
+
+        const manageMouseMove = (e) => {
+            mouse.current = { x: e.clientX, y: e.clientY };
+        };
+
+        const animate = () => {
+            delayedMouse.current = {
+                x: lerp(delayedMouse.current.x, mouse.current.x, 0.12),
+                y: lerp(delayedMouse.current.y, mouse.current.y, 0.12)
+            };
+            gsap.set(cursor.current, { 
+                x: delayedMouse.current.x, 
+                y: delayedMouse.current.y,
+                xPercent: -50, 
+                yPercent: -50,
+                force3D: true
+            });
+            rafId.current = window.requestAnimationFrame(animate);
+        };
         
-        window.addEventListener("mousemove", manageMouseMove);
-        animate();
+        window.addEventListener('mousemove', manageMouseMove, { passive: true });
+        rafId.current = window.requestAnimationFrame(animate);
+
         return () => {
-            window.removeEventListener("mousemove", manageMouseMove);
+            window.removeEventListener('mousemove', manageMouseMove);
             window.cancelAnimationFrame(rafId.current);
-        }
-    }, [state, isMobileDevice])
+        };
+    }, [isMobileDevice])
 
     // Don't render cursor on mobile devices
     if (isMobileDevice) {

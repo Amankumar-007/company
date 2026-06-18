@@ -1,101 +1,37 @@
-'use client';
-import styles from './page.module.scss'
-import { useEffect, useState } from 'react'
-import { AnimatePresence, motionValue } from 'framer-motion';
-import Preloader from '../components/Preloader';
-import Projects from '../components/Projects';
-import Description from '../components/Description';
-import SlidingImages from '../components/SlidingImages';
-import Contact from '../components/Contact';
-import HeroSection from '@/components/HeroSection';
-import Card from '../components/Card';
-import VideoComponent from '@/components/VideoComponent';
+import HomeClient from './HomeClient';
+
+export const metadata = {
+  title: 'Twofloww – Premium Digital Agency | Web & Mobile Development',
+  description: 'Twofloww is a next-generation digital agency specializing in high-performance web development, mobile apps, UI/UX design, SEO, and cloud scaling. We build digital products that grow your business.',
+  alternates: {
+    canonical: 'https://www.twofloww.in',
+  },
+  openGraph: {
+    type: 'website',
+    locale: 'en_IN',
+    url: 'https://www.twofloww.in',
+    siteName: 'Twofloww Digital Agency',
+    title: 'Twofloww – Premium Digital Agency | Web & Mobile Development',
+    description: 'Next-generation digital agency specializing in high-performance web development, mobile apps, UI/UX design, SEO, and cloud scaling.',
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Twofloww Digital Agency',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Twofloww – Premium Digital Agency',
+    description: 'Next-generation digital agency specializing in high-performance web development, mobile apps, UI/UX design, SEO, and cloud scaling.',
+    images: ['/og-image.png'],
+    creator: '@twofloww',
+    site: '@twofloww',
+  },
+};
 
 export default function Home() {
-  const [isLoading, setIsLoading] = useState(true);
-  const progress = motionValue(0);
-
-  useEffect(() => {
-    (async () => {
-      const LocomotiveScroll = (await import('locomotive-scroll')).default;
-      const locomotiveScroll = new LocomotiveScroll();
-
-      setTimeout(() => {
-        setIsLoading(false);
-        document.body.style.cursor = 'default';
-        window.scrollTo(0, 0);
-      }, 2000);
-
-      return () => locomotiveScroll.destroy();
-    })();
-  }, []);
-
-  return (
-    <main className={styles.main}>
-      <AnimatePresence mode='wait'>
-        {isLoading && <Preloader />}
-      </AnimatePresence>
-      <HeroSection />
-      <VideoComponent />
-      <Description />
-      <Projects />
-      <Card
-        title="Sample Project 1"
-        description="This is the first sample card component to showcase the project details."
-        src="locomotive.png"
-        url="#"
-        color="#f0f0f0"
-        i={0}
-        progress={progress}
-        range={[0, 0.25]}
-        targetScale={1.2}
-      />
-      <Card
-        title="Sample Project 2"
-        description="This is the second sample card component to showcase the project details."
-        src="google.jpg"
-        url="#"
-        color="#e8f4f8"
-        i={1}
-        progress={progress}
-        range={[0.25, 0.5]}
-        targetScale={1.2}
-      />
-      <Card
-        title="Sample Project 3"
-        description="This is the third sample card component to showcase the project details."
-        src="wix.jpg"
-        url="#"
-        color="#f8f0e8"
-        i={2}
-        progress={progress}
-        range={[0.5, 0.75]}
-        targetScale={1.2}
-      />
-      <Card
-        title="Sample Project 4"
-        description="This is the fourth sample card component to showcase the project details."
-        src="maven.jpg"
-        url="#"
-        color="#e8f8e8"
-        i={3}
-        progress={progress}
-        range={[0.75, 1]}
-        targetScale={1.2}
-      />
-      <Card
-        title="Sample Project 5"
-        description="This is the fifth sample card component to showcase the project details."
-        src="panda.jpg"
-        url="#"
-        color="#f8e8f8"
-        i={4}
-        progress={progress}
-        range={[0.9, 1.1]}
-        targetScale={1.2}
-      />
-      <SlidingImages />
-      <Contact />
-    </main>
-  )
+  return <HomeClient />;
 }

@@ -267,7 +267,7 @@ export default function MobileMenu({ navItems, onClose, pathname, isDesktop = fa
           <div className={styles.socialLinks}>
             <Magnetic>
               <motion.a
-                href="#"
+                href="https://facebook.com"
                 className={styles.socialLink}
                 whileHover={{ scale: 1.1, rotate: 5 }}
                 whileTap={{ scale: 0.9 }}
@@ -279,7 +279,7 @@ export default function MobileMenu({ navItems, onClose, pathname, isDesktop = fa
             </Magnetic>
             <Magnetic>
               <motion.a
-                href="#"
+                href="https://twitter.com"
                 className={styles.socialLink}
                 whileHover={{ scale: 1.1, rotate: 5 }}
                 whileTap={{ scale: 0.9 }}
@@ -291,7 +291,7 @@ export default function MobileMenu({ navItems, onClose, pathname, isDesktop = fa
             </Magnetic>
             <Magnetic>
               <motion.a
-                href="#"
+                href="https://linkedin.com"
                 className={styles.socialLink}
                 whileHover={{ scale: 1.1, rotate: 5 }}
                 whileTap={{ scale: 0.9 }}

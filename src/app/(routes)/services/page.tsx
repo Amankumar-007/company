@@ -11,9 +11,20 @@ if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger)
 }
 
+// Pattern Component for Services
+const ServicesPattern = () => (
+  <div className="absolute top-0 right-0 w-64 h-64 opacity-10 pointer-events-none text-black z-0">
+    <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+      <path d="M10 100 C 40 10, 60 10, 90 100 C 120 190, 140 190, 190 100" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+      <path d="M10 100 C 40 190, 60 190, 90 100 C 120 10, 140 10, 190 100" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+      <path d="M50 100 L150 100" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeDasharray="4 8" />
+    </svg>
+  </div>
+);
+
 const ServicesPage = () => {
   const [hoveredService, setHoveredService] = useState<string | null>(null)
-  
+
   // Refs for GSAP animations
   const heroRef = useRef(null)
   const servicesRef = useRef(null)
@@ -31,7 +42,7 @@ const ServicesPage = () => {
       technologies: ["React", "Next.js", "Node.js", "TypeScript", "MongoDB", "PostgreSQL"],
       features: [
         "Responsive Design",
-        "Performance Optimization", 
+        "Performance Optimization",
         "SEO Friendly",
         "Progressive Web Apps",
         "API Development",
@@ -110,7 +121,7 @@ const ServicesPage = () => {
     {
       id: "ecommerce-solutions",
       title: "E-commerce Solutions",
-      subtitle: "Online Store Development", 
+      subtitle: "Online Store Development",
       description: "Complete e-commerce solutions that drive sales and provide seamless shopping experiences.",
       fullDescription: "From custom platforms to popular CMS integrations, we build converting stores that maximize your revenue. Our solutions include everything from payment processing to inventory management.",
       technologies: ["Shopify", "WooCommerce", "Magento", "Stripe", "PayPal", "Inventory APIs"],
@@ -170,7 +181,7 @@ const ServicesPage = () => {
       'Inventory APIs': '',
       'Content CMS': ''
     };
-    
+
     return iconMap[techName] || '';
   };
 
@@ -178,16 +189,16 @@ const ServicesPage = () => {
     if (heroRef.current) {
       // Hero section animations with GSAP
       const tl = gsap.timeline({ delay: 0.1 })
-      
+
       tl.fromTo('.hero-title-line',
         { opacity: 0, x: -50 },
         { opacity: 1, x: 0, duration: 0.8, ease: 'power2.out', stagger: 0.05 }
       )
-      .fromTo('.hero-description',
-        { opacity: 0, x: 50 },
-        { opacity: 1, x: 0, duration: 0.6, ease: 'power2.out' },
-        '-=0.4'
-      )
+        .fromTo('.hero-description',
+          { opacity: 0, x: 50 },
+          { opacity: 1, x: 0, duration: 0.6, ease: 'power2.out' },
+          '-=0.4'
+        )
 
       // Services cards animation with ScrollTrigger
       serviceCardsRef.current.forEach((card) => {
@@ -276,15 +287,16 @@ const ServicesPage = () => {
   return (
     <div className="min-h-screen bg-white text-black">
       {/* Hero Section */}
-      <section ref={heroRef} className="p-5 md:px-12 lg:px-24 bg-gradient-to-b from-white to-gray-50">
-        <div className="max-w-7xl mx-auto">
+      <section ref={heroRef} className="relative p-5 md:px-12 lg:px-24 bg-gradient-to-b from-white to-gray-50">
+        <ServicesPattern />
+        <div className="relative z-10 max-w-7xl mx-auto">
           <div className="mb-8">
             <h1 className="text-6xl md:text-8xl lg:text-9xl font-black mb-6 leading-tight">
               <div className="hero-title-line">OUR</div>
               <div className="hero-title-line">SERVICES</div>
             </h1>
             <p className="hero-description text-xl md:text-2xl max-w-3xl text-gray-600 leading-relaxed">
-              We deliver comprehensive digital solutions that transform your business vision into reality. 
+              We deliver comprehensive digital solutions that transform your business vision into reality.
               From web development to digital marketing, we&apos;ve got you covered with cutting-edge technology and innovative strategies.
             </p>
           </div>
@@ -320,7 +332,7 @@ const ServicesPage = () => {
                       <span className="text-sm font-mono text-gray-400 tracking-wider mb-2 block">
                         SERVICE {String(services.findIndex(s => s.id === service.id) + 1).padStart(2, '0')}
                       </span>
-                      <motion.h3 
+                      <motion.h3
                         className="text-3xl lg:text-4xl font-black mb-3 leading-tight"
                         animate={{
                           scale: hoveredService === service.id ? 1.02 : 1
@@ -361,8 +373,8 @@ const ServicesPage = () => {
                         title={tech}
                       >
                         {getTechIcon(tech) ? (
-                          <Image 
-                            src={getTechIcon(tech)} 
+                          <Image
+                            src={getTechIcon(tech)}
                             alt={tech}
                             width={24}
                             height={24}
@@ -412,7 +424,7 @@ const ServicesPage = () => {
               A streamlined approach to deliver exceptional results, from concept to completion.
             </p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
               { step: "01", title: "Discovery", desc: "Understanding your needs and goals" },
@@ -447,10 +459,11 @@ const ServicesPage = () => {
             <p className="text-xl md:text-2xl mb-12 text-gray-300 leading-relaxed max-w-3xl mx-auto">
               Let&apos;s discuss your vision and bring it to life with our expert team and cutting-edge solutions.
             </p>
-            <motion.button 
-              className="bg-white text-black px-12 py-4 text-lg font-semibold hover:bg-gray-100 transition-all duration-300 rounded-lg inline-flex items-center gap-3 group"
+            <motion.button
+              className="relative z-50 bg-white text-black px-12 py-4 text-lg font-semibold hover:bg-gray-100 transition-all duration-300 rounded-lg inline-flex items-center gap-3 group cursor-pointer"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              onClick={() => window.location.assign('/contact')}
             >
               Get In Touch
               <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -465,3 +478,4 @@ const ServicesPage = () => {
 }
 
 export default ServicesPage
+

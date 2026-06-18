@@ -48,17 +48,19 @@ export default function index() {
         >
             <div className={styles.body}>
                 <div className={styles.title}>
-                    <span>
-                        <div className={styles.imageContainer}>
-                            <Image 
-                            fill={true}
-                            alt={"image"}
-                            src={`/brandlogo.png`}
-                            />
-                        </div>
-                        <h2>Let's work</h2>
-                    </span>
-                    <h2>together</h2>
+                    <div className={styles.textWrapper}>
+                        <span>
+                            <div className={styles.imageContainer}>
+                                <Image 
+                                fill={true}
+                                alt={"image"}
+                                src={`/brandlogo.png`}
+                                />
+                            </div>
+                            <h2>Let's work</h2>
+                        </span>
+                        <h2>together</h2>
+                    </div>
                     <motion.div 
                         style={{
                             x: shouldAnimate ? x : 0,

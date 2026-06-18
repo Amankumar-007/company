@@ -71,7 +71,6 @@ export default function index() {
     // Reduce animation intensity for mobile devices, disable for tablets
     const x1 = useTransform(scrollYProgress, [0, 1], shouldAnimate ? [0, 150] : [0, 0])
     const x2 = useTransform(scrollYProgress, [0, 1], shouldAnimate ? [0, -150] : [0, 0])
-    const height = useTransform(scrollYProgress, [0, 0.9], shouldAnimate ? [50, 0] : [0, 0])
 
     return (
         <div ref={container} className={styles.slidingImages}>
@@ -114,15 +113,6 @@ export default function index() {
                             </div>
                         })
                     }
-                </motion.div>
-                <motion.div 
-                    style={{
-                        height: shouldAnimate ? height : 0,
-                        transition: shouldAnimate ? 'inherit' : 'none'
-                    }} 
-                    className={styles.circleContainer}
-                >
-                    <div className={styles.circle}></div>
                 </motion.div>
         </div>
     )
