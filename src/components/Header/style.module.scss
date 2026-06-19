@@ -18,6 +18,13 @@
   }
 }
 
+.absoluteHeader {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
 .logo {
   display: flex;
   align-items: center;

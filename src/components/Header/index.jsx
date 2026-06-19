@@ -2,6 +2,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { usePathname } from 'next/navigation';
+import Link from 'next/link';
 import Magnetic from '../../common/Magnetic';
 import styles from './style.module.scss';
 import MobileMenu from './MobileMenu';
@@ -14,34 +15,44 @@ const navItems = [
   { title: 'Contact', href: '/contact' },
 ];
 
+const MotionLink = motion.create ? motion.create(Link) : motion(Link);
+
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
   const headerRef = useRef(null);
+  // Derived value — NOT a hook, safe to compute before effects
+  const isAdmin = pathname?.startsWith('/admin');
 
-  if (pathname?.startsWith('/admin')) return null;
+  // ─── ALL hooks MUST be called unconditionally, before any early return ───
 
+  // Close mobile menu on route change — guard inside, not via early return
   useEffect(() => {
     if (isMobileMenuOpen) {
       setIsMobileMenuOpen(false);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
 
+  // Scroll listener — skip entirely on admin pages
   useEffect(() => {
+    if (isAdmin) return;
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
     };
-
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [isAdmin]);
+
+  // ─── Early return AFTER all hooks are called ───
+  if (isAdmin) return null;
 
   return (
     <>
       <motion.header
         ref={headerRef}
-        className={`${styles.header} ${isScrolled ? styles.scrolled : ''}`}
+        className={`${styles.header} ${isScrolled ? styles.scrolled : ''} ${pathname?.startsWith('/blog') ? styles.absoluteHeader : ''}`}
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, ease: 'easeOut' }}
@@ -52,7 +63,7 @@ export default function Header() {
           whileHover={{ scale: 1.05 }}
           transition={{ type: 'spring', stiffness: 400, damping: 10 }}
         >
-          <a href="/" className={styles.logoLink}>
+          <Link href="/" className={styles.logoLink}>
             <motion.div className={styles.logoContainer}>
               <motion.img
                 src="/brandlogo.png"
@@ -70,14 +81,14 @@ export default function Header() {
                 <span className='bg-[#7ED348]'>W</span>
               </motion.span>
             </motion.div>
-          </a>
+          </Link>
         </motion.div>
-
+ 
         {/* Desktop Navigation */}
         <nav className={styles.desktopNav}>
           {navItems.map((item, index) => (
             <Magnetic key={item.title}>
-              <motion.a
+              <MotionLink
                 href={item.href}
                 className={`${styles.navLink} ${pathname === item.href ? styles.active : ''}`}
                 initial={{ opacity: 0, y: 20 }}
@@ -93,7 +104,7 @@ export default function Header() {
                   animate={{ scaleX: pathname === item.href ? 1 : 0 }}
                   transition={{ duration: 0.3 }}
                 />
-              </motion.a>
+              </MotionLink>
             </Magnetic>
           ))}
         </nav>

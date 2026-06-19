@@ -27,7 +27,7 @@ export default function Footer() {
       className="w-full text-[#0B0D17] font-sans"
     >
       {/* Main Content Container */}
-      <div className="max-w-[1400px] mx-auto px-8 md:px-12 pt-20 pb-16 relative z-10">
+      <div className="max-w-[1400px] mx-auto px-4 md:px-12 pt-20 pb-16 relative z-10">
 
         {/* Become an Affiliate Card (3D Glassmorphic floating card) */}
 

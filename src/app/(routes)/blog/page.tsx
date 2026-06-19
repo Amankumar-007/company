@@ -1,7 +1,7 @@
 import { createClient } from '@/utils/supabase/server'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Calendar, Clock, ArrowUpRight, Search } from 'lucide-react'
+import { Calendar, ArrowRight } from 'lucide-react'
 
 export const metadata = {
   title: 'Blog | Twofloww',
@@ -10,137 +10,89 @@ export const metadata = {
 
 export default async function BlogListingPage() {
   const supabase = await createClient()
-  
+
   const { data: blogs } = await supabase
     .from('blogs')
-    .select('*')
+    .select('*, author:authors(*)')
     .eq('status', 'published')
     .order('created_at', { ascending: false })
 
   const featuredBlog = blogs && blogs.length > 0 ? blogs[0] : null
   const remainingBlogs = blogs && blogs.length > 1 ? blogs.slice(1) : []
 
-  // Simulated categories for aesthetic look
-  const categories = ['All Insights', 'Engineering', 'Design Systems', 'Product Strategy', 'Company News']
+  // Categories matching the design
+  const categories = ['All', 'Product Updates', 'News', 'Academy', 'Client Management', 'Ambassador', 'Features']
 
   return (
-    <main className="min-h-screen pt-36 pb-24 bg-[#FAFAFA] text-black">
-      {/* Hero Section */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
-        <div className="relative overflow-hidden rounded-3xl bg-black text-white p-8 sm:p-12 md:p-16 shadow-2xl border border-neutral-800">
-          {/* Subtle grid background */}
-          <div className="absolute inset-0 opacity-10 bg-[linear-gradient(to_right,#808080_1px,transparent_1px),linear-gradient(to_bottom,#808080_1px,transparent_1px)] bg-[size:24px_24px]"></div>
-          
-          <div className="relative z-10 max-w-3xl">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-[#7ED348] text-black mb-6 uppercase tracking-wider">
-              <span className="w-1.5 h-1.5 rounded-full bg-black animate-pulse" />
-              Twofloww Journal
-            </span>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold font-space-grotesk tracking-tight leading-[1.15] mb-6">
-              Insights on the <span className="text-[#7ED348]">Future</span> of Digital Products.
-            </h1>
-            <p className="text-lg sm:text-xl text-neutral-400 font-light leading-relaxed">
-              Deep dives, tutorials, and field reports on web engineering, UI/UX systems, and product strategy.
-            </p>
-          </div>
-          
-          {/* Decorative glowing sphere */}
-          <div className="absolute -right-20 -bottom-20 w-80 h-80 rounded-full bg-[#7ED348]/10 blur-[100px] pointer-events-none"></div>
-        </div>
+    <main className="min-h-screen pt-24 pb-16 md:pt-32 md:pb-24 bg-[#f2f1ec] text-black relative overflow-hidden">
+      {/* Decorative top-right shapes (Simulating the design's abstract background) */}
+      <div className="absolute top-0 right-0 w-96 h-96 pointer-events-none opacity-80" aria-hidden="true">
+        <svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg" className="absolute top-0 right-0 w-full h-full -translate-y-1/4 translate-x-1/4">
+          <path d="M 0 0 C 150 50, 300 -50, 400 100 L 400 0 Z" fill="#fca5a5" opacity="0.3" />
+          <path d="M 50 150 C 200 200, 350 50, 450 150 L 450 0 L 50 0 Z" fill="#fdba74" opacity="0.6" />
+          <path d="M 100 200 C 250 250, 350 100, 500 200 L 500 0 L 100 0 Z" fill="#99f6e4" opacity="0.4" />
+        </svg>
       </div>
 
-      {/* Category Selection Bar & Simulated Search */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 pb-6 border-b border-neutral-200">
-          {/* Category List */}
-          <div className="flex flex-wrap gap-2">
-            {categories.map((cat, idx) => (
-              <button
-                key={cat}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
-                  idx === 0
-                    ? 'bg-black text-white'
-                    : 'bg-white text-neutral-600 border border-neutral-200 hover:border-black hover:text-black'
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        {/* Header */}
+        <h1 className="text-4xl md:text-6xl font-bold text-[#c2410c] mb-6 md:mb-8 font-space-grotesk tracking-tight">
+          Blog
+        </h1>
+
+        {/* Filter Bar */}
+        <div className="flex overflow-x-auto no-scrollbar scroll-smooth flex-nowrap items-center bg-[#ea580c] p-1.5 rounded-full mb-8 md:mb-12 w-full max-w-full sm:w-fit shadow-md">
+          {categories.map((cat, idx) => (
+            <button
+              key={cat}
+              className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 shrink-0 ${idx === 0
+                ? 'bg-white text-[#c2410c] shadow-sm'
+                : 'text-white/90 hover:bg-white/10 hover:text-white'
                 }`}
-              >
-                {cat}
-              </button>
-            ))}
-          </div>
-
-          {/* Search Box Mock */}
-          <div className="relative w-full md:w-80">
-            <input
-              type="text"
-              placeholder="Search articles..."
-              className="w-full bg-white border border-neutral-200 text-black px-4 py-2.5 pl-10 rounded-full text-sm focus:outline-none focus:ring-1 focus:ring-black focus:border-black"
-            />
-            <Search className="absolute left-3.5 top-3 w-4 h-4 text-neutral-400" />
-          </div>
+            >
+              {cat}
+            </button>
+          ))}
         </div>
-      </div>
 
-      {/* Blog Posts Grid */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
         {/* 1. Featured Post */}
         {featuredBlog && (
-          <div className="mb-16">
+          <div className="mb-10 md:mb-16">
             <Link href={`/blog/${featuredBlog.slug}`} className="group block">
-              <article className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-white rounded-3xl p-6 sm:p-8 border border-neutral-200 shadow-sm hover:shadow-xl transition-all duration-500 transform hover:-translate-y-1">
-                {/* Image panel */}
-                <div className="lg:col-span-7 relative aspect-[16/10] lg:aspect-[16/9] w-full rounded-2xl overflow-hidden bg-neutral-100 shadow-inner">
+              <article className="flex flex-col-reverse lg:flex-row bg-[#e8e9e4] rounded-2xl md:rounded-[2.5rem] overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 transform hover:-translate-y-1">
+
+                {/* Left panel */}
+                <div className="lg:w-[45%] bg-[#ea580c] text-white p-6 sm:p-10 lg:p-14 flex flex-col justify-center">
+                  <h2 className="text-2xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 font-space-grotesk leading-[1.15] line-clamp-3">
+                    {featuredBlog.title}
+                  </h2>
+                  <p className="text-white/90 text-base sm:text-lg leading-relaxed mb-6 sm:mb-12 font-light line-clamp-2">
+                    {featuredBlog.description || featuredBlog.meta_description || 'Explore this article to learn more about the best techniques and trends shaping the design and engineering space.'}
+                  </p>
+
+                  <div className="mt-6 lg:mt-auto flex items-center gap-4 text-white font-semibold group-hover:opacity-80 transition-opacity">
+                    <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center transform group-hover:scale-110 transition-transform">
+                      <ArrowRight className="w-5 h-5 text-white" />
+                    </div>
+                    Read full article
+                  </div>
+                </div>
+
+                {/* Right panel */}
+                <div className="lg:w-[55%] relative min-h-[220px] sm:min-h-[320px] lg:min-h-[450px]">
                   {featuredBlog.cover_image ? (
                     <Image
                       src={featuredBlog.cover_image}
                       alt={featuredBlog.title}
                       fill
-                      className="object-cover transform group-hover:scale-103 transition-transform duration-700 ease-out"
+                      className="object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out"
                       priority
                     />
                   ) : (
-                    <div className="absolute inset-0 bg-gradient-to-br from-neutral-800 to-neutral-900 flex items-center justify-center">
-                      <span className="text-neutral-500 font-space-grotesk text-2xl">twofloww</span>
+                    <div className="absolute inset-0 bg-[#e5e7eb] flex items-center justify-center">
+                      <span className="text-neutral-400 font-space-grotesk text-2xl">twofloww</span>
                     </div>
                   )}
-                  {/* Category chip absolute */}
-                  <span className="absolute top-4 left-4 bg-black/80 backdrop-blur-md text-[#7ED348] text-xs font-semibold px-3 py-1.5 rounded-full uppercase tracking-wider">
-                    Featured Post
-                  </span>
-                </div>
-
-                {/* Content panel */}
-                <div className="lg:col-span-5 flex flex-col justify-center h-full py-4">
-                  <div className="flex items-center gap-4 text-xs font-medium text-neutral-500 mb-4">
-                    <span className="flex items-center gap-1">
-                      <Calendar className="w-3.5 h-3.5" />
-                      {new Date(featuredBlog.created_at).toLocaleDateString('en-US', {
-                        month: 'short',
-                        day: 'numeric',
-                        year: 'numeric'
-                      })}
-                    </span>
-                    <span className="w-1.5 h-1.5 rounded-full bg-neutral-300"></span>
-                    <span className="flex items-center gap-1">
-                      <Clock className="w-3.5 h-3.5" />
-                      5 min read
-                    </span>
-                  </div>
-
-                  <h2 className="text-3xl sm:text-4xl font-bold text-neutral-950 font-space-grotesk tracking-tight leading-snug mb-4 group-hover:text-[#7ED348] transition-colors duration-300">
-                    {featuredBlog.title}
-                  </h2>
-
-                  <p className="text-neutral-600 text-base leading-relaxed mb-6 font-light">
-                    {featuredBlog.meta_description || 'Explore this article to learn more about the best techniques and trends shaping the design and engineering space.'}
-                  </p>
-
-                  <div className="mt-auto pt-4 flex items-center gap-2 text-black font-semibold text-sm group-hover:text-neutral-700">
-                    <span className="border-b border-black group-hover:border-neutral-500 pb-0.5 transition-colors">
-                      Read Full Article
-                    </span>
-                    <ArrowUpRight className="w-4 h-4 transform group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                  </div>
                 </div>
               </article>
             </Link>
@@ -149,69 +101,83 @@ export default async function BlogListingPage() {
 
         {/* 2. Remaining Posts Grid */}
         {remainingBlogs.length > 0 && (
-          <div className="space-y-8">
-            <h3 className="text-xl font-bold text-neutral-900 font-space-grotesk mb-6">Latest Articles</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {remainingBlogs.map((blog) => (
-                <Link key={blog.id} href={`/blog/${blog.slug}`} className="group block h-full">
-                  <article className="flex flex-col h-full bg-white rounded-3xl overflow-hidden border border-neutral-200 shadow-sm hover:shadow-xl transition-all duration-500 transform hover:-translate-y-1">
-                    <div className="relative aspect-[16/10] w-full bg-neutral-100 overflow-hidden">
-                      {blog.cover_image ? (
-                        <Image
-                          src={blog.cover_image}
-                          alt={blog.title}
-                          fill
-                          className="object-cover transform group-hover:scale-103 transition-transform duration-700 ease-out"
-                        />
-                      ) : (
-                        <div className="absolute inset-0 bg-gradient-to-br from-neutral-100 to-neutral-200 flex items-center justify-center">
-                          <span className="text-neutral-400 font-space-grotesk">twofloww</span>
-                        </div>
-                      )}
-                      {/* Accent highlight on hover */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 lg:gap-x-8 gap-y-8 lg:gap-y-12">
+            {remainingBlogs.map((blog) => (
+              <Link key={blog.id} href={`/blog/${blog.slug}`} className="group block h-full">
+                <article className="flex flex-col h-full bg-transparent">
+                  {/* Card Image */}
+                  <div className="relative aspect-[4/3] w-full rounded-2xl md:rounded-[2rem] overflow-hidden mb-4 md:mb-5 bg-neutral-200">
+                    {blog.cover_image ? (
+                      <Image
+                        src={blog.cover_image}
+                        alt={blog.title}
+                        fill
+                        className="object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out"
+                      />
+                    ) : (
+                      <div className="absolute inset-0 bg-[#e5e7eb] flex items-center justify-center">
+                        <span className="text-neutral-400 font-space-grotesk">twofloww</span>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Card Content */}
+                  <div className="flex flex-col flex-1 px-1">
+                    <div className="flex items-center justify-between mb-4">
+                      <span className="bg-orange-50 text-[#c2410c] border border-orange-100 text-xs font-semibold px-3 py-1 rounded-md">
+                        Features
+                      </span>
+                      <span className="text-xs font-semibold text-neutral-500">
+                        {new Date(blog.created_at).toLocaleDateString('en-US', {
+                          month: 'short',
+                          day: 'numeric',
+                          year: 'numeric'
+                        })}
+                      </span>
                     </div>
 
-                    <div className="p-6 sm:p-8 flex flex-col flex-1">
-                      <div className="flex items-center gap-3 text-xs text-neutral-500 mb-4 font-medium">
-                        <time dateTime={blog.created_at}>
-                          {new Date(blog.created_at).toLocaleDateString('en-US', {
-                            month: 'short',
-                            day: 'numeric',
-                            year: 'numeric'
-                          })}
-                        </time>
-                        <span className="w-1 h-1 rounded-full bg-neutral-300" />
-                        <span>4 min read</span>
+                    <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-[#c2410c] font-space-grotesk tracking-tight leading-snug mb-2 md:mb-3 group-hover:opacity-80 transition-opacity line-clamp-2">
+                      {blog.title}
+                    </h3>
+
+                    <p className="text-neutral-500 text-xs sm:text-sm mb-4 md:mb-6 line-clamp-2 leading-relaxed">
+                      {blog.description || blog.meta_description || 'Explore this article to learn more about the best techniques and trends shaping the space.'}
+                    </p>
+
+                    {/* Author Mock / Real */}
+                    <div className="mt-auto flex items-center gap-3 pt-2">
+                      <div className="w-8 h-8 rounded-full bg-neutral-300 overflow-hidden relative border border-neutral-200">
+                        {blog.author?.profile_image ? (
+                          <Image
+                            src={blog.author.profile_image}
+                            alt={blog.author.full_name}
+                            fill
+                            className="object-cover"
+                          />
+                        ) : (
+                          <div className="w-full h-full flex items-center justify-center bg-orange-100 text-[#c2410c] font-bold text-xs">
+                            {blog.author?.full_name?.charAt(0) || 'U'}
+                          </div>
+                        )}
                       </div>
-
-                      <h4 className="text-xl font-bold text-neutral-950 font-space-grotesk tracking-tight leading-snug mb-3 group-hover:text-[#7ED348] transition-colors duration-300 line-clamp-2">
-                        {blog.title}
-                      </h4>
-
-                      <p className="text-neutral-600 text-sm leading-relaxed mb-6 flex-1 line-clamp-3 font-light">
-                        {blog.meta_description || 'Deep dive into standard methods, tools, and updates from our creative and technical teams.'}
-                      </p>
-
-                      <div className="flex items-center gap-1.5 text-black font-semibold text-xs mt-auto pt-4 border-t border-neutral-100">
-                        <span>Read Post</span>
-                        <ArrowUpRight className="w-3.5 h-3.5 transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                      </div>
+                      <span className="text-sm font-medium text-neutral-600">
+                        {blog.author?.full_name || 'Unknown Author'}
+                      </span>
                     </div>
-                  </article>
-                </Link>
-              ))}
-            </div>
+                  </div>
+                </article>
+              </Link>
+            ))}
           </div>
         )}
 
         {/* 3. Empty State */}
         {(!blogs || blogs.length === 0) && (
-          <div className="text-center py-24 bg-white border border-neutral-200 rounded-3xl p-8 shadow-sm">
-            <div className="w-16 h-16 bg-neutral-100 text-neutral-400 rounded-full flex items-center justify-center mx-auto mb-4">
+          <div className="text-center py-24 bg-white border border-neutral-200 rounded-[2rem] p-8 shadow-sm">
+            <div className="w-16 h-16 bg-orange-50 text-[#c2410c] rounded-full flex items-center justify-center mx-auto mb-4">
               <Calendar className="w-6 h-6" />
             </div>
-            <h3 className="text-lg font-semibold text-neutral-900 mb-1">No Articles Published</h3>
+            <h3 className="text-lg font-semibold text-[#c2410c] mb-1">No Articles Published</h3>
             <p className="text-neutral-500 text-sm max-w-sm mx-auto mb-6">
               Our writers are crafting high-quality content. Subscribe or check back soon for our latest thoughts!
             </p>

@@ -6,6 +6,7 @@ import Footer from '../components/Footer';
 import { ReactNode } from 'react';
 import { CursorProvider } from '../components/Cursor';
 import SmoothScrollWrapper from '../components/SmoothScrollWrapper';
+import ExtensionErrorSuppressor from '../components/ExtensionErrorSuppressor';
 import type { Metadata, Viewport } from 'next';
 
 const inter = Inter({
@@ -168,6 +169,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         />
       </head>
       <body className={`${inter.className} ${spaceGrotesk.variable} bg-white text-black min-h-screen`} suppressHydrationWarning>
+        <ExtensionErrorSuppressor />
         <SmoothScrollWrapper>
           <CursorProvider>
             <Header />

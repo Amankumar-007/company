@@ -2,13 +2,14 @@ import BlogForm from '@/components/Admin/BlogForm'
 import { createClient } from '@/utils/supabase/server'
 import { notFound } from 'next/navigation'
 
-export default async function EditBlogPage({ params }: { params: { id: string } }) {
+export default async function EditBlogPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params
   const supabase = await createClient()
   
   const { data: blog } = await supabase
     .from('blogs')
     .select('*')
-    .eq('id', params.id)
+    .eq('id', id)
     .single()
 
   if (!blog) {

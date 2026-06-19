@@ -20,7 +20,7 @@ export default async function AdminBlogsPage() {
         </div>
         <Link
           href="/admin/blogs/new"
-          className="flex items-center space-x-2 px-5 py-2.5 bg-[#7ED348] hover:bg-[#7ED348]/90 text-black font-semibold rounded-xl transition-all duration-200 shadow-sm hover:shadow-md"
+          className="flex items-center space-x-2 px-6 py-3 bg-[#ea580c] hover:bg-[#c2410c] text-white font-semibold rounded-2xl transition-all duration-300 shadow-lg shadow-orange-500/20 hover:shadow-orange-500/40 hover:-translate-y-0.5"
         >
           <Plus size={18} />
           <span>New Article</span>
@@ -28,15 +28,15 @@ export default async function AdminBlogsPage() {
       </div>
 
       {/* Main Table Container */}
-      <div className="bg-white rounded-2xl border border-zinc-200/80 shadow-sm overflow-hidden">
+      <div className="bg-white rounded-[2rem] border border-neutral-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] overflow-hidden p-2">
         <div className="overflow-x-auto">
-          <table className="w-full text-left border-collapse">
+          <table className="w-full text-left border-collapse border-spacing-y-2">
             <thead>
-              <tr className="bg-zinc-50/75 border-b border-zinc-200 text-xs font-bold text-zinc-500 uppercase tracking-widest">
-                <th className="px-6 py-4">Article</th>
-                <th className="px-6 py-4">Status</th>
-                <th className="px-6 py-4">Created Date</th>
-                <th className="px-6 py-4 text-right">Actions</th>
+              <tr className="bg-neutral-50/50 border-b border-neutral-100 text-[11px] font-bold text-neutral-400 uppercase tracking-widest">
+                <th className="px-6 py-5 rounded-tl-2xl">Article</th>
+                <th className="px-6 py-5">Status</th>
+                <th className="px-6 py-5">Created Date</th>
+                <th className="px-6 py-5 text-right rounded-tr-2xl">Actions</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-zinc-100 text-sm">
@@ -64,15 +64,15 @@ export default async function AdminBlogsPage() {
                     
                     {/* Status pill */}
                     <td className="px-6 py-4.5">
-                      <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold uppercase tracking-wider ${
+                      <span className={`inline-flex items-center px-3 py-1.5 rounded-xl text-[11px] font-bold uppercase tracking-wider ${
                         blog.status === 'published'
-                          ? 'bg-[#7ED348]/10 text-[#7ED348] border border-[#7ED348]/20'
+                          ? 'bg-orange-50 text-[#ea580c] border border-orange-100'
                           : blog.status === 'scheduled'
                           ? 'bg-blue-50 text-blue-700 border border-blue-100'
-                          : 'bg-zinc-100 text-zinc-650 border border-zinc-200'
+                          : 'bg-neutral-100 text-neutral-500 border border-neutral-200'
                       }`}>
-                        {blog.status === 'published' && <span className="w-1.5 h-1.5 rounded-full bg-[#7ED348] mr-1.5 animate-pulse" />}
-                        {blog.status === 'scheduled' && <span className="w-1.5 h-1.5 rounded-full bg-blue-500 mr-1.5" />}
+                        {blog.status === 'published' && <span className="w-1.5 h-1.5 rounded-full bg-[#ea580c] mr-2 animate-pulse" />}
+                        {blog.status === 'scheduled' && <span className="w-1.5 h-1.5 rounded-full bg-blue-500 mr-2" />}
                         <span>{blog.status || 'Draft'}</span>
                       </span>
                     </td>
@@ -103,9 +103,9 @@ export default async function AdminBlogsPage() {
                         </Link>
                         {/* Note: Soft action delete indicator */}
                         <button 
-                          className="p-2 text-zinc-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-all"
+                          className="p-2 text-zinc-450 hover:text-red-600 hover:bg-red-50 rounded-lg transition-all opacity-50 cursor-not-allowed"
                           title="Delete article (coming soon)"
-                          onClick={() => alert("Delete blog functionality will be supported shortly via database action.")}
+                          disabled
                         >
                           <Trash2 size={16} />
                         </button>

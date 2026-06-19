@@ -23,7 +23,7 @@ export default async function AdminDashboard() {
           <p className="text-zinc-500 mt-1 text-sm">Welcome back! Manage content, read inquiries, and monitor statistics.</p>
         </div>
         <div className="flex flex-wrap gap-3">
-          <Link href="/admin/blogs/new" className="flex items-center gap-2 bg-[#7ED348] hover:bg-[#7ED348]/90 text-black px-5 py-2.5 rounded-xl font-semibold transition-all duration-200 shadow-sm hover:shadow-md">
+          <Link href="/admin/blogs/new" className="flex items-center gap-2 bg-[#ea580c] hover:bg-[#c2410c] text-white px-5 py-2.5 rounded-xl font-semibold transition-all duration-300 shadow-sm hover:shadow-md">
             <Plus size={18} />
             Write Blog
           </Link>
@@ -41,7 +41,7 @@ export default async function AdminDashboard() {
           <div className="space-y-1">
             <p className="text-xs font-bold text-zinc-400 uppercase tracking-widest">Total Published</p>
             <h3 className="text-4xl font-bold font-space-grotesk text-zinc-900">{blogsCount || 0}</h3>
-            <p className="text-xs text-[#7ED348] font-medium mt-1">Blogs active on live site</p>
+            <p className="text-xs text-[#ea580c] font-medium mt-1">Blogs active on live site</p>
           </div>
           <div className="p-4 bg-zinc-50 text-zinc-800 rounded-2xl border border-zinc-100">
             <FileText size={28} />
@@ -142,7 +142,7 @@ export default async function AdminDashboard() {
                       <p className="font-bold text-zinc-900 text-sm truncate">{blog.title}</p>
                       <div className="flex items-center gap-2.5 mt-1.5">
                         <span className={`text-[10px] px-2 py-0.5 rounded-full font-semibold ${
-                          blog.status === 'published' ? 'bg-[#7ED348]/10 text-[#7ED348] border border-[#7ED348]/20' : 'bg-zinc-150 text-zinc-650'
+                          blog.status === 'published' ? 'bg-[#ea580c]/10 text-[#ea580c] border border-[#ea580c]/20' : 'bg-zinc-150 text-zinc-650'
                         }`}>
                           {blog.status || 'Draft'}
                         </span>

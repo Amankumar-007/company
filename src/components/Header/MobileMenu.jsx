@@ -1,8 +1,11 @@
 'use client';
 import { motion } from 'framer-motion';
 import { useEffect } from 'react';
+import Link from 'next/link';
 import Magnetic from '../../common/Magnetic';
 import styles from './MobileMenu.module.scss';
+
+const MotionLink = motion.create ? motion.create(Link) : motion(Link);
 
 const menuVariants = {
   initial: { opacity: 0 },
@@ -141,7 +144,7 @@ export default function MobileMenu({ navItems, onClose, pathname, isDesktop = fa
           <nav className={styles.desktopNavItems}>
             {navItems.map((item, index) => (
               <Magnetic key={item.title}>
-                <motion.a
+                <MotionLink
                   href={item.href}
                   className={`${styles.desktopNavItem} ${pathname === item.href ? styles.active : ''}`}
                   variants={menuItemVariants}
@@ -168,7 +171,7 @@ export default function MobileMenu({ navItems, onClose, pathname, isDesktop = fa
                     animate={{ scaleX: pathname === item.href ? 1 : 0 }}
                     transition={{ delay: index * 0.1 + 0.4, duration: 0.3 }}
                   />
-                </motion.a>
+                </MotionLink>
               </Magnetic>
             ))}
           </nav>
@@ -221,7 +224,7 @@ export default function MobileMenu({ navItems, onClose, pathname, isDesktop = fa
         <nav className={styles.navItems}>
           {navItems.map((item, index) => (
             <Magnetic key={item.title}>
-              <motion.a
+              <MotionLink
                 href={item.href}
                 className={`${styles.navItem} ${pathname === item.href ? styles.active : ''}`}
                 variants={menuItemVariants}
@@ -248,7 +251,7 @@ export default function MobileMenu({ navItems, onClose, pathname, isDesktop = fa
                   animate={{ scaleX: pathname === item.href ? 1 : 0 }}
                   transition={{ delay: index * 0.1 + 0.4, duration: 0.3 }}
                 />
-              </motion.a>
+              </MotionLink>
             </Magnetic>
           ))}
         </nav>

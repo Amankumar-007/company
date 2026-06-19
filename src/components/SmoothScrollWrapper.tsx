@@ -27,12 +27,15 @@ export default function SmoothScrollWrapper({ children }: { children: React.Reac
 
     lenisRef.current = lenis;
 
+    // CRITICAL FIX: Store the LATEST rafId on every frame so cancelAnimationFrame
+    // actually stops the loop. Without this, the old ID is cancelled but the new
+    // recursive call keeps running — leaking an infinite loop on every navigation.
+    let rafId: number;
     function raf(time: number) {
       lenis.raf(time);
-      requestAnimationFrame(raf);
+      rafId = requestAnimationFrame(raf);
     }
-    
-    const rafId = requestAnimationFrame(raf);
+    rafId = requestAnimationFrame(raf);
 
     return () => {
       cancelAnimationFrame(rafId);

@@ -1,8 +1,8 @@
 import { v2 as cloudinary } from 'cloudinary';
 
-// Configure Cloudinary
+// Configure Cloudinary — ensure all three keys are present
 cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME || process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
@@ -16,50 +16,65 @@ export interface UploadResult {
   created_at: string;
 }
 
+// Maps MIME type to a Cloudinary-safe format string
+function getCloudinaryFormat(mimeType: string): string | undefined {
+  const map: Record<string, string> = {
+    'image/jpeg': 'jpg',
+    'image/jpg': 'jpg',
+    'image/png': 'png',
+    'image/gif': 'gif',
+    'image/webp': 'webp',
+    'image/svg+xml': 'svg',
+    'application/pdf': 'pdf',
+  };
+  return map[mimeType] ?? undefined;
+}
+
 export async function uploadFileToCloudinary(
   file: File,
-  folder: string = 'contact-attachments'
+  folder: string = 'company-uploads'
 ): Promise<UploadResult> {
-  return new Promise((resolve, reject) => {
-    // Convert File to Buffer
-    const reader = new FileReader();
-    reader.onload = async (event) => {
-      try {
-        const buffer = Buffer.from(event.target?.result as ArrayBuffer);
-        
-        // Determine resource type based on file type
-        const resourceType = file.type.startsWith('image/') ? 'image' : 
-                           file.type.startsWith('video/') ? 'video' : 'raw';
-        
-        // Upload to Cloudinary
-        const result = await cloudinary.uploader.upload_stream(
-          {
-            folder,
-            resource_type: resourceType,
-            format: file.type.split('/')[1] || undefined,
-            use_filename: true,
-            unique_filename: true,
-            overwrite: false,
-          },
-          (error, result) => {
-            if (error) {
-              reject(error);
-            } else {
-              resolve(result as UploadResult);
-            }
+  // Verify config is set before attempting upload
+  const cfg = cloudinary.config();
+  if (!cfg.cloud_name || !cfg.api_key || !cfg.api_secret) {
+    throw new Error(
+      `Cloudinary configuration is incomplete. cloud_name=${cfg.cloud_name}, api_key set=${!!cfg.api_key}, api_secret set=${!!cfg.api_secret}`
+    );
+  }
+
+  return new Promise(async (resolve, reject) => {
+    try {
+      const arrayBuffer = await file.arrayBuffer();
+      const buffer = Buffer.from(arrayBuffer);
+
+      const resourceType = file.type.startsWith('image/')
+        ? 'image'
+        : file.type.startsWith('video/')
+        ? 'video'
+        : 'raw';
+
+      const uploadStream = cloudinary.uploader.upload_stream(
+        {
+          folder,
+          resource_type: resourceType,
+          format: getCloudinaryFormat(file.type),
+          use_filename: true,
+          unique_filename: true,
+          overwrite: false,
+        },
+        (error, result) => {
+          if (error) {
+            reject(new Error(`Cloudinary upload error: ${error.message} (http_code: ${error.http_code})`));
+          } else {
+            resolve(result as UploadResult);
           }
-        ).end(buffer);
-        
-      } catch (error) {
-        reject(error);
-      }
-    };
-    
-    reader.onerror = () => {
-      reject(new Error('Failed to read file'));
-    };
-    
-    reader.readAsArrayBuffer(file);
+        }
+      );
+
+      uploadStream.end(buffer);
+    } catch (error) {
+      reject(error);
+    }
   });
 }
 
