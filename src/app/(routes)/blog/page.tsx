@@ -2,14 +2,63 @@ import { createClient } from '@/utils/supabase/server'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Calendar, ArrowRight } from 'lucide-react'
+import type { Metadata } from 'next'
 
-export const metadata = {
-  title: 'Blog | Twofloww',
+const BASE_URL = 'https://www.twofloww.in'
+
+export const metadata: Metadata = {
+  title: 'Blog | Twofloww – Digital Agency Insights & Engineering',
   description: 'Insights, thoughts, and industry-leading stories on web engineering, design systems, and product development from the Twofloww team.',
+  keywords: ['web development blog', 'design systems', 'digital agency insights', 'Twofloww blog', 'engineering stories'],
+  alternates: {
+    canonical: `${BASE_URL}/blog`,
+  },
+  openGraph: {
+    type: 'website',
+    locale: 'en_IN',
+    url: `${BASE_URL}/blog`,
+    siteName: 'Twofloww Digital Agency',
+    title: 'Blog | Twofloww – Digital Agency Insights',
+    description: 'Insights, thoughts, and industry-leading stories on web engineering, design systems, and product development from the Twofloww team.',
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Twofloww Blog',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Blog | Twofloww',
+    description: 'Insights, thoughts, and industry-leading stories from the Twofloww team.',
+    images: ['/og-image.png'],
+    creator: '@twofloww',
+    site: '@twofloww',
+  },
 }
 
 export default async function BlogListingPage() {
   const supabase = await createClient()
+
+  // Dynamic JSON-LD structured data for the Blog
+  const blogSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Blog',
+    name: 'Twofloww Blog',
+    url: `${BASE_URL}/blog`,
+    description: 'Insights, thoughts, and industry-leading stories on web engineering, design systems, and product development.',
+    publisher: {
+      '@type': 'Organization',
+      name: 'Twofloww',
+      logo: {
+        '@type': 'ImageObject',
+        url: `${BASE_URL}/logo.png`
+      }
+    }
+  }
+
 
   const { data: blogs } = await supabase
     .from('blogs')
@@ -24,10 +73,15 @@ export default async function BlogListingPage() {
   const categories = ['All', 'Product Updates', 'News', 'Academy', 'Client Management', 'Ambassador', 'Features']
 
   return (
-    <main className="min-h-screen pt-24 pb-16 md:pt-32 md:pb-24 bg-[#f2f1ec] text-black relative overflow-hidden">
-      {/* Decorative top-right shapes (Simulating the design's abstract background) */}
-      <div className="absolute top-0 right-0 w-96 h-96 pointer-events-none opacity-80" aria-hidden="true">
-        <svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg" className="absolute top-0 right-0 w-full h-full -translate-y-1/4 translate-x-1/4">
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogSchema) }}
+      />
+      <main className="min-h-screen pt-24 pb-16 md:pt-32 md:pb-24 bg-[#f2f1ec] text-black relative overflow-hidden">
+        {/* Decorative top-right shapes (Simulating the design's abstract background) */}
+        <div className="absolute top-0 right-0 w-96 h-96 pointer-events-none opacity-80" aria-hidden="true">
+          <svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg" className="absolute top-0 right-0 w-full h-full -translate-y-1/4 translate-x-1/4">
           <path d="M 0 0 C 150 50, 300 -50, 400 100 L 400 0 Z" fill="#fca5a5" opacity="0.3" />
           <path d="M 50 150 C 200 200, 350 50, 450 150 L 450 0 L 50 0 Z" fill="#fdba74" opacity="0.6" />
           <path d="M 100 200 C 250 250, 350 100, 500 200 L 500 0 L 100 0 Z" fill="#99f6e4" opacity="0.4" />
@@ -185,5 +239,6 @@ export default async function BlogListingPage() {
         )}
       </div>
     </main>
+    </>
   )
 }

@@ -1,5 +1,5 @@
 import './globals.css'
-import { Inter, Space_Grotesk } from 'next/font/google'
+import { Inter, Space_Grotesk, Unbounded } from 'next/font/google'
 import Header from '../components/Header';
 import ScrollToTop from '../components/ScrollToTop';
 import Footer from '../components/Footer';
@@ -18,6 +18,13 @@ const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
   weight: ['400', '500', '600', '700'],
   variable: '--font-space-grotesk',
+  display: 'swap',
+})
+
+const unbounded = Unbounded({
+  subsets: ['latin'],
+  weight: ['900'],
+  variable: '--font-unbounded',
   display: 'swap',
 })
 
@@ -168,7 +175,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
         />
       </head>
-      <body className={`${inter.className} ${spaceGrotesk.variable} bg-white text-black min-h-screen`} suppressHydrationWarning>
+      <body className={`${inter.className} ${spaceGrotesk.variable} ${unbounded.variable} bg-white text-black min-h-screen`} suppressHydrationWarning>
         <ExtensionErrorSuppressor />
         <SmoothScrollWrapper>
           <CursorProvider>

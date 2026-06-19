@@ -156,7 +156,7 @@ export default function Footer() {
         <div className="w-full overflow-hidden select-none pointer-events-none mt-16 flex items-center justify-center relative z-10">
           <h1
             style={{
-              fontFamily: 'Unbounded, sans-serif',
+              fontFamily: 'var(--font-unbounded), sans-serif',
               fontWeight: 900,
               color: '#DE5D26',
               fontSize: 'clamp(50px, 12.5vw, 190px)',

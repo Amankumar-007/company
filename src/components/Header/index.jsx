@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 import Magnetic from '../../common/Magnetic';
 import styles from './style.module.scss';
 import MobileMenu from './MobileMenu';
@@ -16,6 +17,7 @@ const navItems = [
 ];
 
 const MotionLink = motion.create ? motion.create(Link) : motion(Link);
+const MotionImage = motion.create ? motion.create(Image) : motion(Image);
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -65,9 +67,12 @@ export default function Header() {
         >
           <Link href="/" className={styles.logoLink}>
             <motion.div className={styles.logoContainer}>
-              <motion.img
+              <MotionImage
                 src="/brandlogo.png"
                 alt="FlowW Logo"
+                width={88}
+                height={88}
+                priority
                 className={styles.logoImage}
                 whileHover={{ rotate: 5 }}
                 transition={{ type: 'spring', stiffness: 400, damping: 10 }}

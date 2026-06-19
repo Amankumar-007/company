@@ -46,6 +46,9 @@ export async function generateMetadata(
       description: blog.meta_description,
       images: blog.cover_image ? [blog.cover_image] : [],
     },
+    alternates: {
+      canonical: `https://www.twofloww.in/blog/${blog.slug}`,
+    },
   }
 }
 
@@ -111,8 +114,41 @@ export default async function BlogPostPage({ params }: Props) {
 
   const articleUrl = `https://www.twofloww.in/blog/${blog.slug}`;
 
+  // Dynamic JSON-LD structured data for the Blog Article
+  const articleSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: blog.title,
+    description: blog.meta_description || blog.description,
+    image: blog.cover_image ? [blog.cover_image] : undefined,
+    datePublished: new Date(blog.created_at).toISOString(),
+    dateModified: blog.updated_at ? new Date(blog.updated_at).toISOString() : new Date(blog.created_at).toISOString(),
+    author: {
+      '@type': 'Person',
+      name: blog.author?.full_name || 'Twofloww',
+      url: blog.author?.social_links?.linkedin || blog.author?.social_links?.twitter || `https://www.twofloww.in/about`,
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Twofloww',
+      logo: {
+        '@type': 'ImageObject',
+        url: `https://www.twofloww.in/logo.png`
+      }
+    },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': articleUrl,
+    }
+  }
+
   return (
-    <main className="min-h-screen pt-20 pb-16 md:pt-28 md:pb-24 bg-[#f2f1ec] text-black">
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
+      <main className="min-h-screen pt-20 pb-16 md:pt-28 md:pb-24 bg-[#f2f1ec] text-black">
       {/* Floating Back Navigation - Full width container */}
       <div className="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 mb-6 md:mb-8">
         <Link
@@ -399,5 +435,6 @@ export default async function BlogPostPage({ params }: Props) {
         </div>
       </div>
     </main>
+    </>
   )
 }

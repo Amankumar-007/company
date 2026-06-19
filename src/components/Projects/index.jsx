@@ -110,6 +110,7 @@ export default function Home() {
                         height={380}
                         alt={project.title}
                         style={{ objectFit: 'cover', width: '100%', height: '100%' }}
+                        sizes="(max-width: 768px) 100vw, 420px"
                     />
                 </div>
                 })
