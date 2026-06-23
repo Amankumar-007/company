@@ -1,5 +1,6 @@
 import { MetadataRoute } from 'next'
 import { createClient } from '@/utils/supabase/server'
+import { targetLocations } from '@/data/seo-locations'
 
 const BASE_URL = 'https://www.twofloww.in'
 
@@ -81,6 +82,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: 0.6,
     }))
 
+    const seoServicesToGenerate = ['digital-agency', 'web-development', 'seo-services', 'ecommerce-solutions']
+    const programmaticSeoPages = targetLocations.flatMap(location => 
+        seoServicesToGenerate.map(service => ({
+            url: `${BASE_URL}/best-${service}-in-${location.id}`,
+            lastModified: new Date(),
+            changeFrequency: 'weekly' as const,
+            priority: 0.8,
+        }))
+    )
+
     return [
         {
             url: BASE_URL,
@@ -129,5 +140,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         ...categoryPages,
         ...skillPages,
         ...blogPages,
+        ...programmaticSeoPages,
     ]
 }

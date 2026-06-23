@@ -1,6 +1,7 @@
 'use client';
 import React, { useEffect, useRef } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { gsap } from 'gsap';
 
 export default function HeroSection({ isLoading = true }) {
@@ -18,16 +19,16 @@ export default function HeroSection({ isLoading = true }) {
         { opacity: 0, y: '110%' },
         { opacity: 1, y: '0%', duration: 1.2, ease: 'power4.out', stagger: 0.12 }
       )
-      .fromTo('.hero-subtitle-home',
-        { opacity: 0, y: 30 },
-        { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out' },
-        '-=0.7'
-      )
-      .fromTo('.hero-cta-home',
-        { opacity: 0, y: 20 },
-        { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out', stagger: 0.1 },
-        '-=0.6'
-      );
+        .fromTo('.hero-subtitle-home',
+          { opacity: 0, y: 30 },
+          { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out' },
+          '-=0.7'
+        )
+        .fromTo('.hero-cta-home',
+          { opacity: 0, y: 20 },
+          { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out', stagger: 0.1 },
+          '-=0.6'
+        );
     }, 900);
 
     return () => clearTimeout(timer);
@@ -35,9 +36,15 @@ export default function HeroSection({ isLoading = true }) {
   return (
     <div
       ref={heroRef}
-      className="relative min-h-[90vh] -mb-[25vh] flex items-center justify-center px-4 sm:px-5 lg:px-7 pt-32 pb-[32vh] bg-cover bg-center bg-no-repeat"
-      style={{ backgroundImage: "url('/hero1.png')" }}
+      className="relative min-h-[90vh] -mb-[25vh] flex items-center justify-center px-4 sm:px-5 lg:px-7 pt-32 pb-[32vh]"
     >
+      <Image
+        src="/hero1.png"
+        alt="Twofloww Digital Excellence"
+        fill
+        priority
+        className="object-cover object-center -z-10"
+      />
       {/* Gradient overlay to blend bottom into white background */}
       <div className="absolute bottom-0 left-0 right-0 h-[40vh] bg-gradient-to-b from-transparent via-white/50 to-white z-0 pointer-events-none"></div>
 

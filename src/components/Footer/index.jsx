@@ -118,8 +118,8 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* RIGHT — 3 Sitemap Columns (7 cols) */}
-          <div className="lg:col-span-7 grid grid-cols-3 gap-8 justify-between w-full">
+          {/* RIGHT — 4 Sitemap Columns (7 cols) */}
+          <div className="lg:col-span-7 grid grid-cols-2 md:grid-cols-4 gap-8 justify-between w-full">
 
             {/* Sitemap */}
             <div className="flex flex-col gap-3">
@@ -167,6 +167,15 @@ export default function Footer() {
               <a href="#" className="text-gray-600 hover:text-[#DE5D26] text-[14px] transition-colors font-medium">Mobile Apps</a>
               <a href="#" className="text-gray-600 hover:text-[#DE5D26] text-[14px] transition-colors font-medium">UI/UX Design</a>
               <a href="#" className="text-gray-600 hover:text-[#DE5D26] text-[14px] transition-colors font-medium">SEO & Marketing</a>
+            </div>
+
+            {/* Areas We Serve */}
+            <div className="flex flex-col gap-3">
+              <h4 className="text-[#0B0D17] font-semibold text-[15px] tracking-wide mb-2">Areas We Serve</h4>
+              <a href="/best-digital-agency-in-noida" className="text-gray-600 hover:text-[#DE5D26] text-[14px] transition-colors font-medium">Noida</a>
+              <a href="/best-web-development-in-delhi" className="text-gray-600 hover:text-[#DE5D26] text-[14px] transition-colors font-medium">Delhi</a>
+              <a href="/best-seo-services-in-agra" className="text-gray-600 hover:text-[#DE5D26] text-[14px] transition-colors font-medium">Agra</a>
+              <a href="/best-digital-agency-in-gurugram" className="text-gray-600 hover:text-[#DE5D26] text-[14px] transition-colors font-medium">Gurugram</a>
             </div>
 
           </div>

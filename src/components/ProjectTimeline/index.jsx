@@ -78,11 +78,12 @@ const ProjectTimeline = () => {
         {/* Timeline */}
         <div className="relative">
 
-          {/* Main Timeline Structure */}
-          <div className="grid grid-cols-5 gap-4 lg:gap-8 relative">
+          {/* Main Timeline Structure - Desktop */}
+          <div className="hidden md:block">
+            <div className="grid grid-cols-5 gap-4 lg:gap-8 relative">
 
-            {/* Timeline Line */}
-            <div className="absolute top-8 left-0 right-0 h-0.5 bg-gray-200 z-10"></div>
+              {/* Timeline Line */}
+              <div className="absolute top-8 left-0 right-0 h-0.5 bg-gray-200 z-10"></div>
 
             {timelineData.stages.map((stage, stageIndex) => (
               <div
@@ -117,9 +118,9 @@ const ProjectTimeline = () => {
 
                   {/* Stage Title */}
                   <div className="text-center lg:text-left">
-                    <h3 className="text-lg font-bold text-black mb-2 group-hover:text-gray-700 transition-colors">
+                    <h2 className="text-lg font-bold text-black mb-2 group-hover:text-gray-700 transition-colors">
                       {stage.name}
-                    </h3>
+                    </h2>
                   </div>
 
                   {/* Tasks */}
@@ -150,7 +151,7 @@ const ProjectTimeline = () => {
 
                         {/* Task Step Info */}
                         <div className="mt-2 flex items-center justify-between">
-                          <span className="text-xs font-semibold text-gray-500 bg-white px-2 py-1 rounded-full border">
+                          <span className="text-xs font-semibold text-gray-700 bg-white px-2 py-1 rounded-full border">
                             Step {task.step}
                           </span>
                         </div>
@@ -163,12 +164,53 @@ const ProjectTimeline = () => {
           </div>
 
           {/* Duration Labels */}
-          <div className="grid grid-cols-5 gap-4 lg:gap-8 mt-12">
-            {timelineData.stages.map((stage, index) => (
-              <div key={index} className="text-center">
-                <span className="text-sm font-medium text-gray-500 bg-gray-100 px-3 py-1 rounded-full">
-                  {stage.duration}
-                </span>
+            <div className="grid grid-cols-5 gap-4 lg:gap-8 mt-12">
+              {timelineData.stages.map((stage, index) => (
+                <div key={index} className="text-center">
+                  <span className="text-sm font-medium text-gray-700 bg-gray-100 px-3 py-1 rounded-full">
+                    {stage.duration}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Mobile Timeline Structure */}
+          <div className="md:hidden relative border-l-2 border-gray-200 ml-4 my-8">
+            {timelineData.stages.map((stage, stageIndex) => (
+              <div key={stageIndex} className="relative pl-8 pb-10 last:pb-0" onClick={() => setActiveStage(stageIndex)}>
+                {/* Stage Circle */}
+                <div className={`absolute -left-[9px] top-0 w-4 h-4 rounded-full border-2 z-20 transition-colors duration-300 ${stageIndex <= activeStage ? 'bg-black border-black' : 'bg-white border-gray-300'}`}>
+                  {stageIndex <= activeStage && (
+                    <div className="absolute inset-0 w-full h-full rounded-full bg-black opacity-20 animate-ping"></div>
+                  )}
+                </div>
+                
+                {/* Stage Content */}
+                <div className="-mt-1.5">
+                  <h2 className="text-xl font-bold text-black mb-2">{stage.name}</h2>
+                  <div className="mb-4">
+                    <span className="text-xs font-medium text-gray-700 bg-gray-100 px-3 py-1 rounded-full">{stage.duration}</span>
+                  </div>
+                  
+                  {/* Tasks */}
+                  <div className="space-y-3">
+                    {stage.tasks.map((task, taskIndex) => (
+                      <div 
+                        key={taskIndex} 
+                        className={`p-3 rounded-lg border transition-all duration-300 ${task.highlighted ? 'bg-orange-50 border-orange-200 text-orange-700' : task.active ? 'bg-gray-50 border-gray-200 text-black shadow-sm relative' : 'bg-gray-50 border-gray-200 text-gray-700'} ${stageIndex <= activeStage ? 'opacity-100' : 'opacity-60'}`}
+                      >
+                        {task.active && (
+                          <div className="absolute -top-1 -right-1 w-3 h-3 bg-green-400 rounded-full animate-pulse shadow-sm"></div>
+                        )}
+                        <p className="text-sm font-medium leading-tight">{task.name}</p>
+                        <div className="mt-2 flex items-center justify-between">
+                          <span className="text-xs font-semibold text-gray-700 bg-white px-2 py-1 rounded-full border">Step {task.step}</span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
             ))}
           </div>
@@ -180,6 +222,7 @@ const ProjectTimeline = () => {
             {timelineData.stages.map((_, index) => (
               <button
                 key={index}
+                aria-label={`Go to stage ${index + 1}`}
                 className={`w-3 h-3 rounded-full transition-all duration-300 transform hover:scale-125 ${index <= activeStage ? 'bg-black' : 'bg-gray-300'
                   }`}
                 onClick={() => setActiveStage(index)}

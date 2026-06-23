@@ -1,5 +1,6 @@
 'use client';
 import React, { useState, useRef, useEffect, useMemo, useCallback } from 'react';
+import Image from 'next/image';
 import styles from './style.module.scss';
 
 const VideoThumbnail = ({ 
@@ -127,10 +128,20 @@ const VideoThumbnail = ({
 
   return (
     <div className={`relative overflow-hidden ${className}`}>
+      {!isPlaying && posterSrc && (
+        <Image
+          src={posterSrc}
+          alt={alt || "Video thumbnail"}
+          fill
+          className={`object-cover transition-transform duration-500 ease-out ${
+            !isMobileOrTablet && isHovered ? 'scale-105' : 'scale-100'
+          }`}
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+        />
+      )}
       <video
         ref={videoRef}
         src={memoizedVideoSrc}
-        poster={posterSrc}
         muted
         loop
         playsInline
@@ -142,7 +153,9 @@ const VideoThumbnail = ({
         disablePictureInPicture
         // Prevent context menu on mobile
         onContextMenu={(e) => isMobileOrTablet && e.preventDefault()}
-      />
+      >
+        <track kind="captions" srcLang="en" label="English captions" />
+      </video>
     </div>
   );
 };
