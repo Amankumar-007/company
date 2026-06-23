@@ -4,7 +4,7 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: 'Twofloww Digital Agency',
     short_name: 'Twofloww',
-    description: 'Twofloww is a premium digital agency specializing in web development, mobile apps, UI/UX design, SEO, and cloud scaling.',
+    description: 'Twofloww is a digital agency specializing in web development, mobile apps, UI/UX design, SEO, and cloud scaling.',
     start_url: '/',
     display: 'standalone',
     background_color: '#ffffff',

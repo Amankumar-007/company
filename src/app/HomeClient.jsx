@@ -27,7 +27,7 @@ export default function HomeClient() {
       <AnimatePresence mode='wait'>
         {isLoading && <Preloader />}
       </AnimatePresence>
-      <HeroSection />
+      <HeroSection isLoading={isLoading} />
       <VideoComponent />
       <Description />
       <Projects />

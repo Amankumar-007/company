@@ -6,6 +6,7 @@ import FAQ from '@/components/Faq';
 import ProjectTimeline from '@/components/ProjectTimeline';
 import VideoThumbnail from '@/components/VideoThumbnail';
 import { getAllProjects } from '@/data/projects';
+import { gsap } from 'gsap';
 
 // Pattern Component for Projects
 const ProjectsPattern = () => (
@@ -107,23 +108,41 @@ ProjectCard.displayName = 'ProjectCard';
 
 const CubertoProjectsPage = () => {
   const containerRef = useRef(null);
+  const heroRef = useRef(null);
 
   // Memoize projects data to load only once
   const projects = useMemo(() => getAllProjects(), []);
+
+  useEffect(() => {
+    if (heroRef.current) {
+      const tl = gsap.timeline({ delay: 0.1 })
+      tl.fromTo('.projects-hero-title-line',
+        { opacity: 0, y: '110%' },
+        { opacity: 1, y: '0%', duration: 1.2, ease: 'power4.out', stagger: 0.12 }
+      )
+      tl.fromTo('.projects-hero-sub',
+        { opacity: 0, y: 30 },
+        { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out' },
+        '-=0.7'
+      )
+    }
+  }, []);
 
 
 
   return (
     <div ref={containerRef} className="min-h-screen bg-white">
       {/* Header */}
-      <header className="relative pb-16 lg:pt-14 lg:pb-20">
+      <header ref={heroRef} className="relative pb-16 lg:pt-14 lg:pb-20">
         <ProjectsPattern />
         <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto">
             <h1 className="text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
-              Our Projects
+              <div className="overflow-hidden pb-2 -mb-2">
+                <div className="projects-hero-title-line inline-block opacity-0 translate-y-[110%]">Our Projects</div>
+              </div>
             </h1>
-            <p className="text-xl text-gray-600 leading-relaxed">
+            <p className="projects-hero-sub text-xl text-gray-600 leading-relaxed opacity-0">
               We help bring ideas to life and create digital products that work.
             </p>
           </div>

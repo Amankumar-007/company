@@ -1,5 +1,6 @@
 "use client"
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { gsap } from 'gsap';
 
 // Pattern Component for Contact
 const ContactPattern = () => (
@@ -41,6 +42,7 @@ export default function ContactForm() {
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [submitMessage, setSubmitMessage] = useState('');
   const [isHovered, setIsHovered] = useState(false);
+  const heroRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -49,6 +51,21 @@ export default function ContactForm() {
       window.scrollTo(0, 0);
     }, 2000);
     return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    if (heroRef.current) {
+      const tl = gsap.timeline({ delay: 0.15 })
+      tl.fromTo('.contact-hero-title-line',
+        { opacity: 0, y: '110%' },
+        { opacity: 1, y: '0%', duration: 1.2, ease: 'power4.out', stagger: 0.12 }
+      )
+      tl.fromTo('.contact-hero-sub',
+        { opacity: 0, y: 30 },
+        { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out' },
+        '-=0.7'
+      )
+    }
   }, []);
 
   const services = [
@@ -276,12 +293,16 @@ export default function ContactForm() {
       <ContactPattern />
       <div className="relative z-10 max-w-4xl mx-auto px-6 py-8">
         {/* Header */}
-        <div className="text-center mb-20">
+        <div ref={heroRef} className="text-center mb-20">
           <h1 className="text-6xl md:text-7xl font-bold mb-8 leading-tight tracking-tight">
-            Hey! Tell us all<br />
-            the things
+            <div className="overflow-hidden pb-2 -mb-2">
+              <div className="contact-hero-title-line inline-block opacity-0 translate-y-[110%]">Hey! Tell us all</div>
+            </div>
+            <div className="overflow-hidden pb-2 -mb-2">
+              <div className="contact-hero-title-line inline-block opacity-0 translate-y-[110%]">the things</div>
+            </div>
           </h1>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <p className="contact-hero-sub text-lg text-gray-600 max-w-2xl mx-auto opacity-0">
             Let&apos;s create something amazing together. Fill out the form below and we&apos;ll get back to you as soon as possible.
           </p>
         </div>

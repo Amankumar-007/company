@@ -1,7 +1,8 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import styles from './page.module.scss';
 import { Globe, Smartphone, Palette, ShieldCheck } from 'lucide-react';
+import { gsap } from 'gsap';
 
 // Navbar Component
 
@@ -45,16 +46,40 @@ const HeroSection = () => {
     return result;
   };
 
+  const heroRef = useRef(null);
+
+  useEffect(() => {
+    if (heroRef.current) {
+      const tl = gsap.timeline({ delay: 0.1 })
+      tl.fromTo('.about-hero-title-line',
+        { opacity: 0, y: '110%' },
+        { opacity: 1, y: '0%', duration: 1.2, ease: 'power4.out', stagger: 0.12 }
+      )
+      tl.fromTo('.about-hero-sub',
+        { opacity: 0, y: 30 },
+        { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out' },
+        '-=0.7'
+      )
+    }
+  }, []);
+
   return (
-    <section className="relative py-20 lg:py-32 bg-white overflow-hidden" data-scroll-section>
+    <section ref={heroRef} className="relative py-18 lg:py-22 bg-white overflow-hidden" data-scroll-section>
       <CurvedSwirl />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="text-center max-w-4xl mx-auto">
-          <h1
-            className="text-4xl lg:text-5xl xl:text-6xl font-bold text-black leading-tight mb-6"
-            dangerouslySetInnerHTML={{ __html: renderHighlightedTitle() }}
-          />
-          <p className="text-lg lg:text-xl text-gray-600 leading-relaxed max-w-3xl mx-auto">
+          <h1 className="text-4xl lg:text-5xl xl:text-6xl font-bold text-black leading-tight mb-6">
+            <div className="overflow-hidden pb-2 -mb-2">
+              <div className="about-hero-title-line inline-block opacity-0 translate-y-[110%]">Meet our team of</div>
+            </div>
+            <div className="overflow-hidden pb-2 -mb-2">
+              <div className="about-hero-title-line inline-block opacity-0 translate-y-[110%]"><em className="italic font-medium">creators</em>, <em className="italic font-medium">designers</em>,</div>
+            </div>
+            <div className="overflow-hidden pb-2 -mb-2">
+              <div className="about-hero-title-line inline-block opacity-0 translate-y-[110%]">and world-class <em className="italic font-medium">problem solvers</em></div>
+            </div>
+          </h1>
+          <p className="about-hero-sub text-lg lg:text-xl text-gray-600 leading-relaxed max-w-3xl mx-auto opacity-0">
             To be the company our customers want us to be, it takes an eclectic group of passionate operators.
             Get to know the people leading the way at Untitled.
           </p>
@@ -256,11 +281,11 @@ const AboutPage = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-      setTimeout(() => {
-        setIsLoading(false);
-        document.body.style.cursor = 'default';
-        window.scrollTo(0, 0);
-      }, 1000);
+    setTimeout(() => {
+      setIsLoading(false);
+      document.body.style.cursor = 'default';
+      window.scrollTo(0, 0);
+    }, 1000);
   }, []);
 
   return (

@@ -27,49 +27,49 @@ const menuVariants = {
 
 const overlayVariants = {
   initial: { opacity: 0 },
-  animate: { opacity: 1 },
-  exit: { opacity: 0 }
+  animate: { opacity: 1, transition: { duration: 0.35, ease: "easeOut" } },
+  exit: { opacity: 0, transition: { duration: 0.3, ease: "easeIn" } }
 };
 
 const mobileMenuVariants = {
-  initial: { x: '100%', opacity: 0 },
+  initial: { 
+    x: '100%', 
+    opacity: 0.5
+  },
   animate: { 
     x: 0, 
     opacity: 1,
     transition: { 
-      type: 'spring',
-      damping: 25,
-      stiffness: 200,
-      duration: 0.4
+      duration: 0.45,
+      ease: [0.16, 1, 0.3, 1],
+      staggerChildren: 0.05,
+      delayChildren: 0.05
     }
   },
   exit: { 
     x: '100%', 
     opacity: 0,
     transition: { 
-      type: 'spring',
-      damping: 25,
-      stiffness: 200,
-      duration: 0.3
+      duration: 0.35,
+      ease: [0.16, 1, 0.3, 1]
     }
   }
 };
 
 const menuItemVariants = {
-  initial: { x: 30, opacity: 0 },
+  initial: { y: 15, opacity: 0 },
   animate: { 
-    x: 0, 
+    y: 0, 
     opacity: 1,
     transition: { 
-      type: 'spring',
-      stiffness: 300,
-      damping: 20
+      duration: 0.4,
+      ease: [0.16, 1, 0.3, 1]
     }
   },
   exit: { 
-    x: 30, 
+    y: 10, 
     opacity: 0,
-    transition: { duration: 0.2 }
+    transition: { duration: 0.25 }
   }
 };
 
@@ -201,19 +201,23 @@ export default function MobileMenu({ navItems, onClose, pathname, isDesktop = fa
         animate="animate"
         exit="exit"
       >
+        {/* Glow Blobs */}
+        <div className={styles.glowBlob1} />
+        <div className={styles.glowBlob2} />
+
         {/* Mobile Menu Header */}
         <motion.div 
           className={styles.menuHeader}
           variants={menuItemVariants}
         >
-          <h2 className={styles.menuTitle}>Menu</h2>
+          <h2 className={styles.menuTitle}>Navigation</h2>
           <motion.button
             className={styles.closeButton}
             onClick={onClose}
             whileHover={{ scale: 1.1, rotate: 90 }}
             whileTap={{ scale: 0.9 }}
           >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <line x1="18" y1="6" x2="6" y2="18"></line>
               <line x1="6" y1="6" x2="18" y2="18"></line>
             </svg>
@@ -231,26 +235,19 @@ export default function MobileMenu({ navItems, onClose, pathname, isDesktop = fa
                 custom={index}
                 onClick={handleLinkClick}
                 whileHover={{ 
-                  scale: 1.02,
-                  x: -5,
-                  transition: { type: 'spring', stiffness: 400, damping: 10 }
+                  x: 8,
+                  transition: { type: 'spring', stiffness: 300, damping: 20 }
                 }}
-                whileTap={{ scale: 0.98 }}
+                whileTap={{ scale: 0.97 }}
               >
-                <motion.span
-                  className={styles.navText}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: index * 0.1 + 0.3 }}
-                >
-                  {item.title}
-                </motion.span>
-                <motion.div
-                  className={styles.navIndicator}
-                  initial={{ scaleX: 0 }}
-                  animate={{ scaleX: pathname === item.href ? 1 : 0 }}
-                  transition={{ delay: index * 0.1 + 0.4, duration: 0.3 }}
-                />
+                <span className={styles.navNumber}>0{index + 1}.</span>
+                <span className={styles.navText}>{item.title}</span>
+                <span className={styles.navArrow}>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                  </svg>
+                </span>
               </MotionLink>
             </Magnetic>
           ))}
@@ -262,7 +259,7 @@ export default function MobileMenu({ navItems, onClose, pathname, isDesktop = fa
           variants={menuItemVariants}
         >
           <div className={styles.contactInfo}>
-            <p className={styles.contactLabel}>Get in touch</p>
+            <p className={styles.contactLabel}>Get in Touch</p>
             <a href="mailto:hello@company.com" className={styles.contactLink}>
               hello@company.com
             </a>
@@ -272,10 +269,10 @@ export default function MobileMenu({ navItems, onClose, pathname, isDesktop = fa
               <motion.a
                 href="https://facebook.com"
                 className={styles.socialLink}
-                whileHover={{ scale: 1.1, rotate: 5 }}
+                whileHover={{ scale: 1.15, y: -3 }}
                 whileTap={{ scale: 0.9 }}
               >
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
                 </svg>
               </motion.a>
@@ -284,10 +281,10 @@ export default function MobileMenu({ navItems, onClose, pathname, isDesktop = fa
               <motion.a
                 href="https://twitter.com"
                 className={styles.socialLink}
-                whileHover={{ scale: 1.1, rotate: 5 }}
+                whileHover={{ scale: 1.15, y: -3 }}
                 whileTap={{ scale: 0.9 }}
               >
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
                 </svg>
               </motion.a>
@@ -296,10 +293,10 @@ export default function MobileMenu({ navItems, onClose, pathname, isDesktop = fa
               <motion.a
                 href="https://linkedin.com"
                 className={styles.socialLink}
-                whileHover={{ scale: 1.1, rotate: 5 }}
+                whileHover={{ scale: 1.15, y: -3 }}
                 whileTap={{ scale: 0.9 }}
               >
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
                 </svg>
               </motion.a>

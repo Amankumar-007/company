@@ -78,6 +78,7 @@ export default function BlogForm({ initialData, blogId }: BlogFormProps) {
   const [tagInput, setTagInput] = useState('')
   const [isFeatured, setIsFeatured] = useState(initialData?.is_featured || false)
   const [category, setCategory] = useState(initialData?.category || '')
+  const [existingCategories, setExistingCategories] = useState<string[]>([])
 
   // Derived: word count & reading time
   const wordCount = countWordsFromHTML(content)
@@ -126,9 +127,18 @@ export default function BlogForm({ initialData, blogId }: BlogFormProps) {
     if (data) setAuthors(data)
   }, [supabase])
 
+  const fetchCategories = useCallback(async () => {
+    const { data } = await supabase.from('blogs').select('category')
+    if (data) {
+      const cats = Array.from(new Set(data.map(d => d.category).filter(Boolean))) as string[]
+      setExistingCategories(cats)
+    }
+  }, [supabase])
+
   useEffect(() => {
     fetchAuthors()
-  }, [fetchAuthors])
+    fetchCategories()
+  }, [fetchAuthors, fetchCategories])
 
   // Tags handling
   const addTag = (tag: string) => {
@@ -414,11 +424,15 @@ export default function BlogForm({ initialData, blogId }: BlogFormProps) {
                 <Hash size={14} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-400" />
                 <input
                   type="text"
+                  list="category-list"
                   value={category}
                   onChange={(e) => setCategory(e.target.value)}
                   className="w-full pl-9 pr-4 py-3 bg-zinc-50/50 border border-zinc-200 rounded-xl focus:bg-white focus:ring-4 focus:ring-orange-500/10 focus:border-[#ea580c] transition-all duration-200 text-black text-sm placeholder-zinc-400 font-medium outline-none"
                   placeholder="e.g. Design, Engineering, Product"
                 />
+                <datalist id="category-list">
+                  {existingCategories.map(cat => <option key={cat} value={cat} />)}
+                </datalist>
               </div>
             </div>
 

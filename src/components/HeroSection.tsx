@@ -1,41 +1,83 @@
-import React from 'react';
+'use client';
+import React, { useEffect, useRef } from 'react';
 import Link from 'next/link';
+import { gsap } from 'gsap';
 
-export default function HeroSection() {
+export default function HeroSection({ isLoading = true }) {
+  const heroRef = useRef(null);
+
+  useEffect(() => {
+    // Only fire once isLoading flips to false (preloader is leaving)
+    if (isLoading) return;
+
+    // Wait for the preloader slide-up exit to finish (~900ms: 0.2s delay + 0.8s anim)
+    const timer = setTimeout(() => {
+      if (!heroRef.current) return;
+      const tl = gsap.timeline();
+      tl.fromTo('.hero-title-line-home',
+        { opacity: 0, y: '110%' },
+        { opacity: 1, y: '0%', duration: 1.2, ease: 'power4.out', stagger: 0.12 }
+      )
+      .fromTo('.hero-subtitle-home',
+        { opacity: 0, y: 30 },
+        { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out' },
+        '-=0.7'
+      )
+      .fromTo('.hero-cta-home',
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out', stagger: 0.1 },
+        '-=0.6'
+      );
+    }, 900);
+
+    return () => clearTimeout(timer);
+  }, [isLoading]);
   return (
-    <div className="relative min-h-[50vh] mb-10 mt-5 flex items-center justify-center px-4 sm:px-5 lg:px-7 pt-6">
-      <div className="max-w-6xl mx-auto text-center">
+    <div
+      ref={heroRef}
+      className="relative min-h-[90vh] -mb-[25vh] flex items-center justify-center px-4 sm:px-5 lg:px-7 pt-32 pb-[32vh] bg-cover bg-center bg-no-repeat"
+      style={{ backgroundImage: "url('/hero1.png')" }}
+    >
+      {/* Gradient overlay to blend bottom into white background */}
+      <div className="absolute bottom-0 left-0 right-0 h-[40vh] bg-gradient-to-b from-transparent via-white/50 to-white z-0 pointer-events-none"></div>
+
+      <div className="max-w-6xl mx-auto text-center relative z-10">
         {/* Main Heading */}
-        <h1 className="text-[2.0rem] sm:text-[3.0rem] lg:text-[3.2rem] xl:text-[4.2rem] font-bold text-gray-900 leading-tight mb-8 tracking-tight">
-          <span className="block">Building Digital Excellence</span>
-          <span className="block">the <span className="bg-[#7ED348] text-black px-2 pt-0.5 pb-1 rounded-md">Agile</span> Way</span>
+        <h1 className="text-[1.8rem] sm:text-[2.6rem] lg:text-[3.0rem] xl:text-[3.8rem] font-bold text-white leading-tight mb-8 tracking-tight">
+          <div className="overflow-hidden pb-1 -mb-1">
+            <div className="hero-title-line-home inline-block opacity-0 translate-y-[110%]">Building Digital Excellence</div>
+          </div>
+          <div className="overflow-hidden pb-1 -mb-1">
+            <div className="hero-title-line-home inline-block opacity-0 translate-y-[110%]">the <span className="border-b-4 border-orange-500 pb-1">Agile</span> Way</div>
+          </div>
         </h1>
 
         {/* Subtitle */}
-        <p className="text-lg sm:text-xl lg:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed mb-12 font-light">
+        <p className="hero-subtitle-home text-lg sm:text-xl lg:text-2xl text-gray-200 max-w-4xl mx-auto leading-relaxed mb-12 font-light opacity-0">
           We use agile methodology to build exceptional websites.
-          <span className="block mt-2">Get your <span className="font-semibold bg-[#7ED348] text-black px-2 py-0.5 rounded-md">free</span> first wireframe - let&apos;s create something amazing together.</span>
+          <span className="block mt-2">Get your <span className="font-semibold border-b-2 border-orange-500 pb-0.5 text-white">free</span> first wireframe - let&apos;s create something amazing together.</span>
         </p>
 
         {/* CTA Buttons */}
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+        <div className="flex flex-col sm:flex-row gap-6 sm:gap-10 justify-center items-center mt-4">
           <Link
             href="/contact"
-            className="relative overflow-hidden px-8 py-4 border border-gray-600 rounded-full text-black transition-all duration-300 hover:border-black group"
+            className="hero-cta-home relative overflow-hidden px-7 py-3.5 bg-black border border-black text-white rounded-full transition-all duration-300 hover:border-[#4169E1] group opacity-0"
           >
-            <div className="absolute inset-0 bg-[#7ED348] transform translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out"></div>
-            <span className="relative z-10 group-hover:text-black transition-colors duration-300 font-medium text-lg">
+            <div className="absolute inset-0 bg-[#4169E1] transform translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out"></div>
+            <span className="relative z-10 font-medium text-base">
               Start Your Project
             </span>
           </Link>
           <Link
             href="/projects"
-            className="relative overflow-hidden px-8 py-4 border border-gray-600 rounded-full text-black transition-all duration-300 hover:border-black group"
+            className="hero-cta-home group relative pb-1 text-white font-medium transition-all duration-300 opacity-0"
           >
-            <div className="absolute inset-0 bg-[#7ED348] transform translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out"></div>
-            <span className="relative z-10 group-hover:text-black transition-colors duration-300 font-medium text-lg">
+            <span className="group-hover:text-gray-300 transition-colors duration-300 uppercase tracking-widest text-sm">
               View Our Work
             </span>
+            {/* Aesthetic animated black line on the bottom */}
+            <span className="absolute bottom-0 left-0 w-8 h-[2px] bg-black group-hover:w-full transition-all duration-500 ease-out"></span>
           </Link>
         </div>
 

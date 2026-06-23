@@ -3,6 +3,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Calendar, ArrowRight } from 'lucide-react'
 import type { Metadata } from 'next'
+import BlogHeroReveal from './BlogHeroReveal'
 
 const BASE_URL = 'https://www.twofloww.in'
 
@@ -39,7 +40,14 @@ export const metadata: Metadata = {
   },
 }
 
-export default async function BlogListingPage() {
+type Props = {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+}
+
+export default async function BlogListingPage(props: Props) {
+  const searchParams = await props.searchParams
+  const selectedCategory = typeof searchParams?.category === 'string' ? searchParams.category : 'All'
+
   const supabase = await createClient()
 
   // Dynamic JSON-LD structured data for the Blog
@@ -60,17 +68,25 @@ export default async function BlogListingPage() {
   }
 
 
-  const { data: blogs } = await supabase
+  const { data: allBlogs } = await supabase
     .from('blogs')
     .select('*, author:authors(*)')
     .eq('status', 'published')
     .order('created_at', { ascending: false })
 
-  const featuredBlog = blogs && blogs.length > 0 ? blogs[0] : null
-  const remainingBlogs = blogs && blogs.length > 1 ? blogs.slice(1) : []
+  const blogs = allBlogs || []
 
-  // Categories matching the design
-  const categories = ['All', 'Product Updates', 'News', 'Academy', 'Client Management', 'Ambassador', 'Features']
+  // Extract unique available categories
+  const extractedCategories = Array.from(new Set(blogs.map(b => b.category).filter(Boolean))) as string[]
+  const categories = ['All', ...extractedCategories]
+
+  // Filter based on selected category
+  const filteredBlogs = selectedCategory === 'All' 
+    ? blogs 
+    : blogs.filter(b => b.category === selectedCategory)
+
+  const featuredBlog = filteredBlogs.length > 0 ? filteredBlogs[0] : null
+  const remainingBlogs = filteredBlogs.length > 1 ? filteredBlogs.slice(1) : []
 
   return (
     <>
@@ -90,23 +106,35 @@ export default async function BlogListingPage() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
-        <h1 className="text-4xl md:text-6xl font-bold text-[#c2410c] mb-6 md:mb-8 font-space-grotesk tracking-tight">
-          Blog
-        </h1>
+        <div className="relative mb-6 md:mb-8">
+          <BlogHeroReveal />
+          <h1 className="text-4xl md:text-6xl font-bold text-[#c2410c] font-space-grotesk tracking-tight">
+            <div className="overflow-hidden pb-2 -mb-2">
+              <div className="blog-hero-title-line inline-block opacity-0 translate-y-[110%]">Blog</div>
+            </div>
+          </h1>
+          <p className="blog-hero-sub text-lg text-gray-600 mt-2 opacity-0 max-w-xl">
+            Insights, thoughts, and stories from the Twofloww team.
+          </p>
+        </div>
 
         {/* Filter Bar */}
         <div className="flex overflow-x-auto no-scrollbar scroll-smooth flex-nowrap items-center bg-[#ea580c] p-1.5 rounded-full mb-8 md:mb-12 w-full max-w-full sm:w-fit shadow-md">
-          {categories.map((cat, idx) => (
-            <button
-              key={cat}
-              className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 shrink-0 ${idx === 0
-                ? 'bg-white text-[#c2410c] shadow-sm'
-                : 'text-white/90 hover:bg-white/10 hover:text-white'
-                }`}
-            >
-              {cat}
-            </button>
-          ))}
+          {categories.map((cat) => {
+            const isSelected = selectedCategory === cat
+            return (
+              <Link
+                href={`/blog${cat === 'All' ? '' : `?category=${encodeURIComponent(cat)}`}`}
+                key={cat}
+                className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 shrink-0 ${isSelected
+                  ? 'bg-white text-[#c2410c] shadow-sm'
+                  : 'text-white/90 hover:bg-white/10 hover:text-white'
+                  }`}
+              >
+                {cat}
+              </Link>
+            )
+          })}
         </div>
 
         {/* 1. Featured Post */}
@@ -139,7 +167,7 @@ export default async function BlogListingPage() {
                       src={featuredBlog.cover_image}
                       alt={featuredBlog.title}
                       fill
-                      className="object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out"
+                      className="object-contain p-6 lg:p-10 transition-transform duration-700 ease-out"
                       priority
                     />
                   ) : (
@@ -160,13 +188,13 @@ export default async function BlogListingPage() {
               <Link key={blog.id} href={`/blog/${blog.slug}`} className="group block h-full">
                 <article className="flex flex-col h-full bg-transparent">
                   {/* Card Image */}
-                  <div className="relative aspect-[4/3] w-full rounded-2xl md:rounded-[2rem] overflow-hidden mb-4 md:mb-5 bg-neutral-200">
+                  <div className="relative aspect-video w-full rounded-2xl md:rounded-[2rem] overflow-hidden mb-4 md:mb-5 bg-neutral-200">
                     {blog.cover_image ? (
                       <Image
                         src={blog.cover_image}
                         alt={blog.title}
                         fill
-                        className="object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out"
+                        className="object-contain p-4 sm:p-6 transition-transform duration-700 ease-out"
                       />
                     ) : (
                       <div className="absolute inset-0 bg-[#e5e7eb] flex items-center justify-center">
