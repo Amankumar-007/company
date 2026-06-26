@@ -67,10 +67,10 @@ interface Props {
   serviceLabel?: string;
 }
 
-// Framer Motion variants
+// Framer Motion variants — lighter y offset and faster stagger for mobile perf
 const fadeInUp = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } }
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] } }
 };
 
 const staggerContainer = {
@@ -78,7 +78,7 @@ const staggerContainer = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.1
+      staggerChildren: 0.06,
     }
   }
 };
@@ -142,7 +142,7 @@ export default function LocationPageTemplate({ loc, h1, intro, faqs, serviceLabe
     <main className="bg-[#FAFAFA] text-[#0B0D17] min-h-screen selection:bg-[#DE5D26]/20 selection:text-[#DE5D26] font-sans overflow-x-hidden">
       
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
-      <section className="relative min-h-[90vh] flex items-center px-6 pt-36 pb-24 overflow-hidden bg-white border-b border-gray-100">
+      <section className="relative min-h-[85vh] flex items-center px-4 sm:px-6 pt-28 sm:pt-36 pb-16 sm:pb-24 overflow-hidden bg-white border-b border-gray-100">
         {/* dot-grid background */}
         <div
           aria-hidden
@@ -153,34 +153,12 @@ export default function LocationPageTemplate({ loc, h1, intro, faqs, serviceLabe
           }}
         />
 
-        {/* ambient glow blobs */}
-        <motion.div
-          animate={{
-            x: [0, 30, -20, 0],
-            y: [0, -40, 20, 0],
-          }}
-          transition={{
-            duration: 12,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-          className="absolute top-0 right-10 w-[400px] h-[400px] rounded-full bg-[#DE5D26]/[0.05] blur-[100px] pointer-events-none"
-        />
-        <motion.div
-          animate={{
-            x: [0, -40, 30, 0],
-            y: [0, 30, -30, 0],
-          }}
-          transition={{
-            duration: 15,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-          className="absolute bottom-10 left-10 w-[500px] h-[500px] rounded-full bg-indigo-500/[0.04] blur-[120px] pointer-events-none"
-        />
+        {/* ambient glow blobs — static to keep mobile GPU free */}
+        <div className="absolute top-0 right-10 w-[400px] h-[400px] rounded-full bg-[#DE5D26]/[0.06] blur-[100px] pointer-events-none" />
+        <div className="absolute bottom-10 left-10 w-[500px] h-[500px] rounded-full bg-indigo-500/[0.04] blur-[120px] pointer-events-none" />
 
         <div className="relative z-10 max-w-6xl mx-auto w-full">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center">
             {/* Left side: text and badges */}
             <motion.div 
               initial="hidden" 
@@ -356,12 +334,12 @@ export default function LocationPageTemplate({ loc, h1, intro, faqs, serviceLabe
       </section>
 
       {/* ── Trust bar (Floating Cards) ───────────────────────────────────── */}
-      <section className="relative z-20 -mt-10 px-6">
+      <section className="relative z-20 mt-0 lg:-mt-10 px-6">
         <div className="max-w-6xl mx-auto">
           <motion.div 
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: "-50px" }}
+            viewport={{ once: true, amount: 0.1 }}
             variants={staggerContainer}
             className="grid grid-cols-2 lg:grid-cols-4 gap-4"
           >
@@ -371,11 +349,10 @@ export default function LocationPageTemplate({ loc, h1, intro, faqs, serviceLabe
               { value: '2016', label: 'Founded', desc: 'Years of software excellence' },
               { value: '100%', label: 'Satisfaction', desc: 'Guaranteed quality delivery' },
             ].map(({ value, label, desc }) => (
-              <motion.div 
-                variants={fadeInUp} 
-                key={label} 
-                whileHover={{ y: -5, transition: { duration: 0.2 } }}
-                className="bg-white/80 backdrop-blur-md border border-gray-100 rounded-2xl p-6 shadow-[0_8px_30px_rgba(0,0,0,0.03)] hover:shadow-[0_12px_40px_rgba(0,0,0,0.06)] hover:border-[#DE5D26]/30 transition-all duration-300 flex flex-col items-center text-center group"
+              <motion.div
+                variants={fadeInUp}
+                key={label}
+                className="bg-white border border-gray-100 rounded-2xl p-6 shadow-[0_8px_30px_rgba(0,0,0,0.03)] hover:shadow-[0_12px_40px_rgba(0,0,0,0.06)] hover:border-[#DE5D26]/30 transition-all duration-300 flex flex-col items-center text-center group"
               >
                 <p
                   className="text-3xl md:text-4xl font-black text-[#DE5D26] mb-1 group-hover:scale-105 transition-transform duration-300"
@@ -397,7 +374,7 @@ export default function LocationPageTemplate({ loc, h1, intro, faqs, serviceLabe
           <motion.div 
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true }}
+            viewport={{ once: true, amount: 0.1 }}
             variants={fadeInUp}
             className="mb-16 text-center max-w-2xl mx-auto"
           >
@@ -413,7 +390,7 @@ export default function LocationPageTemplate({ loc, h1, intro, faqs, serviceLabe
           <motion.div 
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true }}
+            viewport={{ once: true, amount: 0.1 }}
             variants={staggerContainer}
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
           >
@@ -421,7 +398,6 @@ export default function LocationPageTemplate({ loc, h1, intro, faqs, serviceLabe
               <motion.div
                 variants={fadeInUp}
                 key={label}
-                whileHover={{ y: -4, transition: { duration: 0.2 } }}
                 className="bg-white border border-gray-100 hover:border-[#DE5D26]/30 hover:shadow-[0_20px_50px_rgba(222,93,38,0.06)] rounded-3xl p-8 transition-all duration-300 group relative overflow-hidden"
               >
                 {/* corner gradient */}
@@ -450,7 +426,7 @@ export default function LocationPageTemplate({ loc, h1, intro, faqs, serviceLabe
           <motion.div 
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true }}
+            viewport={{ once: true, amount: 0.1 }}
             variants={fadeInUp}
             className="mb-16 text-center max-w-2xl mx-auto"
           >
@@ -471,7 +447,7 @@ export default function LocationPageTemplate({ loc, h1, intro, faqs, serviceLabe
           <motion.div 
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true }}
+            viewport={{ once: true, amount: 0.1 }}
             variants={staggerContainer}
             className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6"
           >
@@ -490,7 +466,6 @@ export default function LocationPageTemplate({ loc, h1, intro, faqs, serviceLabe
               <motion.div
                 variants={fadeInUp}
                 key={title}
-                whileHover={{ y: -6, transition: { duration: 0.2 } }}
                 className="bg-white border border-gray-100 hover:border-[#DE5D26]/30 hover:shadow-[0_20px_45px_rgba(222,93,38,0.06)] rounded-3xl p-6 flex flex-col items-center text-center justify-center gap-4 transition-all duration-300 group overflow-hidden relative"
               >
                 {/* Subtle background glow on hover */}
@@ -533,7 +508,7 @@ export default function LocationPageTemplate({ loc, h1, intro, faqs, serviceLabe
           <motion.div
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true }}
+            viewport={{ once: true, amount: 0.1 }}
             variants={staggerContainer}
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12"
           >
@@ -562,7 +537,6 @@ export default function LocationPageTemplate({ loc, h1, intro, faqs, serviceLabe
               <motion.div
                 variants={fadeInUp}
                 key={title}
-                whileHover={{ y: -5, transition: { duration: 0.2 } }}
                 className="bg-[#FAFAFA] border border-gray-100 rounded-3xl p-8 hover:bg-white hover:shadow-[0_20px_50px_rgba(222,93,38,0.05)] hover:border-[#DE5D26]/20 transition-all duration-300 group flex flex-col items-center text-center justify-between"
               >
                 <div className="flex flex-col items-center">
@@ -601,7 +575,7 @@ export default function LocationPageTemplate({ loc, h1, intro, faqs, serviceLabe
           <motion.div
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true }}
+            viewport={{ once: true, amount: 0.1 }}
             variants={staggerContainer}
           >
             <motion.p variants={fadeInUp} className="text-xs text-[#DE5D26] font-bold uppercase tracking-widest mb-4">Our Process</motion.p>
@@ -641,9 +615,9 @@ export default function LocationPageTemplate({ loc, h1, intro, faqs, serviceLabe
           <motion.div 
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true }}
+            viewport={{ once: true, amount: 0.1 }}
             variants={staggerContainer}
-            className="grid grid-cols-1 sm:grid-cols-2 gap-6"
+            className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6"
           >
             {[
               { n: '01', t: 'Discovery', d: `We map your goals and the competitive landscape in ${place}.` },
@@ -801,7 +775,7 @@ export default function LocationPageTemplate({ loc, h1, intro, faqs, serviceLabe
           <motion.div
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true }}
+            viewport={{ once: true, amount: 0.1 }}
             variants={fadeInUp}
             className="mb-14 text-center"
           >
@@ -816,7 +790,7 @@ export default function LocationPageTemplate({ loc, h1, intro, faqs, serviceLabe
           <motion.div
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true }}
+            viewport={{ once: true, amount: 0.1 }}
             variants={staggerContainer}
           >
             {faqs.map((faq, i) => (
@@ -861,7 +835,7 @@ export default function LocationPageTemplate({ loc, h1, intro, faqs, serviceLabe
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, amount: 0.1 }}
             transition={{ duration: 0.6 }}
             className="text-center mb-14"
           >
@@ -894,9 +868,9 @@ export default function LocationPageTemplate({ loc, h1, intro, faqs, serviceLabe
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, amount: 0.1 }}
             transition={{ duration: 0.7, ease: 'easeOut' }}
-            className="relative overflow-hidden rounded-2xl px-10 py-10 sm:px-14"
+            className="relative overflow-hidden rounded-2xl px-6 py-8 sm:px-14 sm:py-10"
             style={{
               background: 'linear-gradient(120deg, #E8521A 0%, #F97316 55%, #FBBF24 100%)',
             }}

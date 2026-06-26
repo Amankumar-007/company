@@ -4,13 +4,27 @@ import Image from 'next/image'
 import { Calendar, ArrowRight } from 'lucide-react'
 import type { Metadata } from 'next'
 import BlogHeroReveal from './BlogHeroReveal'
+import { getRelativeTime } from '@/lib/utils'
 
 const BASE_URL = 'https://www.twofloww.in'
 
 export const metadata: Metadata = {
   title: 'Blog | Twofloww – Digital Agency Insights & Engineering',
-  description: 'Insights, thoughts, and industry-leading stories on web engineering, design systems, and product development from the Twofloww team.',
-  keywords: ['web development blog', 'design systems', 'digital agency insights', 'Twofloww blog', 'engineering stories'],
+  description: 'Fresh insights on web development, UI/UX design, SEO, and digital marketing from the Twofloww team. Practical guides updated regularly for developers and founders in India.',
+  keywords: [
+    'web development blog India',
+    'digital agency blog',
+    'UI UX design tips',
+    'SEO guides for startups',
+    'Next.js tutorials',
+    'React development tips',
+    'digital marketing India',
+    'Twofloww blog',
+    'web engineering insights',
+    'product development blog',
+    'startup tech blog',
+    'design systems guide',
+  ],
   alternates: {
     canonical: `${BASE_URL}/blog`,
   },
@@ -19,21 +33,21 @@ export const metadata: Metadata = {
     locale: 'en_IN',
     url: `${BASE_URL}/blog`,
     siteName: 'Twofloww Digital Agency',
-    title: 'Blog | Twofloww – Digital Agency Insights',
-    description: 'Insights, thoughts, and industry-leading stories on web engineering, design systems, and product development from the Twofloww team.',
+    title: 'Blog | Twofloww – Digital Agency Insights & Engineering',
+    description: 'Fresh insights on web development, UI/UX design, SEO, and digital marketing from the Twofloww team. Practical guides updated regularly.',
     images: [
       {
         url: '/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'Twofloww Blog',
+        alt: 'Twofloww Blog – Digital Agency Insights',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Blog | Twofloww',
-    description: 'Insights, thoughts, and industry-leading stories from the Twofloww team.',
+    title: 'Blog | Twofloww – Digital Agency Insights',
+    description: 'Fresh insights on web development, UI/UX design, SEO, and digital marketing from the Twofloww team.',
     images: ['/og-image.png'],
     creator: '@twofloww',
     site: '@twofloww',
@@ -209,12 +223,11 @@ export default async function BlogListingPage(props: Props) {
                       <span className="bg-orange-50 text-[#c2410c] border border-orange-100 text-xs font-semibold px-3 py-1 rounded-md">
                         Features
                       </span>
-                      <span className="text-xs font-semibold text-neutral-500">
-                        {new Date(blog.created_at).toLocaleDateString('en-US', {
-                          month: 'short',
-                          day: 'numeric',
-                          year: 'numeric'
-                        })}
+                      <span
+                        className="text-xs font-semibold text-neutral-500"
+                        title={new Date(blog.created_at).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+                      >
+                        {getRelativeTime(blog.created_at)}
                       </span>
                     </div>
 

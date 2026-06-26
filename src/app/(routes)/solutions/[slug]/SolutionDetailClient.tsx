@@ -3,7 +3,7 @@
 import React, { useRef } from 'react';
 import { motion, useMotionValue, useTransform, useSpring } from 'framer-motion';
 import Link from 'next/link';
-import { ArrowLeft, ArrowRight, Sparkles, Check } from 'lucide-react';
+import { ArrowRight, Sparkles, Check } from 'lucide-react';
 import { openConsultModal } from '@/components/ConsultModal';
 import {
   Rocket,
@@ -83,7 +83,7 @@ export default function SolutionDetailClient({ solution }: { solution: Solution 
     <div className="bg-[#FAFAFA] text-[#0B0D17] min-h-screen selection:bg-[#DE5D26]/20 selection:text-[#DE5D26] font-sans overflow-x-hidden">
       
       {/* ── HERO SECTION ─────────────────────────────────────────────────── */}
-      <section className="relative min-h-[85vh] flex items-center px-6 pt-36 pb-20 overflow-hidden bg-white border-b border-zinc-100 select-none">
+      <section className="relative min-h-[70vh] lg:min-h-[85vh] flex items-center px-4 sm:px-6 pt-28 sm:pt-36 pb-14 sm:pb-20 overflow-hidden bg-white border-b border-zinc-100 select-none">
         
         {/* dot-grid background */}
         <div
@@ -100,7 +100,7 @@ export default function SolutionDetailClient({ solution }: { solution: Solution 
         <div className="absolute bottom-10 left-10 w-[550px] h-[550px] rounded-full bg-orange-500/[0.03] blur-[120px] pointer-events-none" />
 
         <div className="relative z-10 max-w-6xl mx-auto w-full">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center">
             
             {/* Left Side: Header & Context */}
             <div className="lg:col-span-7 flex flex-col">
@@ -148,8 +148,8 @@ export default function SolutionDetailClient({ solution }: { solution: Solution 
               </div>
             </div>
 
-            {/* Right Side: Interactive 3D Card Graphic */}
-            <div className="lg:col-span-5 flex items-center justify-center py-8">
+            {/* Right Side: Interactive 3D Card Graphic — desktop only */}
+            <div className="lg:col-span-5 hidden lg:flex items-center justify-center py-8">
               <div
                 ref={cardRef}
                 onMouseMove={handleMouseMove}
@@ -198,21 +198,21 @@ export default function SolutionDetailClient({ solution }: { solution: Solution 
       </section>
 
       {/* ── TRUST BAR / STATS ────────────────────────────────────────────── */}
-      <section className="relative z-20 -mt-10 px-6 select-none">
+      <section className="relative z-20 mt-0 lg:-mt-10 px-6 select-none">
         <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+          <div className="grid grid-cols-3 gap-3 sm:gap-6">
             {solution.stats.map((stat, i) => (
               <div
                 key={i}
-                className="bg-white/90 backdrop-blur-md border border-zinc-100 rounded-3xl p-8 shadow-[0_15px_40px_rgba(0,0,0,0.02)] hover:shadow-[0_20px_50px_rgba(0,0,0,0.06)] hover:border-zinc-200 transition-all duration-300 flex flex-col items-center text-center group"
+                className="bg-white border border-zinc-100 rounded-2xl sm:rounded-3xl p-4 sm:p-8 shadow-[0_8px_20px_rgba(0,0,0,0.02)] hover:shadow-[0_20px_50px_rgba(0,0,0,0.06)] hover:border-zinc-200 transition-all duration-300 flex flex-col items-center text-center group"
               >
                 <span
-                  className="text-4xl lg:text-5xl font-black mb-2 transition-transform duration-300 group-hover:scale-105"
+                  className="text-2xl sm:text-4xl lg:text-5xl font-black mb-1 sm:mb-2 transition-transform duration-300 group-hover:scale-105"
                   style={{ color: solution.color, fontFamily: 'var(--font-space-grotesk)' }}
                 >
                   {stat.value}
                 </span>
-                <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">
+                <span className="text-[9px] sm:text-[10px] font-bold text-zinc-400 uppercase tracking-wider text-center leading-tight">
                   {stat.label}
                 </span>
               </div>
@@ -222,7 +222,7 @@ export default function SolutionDetailClient({ solution }: { solution: Solution 
       </section>
 
       {/* ── SPLIT TIMELINE / CAPABILITIES ────────────────────────────────── */}
-      <section className="py-32 px-6">
+      <section className="py-16 sm:py-24 lg:py-32 px-4 sm:px-6">
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
             
@@ -297,7 +297,7 @@ export default function SolutionDetailClient({ solution }: { solution: Solution 
             {solution.benefits.map((benefit, i) => (
               <div
                 key={i}
-                className="bg-[#FAFAFA] border border-zinc-100 rounded-[2.2rem] p-10 flex flex-col justify-between min-h-[320px] shadow-[0_15px_40px_rgba(0,0,0,0.01)] hover:shadow-[0_25px_60px_rgba(0,0,0,0.04)] hover:bg-white hover:border-zinc-200 transition-all duration-500 group relative overflow-hidden"
+                className="bg-[#FAFAFA] border border-zinc-100 rounded-[2rem] sm:rounded-[2.2rem] p-6 sm:p-10 flex flex-col justify-between shadow-[0_15px_40px_rgba(0,0,0,0.01)] hover:shadow-[0_25px_60px_rgba(0,0,0,0.04)] hover:bg-white hover:border-zinc-200 transition-all duration-500 group relative overflow-hidden"
               >
                 {/* Giant number outline background */}
                 <span
@@ -331,8 +331,8 @@ export default function SolutionDetailClient({ solution }: { solution: Solution 
       </section>
 
       {/* ── CTA SECTION ──────────────────────────────────────────────────── */}
-      <section className="py-24 px-6 bg-[#FAFAFA] relative z-20">
-        <div className="max-w-6xl mx-auto bg-[#0B0D17] rounded-[2.5rem] lg:rounded-[3.5rem] p-10 md:p-24 text-center text-white relative overflow-hidden shadow-2xl">
+      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-[#FAFAFA] relative z-20">
+        <div className="max-w-6xl mx-auto bg-[#0B0D17] rounded-[2rem] lg:rounded-[3.5rem] p-8 sm:p-14 md:p-24 text-center text-white relative overflow-hidden shadow-2xl">
           
           <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-[#DE5D26] opacity-[0.08] rounded-full blur-[100px] transform translate-x-1/2 -translate-y-1/2 pointer-events-none" />
           <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-blue-600 opacity-[0.08] rounded-full blur-[100px] transform -translate-x-1/2 translate-y-1/2 pointer-events-none" />
@@ -344,7 +344,7 @@ export default function SolutionDetailClient({ solution }: { solution: Solution 
             </span>
 
             <h2
-              className="text-4xl md:text-5xl lg:text-7xl font-black mb-8 leading-[1.1] tracking-tight"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-black mb-6 sm:mb-8 leading-[1.1] tracking-tight"
               style={{ fontFamily: 'var(--font-space-grotesk)' }}
             >
               Partner on Your <br className="hidden md:inline" />

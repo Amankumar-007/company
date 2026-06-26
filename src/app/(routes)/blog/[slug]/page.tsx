@@ -6,6 +6,7 @@ import { Metadata, ResolvingMetadata } from 'next'
 import BlogContentRenderer from './MarkdownPreviewClient'
 import { ArrowLeft, Calendar, Clock, Share2, Twitter, Linkedin, Link as LinkIcon, MessageSquare } from 'lucide-react'
 import ShareButtons from './ShareButtons'
+import { getRelativeTime } from '@/lib/utils'
 
 
 type Props = {
@@ -105,16 +106,18 @@ export default async function BlogPostPage({ params }: Props) {
 
   const { headings, content: parsedContent } = extractHeadingsAndAddIds(blog.content || '');
 
-  const readTime = Math.max(1, Math.ceil((blog.content?.split(/\s+/).filter(Boolean).length ?? 0) / 200));
+  const wordCount = blog.content?.split(/\s+/).filter(Boolean).length ?? 0
+  const readTime = Math.max(1, Math.ceil(wordCount / 200));
   const formattedDate = new Date(blog.created_at).toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'long',
     day: 'numeric'
   });
+  const relativeDate = getRelativeTime(blog.created_at);
 
   const articleUrl = `https://www.twofloww.in/blog/${blog.slug}`;
 
-  // Dynamic JSON-LD structured data for the Blog Article
+  // Dynamic JSON-LD structured data for the Blog Article (AEO + SEO optimised)
   const articleSchema = {
     '@context': 'https://schema.org',
     '@type': 'Article',
@@ -123,6 +126,8 @@ export default async function BlogPostPage({ params }: Props) {
     image: blog.cover_image ? [blog.cover_image] : undefined,
     datePublished: new Date(blog.created_at).toISOString(),
     dateModified: blog.updated_at ? new Date(blog.updated_at).toISOString() : new Date(blog.created_at).toISOString(),
+    inLanguage: 'en-IN',
+    wordCount,
     author: {
       '@type': 'Person',
       name: blog.author?.full_name || 'Twofloww',
@@ -139,7 +144,16 @@ export default async function BlogPostPage({ params }: Props) {
     mainEntityOfPage: {
       '@type': 'WebPage',
       '@id': articleUrl,
-    }
+    },
+    speakable: {
+      '@type': 'SpeakableSpecification',
+      cssSelector: ['h1', '.article-summary'],
+    },
+    isPartOf: {
+      '@type': 'Blog',
+      '@id': 'https://www.twofloww.in/blog',
+      name: 'Twofloww Blog',
+    },
   }
 
   return (
@@ -185,7 +199,7 @@ export default async function BlogPostPage({ params }: Props) {
             <div>
               <span className="block text-sm font-bold text-neutral-800 leading-tight">{blog.author.full_name}</span>
               <div className="flex items-center gap-2 text-xs text-neutral-500 font-medium mt-0.5">
-                <span>{formattedDate}</span>
+                <span title={formattedDate}>{relativeDate}</span>
                 <span className="w-1 h-1 rounded-full bg-neutral-300"></span>
                 <span>{readTime} min read</span>
               </div>
@@ -193,7 +207,7 @@ export default async function BlogPostPage({ params }: Props) {
           </div>
         ) : (
           <div className="lg:hidden flex items-center justify-center gap-4 text-xs font-medium text-neutral-500 mb-6">
-            <span className="flex items-center gap-1.5"><Calendar className="w-4 h-4" />{formattedDate}</span>
+            <span className="flex items-center gap-1.5" title={formattedDate}><Calendar className="w-4 h-4" />{relativeDate}</span>
             <span className="w-1.5 h-1.5 rounded-full bg-neutral-300"></span>
             <span className="flex items-center gap-1.5"><Clock className="w-4 h-4" />{readTime} min read</span>
           </div>
@@ -256,9 +270,9 @@ export default async function BlogPostPage({ params }: Props) {
               <div className="hidden lg:block bg-white rounded-[2rem] p-6 shadow-sm border border-neutral-200/60">
                 <div className="space-y-4 mb-6">
                   <div>
-                    <span className="text-[10px] font-bold text-neutral-400 uppercase tracking-widest block mb-1">Published On</span>
-                    <span className="text-sm font-semibold text-[#c2410c] flex items-center gap-2">
-                      <Calendar className="w-4 h-4 text-[#ea580c]" /> {formattedDate}
+                    <span className="text-[10px] font-bold text-neutral-400 uppercase tracking-widest block mb-1">Published</span>
+                    <span className="text-sm font-semibold text-[#c2410c] flex items-center gap-2" title={formattedDate}>
+                      <Calendar className="w-4 h-4 text-[#ea580c]" /> {relativeDate}
                     </span>
                   </div>
                   <div>
@@ -390,12 +404,11 @@ export default async function BlogPostPage({ params }: Props) {
                       <h4 className="font-bold text-[#c2410c] group-hover:opacity-80 transition-opacity duration-300 font-space-grotesk tracking-tight leading-snug text-lg sm:text-xl">
                         {article.title}
                       </h4>
-                      <p className="text-xs text-neutral-500 mt-2">
-                        {new Date(article.created_at).toLocaleDateString('en-US', {
-                          month: 'short',
-                          day: 'numeric',
-                          year: 'numeric'
-                        })}
+                      <p
+                        className="text-xs text-neutral-500 mt-2"
+                        title={new Date(article.created_at).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+                      >
+                        {getRelativeTime(article.created_at)}
                       </p>
                     </Link>
                   ))}

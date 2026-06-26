@@ -56,6 +56,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: 0.9,
     }))
 
+    // Use the most recent blog publish date as the blog index's lastModified
+    const latestBlogDate = blogs && blogs.length > 0
+        ? new Date(blogs[0].updated_at ?? new Date())
+        : new Date('2024-01-01')
+
     return [
         {
             url: BASE_URL,
@@ -65,19 +70,19 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         },
         {
             url: `${BASE_URL}/solutions`,
-            lastModified: new Date(),
+            lastModified: new Date('2025-01-01'),
             changeFrequency: 'weekly',
             priority: 0.9,
         },
         {
             url: `${BASE_URL}/about`,
-            lastModified: new Date(),
+            lastModified: new Date('2024-10-01'),
             changeFrequency: 'monthly',
             priority: 0.9,
         },
         {
             url: `${BASE_URL}/services`,
-            lastModified: new Date(),
+            lastModified: new Date('2025-01-01'),
             changeFrequency: 'weekly',
             priority: 0.9,
         },
@@ -89,31 +94,31 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         },
         {
             url: `${BASE_URL}/contact`,
-            lastModified: new Date(),
+            lastModified: new Date('2024-10-01'),
             changeFrequency: 'monthly',
             priority: 0.8,
         },
         {
             url: `${BASE_URL}/blog`,
-            lastModified: new Date(),
+            lastModified: latestBlogDate,
             changeFrequency: 'daily',
-            priority: 0.8,
+            priority: 0.9,
         },
         {
             url: `${BASE_URL}/career`,
-            lastModified: new Date(),
+            lastModified: new Date('2024-10-01'),
             changeFrequency: 'monthly',
             priority: 0.7,
         },
         {
             url: `${BASE_URL}/roadmap`,
-            lastModified: new Date(),
+            lastModified: new Date('2024-10-01'),
             changeFrequency: 'monthly',
             priority: 0.6,
         },
         {
             url: `${BASE_URL}/service-detail`,
-            lastModified: new Date(),
+            lastModified: new Date('2025-01-01'),
             changeFrequency: 'monthly',
             priority: 0.7,
         },
