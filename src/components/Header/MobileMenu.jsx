@@ -1,9 +1,10 @@
 'use client';
-import { motion } from 'framer-motion';
-import { useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Magnetic from '../../common/Magnetic';
 import styles from './MobileMenu.module.scss';
+import { solutionsData } from '@/data/solutions';
 
 const MotionLink = motion.create ? motion.create(Link) : motion(Link);
 
@@ -74,6 +75,8 @@ const menuItemVariants = {
 };
 
 export default function MobileMenu({ navItems, onClose, pathname, isDesktop = false }) {
+  const [openSubmenus, setOpenSubmenus] = useState({});
+
   useEffect(() => {
     const handleEscape = (e) => {
       if (e.key === 'Escape') {
@@ -227,29 +230,86 @@ export default function MobileMenu({ navItems, onClose, pathname, isDesktop = fa
         {/* Mobile Navigation Items */}
         <nav className={styles.navItems}>
           {navItems.map((item, index) => (
-            <Magnetic key={item.title}>
-              <MotionLink
-                href={item.href}
-                className={`${styles.navItem} ${pathname === item.href ? styles.active : ''}`}
-                variants={menuItemVariants}
-                custom={index}
-                onClick={handleLinkClick}
-                whileHover={{ 
-                  x: 8,
-                  transition: { type: 'spring', stiffness: 300, damping: 20 }
-                }}
-                whileTap={{ scale: 0.97 }}
-              >
-                <span className={styles.navNumber}>0{index + 1}.</span>
-                <span className={styles.navText}>{item.title}</span>
-                <span className={styles.navArrow}>
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                    <line x1="5" y1="12" x2="19" y2="12"></line>
-                    <polyline points="12 5 19 12 12 19"></polyline>
-                  </svg>
-                </span>
-              </MotionLink>
-            </Magnetic>
+            <div key={item.title}>
+              <Magnetic>
+                <MotionLink
+                  href={item.href}
+                  className={`${styles.navItem} ${pathname === item.href ? styles.active : ''}`}
+                  variants={menuItemVariants}
+                  custom={index}
+                  onClick={(e) => {
+                    if (item.hasMegaMenu) {
+                      e.preventDefault();
+                      setOpenSubmenus(prev => ({ ...prev, [item.title]: !prev[item.title] }));
+                    } else {
+                      handleLinkClick();
+                    }
+                  }}
+                  whileHover={{ 
+                    x: 8,
+                    transition: { type: 'spring', stiffness: 300, damping: 20 }
+                  }}
+                  whileTap={{ scale: 0.97 }}
+                >
+                  <span className={styles.navNumber}>0{index + 1}.</span>
+                  <span className={styles.navText}>{item.title}</span>
+                  <span className={styles.navArrow}>
+                    <svg 
+                      width="16" 
+                      height="16" 
+                      viewBox="0 0 24 24" 
+                      fill="none" 
+                      stroke="currentColor" 
+                      strokeWidth="2.5"
+                      style={{ 
+                        transform: openSubmenus[item.title] ? 'rotate(90deg)' : (item.hasMegaMenu ? 'rotate(0deg)' : 'rotate(-45deg)'),
+                        transition: 'transform 0.3s ease' 
+                      }}
+                    >
+                      <line x1="5" y1="12" x2="19" y2="12"></line>
+                      <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                  </span>
+                </MotionLink>
+              </Magnetic>
+
+              {/* Mobile Submenu Dropdown */}
+              {item.hasMegaMenu && (
+                <AnimatePresence>
+                  {openSubmenus[item.title] && (
+                    <motion.div
+                      className={styles.mobileSubmenu}
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3, ease: 'easeInOut' }}
+                      style={{ overflow: 'hidden' }}
+                    >
+                      <div className={styles.mobileSubmenuGrid}>
+                        {solutionsData.map(solution => (
+                          <Link 
+                            key={solution.id} 
+                            href={`/solutions/${solution.slug}`}
+                            className={styles.mobileSubmenuItem}
+                            onClick={handleLinkClick}
+                          >
+                            <span className={styles.mobileSubmenuDot} style={{ backgroundColor: solution.color }}></span>
+                            {solution.title}
+                          </Link>
+                        ))}
+                        <Link 
+                          href="/solutions"
+                          className={styles.mobileSubmenuAllLink}
+                          onClick={handleLinkClick}
+                        >
+                          View All Solutions
+                        </Link>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              )}
+            </div>
           ))}
         </nav>
 

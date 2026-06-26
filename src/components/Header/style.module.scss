@@ -10,11 +10,76 @@
   align-items: center;
   padding: 1rem 2rem 0 2rem;
   background: transparent;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 
   @media (max-width: 768px) {
     margin: 0;
     padding: 1rem 1rem 0 1rem;
+  }
+
+  &.scrolled {
+    margin: 0 75px;
+    padding: 1rem 2rem 0 2rem;
+
+    @media (max-width: 1024px) {
+      padding: 0.75rem 2rem;
+    }
+    @media (max-width: 768px) {
+      margin: 0;
+      padding: 0.75rem 1.5rem;
+    }
+
+    .logoImage {
+      height: 50px;
+      width: 50px;
+    }
+  }
+
+  &.lightScrolled {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+
+    .logoText {
+      color: #000;
+    }
+    .desktopNav .navLink {
+      color: #333;
+      &:hover {
+        color: #DE5D26;
+      }
+    }
+    .hamburger span {
+      background: #333;
+    }
+  }
+
+  &.darkScrolled {
+    background: rgba(11, 13, 23, 0.85);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+
+    .logoText {
+      color: #fff;
+    }
+    .desktopNav .navLink {
+      color: rgba(255, 255, 255, 0.8);
+      &:hover {
+        color: #DE5D26;
+      }
+    }
+    .hamburger span {
+      background: #fff;
+    }
+  }
+}
+
+@keyframes headerSlideDown {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
   }
 }
 
@@ -29,7 +94,7 @@
   display: flex;
   align-items: center;
   z-index: 1001;
-  
+
 
   .logoLink {
     display: flex;
@@ -67,7 +132,7 @@
     color: #000;
     letter-spacing: -0.5px;
     transition: all 0.3s ease;
-   
+
 
     &:hover {
       transform: scale(1.05);
@@ -121,6 +186,137 @@
       background: linear-gradient(90deg, #455CE9, #667eea);
       transform-origin: left;
     }
+  }
+
+  .navItemContainer {
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  .chevronClosed {
+    transition: transform 0.3s ease;
+  }
+
+  .chevronOpen {
+    transform: rotate(180deg);
+    transition: transform 0.3s ease;
+  }
+
+  .megaMenu {
+    position: absolute;
+    top: calc(100% + 20px);
+    left: 50%;
+    transform: translateX(-50%) !important; // Center align based on container
+    width: 800px;
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0,0,0,0.05);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    z-index: 100;
+    overflow: hidden;
+    cursor: default;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: -20px;
+      left: 0;
+      right: 0;
+      height: 20px;
+      background: transparent;
+    }
+  }
+
+  .megaMenuContent {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+  }
+
+  .megaMenuHeader {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin: 0;
+    }
+
+    p {
+      font-size: 0.9rem;
+      color: #666;
+      margin: 0;
+      max-width: 80%;
+    }
+
+    .megaMenuAllLink {
+      align-self: flex-start;
+      margin-top: 0.5rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #455CE9;
+      text-decoration: none;
+      transition: color 0.2s ease;
+
+      &:hover {
+        color: #DE5D26;
+      }
+    }
+  }
+
+  .megaMenuGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+  }
+
+  .megaMenuItem {
+    display: flex;
+    align-items: flex-start;
+    padding: 1.25rem;
+    border-radius: 12px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+    
+    &:hover {
+      background-color: #FAFAFA;
+      border-color: rgba(0,0,0,0.03);
+      transform: translateX(4px);
+    }
+  }
+
+  .megaMenuItemText {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+
+    h4 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #0B0D17;
+      margin: 0;
+      transition: color 0.3s ease;
+    }
+
+    p {
+      font-size: 0.85rem;
+      color: #666;
+      line-height: 1.5;
+      margin: 0;
+    }
+  }
+
+  .megaMenuItem:hover .megaMenuItemText h4 {
+    color: #DE5D26;
   }
 }
 

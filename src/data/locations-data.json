@@ -1,0 +1,52 @@
+{
+  "_readme": "Raw facts only. Titles/descriptions/H1s are GENERATED from these facts by lib/seoTemplates.js — don't hardcode copy here, or you'll be editing 29 files every time you tweak wording.",
+  "brand": {
+    "name": "Twofloww",
+    "phone_india": "+91-9999-999-999",
+    "phone_intl": "+91-9999-999-999",
+    "email": "hello@twofloww.in",
+    "address_india": "Noida, Uttar Pradesh, India",
+    "founded_year": 2023,
+    "projects_delivered": "50+",
+    "countries_served": "10+"
+  },
+  "services": [
+    { "key": "web-development", "label": "Web Development", "short": "web development" },
+    { "key": "web-design", "label": "Web Design", "short": "web design" },
+    { "key": "app-development", "label": "Mobile App Development", "short": "app development" },
+    { "key": "ecommerce-development", "label": "eCommerce Development", "short": "ecommerce development" },
+    { "key": "ui-ux-design", "label": "UI/UX Design", "short": "UI/UX design" },
+    { "key": "seo-services", "label": "SEO Services", "short": "SEO" }
+  ],
+  "locations": [
+    { "slug": "noida", "city": "Noida", "type": "city", "state": "Uttar Pradesh", "country": "India", "country_code": "IN", "is_home_base": true, "nearby_areas": ["Greater Noida", "Ghaziabad", "Delhi"], "lat": 28.5355, "lng": 77.3910 },
+    { "slug": "greater-noida", "city": "Greater Noida", "type": "city", "state": "Uttar Pradesh", "country": "India", "country_code": "IN", "nearby_areas": ["Noida", "Ghaziabad"], "lat": 28.4744, "lng": 77.5040 },
+    { "slug": "ghaziabad", "city": "Ghaziabad", "type": "city", "state": "Uttar Pradesh", "country": "India", "country_code": "IN", "nearby_areas": ["Noida", "Delhi"], "lat": 28.6692, "lng": 77.4538 },
+    { "slug": "delhi", "city": "Delhi", "type": "city", "state": "Delhi", "country": "India", "country_code": "IN", "nearby_areas": ["Noida", "Gurugram", "Ghaziabad"], "lat": 28.7041, "lng": 77.1025 },
+    { "slug": "gurugram", "city": "Gurugram", "type": "city", "state": "Haryana", "country": "India", "country_code": "IN", "nearby_areas": ["Delhi", "Faridabad"], "lat": 28.4595, "lng": 77.0266 },
+    { "slug": "faridabad", "city": "Faridabad", "type": "city", "state": "Haryana", "country": "India", "country_code": "IN", "nearby_areas": ["Delhi", "Gurugram"], "lat": 28.4089, "lng": 77.3178 },
+    { "slug": "mumbai", "city": "Mumbai", "type": "city", "state": "Maharashtra", "country": "India", "country_code": "IN", "nearby_areas": ["Thane", "Navi Mumbai", "Pune"], "lat": 19.0760, "lng": 72.8777 },
+    { "slug": "pune", "city": "Pune", "type": "city", "state": "Maharashtra", "country": "India", "country_code": "IN", "nearby_areas": ["Mumbai"], "lat": 18.5204, "lng": 73.8567 },
+    { "slug": "bangalore", "city": "Bangalore", "type": "city", "state": "Karnataka", "country": "India", "country_code": "IN", "nearby_areas": ["Mysore"], "lat": 12.9716, "lng": 77.5946 },
+    { "slug": "hyderabad", "city": "Hyderabad", "type": "city", "state": "Telangana", "country": "India", "country_code": "IN", "nearby_areas": ["Secunderabad"], "lat": 17.3850, "lng": 78.4867 },
+    { "slug": "chennai", "city": "Chennai", "type": "city", "state": "Tamil Nadu", "country": "India", "country_code": "IN", "nearby_areas": ["Coimbatore"], "lat": 13.0827, "lng": 80.2707 },
+    { "slug": "coimbatore", "city": "Coimbatore", "type": "city", "state": "Tamil Nadu", "country": "India", "country_code": "IN", "nearby_areas": ["Chennai"], "lat": 11.0168, "lng": 76.9558 },
+    { "slug": "kolkata", "city": "Kolkata", "type": "city", "state": "West Bengal", "country": "India", "country_code": "IN", "nearby_areas": ["Howrah"], "lat": 22.5726, "lng": 88.3639 },
+    { "slug": "ahmedabad", "city": "Ahmedabad", "type": "city", "state": "Gujarat", "country": "India", "country_code": "IN", "nearby_areas": ["Surat", "Gandhinagar"], "lat": 23.0225, "lng": 72.5714 },
+    { "slug": "surat", "city": "Surat", "type": "city", "state": "Gujarat", "country": "India", "country_code": "IN", "nearby_areas": ["Ahmedabad"], "lat": 21.1702, "lng": 72.8311 },
+    { "slug": "jaipur", "city": "Jaipur", "type": "city", "state": "Rajasthan", "country": "India", "country_code": "IN", "nearby_areas": [], "lat": 26.9124, "lng": 75.7873 },
+    { "slug": "lucknow", "city": "Lucknow", "type": "city", "state": "Uttar Pradesh", "country": "India", "country_code": "IN", "nearby_areas": ["Kanpur"], "lat": 26.8467, "lng": 80.9462 },
+    { "slug": "kanpur", "city": "Kanpur", "type": "city", "state": "Uttar Pradesh", "country": "India", "country_code": "IN", "nearby_areas": ["Lucknow"], "lat": 26.4499, "lng": 80.3319 },
+    { "slug": "chandigarh", "city": "Chandigarh", "type": "city", "state": "Punjab/Haryana", "country": "India", "country_code": "IN", "nearby_areas": ["Mohali", "Panchkula"], "lat": 30.7333, "lng": 76.7794 },
+    { "slug": "indore", "city": "Indore", "type": "city", "state": "Madhya Pradesh", "country": "India", "country_code": "IN", "nearby_areas": ["Bhopal"], "lat": 22.7196, "lng": 75.8577 },
+    { "slug": "bhopal", "city": "Bhopal", "type": "city", "state": "Madhya Pradesh", "country": "India", "country_code": "IN", "nearby_areas": ["Indore"], "lat": 23.2599, "lng": 77.4126 },
+    { "slug": "kochi", "city": "Kochi", "type": "city", "state": "Kerala", "country": "India", "country_code": "IN", "nearby_areas": ["Thrissur"], "lat": 9.9312, "lng": 76.2673 },
+    { "slug": "nagpur", "city": "Nagpur", "type": "city", "state": "Maharashtra", "country": "India", "country_code": "IN", "nearby_areas": [], "lat": 21.1458, "lng": 79.0882 },
+    { "slug": "visakhapatnam", "city": "Visakhapatnam", "type": "city", "state": "Andhra Pradesh", "country": "India", "country_code": "IN", "nearby_areas": [], "lat": 17.6868, "lng": 83.2185 },
+    { "slug": "united-states", "city": null, "type": "country", "state": null, "country": "United States", "country_code": "US", "nearby_areas": ["New York", "California", "Texas"], "lat": 39.8283, "lng": -98.5795 },
+    { "slug": "united-kingdom", "city": null, "type": "country", "state": null, "country": "United Kingdom", "country_code": "GB", "nearby_areas": ["London", "Manchester"], "lat": 55.3781, "lng": -3.4360 },
+    { "slug": "uae", "city": "Dubai", "type": "country", "state": null, "country": "United Arab Emirates", "country_code": "AE", "nearby_areas": ["Abu Dhabi", "Sharjah"], "lat": 25.2048, "lng": 55.2708 },
+    { "slug": "canada", "city": null, "type": "country", "state": null, "country": "Canada", "country_code": "CA", "nearby_areas": ["Toronto", "Vancouver"], "lat": 56.1304, "lng": -106.3468 },
+    { "slug": "australia", "city": null, "type": "country", "state": null, "country": "Australia", "country_code": "AU", "nearby_areas": ["Sydney", "Melbourne"], "lat": -25.2744, "lng": 133.7751 }
+  ]
+}

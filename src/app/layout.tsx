@@ -7,6 +7,7 @@ import { ReactNode } from 'react';
 import { CursorProvider } from '../components/Cursor';
 import SmoothScrollWrapper from '../components/SmoothScrollWrapper';
 import ExtensionErrorSuppressor from '../components/ExtensionErrorSuppressor';
+import ConsultModal from '../components/ConsultModal';
 import type { Metadata, Viewport } from 'next';
 
 const inter = Inter({
@@ -184,6 +185,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             <div className="sticky bottom-0 z-10">
               <Footer />
             </div>
+            <ConsultModal />
             <ScrollToTop />
           </CursorProvider>
         </SmoothScrollWrapper>

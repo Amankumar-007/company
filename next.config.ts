@@ -46,6 +46,13 @@ const nextConfig: NextConfig = {
     
     const headersList: any[] = [
       {
+        // Block search engines from indexing any admin route
+        source: '/admin/:path*',
+        headers: [
+          { key: 'X-Robots-Tag', value: 'noindex, nofollow' },
+        ],
+      },
+      {
         source: '/(.*)',
         headers: [
           // Security

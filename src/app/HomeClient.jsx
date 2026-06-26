@@ -9,6 +9,7 @@ import SlidingImages from '../components/SlidingImages';
 import HeroSection from '@/components/HeroSection';
 import Card from '../components/Card';
 import VideoComponent from '@/components/VideoComponent';
+// import GlobalReach from '@/components/GlobalReach';
 
 export default function HomeClient() {
   const [isLoading, setIsLoading] = useState(true);
@@ -31,6 +32,8 @@ export default function HomeClient() {
       <VideoComponent />
       <Description />
       <Projects />
+      {/* <GlobalReach lightTheme={false} /> */}
+
       <Card
         title="Sample Project 1"
         description="This is the first sample card component to showcase the project details."

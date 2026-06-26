@@ -5,12 +5,15 @@ import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import { gsap } from 'gsap';
+import { ChevronDown, Rocket, Building2, ShoppingCart, Wallet, Activity, BrainCircuit } from 'lucide-react';
 import Magnetic from '../../common/Magnetic';
 import styles from './style.module.scss';
 import MobileMenu from './MobileMenu';
+import { solutionsData } from '@/data/solutions';
 
 const navItems = [
   { title: 'Services', href: '/services' },
+  { title: 'Solutions', href: '/solutions', hasMegaMenu: true },
   { title: 'Projects', href: '/projects' },
   { title: 'Blog', href: '/blog' },
   { title: 'About', href: '/about' },
@@ -19,13 +22,19 @@ const navItems = [
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
+  const [activeMegaMenu, setActiveMegaMenu] = useState(null);
   const headerRef = useRef(null);
   const pathname = usePathname();
 
   // Derived values — safe before effects
   const isAdmin = pathname?.startsWith('/admin');
   const isHome = pathname === '/';
+  const isLocationPage = pathname && (
+    pathname.startsWith('/web-development-company-') ||
+    pathname.includes('-agency-in-')
+  );
+
+  const isSolutionsPage = pathname?.startsWith('/solutions');
 
   // ─── ALL hooks MUST be called unconditionally, before any early return ───
 
@@ -44,13 +53,18 @@ export default function Header() {
     return () => window.removeEventListener('resize', handleResize);
   }, [isMobileMenuOpen]);
 
-  // Scroll listener
+  // Close mega menu when clicking outside
   useEffect(() => {
-    if (isAdmin) return;
-    const handleScroll = () => setIsScrolled(window.scrollY > 50);
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [isAdmin]);
+    const handleClickOutside = (e) => {
+      if (!e.target.closest(`.${styles.navItemContainer}`)) {
+        setActiveMegaMenu(null);
+      }
+    };
+    document.addEventListener('click', handleClickOutside);
+    return () => document.removeEventListener('click', handleClickOutside);
+  }, []);
+
+  // Scroll listener removed — header is static
 
   // GSAP entrance animation — homepage only, after preloader exits
   useEffect(() => {
@@ -81,11 +95,15 @@ export default function Header() {
     }, 2800);
 
     return () => clearTimeout(timer);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname, isAdmin]);
 
   // ─── Early return AFTER all hooks ───
   if (isAdmin) return null;
+
+  // Header requires absolute styling on specific pages
+  const needsAbsoluteHeader = isHome || pathname?.startsWith('/blog') || isLocationPage || isSolutionsPage;
+  const needsWhiteText = isHome; // Only homepage has dark background hero
 
   return (
     <>
@@ -93,7 +111,7 @@ export default function Header() {
       <header
         ref={headerRef}
         style={{ opacity: 0 }} // hidden until GSAP fires
-        className={`${styles.header} ${isScrolled ? styles.scrolled : ''} ${pathname === '/' || pathname?.startsWith('/blog') ? styles.absoluteHeader : ''}`}
+        className={`${styles.header} ${needsAbsoluteHeader ? styles.absoluteHeader : ''}`}
       >
         {/* Logo */}
         <div className={styles.logo}>
@@ -110,7 +128,7 @@ export default function Header() {
                 />
                 <span
                   className={styles.logoText}
-                  style={{ color: pathname === '/' ? 'white' : undefined }}
+                  style={{ color: needsWhiteText ? 'white' : undefined }}
                 >
                   flowW
                 </span>
@@ -122,28 +140,83 @@ export default function Header() {
         {/* Desktop Navigation */}
         <nav className={styles.desktopNav}>
           {navItems.map((item) => (
-            <Magnetic key={item.title}>
-              <Link
-                href={item.href}
-                className={`${styles.navLink} ${pathname === item.href ? styles.active : ''}`}
-                style={{ color: pathname === '/' ? 'white' : undefined }}
-              >
-                {/* Overflow clip for slide-up reveal */}
-                <span className="overflow-hidden inline-block leading-none pb-0.5">
-                  <span className="nav-link-inner inline-block" style={{ opacity: 0, transform: 'translateY(110%)' }}>
-                    {item.title}
-                  </span>
-                </span>
-                {/* Active indicator — CSS only, no motion */}
-                <span
-                  className={styles.navIndicator}
-                  style={{
-                    transform: pathname === item.href ? 'scaleX(1)' : 'scaleX(0)',
-                    transition: 'transform 0.3s ease',
+            <div 
+              key={item.title}
+              className={styles.navItemContainer}
+            >
+              <Magnetic>
+                <Link
+                  href={item.href}
+                  onClick={(e) => {
+                    if (item.hasMegaMenu) {
+                      e.preventDefault();
+                      setActiveMegaMenu(activeMegaMenu === item.title ? null : item.title);
+                    } else {
+                      setActiveMegaMenu(null);
+                    }
                   }}
-                />
-              </Link>
-            </Magnetic>
+                  className={`${styles.navLink} ${pathname === item.href || (item.hasMegaMenu && activeMegaMenu === item.title) ? styles.active : ''}`}
+                  style={{ color: (needsWhiteText && !activeMegaMenu) ? 'white' : undefined }}
+                >
+                  {/* Overflow clip for slide-up reveal */}
+                  <span className="overflow-hidden inline-flex items-center pb-0.5">
+                    <span className="nav-link-inner inline-flex items-center gap-1.5" style={{ opacity: 0, transform: 'translateY(110%)' }}>
+                      {item.title}
+                      {item.hasMegaMenu && (
+                        <ChevronDown 
+                          size={16} 
+                          strokeWidth={2.5}
+                          className={activeMegaMenu === item.title ? styles.chevronOpen : styles.chevronClosed} 
+                        />
+                      )}
+                    </span>
+                  </span>
+                  {/* Active indicator — CSS only, no motion */}
+                  <span
+                    className={styles.navIndicator}
+                    style={{
+                      transform: pathname === item.href ? 'scaleX(1)' : 'scaleX(0)',
+                      transition: 'transform 0.3s ease',
+                    }}
+                  />
+                </Link>
+              </Magnetic>
+
+              {/* Mega Menu Dropdown */}
+              {item.hasMegaMenu && (
+                <AnimatePresence>
+                  {activeMegaMenu === item.title && (
+                    <motion.div
+                      className={styles.megaMenu}
+                      initial={{ opacity: 0, y: 15, scale: 0.98 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: 10, scale: 0.98 }}
+                      transition={{ duration: 0.3, ease: 'easeOut' }}
+                    >
+                      <div className={styles.megaMenuContent}>
+                        <div className={styles.megaMenuHeader}>
+                          <h3>Our Solutions</h3>
+                          <p>Discover tailored digital solutions engineered to transform your business.</p>
+                          <Link href="/solutions" className={styles.megaMenuAllLink} onClick={() => setActiveMegaMenu(null)}>
+                            Explore All Solutions
+                          </Link>
+                        </div>
+                        <div className={styles.megaMenuGrid}>
+                          {solutionsData.map((solution) => (
+                            <Link href={`/solutions/${solution.slug}`} key={solution.id} className={styles.megaMenuItem} onClick={() => setActiveMegaMenu(null)}>
+                              <div className={styles.megaMenuItemText}>
+                                <h4>{solution.title}</h4>
+                                <p>{solution.description}</p>
+                              </div>
+                            </Link>
+                          ))}
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              )}
+            </div>
           ))}
         </nav>
 

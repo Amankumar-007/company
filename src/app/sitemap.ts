@@ -1,6 +1,8 @@
 import { MetadataRoute } from 'next'
 import { createClient } from '@/utils/supabase/server'
 import { targetLocations } from '@/data/seo-locations'
+import locationsData from '@/data/locations-data.json'
+import { solutionsData } from '@/data/solutions'
 
 const BASE_URL = 'https://www.twofloww.in'
 
@@ -18,72 +20,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: 0.8,
     })) || []
 
-    // Service IDs from services/page.tsx
-    const serviceIds = [
-        'web-development',
-        'mobile-development',
-        'seo-marketing',
-        'ui-ux-design',
-        'cloud-solutions',
-        'ecommerce-solutions',
-    ]
-
-    // Project IDs from data/projects.js (1-8)
-    const projectIds = [1, 2, 3, 4, 5, 6, 7, 8]
-
-    // Key technologies/skills categories
-    const skills = [
-        'react',
-        'next.js',
-        'typescript',
-        'node.js',
-        'mongodb',
-        'ui-ux',
-        'mobile-apps',
-        'seo',
-        'digital-marketing',
-        'tailwind-css'
-    ]
-
-    // Additional dynamic pages based on user examples
-    const categories = [
-        'ai-tools',
-        'full-stack',
-        'web-development',
-        'saas',
-        'mobile-app'
-    ]
-
-    const serviceDetailPages = serviceIds.map((id) => ({
-        url: `${BASE_URL}/service-detail?id=${id}`,
-        lastModified: new Date(),
-        changeFrequency: 'monthly' as const,
-        priority: 0.8,
-    }))
-
-    const projectDetailPages = projectIds.map((id) => ({
-        url: `${BASE_URL}/project-detail?id=${id}`,
-        lastModified: new Date(),
-        changeFrequency: 'monthly' as const,
-        priority: 0.7,
-    }))
-
-    const skillPages = skills.map((skill) => ({
-        url: `${BASE_URL}/services?filter=${skill}`,
-        lastModified: new Date(),
-        changeFrequency: 'monthly' as const,
-        priority: 0.6,
-    }))
-
-    const categoryPages = categories.map((cat) => ({
-        url: `${BASE_URL}/projects?category=${cat}`,
-        lastModified: new Date(),
-        changeFrequency: 'weekly' as const,
-        priority: 0.6,
-    }))
-
     const seoServicesToGenerate = ['digital-agency', 'web-development', 'seo-services', 'ecommerce-solutions']
-    const programmaticSeoPages = targetLocations.flatMap(location => 
+    const programmaticSeoPages = targetLocations.flatMap(location =>
         seoServicesToGenerate.map(service => ({
             url: `${BASE_URL}/best-${service}-in-${location.id}`,
             lastModified: new Date(),
@@ -92,12 +30,44 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         }))
     )
 
+    // Location company pages — one per city/country in locations-data.json
+    const locationCompanyPages = locationsData.locations.flatMap(loc => {
+        const oldPage = {
+            url: `${BASE_URL}/web-development-company-${loc.slug}`,
+            lastModified: new Date(),
+            changeFrequency: 'monthly' as const,
+            priority: loc.is_home_base ? 1.0 : 0.8,
+        };
+        
+        const newPages = locationsData.services.map(service => ({
+            url: `${BASE_URL}/${service.key}-agency-in-${loc.slug}`,
+            lastModified: new Date(),
+            changeFrequency: 'monthly' as const,
+            priority: loc.is_home_base ? 1.0 : 0.8,
+        }));
+
+        return [oldPage, ...newPages];
+    })
+
+    const solutionsPages = solutionsData.map((solution) => ({
+        url: `${BASE_URL}/solutions/${solution.slug}`,
+        lastModified: new Date(),
+        changeFrequency: 'weekly' as const,
+        priority: 0.9,
+    }))
+
     return [
         {
             url: BASE_URL,
             lastModified: new Date(),
             changeFrequency: 'daily',
             priority: 1.0,
+        },
+        {
+            url: `${BASE_URL}/solutions`,
+            lastModified: new Date(),
+            changeFrequency: 'weekly',
+            priority: 0.9,
         },
         {
             url: `${BASE_URL}/about`,
@@ -124,6 +94,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             priority: 0.8,
         },
         {
+            url: `${BASE_URL}/blog`,
+            lastModified: new Date(),
+            changeFrequency: 'daily',
+            priority: 0.8,
+        },
+        {
             url: `${BASE_URL}/career`,
             lastModified: new Date(),
             changeFrequency: 'monthly',
@@ -135,11 +111,21 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             changeFrequency: 'monthly',
             priority: 0.6,
         },
-        ...serviceDetailPages,
-        ...projectDetailPages,
-        ...categoryPages,
-        ...skillPages,
+        {
+            url: `${BASE_URL}/service-detail`,
+            lastModified: new Date(),
+            changeFrequency: 'monthly',
+            priority: 0.7,
+        },
+        {
+            url: `${BASE_URL}/project-detail`,
+            lastModified: new Date(),
+            changeFrequency: 'monthly',
+            priority: 0.7,
+        },
         ...blogPages,
         ...programmaticSeoPages,
+        ...locationCompanyPages,
+        ...solutionsPages,
     ]
 }
