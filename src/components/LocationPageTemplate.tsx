@@ -141,13 +141,14 @@ export default function LocationPageTemplate({ loc, h1, intro, faqs, serviceLabe
     : [h1];
 
   return (
-    <main className="bg-[#FAFAFA] text-[#0B0D17] min-h-screen selection:bg-[#DE5D26]/20 selection:text-[#DE5D26] font-sans overflow-x-hidden">
+    <main className="bg-[#FAFAFA] text-[#0B0D17] min-h-screen selection:bg-[#DE5D26]/20 selection:text-[#DE5D26] font-sans overflow-x-hidden" aria-label={`${serviceLabel} agency in ${place} – TwoFloww`}>
 
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
       <section className="relative min-h-[85vh] flex items-center px-4 sm:px-6 pt-28 sm:pt-36 pb-16 sm:pb-24 overflow-hidden bg-white border-b border-gray-100">
         {/* dot-grid background */}
         <div
-          aria-hidden
+          role="presentation"
+          aria-hidden="true"
           className="absolute inset-0 opacity-[0.4]"
           style={{
             backgroundImage: 'radial-gradient(circle, #E5E7EB 1px, transparent 1px)',
@@ -156,8 +157,8 @@ export default function LocationPageTemplate({ loc, h1, intro, faqs, serviceLabe
         />
 
         {/* ambient glow blobs — static to keep mobile GPU free */}
-        <div className="absolute top-0 right-10 w-[400px] h-[400px] rounded-full bg-[#DE5D26]/[0.06] blur-[100px] pointer-events-none" />
-        <div className="absolute bottom-10 left-10 w-[500px] h-[500px] rounded-full bg-indigo-500/[0.04] blur-[120px] pointer-events-none" />
+        <div role="presentation" aria-hidden="true" className="absolute top-0 right-10 w-[400px] h-[400px] rounded-full bg-[#DE5D26]/[0.06] blur-[100px] pointer-events-none" />
+        <div role="presentation" aria-hidden="true" className="absolute bottom-10 left-10 w-[500px] h-[500px] rounded-full bg-indigo-500/[0.04] blur-[120px] pointer-events-none" />
 
         <div className="relative z-10 max-w-6xl mx-auto w-full">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center">
@@ -927,48 +928,55 @@ export default function LocationPageTemplate({ loc, h1, intro, faqs, serviceLabe
       {/* ── Global Reach ─────────────────────────────────────────────────── */}
       <GlobalReach lightTheme={true} />
 
-      {/* ── All locations ────────────────────────────────────────────────── */}
-      <div className="bg-white">
-        <LocationsWeServe />
-      </div>
-
-      {/* ── FAQ ──────────────────────────────────────────────────────────── */}
-      <section className="py-24 px-6 bg-white border-b border-gray-100">
-        <div className="max-w-3xl mx-auto">
+      {/* ── About Our Work in {place} — rich text section for SEO ────────── */}
+      <section className="py-20 px-6 bg-white border-b border-gray-100" aria-label={`About TwoFloww ${serviceLabel} services in ${place}`}>
+        <div className="max-w-4xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.1 }}
             transition={{ duration: 0.6 }}
-            className="text-center mb-14"
           >
-            <span className="inline-flex items-center gap-2 bg-[#DE5D26]/8 border border-[#DE5D26]/20 rounded-full px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-[#DE5D26] mb-5">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#DE5D26] animate-pulse" />
-              Got Questions?
-            </span>
+            <p className="text-xs text-[#DE5D26] font-bold uppercase tracking-widest mb-4">About TwoFloww</p>
             <h2
-              className="text-3xl sm:text-4xl font-black text-[#0B0D17] mb-4 leading-tight"
+              className="text-3xl sm:text-4xl font-black text-[#0B0D17] mb-8 leading-tight"
               style={{ fontFamily: 'var(--font-space-grotesk)' }}
             >
-              Frequently Asked Questions
+              Your Trusted {serviceLabel} Partner in <span className="text-[#DE5D26]">{place}</span>
             </h2>
-            <p className="text-gray-500 text-base max-w-xl mx-auto leading-relaxed">
-              Everything you need to know before we get started.
-            </p>
-          </motion.div>
 
-          <motion.div 
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.1 }}
-            variants={staggerContainer}
-          >
-            {faqs.map((faq, i) => (
-              <FAQItem key={i} idx={i} {...faq} />
-            ))}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 text-gray-600 text-base leading-relaxed">
+              <div className="space-y-5">
+                <p>
+                  TwoFloww is a full-service {serviceLabel.toLowerCase()} company serving businesses in {place} and across India. Since our founding, we have delivered over 150 digital projects — from sleek corporate websites to complex multi-vendor e-commerce platforms and on-demand mobile applications.
+                </p>
+                <p>
+                  Our {serviceLabel.toLowerCase()} team based in Noida, Delhi NCR understands the competitive local business landscape. Whether you are a startup looking to launch your first product or an established enterprise modernising your digital presence, we design and build solutions that are fast, scalable, and conversion-optimised.
+                </p>
+                <p>
+                  Businesses in {place} trust TwoFloww for our transparent pricing, milestone-based delivery, and commitment to long-term partnership — not just one-off projects. Every engagement includes full source-code ownership, post-launch support, and dedicated project management.
+                </p>
+              </div>
+              <div className="space-y-5">
+                <p>
+                  Our technology stack is built for performance. We use Next.js and React for blazing-fast web experiences, Flutter and React Native for cross-platform mobile apps, and Supabase, Node.js, and PostgreSQL for robust back-end infrastructure. Our cloud deployments on AWS and GCP ensure 99.9% uptime for critical business applications.
+                </p>
+                <p>
+                  For {place} businesses requiring SEO and digital marketing, our strategies are grounded in technical excellence. We conduct comprehensive audits, implement structured data, optimise Core Web Vitals, and build authoritative link profiles that drive sustainable organic traffic growth.
+                </p>
+                <p>
+                  Ready to take your {place} business to the next level? Our team offers a free 30-minute consultation where we analyse your current digital presence and outline a custom strategy tailored to your market, budget, and growth goals.
+                </p>
+              </div>
+            </div>
           </motion.div>
         </div>
       </section>
+
+      {/* ── All locations ────────────────────────────────────────────────── */}
+      <div className="bg-white">
+        <LocationsWeServe />
+      </div>
 
       {/* ── CTA bottom ───────────────────────────────────────────────────── */}
       <section className="py-10 px-6 bg-[#FAFAFA]">

@@ -63,9 +63,9 @@ const ProjectTimeline = () => {
         <div className="mb-16">
           <div className="flex flex-col lg:flex-row lg:justify-between lg:items-start gap-8">
             <div className="flex-1">
-              <h1 className="text-5xl lg:text-6xl font-bold text-black mb-6 leading-tight">
+              <h2 className="text-5xl lg:text-6xl font-bold text-black mb-6 leading-tight">
                 {timelineData.title}
-              </h1>
+              </h2>
             </div>
             <div className="flex-1 lg:max-w-md lg:text-right">
               <p className="text-gray-600 text-base leading-relaxed">

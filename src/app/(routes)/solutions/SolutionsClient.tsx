@@ -242,13 +242,13 @@ export default function SolutionsClient() {
             <Sparkles className="w-3 h-3" />
             Our Solutions
           </span>
-          <h1
+          <h2
             className="text-4xl font-black tracking-tight text-[#0B0D17] leading-none mb-6"
             style={{ fontFamily: 'var(--font-space-grotesk)' }}
           >
             Architectures <br />
             Engineered to Dominate
-          </h1>
+          </h2>
           <p className="text-zinc-500 text-base leading-relaxed">
             Food delivery apps, taxi platforms, fintech, astrology, fitness, matrimonial &
             dating apps — and much more. We build digital products that rank and grow.

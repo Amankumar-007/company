@@ -4,7 +4,7 @@ import { ReactNode } from 'react'
 const BASE_URL = 'https://www.twofloww.in'
 
 export const metadata: Metadata = {
-    title: 'Web Development Company Delhi NCR – Services',
+    title: 'Web Development Services Delhi NCR',
     description:
         'TwoFloww offers web development, mobile app development, UI/UX design, SEO & digital marketing in Delhi NCR. Expert team, 5+ years experience. Free consultation.',
     keywords: [
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
         type: 'website',
         locale: 'en_IN',
         siteName: 'TwoFloww',
-        title: 'Web Development Company Delhi NCR – Services | TwoFloww',
+        title: 'Web Development Services Delhi NCR | TwoFloww',
         description:
             'Web development, mobile apps, UI/UX design, SEO & digital marketing in Delhi NCR. 150+ projects. Free consultation.',
         url: `${BASE_URL}/services`,
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Web Development Company Delhi NCR – Services | TwoFloww',
+        title: 'Web Development Services Delhi NCR | TwoFloww',
         description:
             'Web development, mobile apps, UI/UX design, SEO & digital marketing in Delhi NCR. 150+ projects. Free consultation.',
         images: ['/og-image.png'],
