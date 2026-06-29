@@ -6,7 +6,7 @@ const BASE_URL = 'https://www.twofloww.in'
 export const metadata: Metadata = {
     title: 'Service Details – Expert Digital Solutions',
     description:
-        'Detailed overview of Twofloww\'s digital services including technologies, features, and process. Explore web development, mobile apps, UI/UX design, SEO, cloud, and e-commerce solutions.',
+        'Detailed overview of Twofloww\'s services: technologies, features, and process. Web development, mobile apps, UI/UX design, SEO, cloud, and e-commerce solutions.',
     alternates: {
         canonical: `${BASE_URL}/service-detail`,
     },

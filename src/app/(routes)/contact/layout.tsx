@@ -6,7 +6,7 @@ const BASE_URL = 'https://www.twofloww.in'
 export const metadata: Metadata = {
     title: 'Contact Us – Start Your Project Today',
     description:
-        'Get in touch with Twofloww. Tell us about your project — web development, mobile app, design, or marketing. We respond within 24 hours. Let\'s build something amazing together.',
+        'Contact Twofloww for web development, mobile apps, design, or marketing. We respond within 24 hours. Tell us about your project and get a free consultation.',
     keywords: [
         'contact twofloww',
         'hire digital agency',

@@ -10,67 +10,54 @@ const MotionLink = motion.create ? motion.create(Link) : motion(Link);
 
 const menuVariants = {
   initial: { opacity: 0 },
-  animate: { 
+  animate: {
     opacity: 1,
-    transition: { 
-      staggerChildren: 0.1,
-      delayChildren: 0.2
-    }
+    transition: { staggerChildren: 0.04, delayChildren: 0.1 }
   },
-  exit: { 
+  exit: {
     opacity: 0,
-    transition: { 
-      staggerChildren: 0.05,
-      staggerDirection: -1
-    }
+    transition: { staggerChildren: 0.02, staggerDirection: -1 }
   }
 };
 
 const overlayVariants = {
   initial: { opacity: 0 },
-  animate: { opacity: 1, transition: { duration: 0.35, ease: "easeOut" } },
-  exit: { opacity: 0, transition: { duration: 0.3, ease: "easeIn" } }
+  animate: { opacity: 1, transition: { duration: 0.2, ease: 'easeOut' } },
+  exit: { opacity: 0, transition: { duration: 0.2, ease: 'easeIn' } }
 };
 
 const mobileMenuVariants = {
-  initial: { 
-    x: '100%', 
-    opacity: 0.5
-  },
-  animate: { 
-    x: 0, 
-    opacity: 1,
+  initial: { x: '100%' },
+  animate: {
+    x: 0,
     transition: { 
-      duration: 0.45,
-      ease: [0.16, 1, 0.3, 1],
+      duration: 0.3, 
+      ease: [0.25, 0.46, 0.45, 0.94],
       staggerChildren: 0.05,
-      delayChildren: 0.05
+      delayChildren: 0.1
     }
   },
-  exit: { 
-    x: '100%', 
-    opacity: 0,
+  exit: {
+    x: '100%',
     transition: { 
-      duration: 0.35,
-      ease: [0.16, 1, 0.3, 1]
+      duration: 0.25, 
+      ease: [0.55, 0, 1, 0.45],
+      staggerChildren: 0.02,
+      staggerDirection: -1
     }
   }
 };
 
 const menuItemVariants = {
-  initial: { y: 15, opacity: 0 },
-  animate: { 
-    y: 0, 
+  initial: { opacity: 0, x: 12 },
+  animate: {
     opacity: 1,
-    transition: { 
-      duration: 0.4,
-      ease: [0.16, 1, 0.3, 1]
-    }
+    x: 0,
+    transition: { duration: 0.22, ease: 'easeOut' }
   },
-  exit: { 
-    y: 10, 
+  exit: {
     opacity: 0,
-    transition: { duration: 0.25 }
+    transition: { duration: 0.15 }
   }
 };
 
@@ -228,14 +215,12 @@ export default function MobileMenu({ navItems, onClose, pathname, isDesktop = fa
         </motion.div>
 
         {/* Mobile Navigation Items */}
-        <nav className={styles.navItems}>
+        <nav className={styles.navItems} data-lenis-prevent="true">
           {navItems.map((item, index) => (
-            <div key={item.title}>
-              <Magnetic>
-                <MotionLink
+            <motion.div key={item.title} variants={menuItemVariants}>
+              <MotionLink
                   href={item.href}
                   className={`${styles.navItem} ${pathname === item.href ? styles.active : ''}`}
-                  variants={menuItemVariants}
                   custom={index}
                   onClick={(e) => {
                     if (item.hasMegaMenu) {
@@ -244,10 +229,6 @@ export default function MobileMenu({ navItems, onClose, pathname, isDesktop = fa
                     } else {
                       handleLinkClick();
                     }
-                  }}
-                  whileHover={{ 
-                    x: 8,
-                    transition: { type: 'spring', stiffness: 300, damping: 20 }
                   }}
                   whileTap={{ scale: 0.97 }}
                 >
@@ -271,7 +252,6 @@ export default function MobileMenu({ navItems, onClose, pathname, isDesktop = fa
                     </svg>
                   </span>
                 </MotionLink>
-              </Magnetic>
 
               {/* Mobile Submenu Dropdown */}
               {item.hasMegaMenu && (
@@ -309,7 +289,7 @@ export default function MobileMenu({ navItems, onClose, pathname, isDesktop = fa
                   )}
                 </AnimatePresence>
               )}
-            </div>
+            </motion.div>
           ))}
         </nav>
 

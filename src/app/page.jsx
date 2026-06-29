@@ -1,8 +1,24 @@
 import HomeClient from './HomeClient';
 
 export const metadata = {
-  title: 'Twofloww – Premium Digital Agency | Web & Mobile Development',
-  description: 'Twofloww is a next-generation digital agency specializing in high-performance web development, mobile apps, UI/UX design, SEO, and cloud scaling. We build digital products that grow your business.',
+  title: {
+    absolute: 'TwoFloww – Web Development Company Delhi NCR',
+  },
+  description: 'TwoFloww is a top web development company in Delhi NCR. Websites, mobile apps, food delivery & taxi apps, SEO & digital marketing. 150+ projects. Free consultation.',
+  keywords: [
+    'web development company',
+    'website development company',
+    'web development company in delhi',
+    'web development company in noida',
+    'web development services',
+    'web development agency',
+    'digital marketing agency in delhi',
+    'mobile app development services',
+    'food delivery app development company',
+    'on demand app development company',
+    'best web development company in delhi',
+    'TwoFloww',
+  ],
   alternates: {
     canonical: 'https://www.twofloww.in',
   },
@@ -10,22 +26,22 @@ export const metadata = {
     type: 'website',
     locale: 'en_IN',
     url: 'https://www.twofloww.in',
-    siteName: 'Twofloww Digital Agency',
-    title: 'Twofloww – Premium Digital Agency | Web & Mobile Development',
-    description: 'Next-generation digital agency specializing in high-performance web development, mobile apps, UI/UX design, SEO, and cloud scaling.',
+    siteName: 'TwoFloww',
+    title: 'TwoFloww – Web Development Company Delhi NCR',
+    description: 'TwoFloww: web development company Delhi NCR. Websites, mobile apps, food delivery & on-demand apps, SEO. 150+ projects. Free consultation.',
     images: [
       {
         url: '/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'Twofloww Digital Agency',
+        alt: 'TwoFloww – Web Development Company Delhi NCR',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Twofloww – Premium Digital Agency',
-    description: 'Next-generation digital agency specializing in high-performance web development, mobile apps, UI/UX design, SEO, and cloud scaling.',
+    title: 'TwoFloww – Web Development Company Delhi NCR',
+    description: 'TwoFloww: web development company Delhi NCR. Websites, mobile apps, food delivery & on-demand apps, SEO. 150+ projects. Free consultation.',
     images: ['/og-image.png'],
     creator: '@twofloww',
     site: '@twofloww',

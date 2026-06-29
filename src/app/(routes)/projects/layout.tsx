@@ -6,7 +6,7 @@ const BASE_URL = 'https://www.twofloww.in'
 export const metadata: Metadata = {
     title: 'Our Projects – Portfolio & Case Studies',
     description:
-        'Browse Twofloww\'s portfolio of successful projects — web apps, mobile applications, UI/UX designs, and digital marketing campaigns. See our work and what we can build for you.',
+        'Browse Twofloww\'s portfolio — web apps, mobile applications, UI/UX designs, and marketing campaigns. See our work and what we can build for you.',
     keywords: [
         'twofloww portfolio',
         'web development projects',

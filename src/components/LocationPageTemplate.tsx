@@ -2,42 +2,48 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { ArrowRight, ChevronDown, CheckCircle2, Cpu, Layers, UserCheck, Headphones, ShoppingCart, Plane, HeartPulse, Building2, GraduationCap, Truck, Zap, Landmark, Film, Factory } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { ArrowRight, ArrowUpRight, ChevronRight, ChevronDown, CheckCircle2, Cpu, Layers, UserCheck, Headphones, ShoppingCart, Plane, HeartPulse, Building2, GraduationCap, Truck, Zap, Landmark, Film, Factory } from 'lucide-react';
+import { motion, Variants } from 'framer-motion';
 import LocationsWeServe from '@/components/LocationsWeServe';
 import GlobalReach from '@/components/GlobalReach';
 import { openConsultModal } from '@/components/ConsultModal';
 
 const SERVICES = [
-  { 
-    icon: 'https://api.iconify.design/fluent-emoji-flat/globe-showing-americas.svg', 
-    label: 'Web Development', 
-    desc: 'Fast, scalable websites & web apps engineered to convert visitors into customers.' 
+  {
+    icon: 'https://api.iconify.design/fluent-emoji-flat/globe-showing-americas.svg',
+    label: 'Web Development',
+    desc: 'Fast, scalable websites & web apps engineered to convert visitors into customers.',
+    bgImage: '/services/web.jpg'
   },
-  { 
-    icon: 'https://api.iconify.design/fluent-emoji-flat/mobile-phone.svg', 
-    label: 'Mobile App Dev', 
-    desc: 'Native & cross-platform iOS and Android apps built with React Native and Flutter.' 
+  {
+    icon: 'https://api.iconify.design/fluent-emoji-flat/mobile-phone.svg',
+    label: 'Mobile App Dev',
+    desc: 'Native & cross-platform iOS and Android apps built with React Native and Flutter.',
+    bgImage: '/services/mobile.jpg'
   },
-  { 
-    icon: 'https://api.iconify.design/fluent-emoji-flat/artist-palette.svg', 
-    label: 'UI/UX Design', 
-    desc: 'Research-backed, pixel-perfect interfaces that users love — and that drive measurable results.' 
+  {
+    icon: 'https://api.iconify.design/fluent-emoji-flat/artist-palette.svg',
+    label: 'UI/UX Design',
+    desc: 'Research-backed, pixel-perfect interfaces that users love — and that drive measurable results.',
+    bgImage: '/services/uiux.png'
   },
-  { 
-    icon: 'https://api.iconify.design/fluent-emoji-flat/shopping-cart.svg', 
-    label: 'eCommerce', 
-    desc: 'Custom Shopify, WooCommerce & headless storefronts built to sell at scale.' 
+  {
+    icon: 'https://api.iconify.design/fluent-emoji-flat/shopping-cart.svg',
+    label: 'eCommerce',
+    desc: 'Custom Shopify, WooCommerce & headless storefronts built to sell at scale.',
+    bgImage: '/services/ecommerse.png'
   },
-  { 
-    icon: 'https://api.iconify.design/fluent-emoji-flat/magnifying-glass-tilted-right.svg', 
-    label: 'SEO Services', 
-    desc: 'Rank higher, drive qualified organic traffic, and grow revenue sustainably.' 
+  {
+    icon: 'https://api.iconify.design/fluent-emoji-flat/magnifying-glass-tilted-right.svg',
+    label: 'SEO Services',
+    desc: 'Rank higher, drive qualified organic traffic, and grow revenue sustainably.',
+    bgImage: '/services/seo.png'
   },
-  { 
-    icon: 'https://api.iconify.design/fluent-emoji-flat/cloud.svg', 
-    label: 'Cloud Solutions', 
-    desc: 'Scalable, cost-effective infrastructure on AWS, GCP, and Azure.' 
+  {
+    icon: 'https://api.iconify.design/fluent-emoji-flat/cloud.svg',
+    label: 'Cloud Solutions',
+    desc: 'Scalable, cost-effective infrastructure on AWS, GCP, and Azure.',
+    bgImage: '/services/cloud.png'
   },
 ];
 
@@ -68,12 +74,12 @@ interface Props {
 }
 
 // Framer Motion variants — lighter y offset and faster stagger for mobile perf
-const fadeInUp = {
+const fadeInUp: Variants = {
   hidden: { opacity: 0, y: 20 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] } }
 };
 
-const staggerContainer = {
+const staggerContainer: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -88,9 +94,8 @@ function FAQItem({ q, a, idx }: FAQ & { idx: number }) {
   return (
     <motion.div
       variants={fadeInUp}
-      className={`border border-gray-100 rounded-2xl mb-4 overflow-hidden transition-all duration-300 bg-white ${
-        open ? 'shadow-[0_10px_35px_rgba(0,0,0,0.03)] border-l-4 border-l-[#DE5D26]' : 'hover:border-gray-200'
-      }`}
+      className={`border border-gray-100 rounded-2xl mb-4 overflow-hidden transition-all duration-300 bg-white ${open ? 'shadow-[0_10px_35px_rgba(0,0,0,0.03)] border-l-4 border-l-[#DE5D26]' : 'hover:border-gray-200'
+        }`}
     >
       <button
         onClick={() => setOpen(!open)}
@@ -98,9 +103,8 @@ function FAQItem({ q, a, idx }: FAQ & { idx: number }) {
         aria-expanded={open}
       >
         <div className="flex items-center gap-4">
-          <span className={`text-xs font-bold px-2.5 py-1 rounded-md transition-colors ${
-            open ? 'bg-[#DE5D26]/10 text-[#DE5D26]' : 'bg-gray-50 text-gray-400'
-          }`}>
+          <span className={`text-xs font-bold px-2.5 py-1 rounded-md transition-colors ${open ? 'bg-[#DE5D26]/10 text-[#DE5D26]' : 'bg-gray-50 text-gray-400'
+            }`}>
             {String(idx + 1).padStart(2, '0')}
           </span>
           <span className="text-[#0B0D17] font-bold text-base sm:text-lg group-hover:text-[#DE5D26] transition-colors leading-snug">
@@ -108,15 +112,13 @@ function FAQItem({ q, a, idx }: FAQ & { idx: number }) {
           </span>
         </div>
         <ChevronDown
-          className={`shrink-0 w-5 h-5 text-gray-400 transition-transform duration-300 ${
-            open ? 'rotate-180 text-[#DE5D26]' : ''
-          }`}
+          className={`shrink-0 w-5 h-5 text-gray-400 transition-transform duration-300 ${open ? 'rotate-180 text-[#DE5D26]' : ''
+            }`}
         />
       </button>
       <div
-        className={`overflow-hidden transition-all duration-300 ease-in-out ${
-          open ? 'max-h-[300px] opacity-100' : 'max-h-0 opacity-0'
-        }`}
+        className={`overflow-hidden transition-all duration-300 ease-in-out ${open ? 'max-h-[300px] opacity-100' : 'max-h-0 opacity-0'
+          }`}
       >
         <div className="p-6 pt-0 text-gray-500 text-sm sm:text-base leading-relaxed border-t border-gray-50 pl-16">
           {a}
@@ -132,15 +134,15 @@ export default function LocationPageTemplate({ loc, h1, intro, faqs, serviceLabe
   // Highlight the place name inside the H1 with orange
   const highlightedH1 = h1.includes(place)
     ? h1.split(place).flatMap((part, i, arr) =>
-        i < arr.length - 1
-          ? [part, <span key={i} className="text-[#DE5D26]">{place}</span>]
-          : [part]
-      )
+      i < arr.length - 1
+        ? [part, <span key={i} className="text-[#DE5D26]">{place}</span>]
+        : [part]
+    )
     : [h1];
 
   return (
     <main className="bg-[#FAFAFA] text-[#0B0D17] min-h-screen selection:bg-[#DE5D26]/20 selection:text-[#DE5D26] font-sans overflow-x-hidden">
-      
+
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
       <section className="relative min-h-[85vh] flex items-center px-4 sm:px-6 pt-28 sm:pt-36 pb-16 sm:pb-24 overflow-hidden bg-white border-b border-gray-100">
         {/* dot-grid background */}
@@ -160,9 +162,9 @@ export default function LocationPageTemplate({ loc, h1, intro, faqs, serviceLabe
         <div className="relative z-10 max-w-6xl mx-auto w-full">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center">
             {/* Left side: text and badges */}
-            <motion.div 
-              initial="hidden" 
-              animate="visible" 
+            <motion.div
+              initial="hidden"
+              animate="visible"
               variants={staggerContainer}
               className="lg:col-span-7 flex flex-col"
             >
@@ -196,10 +198,10 @@ export default function LocationPageTemplate({ loc, h1, intro, faqs, serviceLabe
               </motion.p>
 
               {/* CTAs */}
-              <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-4">
+              <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-4 w-full">
                 <button
                   onClick={openConsultModal}
-                  className="relative inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#0B0D17] text-white font-semibold rounded-full overflow-hidden group text-sm tracking-wide shadow-xl shadow-[#0B0D17]/15"
+                  className="relative inline-flex w-full sm:w-auto items-center justify-center gap-2 px-6 py-4 sm:px-8 bg-[#0B0D17] text-white font-semibold rounded-full overflow-hidden group text-sm tracking-wide shadow-xl shadow-[#0B0D17]/15"
                 >
                   <span className="absolute inset-0 w-full h-full bg-[#DE5D26] transition-transform duration-300 ease-out transform -translate-x-full group-hover:translate-x-0" />
                   <span className="relative z-10 flex items-center gap-2">
@@ -209,7 +211,7 @@ export default function LocationPageTemplate({ loc, h1, intro, faqs, serviceLabe
                 </button>
                 <Link
                   href="/projects"
-                  className="relative inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#0B0D17] text-white font-semibold rounded-full overflow-hidden group text-sm tracking-wide shadow-sm"
+                  className="relative inline-flex w-full sm:w-auto items-center justify-center gap-2 px-6 py-4 sm:px-8 bg-[#0B0D17] text-white font-semibold rounded-full overflow-hidden group text-sm tracking-wide shadow-sm"
                 >
                   <span className="absolute inset-0 w-full h-full bg-[#DE5D26] transition-transform duration-300 ease-out transform -translate-x-full group-hover:translate-x-0" />
                   <span className="relative z-10">
@@ -278,8 +280,8 @@ export default function LocationPageTemplate({ loc, h1, intro, faqs, serviceLabe
                   <svg className="w-full h-full" viewBox="0 0 100 30">
                     <defs>
                       <linearGradient id="gradient" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="0%" stopColor="#DE5D26" stopOpacity="0.2"/>
-                        <stop offset="100%" stopColor="#DE5D26" stopOpacity="0"/>
+                        <stop offset="0%" stopColor="#DE5D26" stopOpacity="0.2" />
+                        <stop offset="100%" stopColor="#DE5D26" stopOpacity="0" />
                       </linearGradient>
                     </defs>
                     <path
@@ -336,7 +338,7 @@ export default function LocationPageTemplate({ loc, h1, intro, faqs, serviceLabe
       {/* ── Trust bar (Floating Cards) ───────────────────────────────────── */}
       <section className="relative z-20 mt-0 lg:-mt-10 px-6">
         <div className="max-w-6xl mx-auto">
-          <motion.div 
+          <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.1 }}
@@ -344,8 +346,8 @@ export default function LocationPageTemplate({ loc, h1, intro, faqs, serviceLabe
             className="grid grid-cols-2 lg:grid-cols-4 gap-4"
           >
             {[
-              { value: '50+',  label: 'Projects Delivered', desc: 'Crafted with premium performance' },
-              { value: '10+',  label: 'Countries Served', desc: 'Global digital reach' },
+              { value: '50+', label: 'Projects Delivered', desc: 'Crafted with premium performance' },
+              { value: '10+', label: 'Countries Served', desc: 'Global digital reach' },
               { value: '2016', label: 'Founded', desc: 'Years of software excellence' },
               { value: '100%', label: 'Satisfaction', desc: 'Guaranteed quality delivery' },
             ].map(({ value, label, desc }) => (
@@ -371,7 +373,7 @@ export default function LocationPageTemplate({ loc, h1, intro, faqs, serviceLabe
       {/* ── Services ─────────────────────────────────────────────────────── */}
       <section className="py-24 px-6 bg-[#FAFAFA]">
         <div className="max-w-6xl mx-auto">
-          <motion.div 
+          <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.1 }}
@@ -387,32 +389,46 @@ export default function LocationPageTemplate({ loc, h1, intro, faqs, serviceLabe
             </h2>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.1 }}
             variants={staggerContainer}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"
           >
-            {SERVICES.map(({ icon, label, desc }) => (
+            {SERVICES.map(({ icon, label, desc, bgImage }) => (
               <motion.div
                 variants={fadeInUp}
                 key={label}
-                className="bg-white border border-gray-100 hover:border-[#DE5D26]/30 hover:shadow-[0_20px_50px_rgba(222,93,38,0.06)] rounded-3xl p-8 transition-all duration-300 group relative overflow-hidden"
+                className="bg-[#0B0D17] border border-gray-100 hover:border-[#DE5D26]/30 hover:shadow-[0_20px_40px_rgba(222,93,38,0.15)] rounded-2xl transition-all duration-300 group relative overflow-hidden min-h-[280px] flex flex-col"
               >
-                {/* corner gradient */}
-                <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-[#DE5D26]/5 to-transparent rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                
-                <div className="w-14 h-14 bg-gray-50/80 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-[#DE5D26]/10 transition-all duration-300 shadow-sm border border-gray-100">
-                  <img src={icon} alt={label} className="w-8 h-8 object-contain drop-shadow-sm" />
-                </div>
-                <h3 className="font-bold text-[#0B0D17] mb-3 text-lg group-hover:text-[#DE5D26] transition-colors">
-                  {label}
-                </h3>
-                <p className="text-gray-500 text-sm leading-relaxed mb-4">{desc}</p>
-                <div className="flex items-center gap-1.5 text-xs font-bold text-[#DE5D26] opacity-0 group-hover:opacity-100 translate-x-[-10px] group-hover:translate-x-0 transition-all duration-300">
-                  Learn more
-                  <ArrowRight className="w-3 h-3" />
+                {/* Background Image */}
+                <img
+                  src={bgImage}
+                  alt={label}
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-110"
+                />
+
+                {/* Gradient Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0B0D17] via-[#0B0D17]/80 to-[#0B0D17]/10 opacity-90 transition-opacity duration-500 group-hover:opacity-75" />
+
+                <div className="relative z-10 p-6 flex flex-col h-full w-full">
+                  <div className="w-12 h-12 bg-white/10 backdrop-blur-md rounded-xl flex items-center justify-center mb-auto group-hover:scale-110 group-hover:-rotate-3 group-hover:border-[#DE5D26] group-hover:bg-[#DE5D26]/90 transition-all duration-500 shadow-sm border border-white/20">
+                    <img src={icon} alt={label} className="w-6 h-6 object-contain drop-shadow-sm" />
+                  </div>
+
+                  <div className="mt-6">
+                    <h3 className="font-bold text-white mb-2 text-xl group-hover:text-[#FFD700] transition-colors tracking-tight">
+                      {label}
+                    </h3>
+                    <p className="text-gray-300 text-[13px] leading-relaxed mb-4 group-hover:text-white transition-colors line-clamp-2">
+                      {desc}
+                    </p>
+                    <div className="flex items-center gap-1.5 text-[11px] uppercase tracking-wider font-bold text-[#FFD700] opacity-0 group-hover:opacity-100 translate-x-[-10px] group-hover:translate-x-0 transition-all duration-300">
+                      Learn more
+                      <ArrowRight className="w-3 h-3" />
+                    </div>
+                  </div>
                 </div>
               </motion.div>
             ))}
@@ -420,67 +436,125 @@ export default function LocationPageTemplate({ loc, h1, intro, faqs, serviceLabe
         </div>
       </section>
 
-      {/* ── Industries We Serve ─────────────────────────────────────────── */}
-      <section className="py-24 px-6 bg-[#FAFAFA] border-b border-gray-100">
-        <div className="max-w-6xl mx-auto">
-          <motion.div 
+      {/* ── Industries We Serve (Horizontal Scroll with Cutout Corners) ─────────────────────────────────────────── */}
+      <section className="py-24 px-0 sm:px-6 bg-[#FAFAFA] border-b border-gray-100 overflow-hidden">
+        {/* Custom Styles for Inverted Corner Cutout */}
+        <style>{`
+          .corner-cutout {
+            position: absolute;
+            bottom: -1px;
+            right: -1px;
+            width: 72px;
+            height: 72px;
+            background-color: #FAFAFA;
+            border-top-left-radius: 28px;
+            z-index: 10;
+          }
+          .corner-cutout::before, .corner-cutout::after {
+            content: "";
+            position: absolute;
+            width: 28px;
+            height: 28px;
+            background-image: radial-gradient(circle at top left, transparent 27.5px, #FAFAFA 28px);
+          }
+          .corner-cutout::before {
+            bottom: 100%;
+            right: 0;
+          }
+          .corner-cutout::after {
+            bottom: 0;
+            right: 100%;
+          }
+          .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+          }
+          .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+          }
+        `}</style>
+
+        <div className="max-w-7xl mx-auto w-full">
+          <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.1 }}
             variants={fadeInUp}
-            className="mb-16 text-center max-w-2xl mx-auto"
+            className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-10 mb-16 px-6 lg:px-4"
           >
-            <p className="text-xs text-[#DE5D26] font-bold uppercase tracking-widest mb-4">
-              {serviceLabel} Agency in {place}
-            </p>
-            <h2
-              className="text-3xl sm:text-4xl md:text-5xl font-black text-[#0B0D17] mb-6"
-              style={{ fontFamily: 'var(--font-space-grotesk)' }}
-            >
-              Industries We Serve
-            </h2>
-            <p className="text-gray-600 text-sm sm:text-base leading-relaxed font-medium">
-              Delivering tailored digital solutions for businesses in {place} and across diverse industries, helping brands grow and streamline operations.
-            </p>
+            <div className="max-w-xl">
+              <div className="flex items-center gap-2 text-[#DE5D26] font-bold text-sm mb-4">
+                <span>/</span>
+                <span className="uppercase tracking-widest">{serviceLabel} Agency in {place}</span>
+              </div>
+              <h2
+                className="text-[2.75rem] sm:text-6xl md:text-[5rem] font-medium text-[#2C1D18] leading-[1.05] tracking-tight"
+                style={{ fontFamily: 'var(--font-space-grotesk)' }}
+              >
+                Industries<br />We Serve
+              </h2>
+            </div>
+
+            <div className="max-w-md">
+              <p className="text-gray-500 font-medium mb-6 leading-relaxed text-base sm:text-lg">
+                From scalable digital platforms to enterprise infrastructure, we've got you covered. Choose reliability, choose excellence.
+              </p>
+              <div className="flex items-center gap-8 font-bold text-[#DE5D26]">
+                <a href="#" className="flex items-center gap-1 hover:text-[#0B0D17] transition-colors">
+                  View All Industries <ChevronRight className="w-5 h-5" />
+                </a>
+                <a href="#" className="flex items-center gap-1 hover:text-[#0B0D17] transition-colors">
+                  Contact Us <ChevronRight className="w-5 h-5" />
+                </a>
+              </div>
+            </div>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.1 }}
             variants={staggerContainer}
-            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6"
+            className="flex gap-4 md:gap-6 overflow-x-auto hide-scrollbar snap-x snap-mandatory pb-8 px-6 lg:px-4 w-full"
           >
             {[
-              { title: 'Ecommerce', icon: 'shopping-bags' },
-              { title: 'Travel & Hospitality', icon: 'airplane' },
-              { title: 'Healthcare', icon: 'stethoscope' },
-              { title: 'Real Estate', icon: 'house-with-garden' },
-              { title: 'Education', icon: 'graduation-cap' },
-              { title: 'Transportation', icon: 'delivery-truck' },
-              { title: 'Utilities & On Demand', icon: 'wrench' },
-              { title: 'Finance & Insurance', icon: 'money-bag' },
-              { title: 'Media & Entertainment', icon: 'clapper-board' },
-              { title: 'Manufacturing', icon: 'factory' }
-            ].map(({ title, icon }) => (
+              { title: 'Ecommerce Platforms', image: '/ecommerse.png' },
+              { title: 'Travel & Hospitality', image: '/travel.jpg' },
+              { title: 'Real Estate Solutions', image: '/real-estate.jpg' },
+              { title: 'Education Portals', image: '/edu.jpg' },
+              { title: 'Logistics & Transport', image: '/transportation.jpg' },
+              { title: 'Media & Entertainment', image: '/entertainment.jpg' },
+              { title: 'Finance & Banking', image: '/finance.jpg' },
+              { title: 'Smart Manufacturing', image: '/manufactiring.jpg' }
+            ].map(({ title, image }) => (
               <motion.div
                 variants={fadeInUp}
                 key={title}
-                className="bg-white border border-gray-100 hover:border-[#DE5D26]/30 hover:shadow-[0_20px_45px_rgba(222,93,38,0.06)] rounded-3xl p-6 flex flex-col items-center text-center justify-center gap-4 transition-all duration-300 group overflow-hidden relative"
+                className="relative w-[280px] sm:w-[320px] h-[380px] sm:h-[440px] shrink-0 rounded-[32px] overflow-hidden group snap-start cursor-pointer shadow-sm hover:shadow-2xl transition-all duration-500 bg-gray-100"
               >
-                {/* Subtle background glow on hover */}
-                <div className="absolute inset-0 bg-gradient-to-b from-[#DE5D26]/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                
-                <div className="relative w-16 h-16 bg-gray-50/80 rounded-2xl flex items-center justify-center group-hover:bg-[#DE5D26]/10 transition-colors duration-300 shadow-sm border border-gray-100/50">
-                  <img 
-                    src={`https://api.iconify.design/fluent-emoji-flat/${icon}.svg`} 
-                    alt={title} 
-                    className="w-9 h-9 object-contain group-hover:scale-110 transition-transform duration-300 drop-shadow-sm" 
-                  />
+                {/* Background Image */}
+                <img
+                  src={image}
+                  alt={title}
+                  className="absolute inset-0 w-full h-full object-cover opacity-90 transition-transform duration-[1.5s] ease-out group-hover:scale-[1.08] group-hover:opacity-100"
+                />
+
+                {/* Dark Overlay gradient for text readability */}
+                <div className="absolute inset-0 bg-gradient-to-t from-[#1A1210]/95 via-[#1A1210]/20 to-transparent opacity-95 transition-opacity duration-500 group-hover:opacity-80" />
+
+                {/* Content */}
+                <div className="absolute inset-0 p-6 sm:p-8 flex flex-col justify-end z-10 pointer-events-none pb-12 sm:pb-14">
+                  <h3 className="text-xl sm:text-2xl font-bold text-white max-w-[85%] leading-tight group-hover:text-[#FFD700] transition-colors duration-300">
+                    {title}
+                  </h3>
                 </div>
-                <h3 className="relative font-bold text-[#0B0D17] text-[15px] group-hover:text-[#DE5D26] transition-colors duration-300">
-                  {title}
-                </h3>
+
+                {/* Bottom Right Cutout and Button */}
+                <div className="corner-cutout">
+                  <div className="absolute inset-2.5 bg-[#2C1D18] group-hover:bg-[#FFD700] rounded-full flex items-center justify-center transition-colors duration-300 shadow-md">
+                    <ArrowUpRight className="w-6 h-6 text-white group-hover:text-[#2C1D18] transition-colors duration-300" />
+                  </div>
+                </div>
               </motion.div>
             ))}
           </motion.div>
@@ -537,7 +611,7 @@ export default function LocationPageTemplate({ loc, h1, intro, faqs, serviceLabe
               <motion.div
                 variants={fadeInUp}
                 key={title}
-                className="bg-[#FAFAFA] border border-gray-100 rounded-3xl p-8 hover:bg-white hover:shadow-[0_20px_50px_rgba(222,93,38,0.05)] hover:border-[#DE5D26]/20 transition-all duration-300 group flex flex-col items-center text-center justify-between"
+                className="bg-[#FAFAFA] border border-gray-100 rounded-3xl p-6 sm:p-8 hover:bg-white hover:shadow-[0_20px_50px_rgba(222,93,38,0.05)] hover:border-[#DE5D26]/20 transition-all duration-300 group flex flex-col items-center text-center justify-between"
               >
                 <div className="flex flex-col items-center">
                   <div className="w-14 h-14 bg-white border border-gray-100 rounded-2xl flex items-center justify-center mb-6 shadow-sm group-hover:bg-[#DE5D26]/10 transition-colors duration-300">
@@ -571,7 +645,7 @@ export default function LocationPageTemplate({ loc, h1, intro, faqs, serviceLabe
 
       {/* ── Our Process (Staircase Workflow) ─────────────────────────────── */}
       <section className="py-24 px-6 bg-[#FAFAFA] border-b border-gray-100">
-        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -612,7 +686,7 @@ export default function LocationPageTemplate({ loc, h1, intro, faqs, serviceLabe
           </motion.div>
 
           {/* 4-step process (Asymmetric staircase timeline) */}
-          <motion.div 
+          <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.1 }}
@@ -621,16 +695,15 @@ export default function LocationPageTemplate({ loc, h1, intro, faqs, serviceLabe
           >
             {[
               { n: '01', t: 'Discovery', d: `We map your goals and the competitive landscape in ${place}.` },
-              { n: '02', t: 'Design',    d: 'Wireframes and high-fidelity prototypes approved before we code.' },
-              { n: '03', t: 'Build',     d: 'Clean, tested code with full-stack engineers on every project.' },
-              { n: '04', t: 'Launch',    d: 'Go-live, monitor, iterate. Your growth is the KPI.' },
+              { n: '02', t: 'Design', d: 'Wireframes and high-fidelity prototypes approved before we code.' },
+              { n: '03', t: 'Build', d: 'Clean, tested code with full-stack engineers on every project.' },
+              { n: '04', t: 'Launch', d: 'Go-live, monitor, iterate. Your growth is the KPI.' },
             ].map(({ n, t, d }) => (
-              <motion.div 
-                variants={fadeInUp} 
-                key={n} 
-                className={`bg-white border border-gray-100 rounded-3xl p-8 hover:shadow-[0_20px_40px_rgba(0,0,0,0.04)] hover:border-[#DE5D26]/20 transition-all duration-300 flex flex-col justify-between ${
-                  n === '02' || n === '04' ? 'lg:translate-y-8' : ''
-                }`}
+              <motion.div
+                variants={fadeInUp}
+                key={n}
+                className={`bg-white border border-gray-100 rounded-3xl p-6 sm:p-8 hover:shadow-[0_20px_40px_rgba(0,0,0,0.04)] hover:border-[#DE5D26]/20 transition-all duration-300 flex flex-col justify-between ${n === '02' || n === '04' ? 'lg:translate-y-8' : ''
+                  }`}
               >
                 <div>
                   <p
@@ -667,10 +740,10 @@ export default function LocationPageTemplate({ loc, h1, intro, faqs, serviceLabe
         <style>{`
           @keyframes marqueeLeft {
             0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
+            100% { transform: translateX(-100%); }
           }
           @keyframes marqueeRight {
-            0% { transform: translateX(-50%); }
+            0% { transform: translateX(-100%); }
             100% { transform: translateX(0); }
           }
           .animate-marquee-left {
@@ -689,8 +762,8 @@ export default function LocationPageTemplate({ loc, h1, intro, faqs, serviceLabe
         `}</style>
 
         {/* Marquee Track 1 (Scrolling Left) */}
-        <div className="relative w-full overflow-hidden mask-gradient mb-6 py-2">
-          <div className="flex gap-6 w-max animate-marquee-left">
+        <div className="relative w-full overflow-hidden mask-gradient mb-6 py-2 flex gap-6">
+          <div className="flex gap-6 shrink-0 animate-marquee-left">
             {[
               { slug: 'nextdotjs', color: '000000', name: 'Next.js' },
               { slug: 'react', color: '61DAFB', name: 'React' },
@@ -701,7 +774,22 @@ export default function LocationPageTemplate({ loc, h1, intro, faqs, serviceLabe
               { slug: 'bootstrap', color: '7952B3', name: 'Bootstrap' },
               { slug: 'javascript', color: 'F7DF1E', name: 'JavaScript' },
               { slug: 'figma', color: 'F24E1E', name: 'Figma' },
-            ].concat([
+            ].map((tech, idx) => (
+              <div
+                key={`t1-${idx}`}
+                className="w-16 h-16 sm:w-24 sm:h-24 bg-white border border-gray-100 rounded-2xl sm:rounded-3xl shadow-[0_8px_30px_rgba(0,0,0,0.02)] flex items-center justify-center hover:shadow-[0_15px_30px_rgba(222,93,38,0.1)] hover:border-[#DE5D26]/20 hover:scale-105 transition-all duration-300 group shrink-0"
+              >
+                <img
+                  src={`https://cdn.simpleicons.org/${tech.slug}/${tech.color}`}
+                  alt={tech.name}
+                  className="w-10 h-10 sm:w-12 sm:h-12 object-contain group-hover:rotate-12 transition-transform duration-300"
+                  loading="lazy"
+                />
+              </div>
+            ))}
+          </div>
+          <div className="flex gap-6 shrink-0 animate-marquee-left" aria-hidden="true">
+            {[
               { slug: 'nextdotjs', color: '000000', name: 'Next.js' },
               { slug: 'react', color: '61DAFB', name: 'React' },
               { slug: 'typescript', color: '3178C6', name: 'TypeScript' },
@@ -711,10 +799,10 @@ export default function LocationPageTemplate({ loc, h1, intro, faqs, serviceLabe
               { slug: 'bootstrap', color: '7952B3', name: 'Bootstrap' },
               { slug: 'javascript', color: 'F7DF1E', name: 'JavaScript' },
               { slug: 'figma', color: 'F24E1E', name: 'Figma' },
-            ]).map((tech, idx) => (
+            ].map((tech, idx) => (
               <div
-                key={`t1-${idx}`}
-                className="w-20 h-20 sm:w-24 h-24 bg-white border border-gray-100 rounded-3xl shadow-[0_8px_30px_rgba(0,0,0,0.02)] flex items-center justify-center hover:shadow-[0_15px_30px_rgba(222,93,38,0.1)] hover:border-[#DE5D26]/20 hover:scale-105 transition-all duration-300 group shrink-0"
+                key={`t1-dup-${idx}`}
+                className="w-16 h-16 sm:w-24 sm:h-24 bg-white border border-gray-100 rounded-2xl sm:rounded-3xl shadow-[0_8px_30px_rgba(0,0,0,0.02)] flex items-center justify-center hover:shadow-[0_15px_30px_rgba(222,93,38,0.1)] hover:border-[#DE5D26]/20 hover:scale-105 transition-all duration-300 group shrink-0"
               >
                 <img
                   src={`https://cdn.simpleicons.org/${tech.slug}/${tech.color}`}
@@ -728,8 +816,8 @@ export default function LocationPageTemplate({ loc, h1, intro, faqs, serviceLabe
         </div>
 
         {/* Marquee Track 2 (Scrolling Right) */}
-        <div className="relative w-full overflow-hidden mask-gradient py-2">
-          <div className="flex gap-6 w-max animate-marquee-right">
+        <div className="relative w-full overflow-hidden mask-gradient py-2 flex gap-6">
+          <div className="flex gap-6 shrink-0 animate-marquee-right">
             {[
               { slug: 'woocommerce', color: '96588A', name: 'WooCommerce' },
               { slug: 'mysql', color: '4479A1', name: 'MySQL' },
@@ -741,7 +829,22 @@ export default function LocationPageTemplate({ loc, h1, intro, faqs, serviceLabe
               { slug: 'supabase', color: '3ECF8E', name: 'Supabase' },
               { slug: 'tailwindcss', color: '06B6D4', name: 'Tailwind CSS' },
               { slug: 'nodedotjs', color: '339933', name: 'Node.js' },
-            ].concat([
+            ].map((tech, idx) => (
+              <div
+                key={`t2-${idx}`}
+                className="w-16 h-16 sm:w-24 sm:h-24 bg-white border border-gray-100 rounded-2xl sm:rounded-3xl shadow-[0_8px_30px_rgba(0,0,0,0.02)] flex items-center justify-center hover:shadow-[0_15px_30px_rgba(222,93,38,0.1)] hover:border-[#DE5D26]/20 hover:scale-105 transition-all duration-300 group shrink-0"
+              >
+                <img
+                  src={`https://cdn.simpleicons.org/${tech.slug}/${tech.color}`}
+                  alt={tech.name}
+                  className="w-10 h-10 sm:w-12 sm:h-12 object-contain group-hover:-rotate-12 transition-transform duration-300"
+                  loading="lazy"
+                />
+              </div>
+            ))}
+          </div>
+          <div className="flex gap-6 shrink-0 animate-marquee-right" aria-hidden="true">
+            {[
               { slug: 'woocommerce', color: '96588A', name: 'WooCommerce' },
               { slug: 'mysql', color: '4479A1', name: 'MySQL' },
               { slug: 'mongodb', color: '47A248', name: 'MongoDB' },
@@ -752,10 +855,10 @@ export default function LocationPageTemplate({ loc, h1, intro, faqs, serviceLabe
               { slug: 'supabase', color: '3ECF8E', name: 'Supabase' },
               { slug: 'tailwindcss', color: '06B6D4', name: 'Tailwind CSS' },
               { slug: 'nodedotjs', color: '339933', name: 'Node.js' },
-            ]).map((tech, idx) => (
+            ].map((tech, idx) => (
               <div
-                key={`t2-${idx}`}
-                className="w-20 h-20 sm:w-24 h-24 bg-white border border-gray-100 rounded-3xl shadow-[0_8px_30px_rgba(0,0,0,0.02)] flex items-center justify-center hover:shadow-[0_15px_30px_rgba(222,93,38,0.1)] hover:border-[#DE5D26]/20 hover:scale-105 transition-all duration-300 group shrink-0"
+                key={`t2-dup-${idx}`}
+                className="w-16 h-16 sm:w-24 sm:h-24 bg-white border border-gray-100 rounded-2xl sm:rounded-3xl shadow-[0_8px_30px_rgba(0,0,0,0.02)] flex items-center justify-center hover:shadow-[0_15px_30px_rgba(222,93,38,0.1)] hover:border-[#DE5D26]/20 hover:scale-105 transition-all duration-300 group shrink-0"
               >
                 <img
                   src={`https://cdn.simpleicons.org/${tech.slug}/${tech.color}`}
@@ -854,11 +957,16 @@ export default function LocationPageTemplate({ loc, h1, intro, faqs, serviceLabe
             </p>
           </motion.div>
 
-          <div className="divide-y divide-gray-100">
+          <motion.div 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.1 }}
+            variants={staggerContainer}
+          >
             {faqs.map((faq, i) => (
-              <FAQItem key={i} q={faq.q} a={faq.a} idx={i} />
+              <FAQItem key={i} idx={i} {...faq} />
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -907,7 +1015,7 @@ export default function LocationPageTemplate({ loc, h1, intro, faqs, serviceLabe
                     className="inline-flex items-center gap-2 bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white text-sm font-semibold px-5 py-2.5 rounded-lg transition-all duration-200"
                   >
                     {/* phone icon */}
-                    <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.77a16 16 0 0 0 6.29 6.29l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.77a16 16 0 0 0 6.29 6.29l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" /></svg>
                     +91 7292 050505
                   </a>
                   <a
@@ -915,17 +1023,17 @@ export default function LocationPageTemplate({ loc, h1, intro, faqs, serviceLabe
                     className="inline-flex items-center gap-2 bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white text-sm font-semibold px-5 py-2.5 rounded-lg transition-all duration-200"
                   >
                     {/* mail icon */}
-                    <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="16" x="2" y="4" rx="2" /><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" /></svg>
                     sales@invoidea.com
                   </a>
                 </div>
               </div>
 
               {/* Right — CTA button */}
-              <div className="shrink-0">
+              <div className="shrink-0 w-full sm:w-auto">
                 <button
                   onClick={openConsultModal}
-                  className="inline-flex items-center gap-2.5 bg-white text-[#E8521A] font-bold px-8 py-4 rounded-xl text-base shadow-xl shadow-black/10 hover:shadow-black/20 hover:scale-[1.03] active:scale-100 transition-all duration-200 whitespace-nowrap"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-white text-[#E8521A] font-bold px-8 py-4 rounded-xl text-base shadow-xl shadow-black/10 hover:shadow-black/20 hover:scale-[1.03] active:scale-100 transition-all duration-200 whitespace-nowrap"
                 >
                   Start Your Project
                   <ArrowRight className="w-5 h-5" />

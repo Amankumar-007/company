@@ -40,33 +40,52 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
+  applicationName: 'TwoFloww',
   title: {
-    default: 'Twofloww – Premium Digital Agency | Web & Mobile Development India',
-    template: '%s | Twofloww Digital Agency',
+    default: 'TwoFloww – Web Development Company Delhi NCR',
+    template: '%s | TwoFloww',
   },
   description:
-    'Twofloww is a premium digital agency in India specializing in web development, mobile apps, UI/UX design, SEO & digital marketing. Trusted by startups and enterprises. Get a free consultation today.',
+    'TwoFloww is a leading web development company in Delhi NCR. We build websites, mobile apps, food delivery apps, taxi apps & digital products. 150+ projects. Free consultation.',
   keywords: [
+    // High-volume gap keywords (from competitor analysis)
+    'web development company',
+    'website development company',
+    'web development services',
+    'web development agency',
+    'web development company in delhi',
+    'web development company in noida',
+    'website development company in noida',
+    'website designing company in delhi',
+    'digital marketing agency in delhi',
+    'digital marketing company in delhi',
+    'seo company in delhi',
+    'mobile app development services',
+    'it companies in delhi',
+    'food delivery app development company',
+    'on demand app development company',
+    'grocery delivery app development company',
+    'taxi booking app development company',
+    // Core brand/service keywords
+    'TwoFloww',
     'digital agency India',
     'web development company India',
     'mobile app development India',
     'UI UX design agency',
     'SEO services India',
-    'digital marketing agency India',
-    'Next.js development agency',
+    'on demand app development company in india',
+    'Next.js development company',
     'React development company',
     'e-commerce development India',
-    'cloud solutions India',
-    'best digital agency Noida',
-    'web design agency Delhi',
+    'best web development company in delhi',
+    'web design agency Delhi NCR',
     'startup digital agency India',
-    'twofloww',
     'affordable web development India',
     'custom software development India',
   ],
-  authors: [{ name: 'Twofloww', url: BASE_URL }],
-  creator: 'Twofloww',
-  publisher: 'Twofloww',
+  authors: [{ name: 'TwoFloww', url: BASE_URL }],
+  creator: 'TwoFloww',
+  publisher: 'TwoFloww',
   robots: {
     index: true,
     follow: true,
@@ -85,10 +104,10 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_IN',
     url: BASE_URL,
-    siteName: 'Twofloww Digital Agency',
-    title: 'Twofloww – Premium Digital Agency | Web & Mobile Development India',
+    siteName: 'TwoFloww',
+    title: 'TwoFloww – Web Development Company Delhi NCR',
     description:
-      'Premium digital agency in India delivering world-class web development, mobile apps, UI/UX design, and digital marketing. Trusted by startups and enterprises.',
+      'TwoFloww: web development company Delhi NCR. Websites, mobile apps, food delivery & on-demand apps, SEO. 150+ projects. Free consultation.',
     images: [
       {
         url: '/og-image.png',
@@ -100,9 +119,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Twofloww – Premium Digital Agency India',
+    title: 'TwoFloww – Web Development Company Delhi NCR',
     description:
-      'Premium digital agency in India delivering world-class web development, mobile apps, UI/UX design, and digital marketing.',
+      'TwoFloww: web development company Delhi NCR. Websites, mobile apps, food delivery & on-demand apps, SEO. 150+ projects. Free consultation.',
     images: ['/og-image.png'],
     creator: '@twofloww',
     site: '@twofloww',
@@ -116,8 +135,8 @@ export const metadata: Metadata = {
 const organizationSchema = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
-  name: 'Twofloww',
-  alternateName: 'Twofloww Digital Agency',
+  name: 'TwoFloww',
+  alternateName: 'TwoFloww Digital Agency',
   url: BASE_URL,
   logo: {
     '@type': 'ImageObject',
@@ -196,8 +215,11 @@ const organizationSchema = {
 const websiteSchema = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
-  name: 'Twofloww Digital Agency',
+  // "name" is what Google displays instead of the raw domain in search results
+  name: 'TwoFloww',
+  alternateName: 'TwoFloww Digital Agency',
   url: BASE_URL,
+  description: 'Web development company in Delhi NCR. Websites, mobile apps, food delivery & on-demand apps, SEO & digital marketing.',
   potentialAction: {
     '@type': 'SearchAction',
     target: {
@@ -206,6 +228,76 @@ const websiteSchema = {
     },
     'query-input': 'required name=search_term_string',
   },
+}
+
+// Sitelinks navigation schema — signals main pages to Google so sitelinks
+// appear under branded searches (similar to how ICBR Wellness shows sub-pages)
+const siteNavigationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'TwoFloww Main Navigation',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      item: {
+        '@type': 'WebPage',
+        name: 'Services – Web Development, Mobile Apps & SEO',
+        url: `${BASE_URL}/services`,
+        description: 'Web development, mobile app development, UI/UX design, SEO & digital marketing by TwoFloww.',
+      },
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      item: {
+        '@type': 'WebPage',
+        name: 'Solutions – Food Delivery, Taxi & On-Demand Apps',
+        url: `${BASE_URL}/solutions`,
+        description: 'Food delivery app, grocery delivery, taxi booking, fitness, astrology & dating app development.',
+      },
+    },
+    {
+      '@type': 'ListItem',
+      position: 3,
+      item: {
+        '@type': 'WebPage',
+        name: 'Projects – Portfolio',
+        url: `${BASE_URL}/projects`,
+        description: 'Explore TwoFloww\'s portfolio of web apps, mobile applications, and digital products.',
+      },
+    },
+    {
+      '@type': 'ListItem',
+      position: 4,
+      item: {
+        '@type': 'WebPage',
+        name: 'About TwoFloww',
+        url: `${BASE_URL}/about`,
+        description: 'Meet the TwoFloww team — developers, designers, and digital architects building top-ranked products.',
+      },
+    },
+    {
+      '@type': 'ListItem',
+      position: 5,
+      item: {
+        '@type': 'WebPage',
+        name: 'Blog – Web Development & Digital Marketing Insights',
+        url: `${BASE_URL}/blog`,
+        description: 'Practical guides on web development, SEO, UI/UX design and digital marketing from TwoFloww.',
+      },
+    },
+    {
+      '@type': 'ListItem',
+      position: 6,
+      item: {
+        '@type': 'WebPage',
+        name: 'Contact TwoFloww',
+        url: `${BASE_URL}/contact`,
+        description: 'Get in touch with TwoFloww for web development, mobile apps, and digital marketing. Free consultation.',
+      },
+    },
+  ],
 }
 
 export default function RootLayout({ children }: { children: ReactNode }) {
@@ -221,6 +313,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(siteNavigationSchema) }}
         />
       </head>
       <body className={`${inter.className} ${spaceGrotesk.variable} ${unbounded.variable} bg-white text-black min-h-screen`} suppressHydrationWarning>

@@ -186,7 +186,8 @@ export default function Footer() {
 
         {/* Bottom Logo section */}
         <div className="w-full overflow-hidden select-none pointer-events-none mt-16 flex items-center justify-center relative z-10">
-          <h1
+          <p
+            aria-hidden="true"
             style={{
               fontFamily: 'var(--font-unbounded), sans-serif',
               fontWeight: 900,
@@ -218,7 +219,7 @@ export default function Footer() {
             >
               R
             </span>
-          </h1>
+          </p>
         </div>
       </div>
     </footer>

@@ -34,7 +34,7 @@ export async function generateMetadata(
   const previousImages = (await parent).openGraph?.images || []
 
   return {
-    title: `${blog.meta_title || blog.title} | Twofloww Blog`,
+    title: blog.meta_title || blog.title,
     description: blog.meta_description,
     openGraph: {
       title: blog.meta_title || blog.title,

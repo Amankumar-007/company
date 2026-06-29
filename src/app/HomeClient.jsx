@@ -9,6 +9,7 @@ import SlidingImages from '../components/SlidingImages';
 import HeroSection from '@/components/HeroSection';
 import Card from '../components/Card';
 import VideoComponent from '@/components/VideoComponent';
+import ServicesScrollSection from '@/components/ServicesScrollSection';
 // import GlobalReach from '@/components/GlobalReach';
 
 export default function HomeClient() {
@@ -32,6 +33,7 @@ export default function HomeClient() {
       <VideoComponent />
       <Description />
       <Projects />
+      <ServicesScrollSection />
       {/* <GlobalReach lightTheme={false} /> */}
 
       <Card

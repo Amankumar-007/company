@@ -71,11 +71,9 @@ export default function Header() {
     if (isAdmin || !headerRef.current) return;
 
     if (!isHome) {
-      // On all other pages: show header instantly, no animation
-      gsap.set(headerRef.current, { y: 0, opacity: 1, clearProps: 'all' });
-      gsap.set('.nav-link-inner', { y: '0%', opacity: 1, clearProps: 'all' });
-      gsap.set('.nav-logo-inner', { y: '0%', opacity: 1, clearProps: 'all' });
-      gsap.set('.nav-cta-inner', { opacity: 1, y: 0, clearProps: 'all' });
+      // Kill any in-flight home-page tweens and remove their inline styles
+      gsap.killTweensOf([headerRef.current, '.nav-link-inner', '.nav-logo-inner', '.nav-cta-inner']);
+      gsap.set([headerRef.current, '.nav-link-inner', '.nav-logo-inner', '.nav-cta-inner'], { clearProps: 'all' });
       return;
     }
 
@@ -110,14 +108,14 @@ export default function Header() {
       {/* Plain header — no motion wrapper, GSAP handles entrance */}
       <header
         ref={headerRef}
-        style={{ opacity: 0 }} // hidden until GSAP fires
+        style={isHome ? { opacity: 0 } : undefined}
         className={`${styles.header} ${needsAbsoluteHeader ? styles.absoluteHeader : ''}`}
       >
         {/* Logo */}
         <div className={styles.logo}>
           <Link href="/" className={styles.logoLink}>
             <div style={{ overflow: 'hidden', display: 'flex', alignItems: 'center' }}>
-              <div className={`nav-logo-inner ${styles.logoContainer}`} style={{ opacity: 0, transform: 'translateY(110%)' }}>
+              <div className={`nav-logo-inner ${styles.logoContainer}`} style={isHome ? { opacity: 0, transform: 'translateY(110%)' } : undefined}>
                 <Image
                   src="/brandlogo.png"
                   alt="FlowW Logo"
@@ -160,7 +158,7 @@ export default function Header() {
                 >
                   {/* Overflow clip for slide-up reveal */}
                   <span className="overflow-hidden inline-flex items-center pb-0.5">
-                    <span className="nav-link-inner inline-flex items-center gap-1.5" style={{ opacity: 0, transform: 'translateY(110%)' }}>
+                    <span className="nav-link-inner inline-flex items-center gap-1.5" style={isHome ? { opacity: 0, transform: 'translateY(110%)' } : undefined}>
                       {item.title}
                       {item.hasMegaMenu && (
                         <ChevronDown 
@@ -223,7 +221,7 @@ export default function Header() {
         {/* Mobile Menu Button — keep motion only for hamburger toggle */}
         <motion.button
           className={`${styles.mobileMenuButton} nav-cta-inner`}
-          style={{ opacity: 0 }}
+          style={isHome ? { opacity: 0 } : undefined}
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           whileTap={{ scale: 0.9 }}
           aria-label="Toggle mobile menu"

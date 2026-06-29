@@ -189,7 +189,7 @@
   }
 
   .navItemContainer {
-    position: relative;
+    position: static;
     height: 100%;
     display: flex;
     align-items: center;
@@ -206,10 +206,11 @@
 
   .megaMenu {
     position: absolute;
-    top: calc(100% + 20px);
+    top: calc(100% + 15px);
     left: 50%;
-    transform: translateX(-50%) !important; // Center align based on container
-    width: 800px;
+    transform: translateX(-50%) !important; // Center align based on header
+    width: 100%;
+    max-width: 1100px;
     background: #ffffff;
     border-radius: 16px;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0,0,0,0.05);
@@ -231,57 +232,73 @@
 
   .megaMenuContent {
     display: flex;
-    flex-direction: column;
-    padding: 2rem;
+    flex-direction: row;
+    padding: 2.5rem;
+    gap: 3rem;
   }
 
   .megaMenuHeader {
-    margin-bottom: 1.5rem;
-    padding-bottom: 1.5rem;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    flex: 0 0 260px;
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 0.75rem;
+    border-right: 1px solid rgba(0, 0, 0, 0.08);
+    padding-right: 2.5rem;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
 
     h3 {
-      font-size: 1.25rem;
-      font-weight: 700;
-      color: #1a1a1a;
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: #0B0D17;
       margin: 0;
+      letter-spacing: -0.5px;
     }
 
     p {
       font-size: 0.9rem;
       color: #666;
       margin: 0;
-      max-width: 80%;
+      max-width: 100%;
+      line-height: 1.55;
     }
 
     .megaMenuAllLink {
       align-self: flex-start;
-      margin-top: 0.5rem;
+      margin-top: auto;
       font-size: 0.85rem;
-      font-weight: 600;
+      font-weight: 700;
       color: #455CE9;
       text-decoration: none;
-      transition: color 0.2s ease;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding-top: 1.5rem;
 
       &:hover {
         color: #DE5D26;
+        transform: translateX(4px);
       }
     }
   }
 
   .megaMenuGrid {
+    flex: 1;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 0.5rem;
+
+    @media (max-width: 1024px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
   }
 
   .megaMenuItem {
     display: flex;
     align-items: flex-start;
-    padding: 1.25rem;
+    padding: 1rem;
     border-radius: 12px;
     text-decoration: none;
     transition: all 0.3s ease;
@@ -297,10 +314,10 @@
   .megaMenuItemText {
     display: flex;
     flex-direction: column;
-    gap: 0.35rem;
+    gap: 0.25rem;
 
     h4 {
-      font-size: 1rem;
+      font-size: 0.95rem;
       font-weight: 700;
       color: #0B0D17;
       margin: 0;
@@ -308,9 +325,9 @@
     }
 
     p {
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       color: #666;
-      line-height: 1.5;
+      line-height: 1.45;
       margin: 0;
     }
   }

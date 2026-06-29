@@ -44,11 +44,10 @@ function ToolbarButton({
       onClick={onClick}
       disabled={disabled}
       title={title}
-      className={`p-2 rounded-lg transition-all duration-150 text-sm font-medium flex items-center justify-center w-8 h-8 shrink-0 ${
-        isActive
-          ? 'bg-[#ea580c] text-white shadow-sm shadow-orange-500/30'
-          : 'text-zinc-600 hover:bg-zinc-100 hover:text-zinc-900'
-      } disabled:opacity-30 disabled:cursor-not-allowed`}
+      className={`p-2 rounded-lg transition-all duration-150 text-sm font-medium flex items-center justify-center w-8 h-8 shrink-0 ${isActive
+        ? 'bg-[#ea580c] text-white shadow-sm shadow-orange-500/30'
+        : 'text-zinc-600 hover:bg-zinc-100 hover:text-zinc-900'
+        } disabled:opacity-30 disabled:cursor-not-allowed`}
     >
       {children}
     </button>

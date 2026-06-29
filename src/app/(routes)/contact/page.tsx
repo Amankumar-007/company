@@ -369,7 +369,7 @@ export default function ContactForm() {
           {/* Budget Selection */}
           <div>
             <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6">
-              <h3 className="text-xl font-medium">Project budget</h3>
+              <h2 className="text-xl font-medium">Project budget</h2>
               <select
                 value={currency}
                 onChange={(e) => setCurrency(e.target.value)}
@@ -402,7 +402,7 @@ export default function ContactForm() {
 
           {/* File Attachment */}
           <div>
-            <h3 className="text-xl mb-6">Attachments</h3>
+            <h2 className="text-xl mb-6">Attachments</h2>
             
             {/* File Upload Area */}
             <div 

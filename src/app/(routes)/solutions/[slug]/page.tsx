@@ -48,20 +48,23 @@ export default async function SolutionPage({ params }) {
     notFound();
   }
 
-  // Cast solution data to expected type for TypeScript/ESLint safety
   const safeSolution = {
     id: solution.id,
     slug: solution.slug,
     title: solution.title,
     description: solution.description,
+    longDescription: solution.longDescription,
     icon: solution.icon,
     color: solution.color,
     features: solution.features,
     benefits: solution.benefits,
     stats: solution.stats,
+    process: solution.process,
+    techStack: solution.techStack,
+    faq: solution.faq,
   };
 
-  const jsonLd = {
+  const serviceJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Service',
     name: solution.title,
@@ -69,17 +72,38 @@ export default async function SolutionPage({ params }) {
     provider: {
       '@type': 'Organization',
       name: 'Twofloww',
-      url: 'https://www.twofloww.in'
+      url: 'https://www.twofloww.in',
     },
     url: `https://www.twofloww.in/solutions/${slug}`,
   };
+
+  const faqJsonLd = solution.faq && solution.faq.length > 0
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: solution.faq.map((item) => ({
+          '@type': 'Question',
+          name: item.q,
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: item.a,
+          },
+        })),
+      }
+    : null;
 
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }}
       />
+      {faqJsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        />
+      )}
       <SolutionDetailClient solution={safeSolution} />
     </>
   );

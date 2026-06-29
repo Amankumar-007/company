@@ -110,6 +110,8 @@ const TeamMemberCard = ({ member }) => {
           <img
             src={member.image}
             alt={member.name}
+            width={400}
+            height={400}
             className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-300 ease-out"
           />
         ) : (

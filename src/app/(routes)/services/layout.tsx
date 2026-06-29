@@ -4,18 +4,24 @@ import { ReactNode } from 'react'
 const BASE_URL = 'https://www.twofloww.in'
 
 export const metadata: Metadata = {
-    title: 'Our Services – Web, Mobile, SEO & Design',
+    title: 'Web Development Company Delhi NCR – Services',
     description:
-        'Explore Twofloww\'s full range of digital services: web development, mobile app development, UI/UX design, SEO & marketing, cloud solutions, and e-commerce. Expert team with 5+ years of experience.',
+        'TwoFloww offers web development, mobile app development, UI/UX design, SEO & digital marketing in Delhi NCR. Expert team, 5+ years experience. Free consultation.',
     keywords: [
+        'web development company in delhi',
+        'web development company in noida',
         'web development services',
-        'mobile app development',
+        'website development company',
+        'mobile app development services',
+        'web development agency delhi ncr',
+        'digital marketing agency in delhi',
+        'seo company in delhi',
         'UI UX design services',
-        'SEO marketing services',
-        'cloud solutions',
-        'e-commerce development',
-        'digital agency services India',
-        'Next.js React development',
+        'e-commerce development india',
+        'it companies in delhi',
+        'best web development company in delhi',
+        'food delivery app development company',
+        'on demand app development company',
     ],
     alternates: {
         canonical: `${BASE_URL}/services`,
@@ -23,18 +29,18 @@ export const metadata: Metadata = {
     openGraph: {
         type: 'website',
         locale: 'en_IN',
-        siteName: 'Twofloww Digital Agency',
-        title: 'Our Services – Web, Mobile, SEO & Design | Twofloww',
+        siteName: 'TwoFloww',
+        title: 'Web Development Company Delhi NCR – Services | TwoFloww',
         description:
-            'Full-range digital services — web development, mobile apps, UI/UX design, SEO, cloud, and e-commerce.',
+            'Web development, mobile apps, UI/UX design, SEO & digital marketing in Delhi NCR. 150+ projects. Free consultation.',
         url: `${BASE_URL}/services`,
-        images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Twofloww Services' }],
+        images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'TwoFloww Services – Web Development Delhi NCR' }],
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Our Services – Web, Mobile, SEO & Design | Twofloww',
+        title: 'Web Development Company Delhi NCR – Services | TwoFloww',
         description:
-            'Full-range digital services — web development, mobile apps, UI/UX design, SEO, cloud, and e-commerce.',
+            'Web development, mobile apps, UI/UX design, SEO & digital marketing in Delhi NCR. 150+ projects. Free consultation.',
         images: ['/og-image.png'],
         creator: '@twofloww',
         site: '@twofloww',

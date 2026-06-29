@@ -27,7 +27,7 @@ export default function GlobalReach({ lightTheme = true }: Props) {
       <div
         className="absolute inset-0 z-0 pointer-events-none"
         style={{
-          backgroundImage: ` 1px, transparent 1px), linear-gradient(to right, ${gridColor} 1px, transparent 1px)`,
+          backgroundImage: `linear-gradient(to bottom, ${gridColor} 1px, transparent 1px), linear-gradient(to right, ${gridColor} 1px, transparent 1px)`,
           backgroundSize: '40px 40px'
         }}
       />

@@ -64,6 +64,22 @@ const nextConfig: NextConfig = {
             key: 'Permissions-Policy',
             value: 'camera=(), microphone=(), geolocation=()',
           },
+          {
+            key: 'Content-Security-Policy',
+            value: [
+              "default-src 'self'",
+              "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
+              "style-src 'self' 'unsafe-inline'",
+              "img-src 'self' data: blob: https://res.cloudinary.com https://images.unsplash.com https://api.iconify.design https://cdn.simpleicons.org",
+              "font-src 'self' data:",
+              "media-src 'self' https://res.cloudinary.com",
+              "connect-src 'self' https://*.supabase.co",
+              "frame-src 'none'",
+              "frame-ancestors 'none'",
+              "base-uri 'self'",
+              "form-action 'self'",
+            ].join('; '),
+          },
         ],
       },
     ];

@@ -9,8 +9,8 @@ import { getRelativeTime } from '@/lib/utils'
 const BASE_URL = 'https://www.twofloww.in'
 
 export const metadata: Metadata = {
-  title: 'Blog | Twofloww – Digital Agency Insights & Engineering',
-  description: 'Fresh insights on web development, UI/UX design, SEO, and digital marketing from the Twofloww team. Practical guides updated regularly for developers and founders in India.',
+  title: 'Blog – Digital Agency Insights & Engineering',
+  description: 'Fresh insights on web development, UI/UX design, SEO, and digital marketing from the Twofloww team. Practical guides for developers and founders in India.',
   keywords: [
     'web development blog India',
     'digital agency blog',
@@ -33,8 +33,8 @@ export const metadata: Metadata = {
     locale: 'en_IN',
     url: `${BASE_URL}/blog`,
     siteName: 'Twofloww Digital Agency',
-    title: 'Blog | Twofloww – Digital Agency Insights & Engineering',
-    description: 'Fresh insights on web development, UI/UX design, SEO, and digital marketing from the Twofloww team. Practical guides updated regularly.',
+    title: 'Blog – Digital Agency Insights & Engineering',
+    description: 'Fresh insights on web development, UI/UX design, SEO, and digital marketing from the Twofloww team. Practical guides for developers and founders.',
     images: [
       {
         url: '/og-image.png',
