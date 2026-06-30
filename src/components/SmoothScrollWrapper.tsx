@@ -16,31 +16,61 @@ export default function SmoothScrollWrapper({ children }: { children: React.Reac
   useEffect(() => {
     if (isAdmin) return;
 
-    const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      orientation: 'vertical',
-      touchMultiplier: 2,
-      gestureOrientation: 'vertical',
-      smoothWheel: true,
-      syncTouch: true,
-    });
-
-    lenisRef.current = lenis;
-
-    // CRITICAL FIX: Store the LATEST rafId on every frame so cancelAnimationFrame
-    // actually stops the loop. Without this, the old ID is cancelled but the new
-    // recursive call keeps running — leaking an infinite loop on every navigation.
+    let lenis: Lenis | null = null;
     let rafId: number;
-    function raf(time: number) {
-      lenis.raf(time);
-      rafId = requestAnimationFrame(raf);
-    }
-    rafId = requestAnimationFrame(raf);
+
+    const initLenis = () => {
+      // Disable smooth scroll on mobile devices and small screens (<= 768px)
+      const isMobile =
+        /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
+        window.innerWidth <= 768;
+
+      if (isMobile) {
+        if (lenis) {
+          lenis.destroy();
+          lenis = null;
+          lenisRef.current = null;
+          cancelAnimationFrame(rafId);
+        }
+        return;
+      }
+
+      if (!lenis) {
+        lenis = new Lenis({
+          duration: 1.2,
+          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+          orientation: 'vertical',
+          touchMultiplier: 2,
+          gestureOrientation: 'vertical',
+          smoothWheel: true,
+          syncTouch: false, // Keep touch scrolling 100% native
+        });
+        lenisRef.current = lenis;
+
+        const raf = (time: number) => {
+          if (lenis) {
+            lenis.raf(time);
+            rafId = requestAnimationFrame(raf);
+          }
+        };
+        rafId = requestAnimationFrame(raf);
+      }
+    };
+
+    initLenis();
+
+    const handleResize = () => {
+      initLenis();
+    };
+
+    window.addEventListener('resize', handleResize);
 
     return () => {
+      window.removeEventListener('resize', handleResize);
+      if (lenis) {
+        lenis.destroy();
+      }
       cancelAnimationFrame(rafId);
-      lenis.destroy();
       lenisRef.current = null;
     };
   }, [isAdmin]);
