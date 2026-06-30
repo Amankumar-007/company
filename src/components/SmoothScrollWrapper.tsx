@@ -20,10 +20,10 @@ export default function SmoothScrollWrapper({ children }: { children: React.Reac
       duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: 'vertical',
+      touchMultiplier: 2,
       gestureOrientation: 'vertical',
       smoothWheel: true,
       syncTouch: true,
-      touchMultiplier: 1,
     });
 
     lenisRef.current = lenis;
