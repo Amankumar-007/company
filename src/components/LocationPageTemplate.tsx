@@ -481,7 +481,7 @@ export default function LocationPageTemplate({ loc, h1, intro, faqs, serviceLabe
             whileInView="visible"
             viewport={{ once: true, amount: 0.1 }}
             variants={fadeInUp}
-            className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-10 mb-16 px-6 lg:px-4"
+            className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-6 lg:gap-10 mb-8 lg:mb-16 px-6 lg:px-4"
           >
             <div className="max-w-xl">
               <div className="flex items-center gap-2 text-[#DE5D26] font-bold text-sm mb-4">
@@ -500,7 +500,7 @@ export default function LocationPageTemplate({ loc, h1, intro, faqs, serviceLabe
               <p className="text-gray-500 font-medium mb-6 leading-relaxed text-base sm:text-lg">
                 From scalable digital platforms to enterprise infrastructure, we've got you covered. Choose reliability, choose excellence.
               </p>
-              <div className="flex items-center gap-8 font-bold text-[#DE5D26]">
+              <div className="flex flex-wrap items-center gap-4 md:gap-8 font-bold text-[#DE5D26]">
                 <a href="#" className="flex items-center gap-1 hover:text-[#0B0D17] transition-colors">
                   View All Industries <ChevronRight className="w-5 h-5" />
                 </a>
@@ -516,7 +516,7 @@ export default function LocationPageTemplate({ loc, h1, intro, faqs, serviceLabe
             whileInView="visible"
             viewport={{ once: true, amount: 0.1 }}
             variants={staggerContainer}
-            className="flex gap-4 md:gap-6 overflow-x-auto hide-scrollbar snap-x snap-mandatory pb-8 px-6 lg:px-4 w-full"
+            className="flex gap-6 overflow-x-auto hide-scrollbar pb-8 px-4 lg:px-4 w-full"
           >
             {[
               { title: 'Ecommerce Platforms', image: '/ecommerse.png' },
@@ -741,10 +741,10 @@ export default function LocationPageTemplate({ loc, h1, intro, faqs, serviceLabe
         <style>{`
           @keyframes marqueeLeft {
             0% { transform: translateX(0); }
-            100% { transform: translateX(-100%); }
+            100% { transform: translateX(calc(-100% - 1.5rem)); }
           }
           @keyframes marqueeRight {
-            0% { transform: translateX(-100%); }
+            0% { transform: translateX(calc(-100% - 1.5rem)); }
             100% { transform: translateX(0); }
           }
           .animate-marquee-left {
@@ -752,9 +752,6 @@ export default function LocationPageTemplate({ loc, h1, intro, faqs, serviceLabe
           }
           .animate-marquee-right {
             animation: marqueeRight 30s linear infinite;
-          }
-          .animate-marquee-left:hover, .animate-marquee-right:hover {
-            animation-play-state: paused;
           }
           .mask-gradient {
             mask-image: linear-gradient(to right, transparent, white 15%, white 85%, transparent);

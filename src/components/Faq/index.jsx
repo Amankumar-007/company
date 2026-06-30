@@ -10,39 +10,44 @@ const FAQ = () => {
   const faqData = [
     {
       id: 1,
-      question: "How long does it take to build a website?",
-      answer: "Typically, a standard business website takes 2-4 weeks, while complex e-commerce or custom applications can take 6-12 weeks. The timeline depends on your specific requirements, content readiness, and feedback response time."
+      question: "How much does website development cost in Delhi NCR?",
+      answer: "Website development cost in Delhi NCR depends on complexity. A standard business website starts from ₹25,000, a custom web application ranges from ₹50,000 to ₹2,00,000, and a full-scale e-commerce or on-demand platform costs ₹2,00,000 to ₹10,00,000+. We offer a free consultation and detailed quote tailored to your specific requirements.",
     },
     {
       id: 2,
-      question: "Do you provide ongoing support and maintenance?",
-      answer: "Yes! We offer comprehensive maintenance packages including security updates, content updates, performance optimization, and technical support. Our plans start from basic monthly maintenance to full-service packages."
+      question: "How long does it take to build a website?",
+      answer: "A standard business website takes 2–4 weeks, while a custom web application or e-commerce store typically takes 6–12 weeks. On-demand apps (food delivery, taxi booking) take 8–16 weeks depending on features. We use agile methodology, delivering in sprints so you see real progress every week.",
     },
     {
       id: 3,
-      question: "Can you help improve my website's SEO ranking?",
-      answer: "Absolutely! Our SEO services include keyword research, on-page optimization, technical SEO, content strategy, and link building. Most clients see improvements in 3-6 months with our proven strategies."
+      question: "Do you develop food delivery apps like Zomato or Swiggy?",
+      answer: "Yes! TwoFloww specializes in on-demand app development including food delivery apps, grocery delivery apps, taxi booking apps (Uber-like), fitness apps, and more. We deliver complete solutions with a customer app, delivery partner app, restaurant/vendor panel, and a full-featured admin dashboard.",
     },
     {
       id: 4,
-      question: "Do you develop mobile apps for both iOS and Android?",
-      answer: "Yes, we develop native apps for iOS and Android, as well as cross-platform solutions using React Native and Flutter. We'll recommend the best approach based on your budget, timeline, and requirements."
+      question: "Do you provide SEO services in Delhi NCR?",
+      answer: "Absolutely. We offer end-to-end SEO services in Delhi NCR including technical SEO, on-page optimization, local SEO, Google Business Profile management, link building, and content marketing. Most clients see measurable ranking improvements within 3–6 months using our proven, white-hat strategies.",
     },
     {
       id: 5,
-      question: "What social media platforms do you manage?",
-      answer: "We manage all major platforms including Facebook, Instagram, Twitter, LinkedIn, TikTok, and YouTube. Our services include content creation, posting schedules, community management, and performance analytics."
+      question: "Which technologies does TwoFloww use for web development?",
+      answer: "We use cutting-edge technologies including Next.js, React.js, Node.js, TypeScript, MongoDB, PostgreSQL, and Tailwind CSS for web projects. For mobile apps, we use React Native and Flutter. Our tech stack is chosen for performance, scalability, and long-term SEO advantage.",
     },
     {
       id: 6,
-      question: "What's included in your digital marketing services?",
-      answer: "Our digital marketing includes PPC advertising, social media marketing, email campaigns, content marketing, conversion optimization, and detailed analytics reporting. We create custom strategies based on your business goals."
+      question: "Which cities does TwoFloww serve?",
+      answer: "TwoFloww is based in Noida and serves clients across Delhi NCR (Delhi, Noida, Gurgaon, Faridabad, Ghaziabad), and pan-India in Mumbai, Bangalore, Hyderabad, Chennai, and Pune. We also work with international clients in the USA, UK, UAE, Canada, and Australia.",
     },
     {
       id: 7,
-      question: "How do you ensure project quality and timelines?",
-      answer: "We use agile methodology with regular check-ins, milestone reviews, and transparent project management tools. You'll receive weekly updates and have access to a dedicated project manager throughout the entire process."
-    }
+      question: "Do you develop mobile apps for both iOS and Android?",
+      answer: "Yes, we develop native iOS and Android apps as well as cross-platform solutions using React Native and Flutter. We recommend the best approach based on your budget, target audience, and timeline — and we handle the full cycle from UI/UX design to App Store and Play Store deployment.",
+    },
+    {
+      id: 8,
+      question: "Do you provide ongoing support and maintenance after launch?",
+      answer: "Yes! Every project includes 3 months of free post-launch support covering bug fixes, security patches, and minor updates. We also offer affordable ongoing maintenance packages for long-term performance monitoring, content updates, and feature additions.",
+    },
   ];
 
   useEffect(() => {

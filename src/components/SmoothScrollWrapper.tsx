@@ -22,7 +22,8 @@ export default function SmoothScrollWrapper({ children }: { children: React.Reac
       orientation: 'vertical',
       gestureOrientation: 'vertical',
       smoothWheel: true,
-      touchMultiplier: 2,
+      syncTouch: true,
+      touchMultiplier: 1,
     });
 
     lenisRef.current = lenis;

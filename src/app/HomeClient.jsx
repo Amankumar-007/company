@@ -9,7 +9,9 @@ import SlidingImages from '../components/SlidingImages';
 import HeroSection from '@/components/HeroSection';
 import Card from '../components/Card';
 import VideoComponent from '@/components/VideoComponent';
-import ServicesScrollSection from '@/components/ServicesScrollSection';
+import HomeSeoSection from '../components/HomeSeoSection';
+import ServicesCardsSection from '../components/ServicesCardsSection';
+// import FAQSection from '../components/FAQSection';
 // import GlobalReach from '@/components/GlobalReach';
 
 export default function HomeClient() {
@@ -33,9 +35,10 @@ export default function HomeClient() {
       <VideoComponent />
       <Description />
       <Projects />
-      <ServicesScrollSection />
+      <ServicesCardsSection />
+      <HomeSeoSection />
       {/* <GlobalReach lightTheme={false} /> */}
-
+      {/* <FAQSection /> */}
       <Card
         title="Sample Project 1"
         description="This is the first sample card component to showcase the project details."
