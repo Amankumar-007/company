@@ -20,7 +20,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: 0.8,
     })) || []
 
-    const seoServicesToGenerate = ['digital-agency', 'web-development', 'seo-services', 'ecommerce-solutions']
+    const seoServicesToGenerate = ['digital-agency', 'web-agency', 'web-development', 'seo-services', 'ecommerce-solutions']
     const programmaticSeoPages = targetLocations.flatMap(location =>
         seoServicesToGenerate.map(service => ({
             url: `${BASE_URL}/best-${service}-in-${location.id}`,

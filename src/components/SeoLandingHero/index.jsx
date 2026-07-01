@@ -44,8 +44,8 @@ export default function SeoLandingHero({ location, serviceName }) {
         </h1>
 
         <p className="seo-hero-sub text-xl lg:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed mb-12 font-light opacity-0">
-          Partner with TwoflowW to elevate your digital presence. 
-          We deliver world-class {serviceName.toLowerCase()} solutions tailored specifically for businesses in {location.name}, {location.state}.
+          Partner with TwoFloww to elevate your digital presence.
+          We deliver world-class {serviceName.toLowerCase()} solutions tailored specifically for businesses in {location.name}{location.state ? `, ${location.state}` : ''}.
         </p>
 
         <div className="seo-hero-cta flex flex-col sm:flex-row gap-6 sm:gap-10 justify-center items-center opacity-0">

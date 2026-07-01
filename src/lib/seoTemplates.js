@@ -18,9 +18,9 @@ export function getBrand() {
   return brand;
 }
 
-/** "Noida" for cities, "United States" for countries */
+/** "Noida" for cities/regions, "United States" for countries */
 function placeName(loc) {
-  return loc.type === 'city' ? loc.city : loc.country;
+  return loc.type === 'country' ? loc.country : loc.city;
 }
 
 /**

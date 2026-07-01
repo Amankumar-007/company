@@ -26,14 +26,14 @@ export const metadata: Metadata = {
         description:
             'Browse our portfolio of successful web, mobile, and design projects.',
         url: `${BASE_URL}/projects`,
-        images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Twofloww Projects' }],
+        images: [{ url: '/opengraph-image', width: 1200, height: 630, alt: 'Twofloww Projects' }],
     },
     twitter: {
         card: 'summary_large_image',
         title: 'Our Projects – Portfolio & Case Studies | Twofloww',
         description:
             'Browse our portfolio of successful web, mobile, and design projects.',
-        images: ['/og-image.png'],
+        images: ['/opengraph-image'],
         creator: '@twofloww',
         site: '@twofloww',
     },

@@ -45,7 +45,7 @@ const ServicesPage = () => {
         "Performance Optimization",
         "SEO Friendly"
       ],
-      stats: { projects: "150+", experience: "5+ Years", satisfaction: "98%" },
+      stats: { projects: "50+", experience: "5+ Years", satisfaction: "98%" },
       accentColor: "#7ED348",
       accentRgb: "126, 211, 72"
     },

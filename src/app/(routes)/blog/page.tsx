@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     description: 'Fresh insights on web development, UI/UX design, SEO, and digital marketing from the Twofloww team. Practical guides for developers and founders.',
     images: [
       {
-        url: '/og-image.png',
+        url: '/opengraph-image',
         width: 1200,
         height: 630,
         alt: 'Twofloww Blog – Digital Agency Insights',
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Blog | Twofloww – Digital Agency Insights',
     description: 'Fresh insights on web development, UI/UX design, SEO, and digital marketing from the Twofloww team.',
-    images: ['/og-image.png'],
+    images: ['/opengraph-image'],
     creator: '@twofloww',
     site: '@twofloww',
   },

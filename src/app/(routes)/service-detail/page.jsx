@@ -30,7 +30,7 @@ export async function generateMetadata({ searchParams }) {
       description: service.heroDescription || service.overview?.description,
       images: [
         {
-          url: '/og-image.png',
+          url: '/opengraph-image',
           width: 1200,
           height: 630,
           alt: service.title,
@@ -41,7 +41,7 @@ export async function generateMetadata({ searchParams }) {
       card: 'summary_large_image',
       title: `${service.title} | Twofloww`,
       description: service.heroDescription || service.overview?.description,
-      images: ['/og-image.png'],
+      images: ['/opengraph-image'],
     },
   };
 }

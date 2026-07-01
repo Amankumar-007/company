@@ -71,6 +71,22 @@ const faqSchema = {
         text: 'Yes. Every project includes 3 months of free post-launch support covering bug fixes, security patches, and minor updates. We also offer affordable ongoing maintenance packages for long-term performance monitoring, content updates, and feature additions.',
       },
     },
+    {
+      '@type': 'Question',
+      name: 'Which is the best web agency in Noida?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'TwoFloww is a top-rated web agency in Noida, offering website development, mobile app development, UI/UX design, SEO, and digital marketing. Based in Noida, Uttar Pradesh, TwoFloww has delivered 50+ projects and is known for transparent pricing, on-time delivery, and post-launch support.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Which is the best web agency in Delhi NCR?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'TwoFloww is a leading web agency in Delhi NCR, serving businesses across Noida, Delhi, Gurugram, Ghaziabad, Faridabad, and Greater Noida. TwoFloww specializes in website development, mobile apps, e-commerce, SEO, and digital marketing, with a free consultation offered before every project.',
+      },
+    },
   ],
 };
 
@@ -80,11 +96,11 @@ const localBusinessSchema = {
   '@type': 'ProfessionalService',
   name: 'TwoFloww',
   alternateName: 'TwoFloww Digital Agency',
-  image: `${BASE_URL}/og-image.png`,
+  image: `${BASE_URL}/opengraph-image`,
   '@id': BASE_URL,
   url: BASE_URL,
   description:
-    'TwoFloww is a leading web development company in Delhi NCR specializing in website development, mobile app development, food delivery apps, on-demand apps, SEO, and digital marketing.',
+    'TwoFloww is a leading web agency and web development company in Delhi NCR (Noida, Delhi, Gurugram) specializing in website development, mobile app development, food delivery apps, on-demand apps, SEO, and digital marketing.',
   priceRange: '₹₹',
   address: {
     '@type': 'PostalAddress',
@@ -125,10 +141,12 @@ const localBusinessSchema = {
   },
   areaServed: [
     { '@type': 'City', name: 'Noida' },
+    { '@type': 'Place', name: 'Delhi NCR' },
     { '@type': 'City', name: 'Delhi' },
     { '@type': 'City', name: 'Gurgaon' },
     { '@type': 'City', name: 'Faridabad' },
     { '@type': 'City', name: 'Ghaziabad' },
+    { '@type': 'City', name: 'Greater Noida' },
     { '@type': 'City', name: 'Mumbai' },
     { '@type': 'City', name: 'Bangalore' },
     { '@type': 'City', name: 'Hyderabad' },
@@ -142,12 +160,20 @@ const localBusinessSchema = {
 
 export const metadata = {
   title: {
-    absolute: 'TwoFloww – Web Development Company Delhi NCR | Mobile Apps, SEO & Digital Marketing',
+    absolute: 'TwoFloww – Web Development Company & Web Agency in Delhi NCR',
   },
   description:
-    'TwoFloww is a top web development company in Delhi NCR. Expert in website design, mobile app development, food delivery apps, on-demand apps, SEO & digital marketing. 150+ projects delivered. Free consultation & wireframe.',
+    'TwoFloww is a top web agency and web development company in Delhi NCR (Noida, Delhi, Gurugram). Website development, mobile apps, food delivery apps, on-demand apps, SEO & digital marketing. 50+ projects delivered. Free consultation & wireframe.',
   keywords: [
     // ── Primary geo + service keywords ──────────────────────────
+    'web agency in noida',
+    'web agency in delhi ncr',
+    'web agency in delhi',
+    'best web agency in noida',
+    'best web agency in delhi ncr',
+    'website development',
+    'website development company',
+    'website development company in delhi ncr',
     'web development company in delhi ncr',
     'web development company in delhi',
     'web development company in noida',
@@ -164,7 +190,6 @@ export const metadata = {
     'top web development company delhi ncr',
     // ── Generic high-volume ──────────────────────────────────────
     'web development company',
-    'website development company',
     'web development services',
     'web development agency',
     'software development company india',
@@ -237,25 +262,25 @@ export const metadata = {
     url: BASE_URL,
     siteName: 'TwoFloww',
     title:
-      'TwoFloww – Web Development Company Delhi NCR | Mobile Apps, SEO & Digital Marketing',
+      'TwoFloww – Web Development Company & Web Agency in Delhi NCR',
     description:
-      'TwoFloww: top web development company in Delhi NCR. Websites, mobile apps, food delivery & on-demand apps, SEO & digital marketing. 150+ projects. Free consultation.',
+      'TwoFloww: top web agency & web development company in Delhi NCR (Noida, Delhi, Gurugram). Website development, mobile apps, food delivery & on-demand apps, SEO & digital marketing. 50+ projects. Free consultation.',
     images: [
       {
-        url: '/og-image.png',
+        url: '/opengraph-image',
         width: 1200,
         height: 630,
-        alt: 'TwoFloww – Web Development Company Delhi NCR',
+        alt: 'TwoFloww – Web Development Company & Web Agency in Delhi NCR',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
     title:
-      'TwoFloww – Web Development Company Delhi NCR | Mobile Apps, SEO & Digital Marketing',
+      'TwoFloww – Web Development Company & Web Agency in Delhi NCR',
     description:
-      'TwoFloww: top web development company in Delhi NCR. Websites, mobile apps, food delivery & on-demand apps, SEO & digital marketing. 150+ projects. Free consultation.',
-    images: ['/og-image.png'],
+      'TwoFloww: top web agency & web development company in Delhi NCR (Noida, Delhi, Gurugram). Website development, mobile apps, food delivery & on-demand apps, SEO & digital marketing. 50+ projects. Free consultation.',
+    images: ['/opengraph-image'],
     creator: '@twofloww',
     site: '@twofloww',
   },

@@ -6,7 +6,7 @@ const ProjectTimeline = () => {
 
   const timelineData = {
     title: "Project Timeline",
-    description: "At TwoflowW, we value your time and understand the urgency of roofing issues. That's why we've streamlined our project timeline.",
+    description: "At TwoFloww, we value your time and understand how urgent your launch is. That's why we've streamlined our project timeline.",
     stages: [
       {
         name: "Discovery Stage",

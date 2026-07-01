@@ -1,5 +1,6 @@
 export const targetLocations = [
   { id: 'noida', name: 'Noida', state: 'Uttar Pradesh' },
+  { id: 'delhi-ncr', name: 'Delhi NCR', state: 'Delhi NCR' },
   { id: 'delhi', name: 'Delhi', state: 'Delhi' },
   { id: 'agra', name: 'Agra', state: 'Uttar Pradesh' },
   { id: 'gurugram', name: 'Gurugram', state: 'Haryana' },
@@ -26,6 +27,7 @@ export const getSeoTarget = (slug) => {
   // Map special strings or find matching service
   let serviceName = '';
   if (serviceSlug === 'digital-agency') serviceName = 'Digital Agency';
+  else if (serviceSlug === 'web-agency') serviceName = 'Web Agency';
   else if (serviceSlug === 'web-solution') serviceName = 'Web Solution';
   else if (serviceSlug === 'web-development') serviceName = 'Web Development';
   else if (serviceSlug === 'mobile-development') serviceName = 'Mobile App Development';

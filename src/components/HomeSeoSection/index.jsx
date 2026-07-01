@@ -337,7 +337,7 @@ export default function HomeSeoSection() {
                 </div>
               </div>
               <div className="relative z-10 bg-white rounded-[1.5rem] p-5 lg:p-6 shadow-2xl mt-auto translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
-                <div className="text-4xl lg:text-6xl font-medium text-gray-900 mb-2 tracking-tight">150+</div>
+                <div className="text-4xl lg:text-6xl font-medium text-gray-900 mb-2 tracking-tight">50+</div>
                 <p className="text-gray-600 font-medium text-sm leading-relaxed">Successful digital products and campaigns delivered for global startups and enterprises.</p>
               </div>
             </motion.div>
@@ -398,7 +398,7 @@ export default function HomeSeoSection() {
                   </div>
                 </div>
                 <div className="relative z-10 bg-white rounded-[1.25rem] p-4 shadow-xl mt-auto">
-                  <div className="text-3xl font-medium text-gray-900 mb-1 tracking-tight">150+</div>
+                  <div className="text-3xl font-medium text-gray-900 mb-1 tracking-tight">50+</div>
                   <p className="text-gray-600 font-medium text-xs leading-relaxed">Successful digital products and campaigns delivered for global startups and enterprises.</p>
                 </div>
               </div>

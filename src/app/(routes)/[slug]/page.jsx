@@ -87,13 +87,13 @@ export async function generateMetadata({ params }) {
         type: 'website',
         locale: 'en_IN',
         siteName: 'Twofloww Digital Agency',
-        images: [{ url: '/og-image.png', width: 1200, height: 630 }],
+        images: [{ url: '/opengraph-image', width: 1200, height: 630 }],
       },
       twitter: {
         card: 'summary_large_image',
         title,
         description,
-        images: ['/og-image.png'],
+        images: ['/opengraph-image'],
         creator: '@twofloww',
       },
     };
@@ -105,12 +105,12 @@ export async function generateMetadata({ params }) {
 
   const { location, serviceName } = target;
   return {
-    title: `Best ${serviceName} in ${location.name} | TwoflowW`,
-    description: `Looking for the best ${serviceName} in ${location.name}? TwoflowW is the top-rated agency providing cutting-edge digital solutions tailored for your business in ${location.name}, ${location.state}.`,
+    title: `Best ${serviceName} in ${location.name} | TwoFloww`,
+    description: `Looking for the best ${serviceName} in ${location.name}? TwoFloww is the top-rated agency providing cutting-edge digital solutions tailored for your business in ${location.name}${location.state ? `, ${location.state}` : ''}.`,
     alternates: { canonical: `${BASE_URL}/${slug}` },
     openGraph: {
       title: `Top ${serviceName} Agency in ${location.name}`,
-      description: `Elevate your business with expert ${serviceName} in ${location.name}. Partner with TwoflowW today.`,
+      description: `Elevate your business with expert ${serviceName} in ${location.name}. Partner with TwoFloww today.`,
       url: `${BASE_URL}/${slug}`,
     },
   };

@@ -30,7 +30,7 @@ export async function generateMetadata({ searchParams }) {
       description: project.description || project.subtitle,
       images: [
         {
-          url: project.image || '/og-image.png',
+          url: project.image || '/opengraph-image',
           width: 1200,
           height: 630,
           alt: project.title,
@@ -41,7 +41,7 @@ export async function generateMetadata({ searchParams }) {
       card: 'summary_large_image',
       title: `${project.title} – Case Study | Twofloww`,
       description: project.description || project.subtitle,
-      images: [project.image || '/og-image.png'],
+      images: [project.image || '/opengraph-image'],
     },
   };
 }

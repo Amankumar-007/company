@@ -443,7 +443,7 @@ export default function SolutionsClient() {
 
             <div className="grid grid-cols-2 gap-5">
               {[
-                { value: "150+", label: "Apps Delivered", color: "#EF4444" },
+                { value: "50+", label: "Apps Delivered", color: "#EF4444" },
                 { value: "5+", label: "Years Experience", color: "#6C5CE7" },
                 { value: "98%", label: "Client Satisfaction", color: "#10B981" },
                 { value: "30+", label: "Engineers", color: "#F59E0B" },

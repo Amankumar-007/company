@@ -18,14 +18,14 @@ export const metadata: Metadata = {
         description:
             'In-depth look at Twofloww services: technologies used, key features, and our delivery process.',
         url: `${BASE_URL}/service-detail`,
-        images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Twofloww Service' }],
+        images: [{ url: '/opengraph-image', width: 1200, height: 630, alt: 'Twofloww Service' }],
     },
     twitter: {
         card: 'summary_large_image',
         title: 'Service Details | Twofloww Digital Agency',
         description:
             'In-depth look at Twofloww services: technologies used, key features, and our delivery process.',
-        images: ['/og-image.png'],
+        images: ['/opengraph-image'],
         creator: '@twofloww',
         site: '@twofloww',
     },

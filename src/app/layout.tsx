@@ -42,20 +42,30 @@ export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   applicationName: 'TwoFloww',
   title: {
-    default: 'TwoFloww – Web Development Company Delhi NCR',
+    default: 'TwoFloww – Web Development Company & Web Agency in Delhi NCR',
     template: '%s | TwoFloww',
   },
   description:
-    'TwoFloww is a leading web development company in Delhi NCR. We build websites, mobile apps, food delivery apps, taxi apps & digital products. 150+ projects. Free consultation.',
+    'TwoFloww is a leading web development company and web agency in Delhi NCR (Noida, Delhi, Gurugram). We build websites, mobile apps, food delivery apps, taxi apps & digital products. 50+ projects. Free consultation.',
   keywords: [
     // High-volume gap keywords (from competitor analysis)
     'web development company',
     'website development company',
+    'website development',
     'web development services',
     'web development agency',
+    'web agency',
+    'web agency in noida',
+    'web agency in delhi ncr',
+    'web agency in delhi',
+    'best web agency in noida',
+    'best web agency in delhi ncr',
+    'digital agency in noida',
+    'digital agency in delhi ncr',
     'web development company in delhi',
     'web development company in noida',
     'website development company in noida',
+    'website development company in delhi ncr',
     'website designing company in delhi',
     'digital marketing agency in delhi',
     'digital marketing company in delhi',
@@ -105,12 +115,12 @@ export const metadata: Metadata = {
     locale: 'en_IN',
     url: BASE_URL,
     siteName: 'TwoFloww',
-    title: 'TwoFloww – Web Development Company Delhi NCR',
+    title: 'TwoFloww – Web Development Company & Web Agency in Delhi NCR',
     description:
-      'TwoFloww: web development company Delhi NCR. Websites, mobile apps, food delivery & on-demand apps, SEO. 150+ projects. Free consultation.',
+      'TwoFloww: web development company & web agency in Delhi NCR (Noida, Delhi, Gurugram). Websites, mobile apps, food delivery & on-demand apps, SEO. 50+ projects. Free consultation.',
     images: [
       {
-        url: '/og-image.png',
+        url: '/opengraph-image',
         width: 1200,
         height: 630,
         alt: 'Twofloww Digital Agency – Web & Mobile Development India',
@@ -119,10 +129,10 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'TwoFloww – Web Development Company Delhi NCR',
+    title: 'TwoFloww – Web Development Company & Web Agency in Delhi NCR',
     description:
-      'TwoFloww: web development company Delhi NCR. Websites, mobile apps, food delivery & on-demand apps, SEO. 150+ projects. Free consultation.',
-    images: ['/og-image.png'],
+      'TwoFloww: web development company & web agency in Delhi NCR (Noida, Delhi, Gurugram). Websites, mobile apps, food delivery & on-demand apps, SEO. 50+ projects. Free consultation.',
+    images: ['/opengraph-image'],
     creator: '@twofloww',
     site: '@twofloww',
   },
@@ -173,8 +183,10 @@ const organizationSchema = {
   },
   areaServed: [
     { '@type': 'Country', name: 'India' },
+    { '@type': 'Place', name: 'Delhi NCR' },
     { '@type': 'City', name: 'Noida' },
     { '@type': 'City', name: 'Delhi' },
+    { '@type': 'City', name: 'Gurugram' },
     { '@type': 'City', name: 'Mumbai' },
     { '@type': 'City', name: 'Bangalore' },
     { '@type': 'City', name: 'Hyderabad' },
@@ -305,7 +317,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="en">
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}

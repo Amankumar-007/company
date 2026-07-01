@@ -2,8 +2,8 @@
   "_readme": "Raw facts only. Titles/descriptions/H1s are GENERATED from these facts by lib/seoTemplates.js — don't hardcode copy here, or you'll be editing 29 files every time you tweak wording.",
   "brand": {
     "name": "Twofloww",
-    "phone_india": "+91-9999-999-999",
-    "phone_intl": "+91-9999-999-999",
+    "phone_india": "+91 79067 53589",
+    "phone_intl": "+91 79067 53589",
     "email": "hello@twofloww.in",
     "address_india": "Noida, Uttar Pradesh, India",
     "founded_year": 2023,
@@ -20,6 +20,7 @@
   ],
   "locations": [
     { "slug": "noida", "city": "Noida", "type": "city", "state": "Uttar Pradesh", "country": "India", "country_code": "IN", "is_home_base": true, "nearby_areas": ["Greater Noida", "Ghaziabad", "Delhi"], "lat": 28.5355, "lng": 77.3910 },
+    { "slug": "delhi-ncr", "city": "Delhi NCR", "type": "region", "state": "Delhi NCR", "country": "India", "country_code": "IN", "nearby_areas": ["Noida", "Delhi", "Gurugram", "Ghaziabad", "Faridabad", "Greater Noida"], "lat": 28.6139, "lng": 77.2090 },
     { "slug": "greater-noida", "city": "Greater Noida", "type": "city", "state": "Uttar Pradesh", "country": "India", "country_code": "IN", "nearby_areas": ["Noida", "Ghaziabad"], "lat": 28.4744, "lng": 77.5040 },
     { "slug": "ghaziabad", "city": "Ghaziabad", "type": "city", "state": "Uttar Pradesh", "country": "India", "country_code": "IN", "nearby_areas": ["Noida", "Delhi"], "lat": 28.6692, "lng": 77.4538 },
     { "slug": "delhi", "city": "Delhi", "type": "city", "state": "Delhi", "country": "India", "country_code": "IN", "nearby_areas": ["Noida", "Gurugram", "Ghaziabad"], "lat": 28.7041, "lng": 77.1025 },

@@ -14,7 +14,7 @@ export default function SeoContent({ location, serviceName }) {
             </h2>
             <div className="space-y-6 text-lg text-gray-600">
               <p>
-                When it comes to <strong>{serviceName.toLowerCase()}</strong>, you need a partner who understands both the global digital landscape and the local market dynamics of <strong>{location.name}</strong>. At TwoflowW, we combine technical excellence with strategic insights to help your business thrive.
+                When it comes to <strong>{serviceName.toLowerCase()}</strong>, you need a partner who understands both the global digital landscape and the local market dynamics of <strong>{location.name}</strong>. At TwoFloww, we combine technical excellence with strategic insights to help your business thrive.
               </p>
               <p>
                 Our team of dedicated professionals has successfully delivered cutting-edge digital solutions to businesses across {location.state}. We don't just build products; we craft digital experiences that drive growth, engage customers, and maximize your ROI.

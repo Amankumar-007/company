@@ -4,14 +4,19 @@ import { ReactNode } from 'react'
 const BASE_URL = 'https://www.twofloww.in'
 
 export const metadata: Metadata = {
-    title: 'Web Development Services Delhi NCR',
+    title: 'Web Development Services & Web Agency in Delhi NCR',
     description:
-        'TwoFloww offers web development, mobile app development, UI/UX design, SEO & digital marketing in Delhi NCR. Expert team, 5+ years experience. Free consultation.',
+        'TwoFloww is a web agency offering website development, mobile app development, UI/UX design, SEO & digital marketing in Delhi NCR (Noida, Delhi, Gurugram). Expert team, 5+ years experience. Free consultation.',
     keywords: [
+        'web agency in noida',
+        'web agency in delhi ncr',
+        'best web agency in noida',
+        'best web agency in delhi ncr',
+        'website development',
+        'website development company',
         'web development company in delhi',
         'web development company in noida',
         'web development services',
-        'website development company',
         'mobile app development services',
         'web development agency delhi ncr',
         'digital marketing agency in delhi',
@@ -30,18 +35,18 @@ export const metadata: Metadata = {
         type: 'website',
         locale: 'en_IN',
         siteName: 'TwoFloww',
-        title: 'Web Development Services Delhi NCR | TwoFloww',
+        title: 'Web Development Services & Web Agency in Delhi NCR | TwoFloww',
         description:
-            'Web development, mobile apps, UI/UX design, SEO & digital marketing in Delhi NCR. 150+ projects. Free consultation.',
+            'Web agency offering web development, mobile apps, UI/UX design, SEO & digital marketing in Delhi NCR. 50+ projects. Free consultation.',
         url: `${BASE_URL}/services`,
-        images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'TwoFloww Services – Web Development Delhi NCR' }],
+        images: [{ url: '/opengraph-image', width: 1200, height: 630, alt: 'TwoFloww Services – Web Development & Web Agency in Delhi NCR' }],
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Web Development Services Delhi NCR | TwoFloww',
+        title: 'Web Development Services & Web Agency in Delhi NCR | TwoFloww',
         description:
-            'Web development, mobile apps, UI/UX design, SEO & digital marketing in Delhi NCR. 150+ projects. Free consultation.',
-        images: ['/og-image.png'],
+            'Web agency offering web development, mobile apps, UI/UX design, SEO & digital marketing in Delhi NCR. 50+ projects. Free consultation.',
+        images: ['/opengraph-image'],
         creator: '@twofloww',
         site: '@twofloww',
     },

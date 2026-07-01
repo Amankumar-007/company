@@ -1,18 +1,18 @@
 const BASE_URL = 'https://www.twofloww.in';
 
 export function generateLocalBusinessSchema(loc, brand) {
-  const name = loc.type === 'city' ? loc.city : loc.country;
+  const name = loc.type === 'country' ? loc.country : loc.city;
   return {
     '@context': 'https://schema.org',
     '@type': 'ProfessionalService',
     name: brand.name,
     url: BASE_URL,
     logo: `${BASE_URL}/logo.png`,
-    image: `${BASE_URL}/og-image.png`,
+    image: `${BASE_URL}/opengraph-image`,
     telephone: loc.country_code === 'IN' ? brand.phone_india : brand.phone_intl,
     email: brand.email,
     areaServed: {
-      '@type': loc.type === 'city' ? 'City' : 'Country',
+      '@type': loc.type === 'country' ? 'Country' : loc.type === 'region' ? 'Place' : 'City',
       name,
     },
     geo: {
@@ -56,7 +56,7 @@ export function generateFAQSchema(faqs) {
 }
 
 export function generateBreadcrumbSchema(loc) {
-  const name = loc.type === 'city' ? loc.city : loc.country;
+  const name = loc.type === 'country' ? loc.country : loc.city;
   return {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',

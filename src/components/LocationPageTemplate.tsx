@@ -129,7 +129,7 @@ function FAQItem({ q, a, idx }: FAQ & { idx: number }) {
 }
 
 export default function LocationPageTemplate({ loc, h1, intro, faqs, serviceLabel = 'Web Development' }: Props) {
-  const place = loc.type === 'city' ? loc.city! : loc.country;
+  const place = loc.type === 'country' ? loc.country : loc.city!;
 
   // Highlight the place name inside the H1 with orange
   const highlightedH1 = h1.includes(place)

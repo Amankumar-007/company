@@ -81,7 +81,7 @@ const HeroSection = () => {
           </h1>
           <p className="about-hero-sub text-lg lg:text-xl text-gray-600 leading-relaxed max-w-3xl mx-auto opacity-0">
             To be the company our customers want us to be, it takes an eclectic group of passionate operators.
-            Get to know the people leading the way at Untitled.
+            Get to know the people leading the way at TwoFloww.
           </p>
         </div>
       </div>
