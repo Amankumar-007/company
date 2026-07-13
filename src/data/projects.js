@@ -189,7 +189,7 @@ export const projects = [
     screenshots: [
       {
         title: "Property Listings",
-        url: "https://images.unsplash.com/photo-1512917774080-9991f7c4c39d?w=800&fit=crop&q=80"
+        url: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&fit=crop&q=80"
       },
       {
         title: "Property Details Page",

@@ -14,6 +14,12 @@ export const metadata: Metadata = {
         'get a quote digital agency',
         'start a project',
         'contact us digital agency India',
+        'hire web developers USA',
+        'contact app developers UK',
+        'hire digital agency Australia',
+        'web development consultation Dubai',
+        'software development agency Canada',
+        'best web agency UAE',
     ],
     alternates: {
         canonical: `${BASE_URL}/contact`,

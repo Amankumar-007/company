@@ -15,12 +15,14 @@ export async function generateMetadata({ params }) {
   
   if (!solution) {
     return {
-      title: 'Solution Not Found',
+      title: { absolute: 'Solution Not Found | Twofloww' },
     };
   }
 
   return {
-    title: solution.seo.title,
+    // solution.seo.title already includes "| Twofloww" — use `absolute` so
+    // the root layout's title template doesn't append the brand again.
+    title: { absolute: solution.seo.title },
     description: solution.seo.description,
     keywords: solution.seo.keywords,
     openGraph: {

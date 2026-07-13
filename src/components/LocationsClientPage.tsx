@@ -300,6 +300,7 @@ export default function LocationsClientPage({ locations, brand }: LocationsClien
                               <Link
                                 href={`/web-development-company-${loc.slug}`}
                                 className="inline-flex items-center gap-1 text-xs font-bold text-[#0B0D17] hover:text-[#DE5D26] transition-colors cursor-pointer"
+                                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                               >
                                 View Location page
                                 <ArrowUpRight className="w-3.5 h-3.5" />

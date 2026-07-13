@@ -5,7 +5,7 @@ import LocationsClientPage from '@/components/LocationsClientPage';
 const { locations, brand } = locationsData;
 
 export const metadata: Metadata = {
-  title: 'Locations We Serve | Twofloww Digital Agency',
+  title: { absolute: 'Locations We Serve | Twofloww Digital Agency' },
   description: 'Twofloww provides premium web development, mobile app development, UI/UX design, and SEO services globally. View all our service locations.',
   alternates: {
     canonical: 'https://www.twofloww.in/locations',

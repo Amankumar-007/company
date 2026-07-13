@@ -37,6 +37,7 @@
     { "slug": "surat", "city": "Surat", "type": "city", "state": "Gujarat", "country": "India", "country_code": "IN", "nearby_areas": ["Ahmedabad"], "lat": 21.1702, "lng": 72.8311 },
     { "slug": "jaipur", "city": "Jaipur", "type": "city", "state": "Rajasthan", "country": "India", "country_code": "IN", "nearby_areas": [], "lat": 26.9124, "lng": 75.7873 },
     { "slug": "lucknow", "city": "Lucknow", "type": "city", "state": "Uttar Pradesh", "country": "India", "country_code": "IN", "nearby_areas": ["Kanpur"], "lat": 26.8467, "lng": 80.9462 },
+    { "slug": "agra", "city": "Agra", "type": "city", "state": "Uttar Pradesh", "country": "India", "country_code": "IN", "nearby_areas": ["Mathura", "Firozabad"], "lat": 27.1767, "lng": 78.0081 },
     { "slug": "kanpur", "city": "Kanpur", "type": "city", "state": "Uttar Pradesh", "country": "India", "country_code": "IN", "nearby_areas": ["Lucknow"], "lat": 26.4499, "lng": 80.3319 },
     { "slug": "chandigarh", "city": "Chandigarh", "type": "city", "state": "Punjab/Haryana", "country": "India", "country_code": "IN", "nearby_areas": ["Mohali", "Panchkula"], "lat": 30.7333, "lng": 76.7794 },
     { "slug": "indore", "city": "Indore", "type": "city", "state": "Madhya Pradesh", "country": "India", "country_code": "IN", "nearby_areas": ["Bhopal"], "lat": 22.7196, "lng": 75.8577 },

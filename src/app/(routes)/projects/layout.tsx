@@ -14,6 +14,12 @@ export const metadata: Metadata = {
         'mobile app projects',
         'design portfolio',
         'agency work examples',
+        'web development portfolio USA',
+        'app development case studies UK',
+        'software projects Australia',
+        'digital agency work Dubai',
+        'best web designs UAE',
+        'UI UX portfolio Canada',
     ],
     alternates: {
         canonical: `${BASE_URL}/projects`,

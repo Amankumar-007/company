@@ -77,7 +77,10 @@ export async function generateMetadata({ params }) {
     const description = generateDescription(loc, service.label);
 
     return {
-      title,
+      // `title` is already a fully composed string (brand included on ~half
+      // of pages by design) — use `absolute` so the root layout's "%s |
+      // Twofloww" template doesn't append the brand a second time.
+      title: { absolute: title },
       description,
       alternates: { canonical: `${BASE_URL}/${slug}` },
       openGraph: {
@@ -101,16 +104,16 @@ export async function generateMetadata({ params }) {
 
   // ── Existing SEO target pages (best-*-in-*) ──────────────────────────────
   const target = getSeoTarget(slug);
-  if (!target) return { title: 'Not Found | Twofloww' };
+  if (!target) return { title: { absolute: 'Not Found | Twofloww' } };
 
   const { location, serviceName } = target;
   return {
-    title: `Best ${serviceName} in ${location.name} | TwoFloww`,
-    description: `Looking for the best ${serviceName} in ${location.name}? TwoFloww is the top-rated agency providing cutting-edge digital solutions tailored for your business in ${location.name}${location.state ? `, ${location.state}` : ''}.`,
+    title: { absolute: `Best ${serviceName} in ${location.name} | Twofloww` },
+    description: `Looking for the best ${serviceName} in ${location.name}? Twofloww is a top-rated agency providing cutting-edge digital solutions tailored for your business in ${location.name}${location.state ? `, ${location.state}` : ''}.`,
     alternates: { canonical: `${BASE_URL}/${slug}` },
     openGraph: {
       title: `Top ${serviceName} Agency in ${location.name}`,
-      description: `Elevate your business with expert ${serviceName} in ${location.name}. Partner with TwoFloww today.`,
+      description: `Elevate your business with expert ${serviceName} in ${location.name}. Partner with Twofloww today.`,
       url: `${BASE_URL}/${slug}`,
     },
   };
@@ -158,9 +161,24 @@ export default async function SeoPage({ params }) {
   if (!target) notFound();
 
   const { location, serviceName } = target;
+  // These legacy pages predate locations-data.json and don't carry lat/lng
+  // or country_code — reuse the richer location record when the city also
+  // exists there so we can emit LocalBusiness/Breadcrumb schema.
+  const richLoc = getLocationBySlug(location.id);
 
   return (
     <div className="min-h-screen bg-white">
+      {richLoc && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify([
+              generateLocalBusinessSchema(richLoc, locationsData.brand),
+              generateBreadcrumbSchema(richLoc),
+            ]),
+          }}
+        />
+      )}
       <SeoLandingHero location={location} serviceName={serviceName} />
       <SeoContent location={location} serviceName={serviceName} />
       <FAQ />

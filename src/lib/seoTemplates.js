@@ -36,10 +36,23 @@ function pickVariant(arr, seedStr) {
 
 export function generateTitle(loc, serviceLabel = 'Web Design & Development') {
   const place = placeName(loc);
+
+  // Flagship page (home base + core service) — deterministic exact-match
+  // title for high-intent searches like "best web development agency in noida",
+  // rather than leaving it to chance via the hashed variant picker below.
+  if (loc.is_home_base && serviceLabel === 'Web Development') {
+    return `Best Web Development Agency in ${place} | ${brand.name}`;
+  }
+
+  // Mix branded and unbranded phrasing so hundreds of programmatic pages
+  // don't all carry an identical "| Brand" suffix.
   const variants = [
     `${serviceLabel} Company in ${place} | ${brand.name}`,
     `Best ${serviceLabel} Agency in ${place} – ${brand.name}`,
     `${place} ${serviceLabel} Experts | ${brand.name}`,
+    `Top-Rated ${serviceLabel} Agency in ${place}`,
+    `${place}'s ${serviceLabel} Specialists`,
+    `Hire a ${serviceLabel} Team in ${place}`,
   ];
   return pickVariant(variants, loc.slug + serviceLabel);
 }
@@ -52,6 +65,8 @@ export function generateDescription(loc, serviceLabel = 'web development') {
     `Looking for a ${serviceLabel} company in ${place}? ${brand.name} builds fast, scalable websites & apps for ${place} businesses. ${brand.projects_delivered} projects delivered — get a free consultation.`,
     `${brand.name} is a trusted ${serviceLabel} agency in ${place}, helping startups & enterprises grow online. Get a free quote today.`,
     `Hire a reliable ${serviceLabel} team in ${place}. ${brand.name} delivers responsive, secure, high-performing digital solutions. Free 30-min consultation.`,
+    `Need ${serviceLabel} in ${place}? We build fast, scalable websites and apps, backed by ${brand.projects_delivered} projects delivered across ${brand.countries_served} countries. Book a free consultation.`,
+    `Top-rated ${serviceLabel} for ${place} businesses — clean code, responsive design, and measurable growth. Free 30-minute consultation, no obligation.`,
   ];
   return pickVariant(variants, loc.slug + serviceLabel + 'd').slice(0, 160);
 }
@@ -60,10 +75,16 @@ export function generateDescription(loc, serviceLabel = 'web development') {
 
 export function generateH1(loc, serviceLabel = 'Web Design & Development Company') {
   const place = placeName(loc);
+
+  if (loc.is_home_base && serviceLabel === 'Web Development') {
+    return `Best Web Development Agency in ${place}`;
+  }
+
   const variants = [
     `${serviceLabel} in ${place}`,
     `Trusted ${serviceLabel} Serving ${place} & Nearby Areas`,
     `${place}'s Partner for ${serviceLabel}`,
+    `Best ${serviceLabel} in ${place}`,
   ];
   return pickVariant(variants, loc.slug + serviceLabel + 'h');
 }

@@ -10,13 +10,13 @@ export async function generateMetadata({ searchParams }) {
 
   if (!service) {
     return {
-      title: 'Service Not Found | Twofloww Digital Agency',
+      title: { absolute: 'Service Not Found | Twofloww Digital Agency' },
     };
   }
 
   const BASE_URL = 'https://www.twofloww.in';
   return {
-    title: `${service.title} – ${service.subtitle} | Twofloww`,
+    title: { absolute: `${service.title} – ${service.subtitle} | Twofloww` },
     description: service.heroDescription || service.overview?.description,
     alternates: {
       canonical: `${BASE_URL}/service-detail?id=${id}`,

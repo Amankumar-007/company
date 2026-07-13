@@ -9,19 +9,19 @@ const services = [
   {
     title: "AI Strategy & Custom Solutions",
     description: "Empower your business with AI integration. As a top web development company, we craft custom software solutions that automate operations and accelerate growth.",
-    image: "/ai.jpg",
+    image: "/ai.png",
     icon: Sparkles,
   },
   {
     title: "Web & Mobile App Development",
     description: "High-performance website design and hybrid mobile application development in Delhi NCR. Built with Next.js, React, and Flutter for maximum speed and scalability.",
-    image: "/utility.jpg",
+    image: "/wb.png",
     icon: MonitorSmartphone,
   },
   {
     title: "SEO Services & Growth Marketing",
     description: "Optimize your search rankings with our expert SEO agency. Drive organic traffic, optimize Core Web Vitals, and convert leads into revenue with data-driven strategies.",
-    image: "/services/web.jpg",
+    image: "/seoo.png",
     icon: TrendingUp,
   }
 ];

@@ -43,12 +43,6 @@ export default function ScrollToTop() {
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
           onClick={scrollToTop}
-          onMouseEnter={() => setCursorHover(true, '', 60, '#ffffff', (
-            <svg className="w-6 h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 10l7-7m0 0l7 7m-7-7v18" />
-            </svg>
-          ))}
-          onMouseLeave={() => setCursorHover(false)}
           className="fixed bottom-8 right-8 z-[9999] bg-black text-white rounded-full shadow-[0_0_20px_rgba(0,0,0,0.3)] flex items-center justify-center overflow-hidden group border border-white/10"
           style={{ width: '56px', height: '56px' }}
           aria-label="Scroll to top"

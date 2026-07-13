@@ -40,13 +40,13 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
-  applicationName: 'TwoFloww',
+  applicationName: 'Twofloww',
   title: {
-    default: 'TwoFloww – Web Development Company & Web Agency in Delhi NCR',
-    template: '%s | TwoFloww',
+    default: 'Twofloww – Web Development Company & Web Agency in Delhi NCR',
+    template: '%s | Twofloww',
   },
   description:
-    'TwoFloww is a leading web development company and web agency in Delhi NCR (Noida, Delhi, Gurugram). We build websites, mobile apps, food delivery apps, taxi apps & digital products. 50+ projects. Free consultation.',
+    'Twofloww is a leading web development company and web agency in Delhi NCR (Noida, Delhi, Gurugram). We build websites, mobile apps, food delivery apps, taxi apps & digital products. 50+ projects. Free consultation.',
   keywords: [
     // High-volume gap keywords (from competitor analysis)
     'web development company',
@@ -77,7 +77,7 @@ export const metadata: Metadata = {
     'grocery delivery app development company',
     'taxi booking app development company',
     // Core brand/service keywords
-    'TwoFloww',
+    'Twofloww',
     'digital agency India',
     'web development company India',
     'mobile app development India',
@@ -92,10 +92,19 @@ export const metadata: Metadata = {
     'startup digital agency India',
     'affordable web development India',
     'custom software development India',
+    // Newly requested keywords for better ranking
+    'two flow',
+    'twoflow',
+    'twofloww solution',
+    'two flow solutio',
+    'twoflow solution',
+    'website build',
+    'website build agency',
+    'custom website build',
   ],
-  authors: [{ name: 'TwoFloww', url: BASE_URL }],
-  creator: 'TwoFloww',
-  publisher: 'TwoFloww',
+  authors: [{ name: 'Twofloww', url: BASE_URL }],
+  creator: 'Twofloww',
+  publisher: 'Twofloww',
   robots: {
     index: true,
     follow: true,
@@ -114,10 +123,10 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_IN',
     url: BASE_URL,
-    siteName: 'TwoFloww',
-    title: 'TwoFloww – Web Development Company & Web Agency in Delhi NCR',
+    siteName: 'Twofloww',
+    title: 'Twofloww – Web Development Company & Web Agency in Delhi NCR',
     description:
-      'TwoFloww: web development company & web agency in Delhi NCR (Noida, Delhi, Gurugram). Websites, mobile apps, food delivery & on-demand apps, SEO. 50+ projects. Free consultation.',
+      'Twofloww: web development company & web agency in Delhi NCR (Noida, Delhi, Gurugram). Websites, mobile apps, food delivery & on-demand apps, SEO. 50+ projects. Free consultation.',
     images: [
       {
         url: '/opengraph-image',
@@ -129,9 +138,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'TwoFloww – Web Development Company & Web Agency in Delhi NCR',
+    title: 'Twofloww – Web Development Company & Web Agency in Delhi NCR',
     description:
-      'TwoFloww: web development company & web agency in Delhi NCR (Noida, Delhi, Gurugram). Websites, mobile apps, food delivery & on-demand apps, SEO. 50+ projects. Free consultation.',
+      'Twofloww: web development company & web agency in Delhi NCR (Noida, Delhi, Gurugram). Websites, mobile apps, food delivery & on-demand apps, SEO. 50+ projects. Free consultation.',
     images: ['/opengraph-image'],
     creator: '@twofloww',
     site: '@twofloww',
@@ -140,13 +149,18 @@ export const metadata: Metadata = {
     google: 'add-your-google-site-verification-token-here',
   },
   category: 'technology',
+  icons: {
+    icon: '/favicon.ico',
+    shortcut: '/favicon.ico',
+    apple: '/apple-touch-icon.png',
+  },
 }
 
 const organizationSchema = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
-  name: 'TwoFloww',
-  alternateName: 'TwoFloww Digital Agency',
+  name: 'Twofloww',
+  alternateName: 'Twofloww Digital Agency',
   url: BASE_URL,
   logo: {
     '@type': 'ImageObject',
@@ -228,8 +242,8 @@ const websiteSchema = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
   // "name" is what Google displays instead of the raw domain in search results
-  name: 'TwoFloww',
-  alternateName: 'TwoFloww Digital Agency',
+  name: 'Twofloww',
+  alternateName: 'Twofloww Digital Agency',
   url: BASE_URL,
   description: 'Web development company in Delhi NCR. Websites, mobile apps, food delivery & on-demand apps, SEO & digital marketing.',
   potentialAction: {
@@ -247,7 +261,7 @@ const websiteSchema = {
 const siteNavigationSchema = {
   '@context': 'https://schema.org',
   '@type': 'ItemList',
-  name: 'TwoFloww Main Navigation',
+  name: 'Twofloww Main Navigation',
   itemListElement: [
     {
       '@type': 'ListItem',
@@ -256,7 +270,7 @@ const siteNavigationSchema = {
         '@type': 'WebPage',
         name: 'Services – Web Development, Mobile Apps & SEO',
         url: `${BASE_URL}/services`,
-        description: 'Web development, mobile app development, UI/UX design, SEO & digital marketing by TwoFloww.',
+        description: 'Web development, mobile app development, UI/UX design, SEO & digital marketing by Twofloww.',
       },
     },
     {
@@ -276,7 +290,7 @@ const siteNavigationSchema = {
         '@type': 'WebPage',
         name: 'Projects – Portfolio',
         url: `${BASE_URL}/projects`,
-        description: 'Explore TwoFloww\'s portfolio of web apps, mobile applications, and digital products.',
+        description: 'Explore Twofloww\'s portfolio of web apps, mobile applications, and digital products.',
       },
     },
     {
@@ -284,9 +298,9 @@ const siteNavigationSchema = {
       position: 4,
       item: {
         '@type': 'WebPage',
-        name: 'About TwoFloww',
+        name: 'About Twofloww',
         url: `${BASE_URL}/about`,
-        description: 'Meet the TwoFloww team — developers, designers, and digital architects building top-ranked products.',
+        description: 'Meet the Twofloww team — developers, designers, and digital architects building top-ranked products.',
       },
     },
     {
@@ -296,7 +310,7 @@ const siteNavigationSchema = {
         '@type': 'WebPage',
         name: 'Blog – Web Development & Digital Marketing Insights',
         url: `${BASE_URL}/blog`,
-        description: 'Practical guides on web development, SEO, UI/UX design and digital marketing from TwoFloww.',
+        description: 'Practical guides on web development, SEO, UI/UX design and digital marketing from Twofloww.',
       },
     },
     {
@@ -304,9 +318,9 @@ const siteNavigationSchema = {
       position: 6,
       item: {
         '@type': 'WebPage',
-        name: 'Contact TwoFloww',
+        name: 'Contact Twofloww',
         url: `${BASE_URL}/contact`,
-        description: 'Get in touch with TwoFloww for web development, mobile apps, and digital marketing. Free consultation.',
+        description: 'Get in touch with Twofloww for web development, mobile apps, and digital marketing. Free consultation.',
       },
     },
   ],
@@ -316,7 +330,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <head>
-        <link rel="icon" href="/favicon.ico" sizes="any" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}

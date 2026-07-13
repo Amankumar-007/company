@@ -177,7 +177,7 @@ export default function Footer() {
               <Link href="/web-development-company-delhi" className="text-gray-600 hover:text-[#DE5D26] text-[14px] transition-colors font-medium">Delhi</Link>
               <Link href="/web-development-company-mumbai" className="text-gray-600 hover:text-[#DE5D26] text-[14px] transition-colors font-medium">Mumbai</Link>
               <Link href="/web-development-company-bangalore" className="text-gray-600 hover:text-[#DE5D26] text-[14px] transition-colors font-medium">Bangalore</Link>
-              <Link href="/locations" className="text-[#DE5D26] hover:underline text-[13px] font-semibold mt-1">View all &rarr;</Link>
+              <Link href="/locations" className="text-[#DE5D26] hover:underline text-[13px] font-semibold mt-1" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>View all &rarr;</Link>
             </div>
 
           </div>
