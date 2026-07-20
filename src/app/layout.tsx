@@ -149,11 +149,6 @@ export const metadata: Metadata = {
     google: 'add-your-google-site-verification-token-here',
   },
   category: 'technology',
-  icons: {
-    icon: '/favicon.ico',
-    shortcut: '/favicon.ico',
-    apple: '/apple-touch-icon.png',
-  },
 }
 
 const organizationSchema = {

@@ -5,7 +5,7 @@ export const solutionsData = [
     title: "Startup Acceleration",
     description: "End-to-end product development for early-stage startups, from MVP to scaling.",
     icon: "Rocket",
-    color: "#FF6B6B",
+    color: "#1D4ED8",
     longDescription: "Twofloww is your technical co-founder substitute — we take your idea from napkin sketch to funded product. Our startup acceleration programme covers rapid prototyping, investor-ready tech demos, and a scalable cloud architecture designed to grow without expensive rewrites. We have helped 50+ early-stage startups ship their first product, raise seed rounds, and scale to thousands of users.",
     features: [
       "Rapid Prototyping & MVP Development",
@@ -60,7 +60,7 @@ export const solutionsData = [
     title: "Enterprise Transformation",
     description: "Modernizing legacy systems and automating workflows for large organizations.",
     icon: "Building2",
-    color: "#4ECDC4",
+    color: "#059669",
     longDescription: "Large organizations run on legacy systems that slow them down. Twofloww's enterprise digital transformation practice modernizes monolithic architectures into microservices, automates manual workflows with AI, and migrates on-premise infrastructure to cloud — without disrupting day-to-day operations. Our track record includes 99.9% uptime migrations and 60% average operational efficiency gains.",
     features: [
       "Legacy System Migration & Refactoring",
@@ -115,7 +115,7 @@ export const solutionsData = [
     title: "E-Commerce Solutions",
     description: "High-performance, scalable online stores optimized for conversion and speed.",
     icon: "ShoppingCart",
-    color: "#FFD93D",
+    color: "#D97706",
     longDescription: "Twofloww builds e-commerce platforms that are engineered for conversion. From headless Shopify Plus storefronts to fully custom Next.js commerce engines, we deliver sub-second load times, intuitive checkout flows, and omnichannel integrations that turn browsers into buyers. Our clients average a 35% increase in conversion rate within 90 days of launch.",
     features: [
       "Headless E-Commerce Development",
@@ -170,7 +170,7 @@ export const solutionsData = [
     title: "FinTech Innovation",
     description: "Secure, compliant, and cutting-edge financial technology solutions.",
     icon: "Wallet",
-    color: "#6C5CE7",
+    color: "#6B21A8",
     longDescription: "Financial technology demands the highest standards of security, compliance, and performance. Twofloww's fintech development team builds payment gateways, digital wallets, lending platforms, and AI-powered fraud detection systems that meet RBI, PCI-DSS, and GDPR requirements. We have secured over $1B in transactions across the fintech solutions we have built.",
     features: [
       "Secure Payment Gateways & Wallets",
@@ -225,7 +225,7 @@ export const solutionsData = [
     title: "Healthcare Tech",
     description: "HIPAA-compliant platforms for telemedicine, patient management, and health tracking.",
     icon: "Activity",
-    color: "#00B894",
+    color: "#0F766E",
     longDescription: "Healthcare technology must balance innovation with strict data privacy regulations. Twofloww builds HIPAA-compliant telemedicine platforms, Electronic Health Records (EHR) systems, patient portals, and wearable device integrations that improve patient outcomes while keeping data completely secure. Our healthcare solutions are trusted by clinics, hospitals, and health-tech startups across India and the US.",
     features: [
       "Telemedicine Platforms",
@@ -280,7 +280,7 @@ export const solutionsData = [
     title: "AI & Machine Learning",
     description: "Intelligent solutions that learn, adapt, and drive smarter business decisions.",
     icon: "BrainCircuit",
-    color: "#A29BFE",
+    color: "#4338CA",
     longDescription: "Artificial intelligence is no longer a future technology — it is a competitive necessity. Twofloww's AI and Machine Learning team builds custom LLM integrations, predictive analytics models, computer vision systems, and NLP applications that automate complex workflows and surface actionable insights. We have deployed over 100 AI models in production, saving clients thousands of hours annually.",
     features: [
       "Custom LLM Integration & Fine-Tuning",
@@ -338,7 +338,7 @@ export const solutionsData = [
     title: "Food Delivery App Development",
     description: "On-demand food delivery apps with real-time tracking, multi-restaurant dashboards, and AI-powered delivery optimization — like Zomato & Swiggy.",
     icon: "UtensilsCrossed",
-    color: "#EF4444",
+    color: "#991B1B",
     longDescription: "As a leading food delivery app development company in India, Twofloww builds scalable on-demand food ordering and delivery platforms that rival Zomato and Swiggy. Our food delivery app development services cover everything from customer-facing iOS and Android apps with live GPS tracking, to intelligent restaurant owner dashboards, driver allocation systems, and a central admin panel. Whether you need a multi-restaurant food marketplace or a single-brand food ordering app, our best-in-class food delivery app development team delivers on-demand solutions that drive orders, retain users, and scale seamlessly.",
     features: [
       "Real-Time Order Tracking & GPS Navigation",
@@ -424,7 +424,7 @@ export const solutionsData = [
     title: "Grocery Delivery App Development",
     description: "Build a fast, reliable grocery delivery app with slot-based scheduling, inventory management, and a seamless checkout — like Blinkit & Zepto.",
     icon: "ShoppingBasket",
-    color: "#10B981",
+    color: "#047857",
     longDescription: "Twofloww is a trusted grocery delivery app development company that builds hyper-local grocery platforms with 10-minute delivery capabilities. Our grocery app development services cover customer apps, store-picker workflows, delivery partner apps, and a comprehensive inventory management dashboard. Whether you are building a quick commerce app, a dark store management system, or an online grocery marketplace, we deliver end-to-end grocery delivery app solutions that delight shoppers and maximize order throughput.",
     features: [
       "Slot-Based & 10-Minute Express Delivery",
@@ -500,7 +500,7 @@ export const solutionsData = [
     title: "Taxi & Cab Booking App Development",
     description: "Build a full-featured taxi booking app with real-time ride matching, surge pricing, driver tracking, and multi-city support — like Ola & Uber.",
     icon: "Car",
-    color: "#F59E0B",
+    color: "#B45309",
     longDescription: "Twofloww is an experienced taxi app development company building ride-hailing platforms that compete with Ola and Uber. Our cab booking app development services cover rider apps, driver apps, fleet management dashboards, and a sophisticated dispatch engine with real-time GPS matching, dynamic surge pricing, and automated driver payouts. Whether you are launching a city cab service, a corporate transportation solution, or a multi-modal transport platform, we deliver taxi app development that is scalable, reliable, and user-friendly.",
     features: [
       "Real-Time Ride Matching & Dispatch Engine",
@@ -576,7 +576,7 @@ export const solutionsData = [
     title: "Fitness & Gym App Development",
     description: "Achieve fitness goals with personalized workout tracking apps, trainer booking, diet plans, and gamified progress systems for gyms and health brands.",
     icon: "Dumbbell",
-    color: "#8B5CF6",
+    color: "#581C87",
     longDescription: "Twofloww builds feature-rich fitness and gym app development solutions for personal trainers, gym chains, health brands, and wellness startups. Our fitness app development services include workout tracking, AI-powered personalized training plans, nutrition and diet management, trainer-client video sessions, and community features that keep users engaged. Whether you are building a white-label gym management system or a consumer fitness app, we deliver end-to-end fitness app development that drives retention and results.",
     features: [
       "Personalized AI Workout Plans",
@@ -652,8 +652,8 @@ export const solutionsData = [
     title: "Astrology App Development",
     description: "Develop an astrology app with daily horoscopes, personalized kundli matching, live astrologer consultations, and AI-powered predictions.",
     icon: "Star",
-    color: "#F472B6",
-    longDescription: "India's astrology app market is growing rapidly, and Twofloww builds production-grade astrology app development solutions for astrologers, spiritual platforms, and new-age wellness brands. Our astrology app development services include Kundli generation and matching, daily horoscope engines, live video and chat consultations with certified astrologers, tarot and numerology integrations, and a marketplace model for astrologer onboarding. Whether you are building an AstroTalk competitor or a premium spiritual wellness app, we deliver astrology software that resonates deeply with Indian and global audiences.",
+    color: "#B76E79",
+    longDescription: "Twofloww builds production-grade astrology app development solutions for astrologers, spiritual platforms, and new-age wellness brands. Our astrology app development services include Kundli generation and matching, daily horoscope engines, live video and chat consultations with certified astrologers, tarot and numerology integrations, and a marketplace model for astrologer onboarding. Whether you are building an AstroTalk competitor or a premium spiritual wellness app, we deliver astrology software that resonates deeply with Indian and global audiences.",
     features: [
       "Personalized Kundli & Birth Chart Generation",
       "Daily, Weekly & Monthly Horoscopes",
@@ -728,7 +728,7 @@ export const solutionsData = [
     title: "Matrimonial App Development",
     description: "Build a matrimonial platform with verified profiles, advanced matchmaking algorithms, horoscope compatibility, and premium membership plans.",
     icon: "Users",
-    color: "#EC4899",
+    color: "#9F1239",
     longDescription: "Twofloww builds trusted matrimonial app development solutions for regional and national matchmaking platforms. Our matrimonial app development services deliver verified user profiles with identity checks, AI-powered compatibility matching, Kundli-based horoscope matching, in-app messaging, video profile features, and premium subscription monetization. Whether you are building a community-specific shaadi app or a national matrimonial platform, we deliver matrimonial software that builds trust and connects families.",
     features: [
       "Verified Profile System with KYC",
@@ -804,7 +804,7 @@ export const solutionsData = [
     title: "Dating App Development",
     description: "Develop an AI-driven dating app with smart matching, swipe mechanics, video dates, safety features, and a premium subscription model.",
     icon: "Heart",
-    color: "#F43F5E",
+    color: "#7F1D1D",
     longDescription: "Twofloww builds modern dating app development solutions for Gen Z and millennial audiences. Our dating app development services cover AI-powered smart matching algorithms, swipe-based discovery, video speed dating, in-app icebreakers, safety and identity verification, and a freemium-to-premium conversion funnel. Whether you are building a niche community dating app or a mainstream platform, we deliver dating software that drives meaningful connections and monetizable engagement.",
     features: [
       "AI-Powered Smart Matching Algorithm",

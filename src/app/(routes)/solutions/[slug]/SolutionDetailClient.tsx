@@ -47,6 +47,27 @@ interface Solution {
   faq?: FAQ[];
 }
 
+const BackgroundPattern = ({ color }: { color: string }) => (
+  <>
+    <div
+      aria-hidden
+      className="absolute inset-0 opacity-60 pointer-events-none"
+      style={{
+        backgroundImage: `radial-gradient(circle, color-mix(in srgb, ${color} 20%, transparent) 1.5px, transparent 1.5px)`,
+        backgroundSize: '32px 32px',
+      }}
+    />
+    <div aria-hidden className="absolute inset-0 flex items-center justify-center overflow-hidden pointer-events-none select-none opacity-[0.04]">
+      <span 
+        className="text-[14rem] md:text-[24rem] font-black whitespace-nowrap tracking-tighter"
+        style={{ fontFamily: 'var(--font-unbounded)', color }}
+      >
+        TWOFLOWW
+      </span>
+    </div>
+  </>
+);
+
 /* ─── FAQ accordion ─────────────────────────────────────────────────────── */
 function FAQItem({ q, a }: { q: string; a: string }) {
   const [open, setOpen] = useState(false);
@@ -108,25 +129,23 @@ function CapabilityCard({
     >
       {/* left accent */}
       <div
-        className="absolute left-0 top-0 bottom-0 w-[3px] group-hover:w-1 opacity-50 group-hover:opacity-100 transition-all duration-300 rounded-r-full group-hover:rounded-none"
-        style={{ backgroundColor: color }}
+        className="absolute left-0 top-0 bottom-0 w-[3px] group-hover:w-1 opacity-30 group-hover:opacity-100 transition-all duration-300 rounded-r-full group-hover:rounded-none bg-[#0B0D17]"
       />
 
       {/* ghost number */}
       <div aria-hidden className="absolute right-2 top-0 bottom-0 flex items-center pointer-events-none">
         <span
-          className="text-[8rem] font-black leading-none select-none opacity-[0.04] group-hover:opacity-[0.07] transition-opacity duration-500"
-          style={{ fontFamily: 'var(--font-unbounded)', color }}
+          className="text-[8rem] font-black leading-none select-none opacity-[0.02] group-hover:opacity-[0.04] transition-opacity duration-500 text-[#0B0D17]"
+          style={{ fontFamily: 'var(--font-unbounded)' }}
         >
           {String(index + 1).padStart(2, '0')}
         </span>
       </div>
 
       <div className="relative z-10 flex items-center gap-5 px-8 py-8 w-full">
-        {/* colored badge */}
+        {/* dark badge */}
         <div
-          className="shrink-0 w-12 h-12 rounded-2xl flex items-center justify-center text-white text-[11px] font-black shadow-md group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300"
-          style={{ backgroundColor: color }}
+          className="shrink-0 w-12 h-12 rounded-2xl flex items-center justify-center text-white text-[11px] font-black shadow-md group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300 bg-[#0B0D17]"
         >
           {String(index + 1).padStart(2, '0')}
         </div>
@@ -162,15 +181,16 @@ function CoreCapabilities({ solution }: { solution: Solution }) {
   };
 
   return (
-    <section className="py-16 sm:py-24 lg:py-32 px-4 sm:px-6 bg-[#FAFAFA]">
-      <div className="max-w-6xl mx-auto">
+    <section className="py-16 sm:py-24 lg:py-32 px-4 sm:px-6 bg-[#FAFAFA] relative overflow-hidden">
+      <BackgroundPattern color={solution.color} />
+      <div className="relative z-10 max-w-6xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
 
           {/* ── LEFT STICKY PANEL ───────────────────────────────────────── */}
           <div className="lg:col-span-5 lg:sticky lg:top-28 self-start">
 
             {/* section header */}
-            <span className="inline-flex items-center gap-2 border border-zinc-200 bg-white/80 backdrop-blur-sm rounded-full px-4 py-2 text-[10px] text-[#DE5D26] font-bold uppercase tracking-widest mb-6 shadow-sm">
+            <span className="inline-flex items-center gap-2 border border-zinc-200 bg-white/80 backdrop-blur-sm rounded-full px-4 py-2 text-[10px] text-[#0B0D17] font-bold uppercase tracking-widest mb-6 shadow-sm">
               <Sparkles className="w-3.5 h-3.5" />
               Technical Depth
             </span>
@@ -188,14 +208,13 @@ function CoreCapabilities({ solution }: { solution: Solution }) {
 
             {/* ── ACTIVE FEATURE CARD ──────────────────────────────────── */}
             <div className="relative rounded-2xl border border-zinc-100 bg-white overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.03)] mb-6">
-              {/* top colored stripe */}
-              <div className="h-1 w-full" style={{ backgroundColor: solution.color }} />
+              {/* top accent stripe */}
+              <div className="h-1 w-full bg-[#0B0D17]" />
 
               {/* ghost icon backdrop */}
               <div aria-hidden className="absolute inset-0 flex items-center justify-end pr-4 pointer-events-none">
                 <IconComp
-                  className="w-28 h-28 opacity-[0.04]"
-                  style={{ color: solution.color } as React.CSSProperties}
+                  className="w-28 h-28 opacity-[0.03] text-[#0B0D17]"
                 />
               </div>
 
@@ -209,8 +228,8 @@ function CoreCapabilities({ solution }: { solution: Solution }) {
                     transition={{ duration: 0.28, ease: 'easeOut' }}
                   >
                     <span
-                      className="text-5xl font-black leading-none block mb-3"
-                      style={{ color: solution.color, fontFamily: 'var(--font-unbounded)' }}
+                      className="text-5xl font-black leading-none block mb-3 text-[#0B0D17]"
+                      style={{ fontFamily: 'var(--font-unbounded)' }}
                     >
                       {String(active + 1).padStart(2, '0')}
                     </span>
@@ -226,15 +245,14 @@ function CoreCapabilities({ solution }: { solution: Solution }) {
                 {/* progress bar */}
                 <div className="mt-5 h-[3px] bg-zinc-100 rounded-full overflow-hidden">
                   <motion.div
-                    className="h-full rounded-full"
-                    style={{ backgroundColor: solution.color }}
+                    className="h-full rounded-full bg-[#0B0D17]"
                     animate={{ width: `${((active + 1) / total) * 100}%` }}
                     transition={{ duration: 0.4, ease: 'easeOut' }}
                   />
                 </div>
                 <div className="flex justify-between mt-2">
                   <span className="text-[9px] font-bold text-zinc-400 uppercase tracking-widest">Currently Viewing</span>
-                  <span className="text-[9px] font-bold uppercase tracking-widest" style={{ color: solution.color }}>
+                  <span className="text-[9px] font-bold uppercase tracking-widest text-[#0B0D17]">
                     {active + 1} / {total}
                   </span>
                 </div>
@@ -255,7 +273,7 @@ function CoreCapabilities({ solution }: { solution: Solution }) {
                     style={{
                       width: i === active ? 20 : 6,
                       height: 6,
-                      backgroundColor: i === active ? solution.color : '#E4E4E7',
+                      backgroundColor: i === active ? '#0B0D17' : '#E4E4E7',
                     }}
                   />
                   {/* label */}
@@ -320,35 +338,40 @@ export default function SolutionDetailClient({ solution }: { solution: Solution 
   const glowY = useTransform(mouseY, [0, 1], [20, -20]);
 
   return (
-    <div className="bg-[#FAFAFA] text-[#0B0D17] min-h-screen selection:bg-[#DE5D26]/20 selection:text-[#DE5D26] font-sans overflow-x-hidden">
+    <div 
+      className="bg-[#FAFAFA] text-[#0B0D17] min-h-screen font-sans overflow-x-hidden"
+      style={{ '--theme': solution.color } as React.CSSProperties}
+    >
+      <style>{`
+        ::selection { background-color: color-mix(in srgb, var(--theme) 20%, transparent); color: var(--theme); }
+        .dynamic-hover-text:hover, .group:hover .dynamic-group-hover-text { color: var(--theme) !important; }
+        .dynamic-hover-bg:hover { background-color: var(--theme) !important; box-shadow: 0 10px 25px -5px color-mix(in srgb, var(--theme) 30%, transparent) !important; }
+      `}</style>
 
       {/* ── HERO ──────────────────────────────────────────────────────────── */}
       <section className="relative min-h-[70vh] lg:min-h-[85vh] flex items-center px-4 sm:px-6 pt-28 sm:pt-36 pb-14 sm:pb-20 overflow-hidden bg-white border-b border-zinc-100 select-none">
-        <div
-          aria-hidden
-          className="absolute inset-0 opacity-[0.35]"
-          style={{
-            backgroundImage: 'radial-gradient(circle, #E5E7EB 1.5px, transparent 1.5px)',
-            backgroundSize: '32px 32px',
-          }}
-        />
-        <div className="absolute top-0 right-10 w-[450px] h-[450px] rounded-full bg-blue-500/[0.03] blur-[100px] pointer-events-none" />
-        <div className="absolute bottom-10 left-10 w-[550px] h-[550px] rounded-full bg-orange-500/[0.03] blur-[120px] pointer-events-none" />
+        <BackgroundPattern color={solution.color} />
+        
+        {/* Sleek abstract shapes instead of blobs */}
+        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-gradient-to-bl from-sky-100 to-transparent opacity-30 rounded-full blur-[100px] pointer-events-none -translate-y-1/2 translate-x-1/3" />
 
         <div className="relative z-10 max-w-6xl mx-auto w-full">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center">
 
             <div className="lg:col-span-7 flex flex-col">
               <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs text-zinc-400 mb-8 font-semibold tracking-wide uppercase">
-                <Link href="/" className="hover:text-[#DE5D26] transition-colors">Home</Link>
+                <Link href="/" className="dynamic-hover-text transition-colors">Home</Link>
                 <span>/</span>
-                <Link href="/solutions" className="hover:text-[#DE5D26] transition-colors">Solutions</Link>
+                <Link href="/solutions" className="dynamic-hover-text transition-colors">Solutions</Link>
                 <span>/</span>
                 <span className="text-zinc-900 font-bold">{solution.title}</span>
               </nav>
 
-              <div className="inline-flex items-center gap-2 text-xs text-[#DE5D26] font-bold uppercase tracking-widest mb-6">
-                <Sparkles className="w-4 h-4" />
+              <div 
+                className="inline-flex items-center gap-2 text-xs border backdrop-blur-md rounded-full px-4 py-2 font-bold uppercase tracking-widest mb-6 shadow-sm self-start"
+                style={{ color: solution.color, borderColor: `color-mix(in srgb, ${solution.color} 30%, transparent)`, backgroundColor: `color-mix(in srgb, ${solution.color} 10%, transparent)` }}
+              >
+                <Sparkles className="w-3.5 h-3.5" />
                 Expert Development Services
               </div>
 
@@ -374,7 +397,7 @@ export default function SolutionDetailClient({ solution }: { solution: Solution 
                   onClick={openConsultModal}
                   className="relative inline-flex items-center justify-center gap-2 px-10 py-5 bg-[#0B0D17] text-white font-bold rounded-full overflow-hidden group text-sm tracking-wide shadow-xl shadow-[#0B0D17]/15 transition-transform duration-300 hover:scale-[1.02] cursor-pointer"
                 >
-                  <span className="absolute inset-0 w-full h-full bg-[#DE5D26] transition-transform duration-300 ease-out transform -translate-x-full group-hover:translate-x-0" />
+                  <span className="absolute inset-0 w-full h-full transition-transform duration-300 ease-out transform -translate-x-full group-hover:translate-x-0" style={{ backgroundColor: solution.color }} />
                   <span className="relative z-10 flex items-center gap-2">
                     Book a Free Consultation
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -400,14 +423,14 @@ export default function SolutionDetailClient({ solution }: { solution: Solution 
                     style={{ transform: 'translateZ(25px)' }}
                   />
                   <div
-                    className="relative z-10 flex items-center justify-center text-white drop-shadow-[0_15px_30px_rgba(0,0,0,0.35)]"
-                    style={{ transform: 'translateZ(60px)' }}
+                    className="relative z-10 flex items-center justify-center drop-shadow-2xl"
+                    style={{ transform: 'translateZ(60px)', color: solution.color }}
                   >
                     <IconComponent className="w-36 h-36" strokeWidth={1.2} />
                   </div>
                   <motion.div
                     style={{ x: glowX, y: glowY, backgroundColor: solution.color, transform: 'translateZ(-20px)' }}
-                    className="absolute inset-0 rounded-[45px] opacity-[0.2] blur-3xl pointer-events-none"
+                    className="absolute inset-0 rounded-[45px] opacity-[0.25] blur-3xl pointer-events-none"
                   />
                 </motion.div>
               </div>
@@ -427,8 +450,8 @@ export default function SolutionDetailClient({ solution }: { solution: Solution 
                 className="bg-white border border-zinc-100 rounded-2xl sm:rounded-3xl p-4 sm:p-8 shadow-[0_8px_20px_rgba(0,0,0,0.02)] hover:shadow-[0_20px_50px_rgba(0,0,0,0.06)] hover:border-zinc-200 transition-all duration-300 flex flex-col items-center text-center group"
               >
                 <span
-                  className="text-2xl sm:text-4xl lg:text-5xl font-black mb-1 sm:mb-2 transition-transform duration-300 group-hover:scale-105"
-                  style={{ color: solution.color, fontFamily: 'var(--font-space-grotesk)' }}
+                  className="text-2xl sm:text-4xl lg:text-5xl font-black mb-1 sm:mb-2 transition-transform duration-300 group-hover:scale-105 text-[#0B0D17]"
+                  style={{ fontFamily: 'var(--font-space-grotesk)' }}
                 >
                   {stat.value}
                 </span>
@@ -449,7 +472,12 @@ export default function SolutionDetailClient({ solution }: { solution: Solution 
         <section className="py-20 px-6 bg-white border-y border-zinc-100">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-16 select-none">
-              <span className="text-xs text-[#DE5D26] font-bold uppercase tracking-widest mb-4 inline-block">How We Work</span>
+              <span 
+                className="text-xs border px-3 py-1.5 rounded-full font-bold uppercase tracking-widest mb-4 inline-block shadow-sm"
+                style={{ color: solution.color, borderColor: `color-mix(in srgb, ${solution.color} 30%, transparent)`, backgroundColor: `color-mix(in srgb, ${solution.color} 10%, transparent)` }}
+              >
+                How We Work
+              </span>
               <h2
                 className="text-4xl sm:text-5xl font-black text-[#0B0D17] tracking-tight"
                 style={{ fontFamily: 'var(--font-space-grotesk)' }}
@@ -470,8 +498,7 @@ export default function SolutionDetailClient({ solution }: { solution: Solution 
                     {item.step}
                   </span>
                   <div
-                    className="w-10 h-10 rounded-xl flex items-center justify-center mb-5 text-white text-sm font-black"
-                    style={{ backgroundColor: solution.color }}
+                    className="w-10 h-10 rounded-xl flex items-center justify-center mb-5 text-white text-sm font-black bg-[#0B0D17]"
                   >
                     {item.step}
                   </div>
@@ -487,10 +514,16 @@ export default function SolutionDetailClient({ solution }: { solution: Solution 
       )}
 
       {/* ── BENEFITS ──────────────────────────────────────────────────────── */}
-      <section className="py-24 px-6 bg-[#FAFAFA]">
-        <div className="max-w-6xl mx-auto">
+      <section className="py-24 px-6 bg-[#FAFAFA] relative overflow-hidden">
+        <BackgroundPattern color={solution.color} />
+        <div className="relative z-10 max-w-6xl mx-auto">
           <div className="mb-20 text-center max-w-2xl mx-auto select-none">
-            <span className="text-xs text-[#DE5D26] font-bold uppercase tracking-widest mb-4 inline-block">Business Impact</span>
+            <span 
+              className="text-xs border px-3 py-1.5 rounded-full font-bold uppercase tracking-widest mb-4 inline-block shadow-sm"
+              style={{ color: solution.color, borderColor: `color-mix(in srgb, ${solution.color} 30%, transparent)`, backgroundColor: `color-mix(in srgb, ${solution.color} 10%, transparent)` }}
+            >
+              Business Impact
+            </span>
             <h2 className="text-4xl sm:text-5xl font-black text-[#0B0D17]" style={{ fontFamily: 'var(--font-space-grotesk)' }}>
               Key Business Benefits
             </h2>
@@ -509,14 +542,14 @@ export default function SolutionDetailClient({ solution }: { solution: Solution 
                 </span>
                 <div className="relative z-10">
                   <h3
-                    className="font-black text-[#0B0D17] text-2xl mb-4 group-hover:text-[#DE5D26] transition-colors duration-300 leading-tight"
+                    className="font-black text-[#0B0D17] text-2xl mb-4 group-hover:text-zinc-600 transition-colors duration-300 leading-tight"
                     style={{ fontFamily: 'var(--font-space-grotesk)' }}
                   >
                     {benefit.title}
                   </h3>
                   <p className="text-zinc-500 text-sm leading-relaxed">{benefit.description}</p>
                 </div>
-                <div className="mt-8 relative z-10 flex items-center gap-1.5 text-xs font-bold text-zinc-400 group-hover:text-[#DE5D26] transition-colors duration-300">
+                <div className="mt-8 relative z-10 flex items-center gap-1.5 text-xs font-bold text-zinc-400 dynamic-group-hover-text transition-colors duration-300">
                   Value Engineered
                   <ArrowRight className="w-3.5 h-3.5 transform group-hover:translate-x-0.5 transition-transform" />
                 </div>
@@ -531,7 +564,12 @@ export default function SolutionDetailClient({ solution }: { solution: Solution 
         <section className="py-20 px-6 bg-white border-t border-zinc-100">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12 select-none">
-              <span className="text-xs text-[#DE5D26] font-bold uppercase tracking-widest mb-4 inline-block">Technology</span>
+              <span 
+                className="text-xs border px-3 py-1.5 rounded-full font-bold uppercase tracking-widest mb-4 inline-block shadow-sm"
+                style={{ color: solution.color, borderColor: `color-mix(in srgb, ${solution.color} 30%, transparent)`, backgroundColor: `color-mix(in srgb, ${solution.color} 10%, transparent)` }}
+              >
+                Technology
+              </span>
               <h2 className="text-3xl sm:text-4xl font-black text-[#0B0D17] tracking-tight" style={{ fontFamily: 'var(--font-space-grotesk)' }}>
                 Tech Stack We Use
               </h2>
@@ -543,7 +581,7 @@ export default function SolutionDetailClient({ solution }: { solution: Solution 
               {solution.techStack.map((tech, i) => (
                 <span
                   key={i}
-                  className="px-5 py-2.5 bg-[#FAFAFA] border border-zinc-200 rounded-full text-sm font-bold text-zinc-700 hover:border-[#DE5D26] hover:text-[#DE5D26] transition-colors duration-200 cursor-default"
+                  className="px-5 py-2.5 bg-[#FAFAFA] border border-zinc-200 rounded-full text-sm font-bold text-zinc-700 hover:border-zinc-800 hover:bg-zinc-800 hover:text-white transition-all duration-300 cursor-default"
                 >
                   {tech}
                 </span>
@@ -555,10 +593,16 @@ export default function SolutionDetailClient({ solution }: { solution: Solution 
 
       {/* ── FAQ ───────────────────────────────────────────────────────────── */}
       {solution.faq && solution.faq.length > 0 && (
-        <section className="py-20 px-6 bg-[#FAFAFA] border-t border-zinc-100">
-          <div className="max-w-4xl mx-auto">
+        <section className="py-20 px-6 bg-[#FAFAFA] border-t border-zinc-100 relative overflow-hidden">
+          <BackgroundPattern color={solution.color} />
+          <div className="relative z-10 max-w-4xl mx-auto">
             <div className="text-center mb-12 select-none">
-              <span className="text-xs text-[#DE5D26] font-bold uppercase tracking-widest mb-4 inline-block">FAQ</span>
+              <span 
+                className="text-xs border px-3 py-1.5 rounded-full font-bold uppercase tracking-widest mb-4 inline-block shadow-sm"
+                style={{ color: solution.color, borderColor: `color-mix(in srgb, ${solution.color} 30%, transparent)`, backgroundColor: `color-mix(in srgb, ${solution.color} 10%, transparent)` }}
+              >
+                FAQ
+              </span>
               <h2 className="text-3xl sm:text-4xl font-black text-[#0B0D17] tracking-tight" style={{ fontFamily: 'var(--font-space-grotesk)' }}>
                 Frequently Asked Questions
               </h2>
@@ -572,7 +616,7 @@ export default function SolutionDetailClient({ solution }: { solution: Solution 
               <p className="text-zinc-500 text-sm mb-4">Have a question not listed here?</p>
               <button
                 onClick={openConsultModal}
-                className="inline-flex items-center gap-2 px-7 py-3.5 bg-[#0B0D17] text-white font-bold rounded-full text-sm hover:bg-[#DE5D26] transition-colors duration-300 cursor-pointer"
+                className="dynamic-hover-bg inline-flex items-center gap-2 px-7 py-3.5 bg-[#0B0D17] text-white font-bold rounded-full text-sm transition-all duration-300 cursor-pointer shadow-lg shadow-[#0B0D17]/10"
               >
                 Ask Us Directly <ArrowRight className="w-4 h-4" />
               </button>
@@ -582,13 +626,18 @@ export default function SolutionDetailClient({ solution }: { solution: Solution 
       )}
 
       {/* ── CTA ───────────────────────────────────────────────────────────── */}
-      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-[#FAFAFA] relative z-20">
-        <div className="max-w-6xl mx-auto bg-[#0B0D17] rounded-[2rem] lg:rounded-[3.5rem] p-8 sm:p-14 md:p-24 text-center text-white relative overflow-hidden shadow-2xl">
-          <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-[#DE5D26] opacity-[0.08] rounded-full blur-[100px] transform translate-x-1/2 -translate-y-1/2 pointer-events-none" />
-          <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-blue-600 opacity-[0.08] rounded-full blur-[100px] transform -translate-x-1/2 translate-y-1/2 pointer-events-none" />
+      <section className="py-12 sm:py-16 px-4 sm:px-6 bg-[#FAFAFA] relative z-20">
+        <div className="max-w-[90rem] mx-auto bg-white rounded-[2rem] lg:rounded-[3rem] p-8 sm:p-12 md:p-16 text-center text-[#0B0D17] relative overflow-hidden shadow-2xl border border-zinc-200">
+          <div
+            aria-hidden
+            className="absolute inset-0 pointer-events-none bg-cover bg-center opacity-80"
+            style={{
+              backgroundImage: `url('https://images.unsplash.com/photo-1602615576820-ea14cf3e476a?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')`,
+            }}
+          />
 
           <div className="relative z-10 max-w-3xl mx-auto flex flex-col items-center select-none">
-            <span className="inline-flex items-center gap-2 border border-white/10 bg-white/5 rounded-full px-4 py-2 text-xs text-[#DE5D26] font-bold uppercase tracking-widest mb-8">
+            <span className="inline-flex items-center gap-2 border border-black/10 bg-black/5 rounded-full px-4 py-2 text-xs font-bold uppercase tracking-widest mb-8 backdrop-blur-sm">
               <Sparkles className="w-3.5 h-3.5" />
               Collaborate
             </span>
@@ -599,15 +648,15 @@ export default function SolutionDetailClient({ solution }: { solution: Solution 
               Partner on Your <br className="hidden md:inline" />
               Next Venture
             </h2>
-            <p className="text-zinc-400 text-lg md:text-xl mb-12 max-w-2xl leading-relaxed">
+            <p className="text-zinc-600 font-medium text-lg md:text-xl mb-12 max-w-2xl leading-relaxed">
               Connect with our development leads. Get a free project estimate within 24 hours and
               engineer your solution with the best team in India.
             </p>
             <button
               onClick={openConsultModal}
-              className="relative inline-flex items-center justify-center gap-2 px-10 py-5 bg-[#DE5D26] text-white font-bold rounded-full overflow-hidden group text-sm tracking-wide shadow-xl shadow-[#DE5D26]/20 transition-transform duration-300 hover:scale-[1.02] cursor-pointer"
+              className="relative inline-flex items-center justify-center gap-2 px-10 py-5 bg-[#0B0D17] text-white font-bold rounded-full overflow-hidden group text-sm tracking-wide shadow-xl shadow-black/10 transition-transform duration-300 hover:scale-[1.02] cursor-pointer"
             >
-              <span className="absolute inset-0 w-full h-full bg-white/10 transition-transform duration-300 ease-out transform -translate-x-full group-hover:translate-x-0" />
+              <span className="absolute inset-0 w-full h-full bg-zinc-800 transition-transform duration-300 ease-out transform -translate-x-full group-hover:translate-x-0" />
               <span className="relative z-10 flex items-center gap-2">
                 Schedule a Free Consultation
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
