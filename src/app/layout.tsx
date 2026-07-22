@@ -9,6 +9,7 @@ import SmoothScrollWrapper from '../components/SmoothScrollWrapper';
 import ExtensionErrorSuppressor from '../components/ExtensionErrorSuppressor';
 import ConsultModal from '../components/ConsultModal';
 import type { Metadata, Viewport } from 'next';
+import Script from 'next/script';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -327,6 +328,19 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <head>
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-2MQFRMEMPT"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-2MQFRMEMPT');
+          `}
+        </Script>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
