@@ -43,6 +43,10 @@ export async function generateMetadata({ searchParams }) {
       description: project.description || project.subtitle,
       images: [project.image || '/opengraph-image'],
     },
+    robots: {
+      index: false,
+      follow: true,
+    },
   };
 }
 

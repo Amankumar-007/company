@@ -1,7 +1,6 @@
 'use client';
-import React, { useState, useRef, useEffect, useMemo, useCallback } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import Image from 'next/image';
-import styles from './style.module.scss';
 
 const VideoThumbnail = ({ 
   videoSrc, 
@@ -9,126 +8,69 @@ const VideoThumbnail = ({
   alt, 
   className = '', 
   isHovered = false,
-  onClick 
 }) => {
   const videoRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMobileOrTablet, setIsMobileOrTablet] = useState(false);
 
-  // Memoize device detection to avoid recalculating
   const checkIsMobileOrTablet = useCallback(() => {
     if (typeof window === 'undefined') return false;
-    
     const userAgent = navigator.userAgent.toLowerCase();
     const isMobile = /iphone|ipod|android|blackberry|opera|mini|windows\sce|palm|smartphone|iemobile/i.test(userAgent);
     const isTablet = /ipad|android(?!.*mobile)|tablet|kindle|silk|playbook|nexus\s7|nexus\s9|nexus\s10/i.test(userAgent);
-    
     return isMobile || isTablet;
   }, []);
 
-  // Memoize video source to prevent unnecessary re-renders
-  const memoizedVideoSrc = useMemo(() => videoSrc, [videoSrc]);
-  
-  // Initialize device detection
   useEffect(() => {
     setIsMobileOrTablet(checkIsMobileOrTablet());
-    
-    const handleResize = () => {
-      setIsMobileOrTablet(checkIsMobileOrTablet());
-    };
-    
+    const handleResize = () => setIsMobileOrTablet(checkIsMobileOrTablet());
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, [checkIsMobileOrTablet]);
 
-  // Handle video loaded data
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    const handleLoadedData = () => {
-      // For mobile/tablet: auto-play and loop
-      if (isMobileOrTablet) {
-        video.play().then(() => {
-          setIsPlaying(true);
-        }).catch((error) => {
-          console.log('Mobile video auto-play failed:', error);
-          // Fallback: try to play on user interaction
-          const handleUserInteraction = () => {
-            video.play().then(() => setIsPlaying(true));
-            document.removeEventListener('touchstart', handleUserInteraction);
-            document.removeEventListener('click', handleUserInteraction);
-          };
-          document.addEventListener('touchstart', handleUserInteraction);
-          document.addEventListener('click', handleUserInteraction);
-        });
-      } else {
-        // For desktop: set to first frame and pause
-        video.currentTime = 0;
-        video.pause();
-      }
-    };
-
-    video.addEventListener('loadeddata', handleLoadedData);
-    
-    // Handle video errors
-    const handleError = () => {
-      console.error('Video loading error for:', memoizedVideoSrc);
-    };
-    
-    video.addEventListener('error', handleError);
-
-    return () => {
-      video.removeEventListener('loadeddata', handleLoadedData);
-      video.removeEventListener('error', handleError);
-    };
-  }, [memoizedVideoSrc, isMobileOrTablet]);
-
-  // Handle hover state changes (desktop only)
+  // Handle desktop hover playback
   useEffect(() => {
     const video = videoRef.current;
     if (!video || isMobileOrTablet) return;
 
-    if (isHovered && !isPlaying) {
-      video.play().then(() => {
-        setIsPlaying(true);
-      }).catch((error) => {
-        console.log('Desktop video play failed:', error);
-      });
-    } else if (!isHovered && isPlaying) {
+    if (isHovered) {
+      video.play()
+        .then(() => setIsPlaying(true))
+        .catch(() => setIsPlaying(false));
+    } else {
       video.pause();
-      video.currentTime = 0;
       setIsPlaying(false);
     }
-  }, [isHovered, isPlaying, isMobileOrTablet]);
+  }, [isHovered, isMobileOrTablet]);
 
-  // Ensure video continues playing on mobile/tablet when it becomes visible
+  // Handle mobile/tablet scroll intersection playback
   useEffect(() => {
     if (!isMobileOrTablet) return;
-    
     const video = videoRef.current;
     if (!video) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting && !isPlaying) {
-          video.play().then(() => setIsPlaying(true))
-            .catch((error) => console.log('Intersection play failed:', error));
-        } else if (!entry.isIntersecting && isPlaying) {
+        if (entry.isIntersecting) {
+          video.play()
+            .then(() => setIsPlaying(true))
+            .catch(() => setIsPlaying(false));
+        } else {
           video.pause();
           setIsPlaying(false);
         }
       },
-      { threshold: 0.5 }
+      { threshold: 0.3 }
     );
 
     observer.observe(video);
     return () => observer.disconnect();
-  }, [isMobileOrTablet, isPlaying]);
+  }, [isMobileOrTablet]);
 
   return (
-    <div className={`relative overflow-hidden ${className}`}>
-      {!isPlaying && posterSrc && (
+    <div className={`relative overflow-hidden bg-gray-100 ${className}`}>
+      {/* Background Poster Image (Always Rendered to Prevent Flickering) */}
+      {posterSrc && (
         <Image
           src={posterSrc}
           alt={alt || "Video thumbnail"}
@@ -139,25 +81,23 @@ const VideoThumbnail = ({
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
       )}
+
+      {/* Video Overlay (Smooth Opacity Transition) */}
       <video
         ref={videoRef}
-        src={memoizedVideoSrc}
+        src={videoSrc}
         muted
         loop
         playsInline
         preload="none"
-        className={`w-full h-full object-cover transition-transform duration-500 ease-out ${
-          !isMobileOrTablet && isHovered ? 'scale-105' : 'scale-100'
-        }`}
-        // Disable picture-in-picture for better mobile performance
+        className={`absolute inset-0 w-full h-full object-cover transition-all duration-500 ease-out ${
+          isPlaying ? 'opacity-100' : 'opacity-0 pointer-events-none'
+        } ${!isMobileOrTablet && isHovered ? 'scale-105' : 'scale-100'}`}
         disablePictureInPicture
-        // Prevent context menu on mobile
         onContextMenu={(e) => isMobileOrTablet && e.preventDefault()}
-      >
-        <track kind="captions" srcLang="en" label="English captions" />
-      </video>
+      />
     </div>
   );
 };
 
-export default VideoThumbnail;
+export default React.memo(VideoThumbnail);

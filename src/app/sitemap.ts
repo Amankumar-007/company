@@ -70,7 +70,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         },
         {
             url: `${BASE_URL}/solutions`,
-            lastModified: new Date('2025-01-01'),
+            lastModified: new Date(),
             changeFrequency: 'weekly',
             priority: 0.9,
         },
@@ -103,6 +103,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             lastModified: latestBlogDate,
             changeFrequency: 'daily',
             priority: 0.9,
+        },
+        {
+            url: `${BASE_URL}/locations`,
+            lastModified: new Date('2025-01-01'),
+            changeFrequency: 'monthly',
+            priority: 0.7,
         },
         ...blogPages,
         ...programmaticSeoPages,

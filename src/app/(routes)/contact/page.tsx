@@ -90,11 +90,11 @@ export default function ContactForm() {
     if (currency === 'USD') return budgetRange + ' USD';
     if (currency === 'INR') {
         const ranges: Record<string, string> = {
-            '10-20k': '8L - 16L INR',
-            '30-40k': '25L - 33L INR',
-            '40-50k': '33L - 41L INR',
-            '50-100k': '41L - 83L INR',
-            '> 100k': '> 83L INR'
+            '10-20k': '1L - 3L INR',
+            '30-40k': '3L - 5L INR',
+            '40-50k': '5L - 10L INR',
+            '50-100k': '10L - 25L INR',
+            '> 100k': '> 25L INR'
         };
         return ranges[budgetRange] || budgetRange;
     }

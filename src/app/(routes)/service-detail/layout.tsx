@@ -10,6 +10,10 @@ export const metadata: Metadata = {
     alternates: {
         canonical: `${BASE_URL}/service-detail`,
     },
+    robots: {
+        index: false,
+        follow: true,
+    },
     openGraph: {
         type: 'website',
         locale: 'en_IN',

@@ -33,9 +33,10 @@ const ProjectCard = React.memo(({ project, index }) => {
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true);
+          if (cardRef.current) observer.unobserve(cardRef.current);
         }
       },
-      { threshold: 0.3, rootMargin: "-20px" }
+      { threshold: 0.1 }
     );
 
     if (cardRef.current) {
@@ -43,13 +44,10 @@ const ProjectCard = React.memo(({ project, index }) => {
     }
 
     return () => {
-      if (cardRef.current) {
-        observer.unobserve(cardRef.current);
-      }
+      observer.disconnect();
     };
   }, []);
 
-  // Memoized event handlers to prevent unnecessary re-renders
   const handleMouseEnter = useCallback(() => {
     setIsHovered(true);
     setCursorHover(true, 'Explore', 80, '#000000');
@@ -67,13 +65,12 @@ const ProjectCard = React.memo(({ project, index }) => {
   return (
     <div
       ref={cardRef}
-      className={`transition-all duration-700 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-        }`}
+      className={`transition-all duration-700 ease-out ${
+        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+      }`}
       style={{
-        transitionDelay: isVisible ? `${index * 50}ms` : '0ms'
+        transitionDelay: isVisible ? `${(index % 2) * 100}ms` : '0ms'
       }}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
     >
       {/* Video Thumbnail */}
       <div

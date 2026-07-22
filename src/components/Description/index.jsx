@@ -15,11 +15,11 @@ export default function index() {
             <div className={styles.body}>
                 <h2 className={styles.headline}>WHAT WE DO</h2>
                 <p>
-                {
-                    phrase.split(" ").map( (word, index) => {
-                        return <span key={index} className={styles.mask}><motion.span variants={slideUp} custom={index} animate={isInView ? "open" : "closed"} key={index}>{word}</motion.span></span>
-                    })
-                }
+                    {
+                        phrase.split(" ").map((word, index) => {
+                            return <span key={index} className={styles.mask}><motion.span variants={slideUp} custom={index} animate={isInView ? "open" : "closed"} key={index}>{word}</motion.span></span>
+                        })
+                    }
                 </p>
                 <motion.p variants={opacity} animate={isInView ? "open" : "closed"}>Our comprehensive services include website development, app creation, SEO marketing, and social media management - all designed to give your business the digital edge it deserves.</motion.p>
                 <div data-scroll data-scroll-speed={0.1}>

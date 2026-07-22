@@ -131,52 +131,53 @@ const ServicesPage = () => {
     }
   ]
 
-  // Tech icon mapping function
+  // Tech icon mapping function - fetches crisp icons from internet CDN
   const getTechIcon = (techName: string) => {
-    const iconMap: Record<string, string> = {
-      'React': '/tech/7423888_react_react native_icon.svg',
-      'Next.js': '/tech/9118036_nextjs_fill_icon.svg',
-      'TypeScript': '/tech/11120662_fi_brands_typescript_icon.svg',
-      'Node.js': '/tech/1012818_code_development_logo_nodejs_icon.svg',
-      'MongoDB': '/tech/1012822_code_development_logo_mongodb_programming_icon.svg',
-      'PostgreSQL': '/tech/4691328_postgresql_icon.svg',
-      'GraphQL': '/tech/4691403_graphql_icon.svg',
-      'AWS': '/tech/4923041_aws_icon.svg',
-      'Docker': '/tech/8725837_docker_icon.svg',
-      'JavaScript': '/tech/652581_code_command_develop_javascript_language_icon.svg',
-      'HTML5': '/tech/104494_html5_html_icon.svg',
-      'Angular': '/tech/4373284_angular_logo_logos_icon.svg',
-      'Tailwind CSS': '/tech/9055799_bxl_tailwind_css_icon.svg',
-      'Flutter': '/tech/9055802_bxl_flutter_icon.svg',
-      'React Native': '/tech/7423888_react_react native_icon.svg',
-      'Swift': '',
-      'Kotlin': '',
-      'Firebase': '',
-      'Google Analytics': '',
-      'SEMrush': '',
-      'Ahrefs': '',
-      'Google Ads': '',
-      'Facebook Ads': '',
-      'Figma': '',
-      'Adobe XD': '',
-      'Sketch': '',
-      'Principle': '',
-      'InVision': '',
-      'Zeplin': '',
-      'Google Cloud': '',
-      'Azure': '',
-      'Kubernetes': '',
-      'Terraform': '',
-      'Shopify': '',
-      'WooCommerce': '',
-      'Magento': '',
-      'Stripe': '',
-      'PayPal': '',
-      'Inventory APIs': '',
-      'Content CMS': ''
+    const slugMap: Record<string, string> = {
+      'React': 'react',
+      'Next.js': 'nextdotjs',
+      'TypeScript': 'typescript',
+      'Node.js': 'nodedotjs',
+      'MongoDB': 'mongodb',
+      'PostgreSQL': 'postgresql',
+      'GraphQL': 'graphql',
+      'AWS': 'amazonwebservices',
+      'Docker': 'docker',
+      'JavaScript': 'javascript',
+      'HTML5': 'html5',
+      'Angular': 'angular',
+      'Tailwind CSS': 'tailwindcss',
+      'Flutter': 'flutter',
+      'React Native': 'react',
+      'Swift': 'swift',
+      'Kotlin': 'kotlin',
+      'Firebase': 'firebase',
+      'Google Analytics': 'googleanalytics',
+      'SEMrush': 'semrush',
+      'Ahrefs': 'ahrefs',
+      'Google Ads': 'googleads',
+      'Facebook Ads': 'meta',
+      'Figma': 'figma',
+      'Adobe XD': 'adobexd',
+      'Sketch': 'sketch',
+      'Principle': 'framer',
+      'InVision': 'invision',
+      'Zeplin': 'zeplin',
+      'Google Cloud': 'googlecloud',
+      'Azure': 'microsoftazure',
+      'Kubernetes': 'kubernetes',
+      'Terraform': 'terraform',
+      'Shopify': 'shopify',
+      'WooCommerce': 'woocommerce',
+      'Magento': 'magento',
+      'Stripe': 'stripe',
+      'PayPal': 'paypal',
+      'Inventory APIs': 'postman',
+      'Content CMS': 'strapi',
     };
 
-    return iconMap[techName] || '';
+    const slug = slugMap[techName] || techName.toLowerCase().replace(/[^a-z0-9]/g, '');
+    return `https://cdn.simpleicons.org/${slug}`;
   };
 
   useEffect(() => {
@@ -365,19 +366,14 @@ const ServicesPage = () => {
                         className="w-10 h-10 flex items-center justify-center bg-gray-50 rounded-xl border border-gray-200 hover:border-black transition-all duration-300 group/icon"
                         title={tech}
                       >
-                        {getTechIcon(tech) ? (
-                          <Image
-                            src={getTechIcon(tech)}
-                            alt={tech}
-                            width={24}
-                            height={24}
-                            className="w-5 h-5 object-contain transition-transform duration-300 group-hover/icon:scale-110"
-                          />
-                        ) : (
-                          <span className="text-[10px] font-mono font-semibold text-gray-400">
-                            {tech.substring(0, 2).toUpperCase()}
-                          </span>
-                        )}
+                        <img
+                          src={getTechIcon(tech)}
+                          alt={tech}
+                          className="w-5 h-5 object-contain transition-transform duration-300 group-hover/icon:scale-110"
+                          onError={(e) => {
+                            (e.currentTarget as HTMLImageElement).style.display = 'none';
+                          }}
+                        />
                       </div>
                     ))}
                     {service.technologies.length > 4 && (

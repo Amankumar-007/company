@@ -116,9 +116,9 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-  alternates: {
-    canonical: BASE_URL,
-  },
+  // NOTE: Do NOT set a global canonical here — each page sets its own
+  // canonical via `alternates.canonical`. Setting one here would make
+  // every route look like a duplicate of the homepage to Google.
   openGraph: {
     type: 'website',
     locale: 'en_IN',
@@ -145,9 +145,11 @@ export const metadata: Metadata = {
     creator: '@twofloww',
     site: '@twofloww',
   },
-  verification: {
-    google: 'add-your-google-site-verification-token-here',
-  },
+  // TODO: Replace with your real Google Search Console verification token.
+  // Go to GSC → Settings → Ownership verification → HTML tag method.
+  // verification: {
+  //   google: 'YOUR_REAL_VERIFICATION_TOKEN_HERE',
+  // },
   category: 'technology',
 }
 

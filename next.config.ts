@@ -40,16 +40,44 @@ const nextConfig: NextConfig = {
   },
 
 
+  // Force www canonical — redirects non-www to www in production.
+  // This eliminates Google's "Page with redirect" and duplicate-canonical
+  // issues caused by twofloww.in vs www.twofloww.in.
+  async redirects() {
+    return [
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'twofloww.in' }],
+        destination: 'https://www.twofloww.in/:path*',
+        permanent: true, // 301 redirect — tells Google definitively which is canonical
+      },
+    ];
+  },
+
   // Security + performance HTTP headers
   async headers() {
     const isProd = process.env.NODE_ENV === 'production';
-    
+
     const headersList: any[] = [
       {
         // Block search engines from indexing any admin route
         source: '/admin/:path*',
         headers: [
           { key: 'X-Robots-Tag', value: 'noindex, nofollow' },
+        ],
+      },
+      {
+        // These pages use ?id= query params — not proper indexable URLs.
+        // Noindex them at the HTTP level too (belt-and-suspenders with metadata).
+        source: '/service-detail',
+        headers: [
+          { key: 'X-Robots-Tag', value: 'noindex, follow' },
+        ],
+      },
+      {
+        source: '/project-detail',
+        headers: [
+          { key: 'X-Robots-Tag', value: 'noindex, follow' },
         ],
       },
       {
@@ -83,6 +111,7 @@ const nextConfig: NextConfig = {
         ],
       },
     ];
+
 
     if (isProd) {
       // Add caching headers for production only

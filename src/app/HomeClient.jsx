@@ -40,8 +40,8 @@ export default function HomeClient() {
       {/* <GlobalReach lightTheme={false} /> */}
       {/* <FAQSection /> */}
       <Card
-        title="Sample Project 1"
-        description="This is the first sample card component to showcase the project details."
+        title="TomatoAI"
+        description="All-in-one AI platform offering intelligent tools for content creation, image generation, and workflow automation."
         src="locomotive.png"
         url="/project-detail?id=1"
         color="#f0f0f0"
@@ -51,8 +51,8 @@ export default function HomeClient() {
         targetScale={1.2}
       />
       <Card
-        title="Sample Project 2"
-        description="This is the second sample card component to showcase the project details."
+        title="Awasdhara"
+        description="Full-stack real estate platform connecting buyers, sellers, and agents across India with 360° virtual tours."
         src="google.jpg"
         url="/project-detail?id=2"
         color="#e8f4f8"
@@ -62,8 +62,8 @@ export default function HomeClient() {
         targetScale={1.2}
       />
       <Card
-        title="Sample Project 3"
-        description="This is the third sample card component to showcase the project details."
+        title="SnippetsX"
+        description="Real-time collaborative code sharing and sandboxed execution workspace for developer teams."
         src="wix.jpg"
         url="/project-detail?id=3"
         color="#f8f0e8"
@@ -73,8 +73,8 @@ export default function HomeClient() {
         targetScale={1.2}
       />
       <Card
-        title="Sample Project 4"
-        description="This is the fourth sample card component to showcase the project details."
+        title="FoodFloww"
+        description="On-demand food delivery & restaurant ecosystem with real-time driver tracking and dispatch management."
         src="maven.jpg"
         url="/project-detail?id=4"
         color="#e8f8e8"
@@ -84,8 +84,8 @@ export default function HomeClient() {
         targetScale={1.2}
       />
       <Card
-        title="Sample Project 5"
-        description="This is the fifth sample card component to showcase the project details."
+        title="AstroConnect"
+        description="Live astrologer consultation, Kundli generation & AI-driven horoscope platform for global users."
         src="panda.jpg"
         url="/project-detail?id=5"
         color="#f8e8f8"

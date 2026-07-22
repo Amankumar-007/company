@@ -72,8 +72,33 @@ export default function ProjectDetailsClient({ project }) {
   };
 
   const getFaviconUrl = (techName) => {
-    const domain = getDomainForTech(techName);
-    return `https://www.google.com/s2/favicons?domain=${domain}&sz=128`;
+    const slugMap = {
+      'React': 'react',
+      'Next.js': 'nextdotjs',
+      'TypeScript': 'typescript',
+      'Node.js': 'nodedotjs',
+      'MongoDB': 'mongodb',
+      'PostgreSQL': 'postgresql',
+      'GraphQL': 'graphql',
+      'AWS': 'amazonwebservices',
+      'Docker': 'docker',
+      'JavaScript': 'javascript',
+      'HTML5': 'html5',
+      'Angular': 'angular',
+      'Tailwind CSS': 'tailwindcss',
+      'Flutter': 'flutter',
+      'React Native': 'react',
+      'Swift': 'swift',
+      'Kotlin': 'kotlin',
+      'Firebase': 'firebase',
+      'Google Analytics': 'googleanalytics',
+      'Figma': 'figma',
+      'Shopify': 'shopify',
+      'Stripe': 'stripe',
+    };
+
+    const slug = slugMap[techName] || techName.toLowerCase().replace(/[^a-z0-9]/g, '');
+    return `https://cdn.simpleicons.org/${slug}`;
   };
 
   return (

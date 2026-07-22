@@ -1,11 +1,13 @@
 'use client';
 
-import React, { useRef, useState, useEffect, useCallback } from 'react';
-import { motion, AnimatePresence, useMotionValue, useTransform, useSpring } from 'framer-motion';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
-import { ArrowRight, Sparkles, ChevronDown } from 'lucide-react';
-import { openConsultModal } from '@/components/ConsultModal';
 import {
+  ArrowRight,
+  Sparkles,
+  ChevronDown,
+  CheckCircle2,
   Rocket,
   Building2,
   ShoppingCart,
@@ -19,11 +21,26 @@ import {
   Star,
   Users,
   Heart,
+  ShieldCheck,
+  Zap,
+  TrendingUp,
 } from 'lucide-react';
+import { openConsultModal } from '@/components/ConsultModal';
 
-const iconMap: Record<string, React.ComponentType<{ className?: string; size?: number; strokeWidth?: number; style?: React.CSSProperties }>> = {
-  Rocket, Building2, ShoppingCart, Wallet, Activity, BrainCircuit,
-  UtensilsCrossed, ShoppingBasket, Car, Dumbbell, Star, Users, Heart,
+const iconMap: Record<string, React.ComponentType<{ className?: string; size?: number }>> = {
+  Rocket,
+  Building2,
+  ShoppingCart,
+  Wallet,
+  Activity,
+  BrainCircuit,
+  UtensilsCrossed,
+  ShoppingBasket,
+  Car,
+  Dumbbell,
+  Star,
+  Users,
+  Heart,
 };
 
 interface Benefit { title: string; description: string; }
@@ -45,627 +62,444 @@ interface Solution {
   process?: ProcessStep[];
   techStack?: string[];
   faq?: FAQ[];
+  seo?: {
+    title: string;
+    description: string;
+    keywords: string[];
+  };
 }
 
-const BackgroundPattern = ({ color }: { color: string }) => (
-  <>
-    <div
-      aria-hidden
-      className="absolute inset-0 opacity-60 pointer-events-none"
-      style={{
-        backgroundImage: `radial-gradient(circle, color-mix(in srgb, ${color} 20%, transparent) 1.5px, transparent 1.5px)`,
-        backgroundSize: '32px 32px',
-      }}
-    />
-    <div aria-hidden className="absolute inset-0 flex items-center justify-center overflow-hidden pointer-events-none select-none opacity-[0.04]">
-      <span 
-        className="text-[14rem] md:text-[24rem] font-black whitespace-nowrap tracking-tighter"
-        style={{ fontFamily: 'var(--font-unbounded)', color }}
-      >
-        TWOFLOWW
-      </span>
-    </div>
-  </>
-);
-
-/* ─── FAQ accordion ─────────────────────────────────────────────────────── */
-function FAQItem({ q, a }: { q: string; a: string }) {
+/* ─── FAQ accordion component ────────────────────────────────────────── */
+function FAQItem({ q, a, idx }: FAQ & { idx: number }) {
   const [open, setOpen] = useState(false);
   return (
-    <div className="border border-zinc-100 rounded-2xl overflow-hidden bg-white shadow-[0_4px_12px_rgba(0,0,0,0.01)]">
+    <div
+      className={`border border-gray-200 rounded-[1.5rem] mb-4 overflow-hidden transition-all duration-300 bg-white ${
+        open ? 'shadow-[0_10px_35px_rgba(0,0,0,0.05)] border-l-4 border-l-black' : 'hover:border-gray-300'
+      }`}
+    >
       <button
         onClick={() => setOpen(!open)}
-        className="w-full flex items-center justify-between gap-4 px-7 py-5 text-left"
+        className="w-full flex items-center justify-between p-6 text-left gap-4 group cursor-pointer"
+        aria-expanded={open}
       >
-        <span className="font-bold text-[#0B0D17] text-base leading-snug">{q}</span>
-        <ChevronDown
-          className="w-5 h-5 shrink-0 transition-transform duration-300 text-zinc-400"
-          style={{ transform: open ? 'rotate(180deg)' : 'rotate(0deg)' }}
-        />
-      </button>
-      {open && (
-        <div className="px-7 pb-6 text-zinc-500 text-sm leading-relaxed border-t border-zinc-50">
-          <div className="pt-4">{a}</div>
+        <div className="flex items-center gap-4">
+          <span
+            className={`text-xs font-bold px-2.5 py-1 rounded-md transition-colors ${
+              open ? 'bg-black text-[#C3F53C]' : 'bg-[#F6F6F6] text-gray-500'
+            }`}
+          >
+            {String(idx + 1).padStart(2, '0')}
+          </span>
+          <span className="text-black font-bold text-base sm:text-lg group-hover:text-gray-600 transition-colors leading-snug">
+            {q}
+          </span>
         </div>
-      )}
+        <div
+          className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-all duration-300 ${
+            open ? 'bg-[#C3F53C] text-black rotate-180' : 'bg-[#F6F6F6] text-gray-500'
+          }`}
+        >
+          <ChevronDown className="w-4 h-4" />
+        </div>
+      </button>
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="overflow-hidden"
+          >
+            <div className="p-6 pt-0 text-gray-600 text-sm sm:text-base leading-relaxed border-t border-gray-100 pl-16">
+              {a}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
 
-/* ─── Single capability card ─────────────────────────────────────────────── */
-function CapabilityCard({
-  feature, index, total, color, onActivate,
-}: {
-  feature: string; index: number; total: number; color: string;
-  onActivate: (i: number) => void;
-}) {
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const obs = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) onActivate(index); },
-      { rootMargin: '-20% 0px -55% 0px' }
-    );
-    obs.observe(el);
-    return () => obs.disconnect();
-  }, [index, onActivate]);
-
-  return (
-    <motion.div
-      id={`cap-${index}`}
-      ref={ref}
-      initial={{ opacity: 0, x: 32 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ once: true, margin: '-60px' }}
-      transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
-      className="group relative bg-white rounded-[2rem] border border-zinc-100 overflow-hidden
-        min-h-[130px] flex items-center
-        shadow-[0_4px_20px_rgba(0,0,0,0.02)]
-        hover:shadow-[0_20px_60px_rgba(0,0,0,0.08)]
-        hover:border-zinc-200 hover:-translate-y-0.5
-        transition-all duration-400 cursor-default"
-    >
-      {/* left accent */}
-      <div
-        className="absolute left-0 top-0 bottom-0 w-[3px] group-hover:w-1 opacity-30 group-hover:opacity-100 transition-all duration-300 rounded-r-full group-hover:rounded-none bg-[#0B0D17]"
-      />
-
-      {/* ghost number */}
-      <div aria-hidden className="absolute right-2 top-0 bottom-0 flex items-center pointer-events-none">
-        <span
-          className="text-[8rem] font-black leading-none select-none opacity-[0.02] group-hover:opacity-[0.04] transition-opacity duration-500 text-[#0B0D17]"
-          style={{ fontFamily: 'var(--font-unbounded)' }}
-        >
-          {String(index + 1).padStart(2, '0')}
-        </span>
-      </div>
-
-      <div className="relative z-10 flex items-center gap-5 px-8 py-8 w-full">
-        {/* dark badge */}
-        <div
-          className="shrink-0 w-12 h-12 rounded-2xl flex items-center justify-center text-white text-[11px] font-black shadow-md group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300 bg-[#0B0D17]"
-        >
-          {String(index + 1).padStart(2, '0')}
-        </div>
-
-        <div className="flex-1 min-w-0">
-          <span className="text-[9px] font-bold text-zinc-400 uppercase tracking-widest block mb-1">
-            Capability · {String(index + 1).padStart(2, '0')} / {String(total).padStart(2, '0')}
-          </span>
-          <h3
-            className="text-xl lg:text-2xl font-black text-[#0B0D17] leading-snug truncate group-hover:text-clip"
-            style={{ fontFamily: 'var(--font-space-grotesk)' }}
-          >
-            {feature}
-          </h3>
-        </div>
-
-        <ArrowRight className="w-5 h-5 text-zinc-200 group-hover:text-zinc-500 group-hover:translate-x-1 transition-all duration-300 shrink-0" />
-      </div>
-    </motion.div>
-  );
-}
-
-/* ─── Core Capabilities section (own component so it can use hooks) ──────── */
-function CoreCapabilities({ solution }: { solution: Solution }) {
-  const [active, setActive] = useState(0);
-  const IconComp = iconMap[solution.icon] || Rocket;
-  const total = solution.features.length;
-
-  const handleActivate = useCallback((i: number) => setActive(i), []);
-
-  const jumpTo = (i: number) => {
-    document.getElementById(`cap-${i}`)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  };
-
-  return (
-    <section className="py-16 sm:py-24 lg:py-32 px-4 sm:px-6 bg-[#FAFAFA] relative overflow-hidden">
-      <BackgroundPattern color={solution.color} />
-      <div className="relative z-10 max-w-6xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
-
-          {/* ── LEFT STICKY PANEL ───────────────────────────────────────── */}
-          <div className="lg:col-span-5 lg:sticky lg:top-28 self-start">
-
-            {/* section header */}
-            <span className="inline-flex items-center gap-2 border border-zinc-200 bg-white/80 backdrop-blur-sm rounded-full px-4 py-2 text-[10px] text-[#0B0D17] font-bold uppercase tracking-widest mb-6 shadow-sm">
-              <Sparkles className="w-3.5 h-3.5" />
-              Technical Depth
-            </span>
-
-            <h2
-              className="text-4xl md:text-5xl font-black tracking-tight text-[#0B0D17] leading-none mb-4"
-              style={{ fontFamily: 'var(--font-space-grotesk)' }}
-            >
-              Core<br />Capabilities
-            </h2>
-            <p className="text-zinc-500 text-sm leading-relaxed mb-8">
-              Every feature is engineered for performance, security, and long-term scalability — built
-              on battle-tested, production-grade foundations.
-            </p>
-
-            {/* ── ACTIVE FEATURE CARD ──────────────────────────────────── */}
-            <div className="relative rounded-2xl border border-zinc-100 bg-white overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.03)] mb-6">
-              {/* top accent stripe */}
-              <div className="h-1 w-full bg-[#0B0D17]" />
-
-              {/* ghost icon backdrop */}
-              <div aria-hidden className="absolute inset-0 flex items-center justify-end pr-4 pointer-events-none">
-                <IconComp
-                  className="w-28 h-28 opacity-[0.03] text-[#0B0D17]"
-                />
-              </div>
-
-              <div className="p-6">
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={active}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    transition={{ duration: 0.28, ease: 'easeOut' }}
-                  >
-                    <span
-                      className="text-5xl font-black leading-none block mb-3 text-[#0B0D17]"
-                      style={{ fontFamily: 'var(--font-unbounded)' }}
-                    >
-                      {String(active + 1).padStart(2, '0')}
-                    </span>
-                    <p
-                      className="text-base font-black text-[#0B0D17] leading-snug"
-                      style={{ fontFamily: 'var(--font-space-grotesk)' }}
-                    >
-                      {solution.features[active]}
-                    </p>
-                  </motion.div>
-                </AnimatePresence>
-
-                {/* progress bar */}
-                <div className="mt-5 h-[3px] bg-zinc-100 rounded-full overflow-hidden">
-                  <motion.div
-                    className="h-full rounded-full bg-[#0B0D17]"
-                    animate={{ width: `${((active + 1) / total) * 100}%` }}
-                    transition={{ duration: 0.4, ease: 'easeOut' }}
-                  />
-                </div>
-                <div className="flex justify-between mt-2">
-                  <span className="text-[9px] font-bold text-zinc-400 uppercase tracking-widest">Currently Viewing</span>
-                  <span className="text-[9px] font-bold uppercase tracking-widest text-[#0B0D17]">
-                    {active + 1} / {total}
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            {/* ── DOT NAVIGATOR ─────────────────────────────────────────── */}
-            <div className="flex flex-col gap-[5px]">
-              {solution.features.map((feat, i) => (
-                <button
-                  key={i}
-                  onClick={() => jumpTo(i)}
-                  className={`flex items-center gap-2.5 text-left w-full py-1 group/nav transition-all duration-200 rounded-lg px-2 hover:bg-zinc-50`}
-                >
-                  {/* dot */}
-                  <span
-                    className="shrink-0 rounded-full transition-all duration-250"
-                    style={{
-                      width: i === active ? 20 : 6,
-                      height: 6,
-                      backgroundColor: i === active ? '#0B0D17' : '#E4E4E7',
-                    }}
-                  />
-                  {/* label */}
-                  <span
-                    className={`text-[11px] font-bold truncate transition-colors duration-200 ${
-                      i === active ? 'text-[#0B0D17]' : 'text-zinc-400 group-hover/nav:text-zinc-600'
-                    }`}
-                  >
-                    {feat}
-                  </span>
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* ── RIGHT CARDS ─────────────────────────────────────────────── */}
-          <div className="lg:col-span-7 flex flex-col gap-4">
-            {solution.features.map((feature, idx) => (
-              <CapabilityCard
-                key={idx}
-                feature={feature}
-                index={idx}
-                total={total}
-                color={solution.color}
-                onActivate={handleActivate}
-              />
-            ))}
-          </div>
-
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ─── Main page component ────────────────────────────────────────────────── */
 export default function SolutionDetailClient({ solution }: { solution: Solution }) {
   const IconComponent = iconMap[solution.icon] || Rocket;
 
-  const cardRef = useRef<HTMLDivElement>(null);
-  const mouseX = useMotionValue(0.5);
-  const mouseY = useMotionValue(0.5);
-
-  const rotateXRaw = useTransform(mouseY, [0, 1], [15, -15]);
-  const rotateYRaw = useTransform(mouseX, [0, 1], [-15, 15]);
-  const rotateX = useSpring(rotateXRaw, { damping: 25, stiffness: 120 });
-  const rotateY = useSpring(rotateYRaw, { damping: 25, stiffness: 120 });
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!cardRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    mouseX.set((e.clientX - rect.left) / rect.width);
-    mouseY.set((e.clientY - rect.top) / rect.height);
+  // JSON-LD Schema for SEO
+  const serviceSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: solution.title,
+    description: solution.seo?.description || solution.description,
+    provider: {
+      '@type': 'Organization',
+      name: 'Twofloww',
+      url: 'https://www.twofloww.in',
+    },
+    serviceType: solution.title,
+    areaServed: 'Worldwide',
   };
-
-  const handleMouseLeave = () => {
-    mouseX.set(0.5);
-    mouseY.set(0.5);
-  };
-
-  const glowX = useTransform(mouseX, [0, 1], [20, -20]);
-  const glowY = useTransform(mouseY, [0, 1], [20, -20]);
 
   return (
-    <div 
-      className="bg-[#FAFAFA] text-[#0B0D17] min-h-screen font-sans overflow-x-hidden"
-      style={{ '--theme': solution.color } as React.CSSProperties}
-    >
-      <style>{`
-        ::selection { background-color: color-mix(in srgb, var(--theme) 20%, transparent); color: var(--theme); }
-        .dynamic-hover-text:hover, .group:hover .dynamic-group-hover-text { color: var(--theme) !important; }
-        .dynamic-hover-bg:hover { background-color: var(--theme) !important; box-shadow: 0 10px 25px -5px color-mix(in srgb, var(--theme) 30%, transparent) !important; }
-      `}</style>
+    <main className="bg-white text-black min-h-screen font-sans selection:bg-[#C3F53C] selection:text-black">
+      
+      {/* ─── Schema JSON-LD ──────────────────────────────────────────────── */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
+      />
 
-      {/* ── HERO ──────────────────────────────────────────────────────────── */}
-      <section className="relative min-h-[70vh] lg:min-h-[85vh] flex items-center px-4 sm:px-6 pt-28 sm:pt-36 pb-14 sm:pb-20 overflow-hidden bg-white border-b border-zinc-100 select-none">
-        <BackgroundPattern color={solution.color} />
-        
-        {/* Sleek abstract shapes instead of blobs */}
-        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-gradient-to-bl from-sky-100 to-transparent opacity-30 rounded-full blur-[100px] pointer-events-none -translate-y-1/2 translate-x-1/3" />
-
-        <div className="relative z-10 max-w-6xl mx-auto w-full">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center">
-
-            <div className="lg:col-span-7 flex flex-col">
-              <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs text-zinc-400 mb-8 font-semibold tracking-wide uppercase">
-                <Link href="/" className="dynamic-hover-text transition-colors">Home</Link>
+      {/* ─── 1. HERO SECTION ────────────────────────────────────────────── */}
+      <section className="relative p-4 sm:p-6 lg:p-8 bg-white max-w-[1600px] mx-auto min-h-[85vh] flex items-center pt-20 lg:pt-24">
+        <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6 h-full min-h-[620px] lg:h-[78vh]">
+          
+          {/* Left Column - Content */}
+          <div className="bg-[#F6F6F6] rounded-[2.5rem] p-8 lg:p-16 flex flex-col justify-center items-center text-center relative overflow-hidden h-full">
+            <motion.div
+              initial={{ opacity: 0, y: 25 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+              className="relative z-10 max-w-xl mx-auto flex flex-col items-center"
+            >
+              {/* Breadcrumb & Pill */}
+              <nav className="flex items-center gap-2 text-xs text-gray-500 mb-6 font-semibold uppercase tracking-wider">
+                <Link href="/" className="hover:text-black transition-colors">Home</Link>
                 <span>/</span>
-                <Link href="/solutions" className="dynamic-hover-text transition-colors">Solutions</Link>
+                <Link href="/solutions" className="hover:text-black transition-colors">Solutions</Link>
                 <span>/</span>
-                <span className="text-zinc-900 font-bold">{solution.title}</span>
+                <span className="text-black font-bold">{solution.title}</span>
               </nav>
 
-              <div 
-                className="inline-flex items-center gap-2 text-xs border backdrop-blur-md rounded-full px-4 py-2 font-bold uppercase tracking-widest mb-6 shadow-sm self-start"
-                style={{ color: solution.color, borderColor: `color-mix(in srgb, ${solution.color} 30%, transparent)`, backgroundColor: `color-mix(in srgb, ${solution.color} 10%, transparent)` }}
+              {/* Solution Icon & Title */}
+              <div
+                className="w-16 h-16 rounded-2xl flex items-center justify-center mb-6 shadow-sm border border-gray-200 bg-white"
+                style={{ color: solution.color }}
               >
-                <Sparkles className="w-3.5 h-3.5" />
-                Expert Development Services
+                <IconComponent className="w-8 h-8" />
               </div>
 
               <h1
-                className="text-4xl sm:text-5xl lg:text-7xl font-black leading-[1.05] tracking-tight mb-6 text-[#0B0D17]"
-                style={{ fontFamily: 'var(--font-space-grotesk)' }}
+                className="text-3xl sm:text-4xl lg:text-[3.2rem] leading-[1.08] font-medium text-black tracking-tight mb-6"
+                style={{ fontFamily: 'var(--font-space-grotesk), sans-serif' }}
               >
                 {solution.title}
               </h1>
 
-              <p className="text-zinc-500 text-lg sm:text-xl max-w-2xl leading-relaxed mb-6 font-medium">
+              <p className="text-gray-600 text-base md:text-lg leading-relaxed max-w-md mb-10">
                 {solution.description}
               </p>
 
-              {solution.longDescription && (
-                <p className="text-zinc-500 text-base max-w-2xl leading-relaxed mb-10">
-                  {solution.longDescription}
-                </p>
-              )}
-
-              <div>
+              {/* CTA Buttons */}
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <button
                   onClick={openConsultModal}
-                  className="relative inline-flex items-center justify-center gap-2 px-10 py-5 bg-[#0B0D17] text-white font-bold rounded-full overflow-hidden group text-sm tracking-wide shadow-xl shadow-[#0B0D17]/15 transition-transform duration-300 hover:scale-[1.02] cursor-pointer"
+                  className="flex items-center gap-4 bg-black text-white rounded-full pl-6 pr-2 py-2 hover:scale-105 transition-transform duration-300 group shadow-md"
                 >
-                  <span className="absolute inset-0 w-full h-full transition-transform duration-300 ease-out transform -translate-x-full group-hover:translate-x-0" style={{ backgroundColor: solution.color }} />
-                  <span className="relative z-10 flex items-center gap-2">
-                    Book a Free Consultation
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                  </span>
+                  <span className="font-bold text-xs tracking-widest uppercase">Consult Solution Architect</span>
+                  <div className="w-9 h-9 rounded-full bg-[#C3F53C] flex items-center justify-center text-black group-hover:rotate-45 transition-transform duration-300">
+                    <ArrowRight className="w-4 h-4" />
+                  </div>
                 </button>
               </div>
-            </div>
-
-            <div className="lg:col-span-5 hidden lg:flex items-center justify-center py-8">
-              <div
-                ref={cardRef}
-                onMouseMove={handleMouseMove}
-                onMouseLeave={handleMouseLeave}
-                className="relative cursor-pointer select-none"
-                style={{ perspective: 1000 }}
-              >
-                <motion.div
-                  style={{ rotateX, rotateY, transformStyle: 'preserve-3d' }}
-                  className="w-72 h-72 sm:w-80 sm:h-80 rounded-[45px] shadow-2xl border border-white/25 flex items-center justify-center relative transition-shadow duration-500 bg-zinc-950"
-                >
-                  <div
-                    className="absolute inset-4 rounded-[32px] bg-white/5 border border-white/10 backdrop-blur-sm pointer-events-none"
-                    style={{ transform: 'translateZ(25px)' }}
-                  />
-                  <div
-                    className="relative z-10 flex items-center justify-center drop-shadow-2xl"
-                    style={{ transform: 'translateZ(60px)', color: solution.color }}
-                  >
-                    <IconComponent className="w-36 h-36" strokeWidth={1.2} />
-                  </div>
-                  <motion.div
-                    style={{ x: glowX, y: glowY, backgroundColor: solution.color, transform: 'translateZ(-20px)' }}
-                    className="absolute inset-0 rounded-[45px] opacity-[0.25] blur-3xl pointer-events-none"
-                  />
-                </motion.div>
-              </div>
-            </div>
-
+            </motion.div>
           </div>
-        </div>
-      </section>
 
-      {/* ── STATS BAR ─────────────────────────────────────────────────────── */}
-      <section className="relative z-20 mt-0 lg:-mt-10 px-6 select-none">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-3 gap-3 sm:gap-6">
-            {solution.stats.map((stat, i) => (
-              <div
-                key={i}
-                className="bg-white border border-zinc-100 rounded-2xl sm:rounded-3xl p-4 sm:p-8 shadow-[0_8px_20px_rgba(0,0,0,0.02)] hover:shadow-[0_20px_50px_rgba(0,0,0,0.06)] hover:border-zinc-200 transition-all duration-300 flex flex-col items-center text-center group"
-              >
-                <span
-                  className="text-2xl sm:text-4xl lg:text-5xl font-black mb-1 sm:mb-2 transition-transform duration-300 group-hover:scale-105 text-[#0B0D17]"
+          {/* Right Column - Stats & Tech Highlights Overlay */}
+          <div className="relative rounded-[2.5rem] bg-[#0B0D17] overflow-hidden h-full min-h-[420px] lg:min-h-full group flex flex-col justify-between p-8 lg:p-14 text-white shadow-2xl">
+            {/* Ambient Overlay Glow */}
+            <div
+              className="absolute top-0 right-0 w-[400px] h-[400px] rounded-full blur-[130px] opacity-20 pointer-events-none"
+              style={{ backgroundColor: solution.color }}
+            />
+
+            {/* Top Info Header */}
+            <div className="relative z-10 flex justify-between items-start">
+              <div>
+                <span className="text-[10px] uppercase tracking-[0.25em] text-[#C3F53C] font-bold block mb-1">
+                  Production Blueprint
+                </span>
+                <h2
+                  className="text-2xl md:text-3xl font-light leading-snug"
                   style={{ fontFamily: 'var(--font-space-grotesk)' }}
                 >
-                  {stat.value}
-                </span>
-                <span className="text-[9px] sm:text-[10px] font-bold text-zinc-400 uppercase tracking-wider text-center leading-tight">
-                  {stat.label}
-                </span>
+                  Built for scale <br />
+                  <span className="italic font-serif text-white/90">& market performance.</span>
+                </h2>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── CORE CAPABILITIES (extracted component) ──────────────────────── */}
-      <CoreCapabilities solution={solution} />
-
-      {/* ── PROCESS ───────────────────────────────────────────────────────── */}
-      {solution.process && solution.process.length > 0 && (
-        <section className="py-20 px-6 bg-white border-y border-zinc-100">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-16 select-none">
-              <span 
-                className="text-xs border px-3 py-1.5 rounded-full font-bold uppercase tracking-widest mb-4 inline-block shadow-sm"
-                style={{ color: solution.color, borderColor: `color-mix(in srgb, ${solution.color} 30%, transparent)`, backgroundColor: `color-mix(in srgb, ${solution.color} 10%, transparent)` }}
-              >
-                How We Work
+              <span className="text-xs font-bold px-3 py-1.5 bg-white/10 rounded-full border border-white/10 text-[#C3F53C]">
+                Active SLA
               </span>
-              <h2
-                className="text-4xl sm:text-5xl font-black text-[#0B0D17] tracking-tight"
-                style={{ fontFamily: 'var(--font-space-grotesk)' }}
-              >
-                Our Development Process
-              </h2>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {solution.process.map((item, i) => (
-                <div
-                  key={i}
-                  className="bg-[#FAFAFA] border border-zinc-100 rounded-2xl p-7 hover:bg-white hover:border-zinc-200 hover:shadow-[0_20px_40px_rgba(0,0,0,0.05)] transition-all duration-300 group relative overflow-hidden"
-                >
-                  <span
-                    className="absolute right-5 top-3 text-6xl font-black text-zinc-100 group-hover:text-zinc-200/50 transition-colors pointer-events-none select-none"
-                    style={{ fontFamily: 'var(--font-unbounded)' }}
-                  >
-                    {item.step}
-                  </span>
-                  <div
-                    className="w-10 h-10 rounded-xl flex items-center justify-center mb-5 text-white text-sm font-black bg-[#0B0D17]"
-                  >
-                    {item.step}
-                  </div>
-                  <h3 className="text-lg font-black text-[#0B0D17] mb-3" style={{ fontFamily: 'var(--font-space-grotesk)' }}>
-                    {item.title}
-                  </h3>
-                  <p className="text-zinc-500 text-sm leading-relaxed">{item.desc}</p>
+
+            {/* Long Description snippet */}
+            {solution.longDescription && (
+              <div className="relative z-10 my-6 bg-white/5 backdrop-blur-md rounded-2xl p-6 border border-white/10">
+                <p className="text-gray-300 text-sm leading-relaxed">
+                  {solution.longDescription}
+                </p>
+              </div>
+            )}
+
+            {/* Bottom Key Performance Stats */}
+            <div className="relative z-10 grid grid-cols-3 gap-3 pt-6 border-t border-white/10">
+              {solution.stats.map((st, idx) => (
+                <div key={idx} className="bg-white/5 backdrop-blur-sm rounded-xl p-3 text-center border border-white/10">
+                  <p className="text-xl lg:text-2xl font-bold text-[#C3F53C]" style={{ fontFamily: 'var(--font-space-grotesk)' }}>
+                    {st.value}
+                  </p>
+                  <p className="text-[9px] text-gray-400 font-medium uppercase tracking-wider mt-0.5">{st.label}</p>
                 </div>
               ))}
             </div>
           </div>
-        </section>
-      )}
 
-      {/* ── BENEFITS ──────────────────────────────────────────────────────── */}
-      <section className="py-24 px-6 bg-[#FAFAFA] relative overflow-hidden">
-        <BackgroundPattern color={solution.color} />
-        <div className="relative z-10 max-w-6xl mx-auto">
-          <div className="mb-20 text-center max-w-2xl mx-auto select-none">
-            <span 
-              className="text-xs border px-3 py-1.5 rounded-full font-bold uppercase tracking-widest mb-4 inline-block shadow-sm"
-              style={{ color: solution.color, borderColor: `color-mix(in srgb, ${solution.color} 30%, transparent)`, backgroundColor: `color-mix(in srgb, ${solution.color} 10%, transparent)` }}
+        </div>
+      </section>
+
+
+      {/* ─── 2. TAGLINE & VALUE PROPOSITION ──────────────────────────────── */}
+      <section className="py-16 md:py-24 bg-white flex flex-col items-center justify-center text-center px-4 overflow-hidden border-b border-gray-100">
+        <div className="flex items-center gap-2 mb-6">
+          <span className="w-1.5 h-1.5 bg-black rounded-sm" />
+          <span className="text-xs font-bold tracking-[0.2em] uppercase text-gray-500">Core Value</span>
+        </div>
+
+        <h2
+          className="text-3xl md:text-4xl lg:text-5xl font-medium leading-[1.35] text-black tracking-tight max-w-4xl mx-auto mb-8"
+          style={{ fontFamily: 'var(--font-space-grotesk), sans-serif' }}
+        >
+          High-performance architecture engineered for <br />
+          <span className="italic font-serif text-[#DE5D26]">maximum retention</span> & <span className="bg-[#C3F53C] px-2 py-0.5 rounded-md">operational growth</span>
+        </h2>
+      </section>
+
+
+      {/* ─── 3. CORE CAPABILITIES / FEATURES GRID ───────────────────────── */}
+      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-[#F8F9FA]">
+        <div className="max-w-[1400px] mx-auto">
+          {/* Header */}
+          <div className="mb-16 flex flex-col items-center text-center">
+            <div className="flex items-center gap-2 mb-4">
+              <span className="w-2 h-2 bg-[#C3F53C] rounded-full" />
+              <span className="text-xs font-bold tracking-[0.2em] uppercase text-gray-500">Technical Depth</span>
+              <span className="w-2 h-2 bg-[#C3F53C] rounded-full" />
+            </div>
+            <h2
+              className="text-4xl md:text-5xl font-medium tracking-tight text-black mb-6"
+              style={{ fontFamily: 'var(--font-space-grotesk), sans-serif', letterSpacing: '-0.03em' }}
             >
-              Business Impact
-            </span>
-            <h2 className="text-4xl sm:text-5xl font-black text-[#0B0D17]" style={{ fontFamily: 'var(--font-space-grotesk)' }}>
-              Key Business Benefits
+              Key Capabilities & Features
             </h2>
+            <p className="text-gray-500 max-w-2xl text-base md:text-lg leading-relaxed">
+              Every component is built using modern, production-tested technologies to guarantee stability, security, and effortless scalability.
+            </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {solution.benefits.map((benefit, i) => (
-              <div
-                key={i}
-                className="bg-white border border-zinc-100 rounded-[2rem] sm:rounded-[2.2rem] p-6 sm:p-10 flex flex-col justify-between shadow-[0_15px_40px_rgba(0,0,0,0.01)] hover:shadow-[0_25px_60px_rgba(0,0,0,0.04)] hover:border-zinc-200 transition-all duration-500 group relative overflow-hidden"
+
+          {/* Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {solution.features.map((feature, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: (idx % 4) * 0.08 }}
+                className="group bg-white rounded-[2rem] p-7 shadow-sm hover:shadow-xl border border-gray-100 hover:border-gray-300 transition-all duration-300 flex flex-col justify-between"
               >
-                <span
-                  className="absolute right-6 top-4 text-7xl font-black text-zinc-100/50 pointer-events-none select-none"
-                  style={{ fontFamily: 'var(--font-unbounded)' }}
-                >
-                  0{i + 1}
-                </span>
-                <div className="relative z-10">
+                <div>
+                  <div className="flex justify-between items-center mb-6">
+                    <span className="w-10 h-10 rounded-xl bg-[#F6F6F6] text-black group-hover:bg-black group-hover:text-white font-bold flex items-center justify-center text-sm transition-colors">
+                      0{idx + 1}
+                    </span>
+                    <CheckCircle2 className="w-5 h-5 text-gray-300 group-hover:text-[#DE5D26] transition-colors" />
+                  </div>
+
                   <h3
-                    className="font-black text-[#0B0D17] text-2xl mb-4 group-hover:text-zinc-600 transition-colors duration-300 leading-tight"
+                    className="text-xl font-bold text-black leading-snug mb-4"
                     style={{ fontFamily: 'var(--font-space-grotesk)' }}
                   >
-                    {benefit.title}
+                    {feature}
                   </h3>
-                  <p className="text-zinc-500 text-sm leading-relaxed">{benefit.description}</p>
                 </div>
-                <div className="mt-8 relative z-10 flex items-center gap-1.5 text-xs font-bold text-zinc-400 dynamic-group-hover-text transition-colors duration-300">
-                  Value Engineered
-                  <ArrowRight className="w-3.5 h-3.5 transform group-hover:translate-x-0.5 transition-transform" />
+
+                <div className="pt-4 border-t border-gray-100 flex items-center justify-between text-xs font-semibold text-gray-400 group-hover:text-black transition-colors">
+                  <span>Production Standard</span>
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── TECH STACK ────────────────────────────────────────────────────── */}
-      {solution.techStack && solution.techStack.length > 0 && (
-        <section className="py-20 px-6 bg-white border-t border-zinc-100">
+
+      {/* ─── 4. BENEFITS & PROCESS SECTION ─────────────────────────────── */}
+      {solution.benefits && solution.benefits.length > 0 && (
+        <section className="py-24 px-4 sm:px-6 lg:px-8 bg-white border-t border-gray-100">
           <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-12 select-none">
-              <span 
-                className="text-xs border px-3 py-1.5 rounded-full font-bold uppercase tracking-widest mb-4 inline-block shadow-sm"
-                style={{ color: solution.color, borderColor: `color-mix(in srgb, ${solution.color} 30%, transparent)`, backgroundColor: `color-mix(in srgb, ${solution.color} 10%, transparent)` }}
-              >
-                Technology
-              </span>
-              <h2 className="text-3xl sm:text-4xl font-black text-[#0B0D17] tracking-tight" style={{ fontFamily: 'var(--font-space-grotesk)' }}>
-                Tech Stack We Use
-              </h2>
-              <p className="text-zinc-500 text-base mt-4 max-w-xl mx-auto">
-                Battle-tested, production-grade technologies chosen for performance, scalability, and developer ecosystem maturity.
-              </p>
-            </div>
-            <div className="flex flex-wrap justify-center gap-3">
-              {solution.techStack.map((tech, i) => (
-                <span
-                  key={i}
-                  className="px-5 py-2.5 bg-[#FAFAFA] border border-zinc-200 rounded-full text-sm font-bold text-zinc-700 hover:border-zinc-800 hover:bg-zinc-800 hover:text-white transition-all duration-300 cursor-default"
-                >
-                  {tech}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+              <div>
+                <span className="text-xs text-[#DE5D26] font-bold uppercase tracking-[0.2em] mb-4 block">
+                  Strategic Advantage
                 </span>
+                <h2
+                  className="text-3xl md:text-5xl font-medium text-black mb-8 tracking-tight"
+                  style={{ fontFamily: 'var(--font-space-grotesk)' }}
+                >
+                  Business Impact & ROI
+                </h2>
+
+                <div className="space-y-6">
+                  {solution.benefits.map((benefit, bIdx) => (
+                    <div key={bIdx} className="p-6 bg-[#F8F9FA] rounded-2xl border border-gray-100">
+                      <h3 className="text-lg font-bold text-black mb-2" style={{ fontFamily: 'var(--font-space-grotesk)' }}>
+                        {benefit.title}
+                      </h3>
+                      <p className="text-gray-600 text-sm leading-relaxed">{benefit.description}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Tech Stack Chips */}
+              {solution.techStack && solution.techStack.length > 0 && (
+                <div className="bg-[#0B0D17] text-white rounded-[2.5rem] p-8 lg:p-12 shadow-2xl">
+                  <div className="flex items-center gap-2 mb-6">
+                    <Sparkles className="w-4 h-4 text-[#C3F53C]" />
+                    <span className="text-xs font-bold uppercase tracking-widest text-gray-400">Battle-Tested Tech Stack</span>
+                  </div>
+
+                  <h3
+                    className="text-2xl lg:text-3xl font-light mb-8"
+                    style={{ fontFamily: 'var(--font-space-grotesk)' }}
+                  >
+                    Engineered with modern frameworks
+                  </h3>
+
+                  <div className="flex flex-wrap gap-3 mb-10">
+                    {solution.techStack.map((tech, tIdx) => (
+                      <span
+                        key={tIdx}
+                        className="px-4 py-2 bg-white/10 border border-white/10 rounded-full text-xs font-bold text-gray-200"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+
+                  <button
+                    onClick={openConsultModal}
+                    className="w-full py-4 bg-[#C3F53C] text-black font-bold rounded-full text-xs tracking-widest uppercase hover:bg-white transition-colors"
+                  >
+                    Request Stack Documentation
+                  </button>
+                </div>
+              )}
+            </div>
+          </div>
+        </section>
+      )}
+
+
+      {/* ─── 5. PROCESS WORKFLOW ────────────────────────────────────────── */}
+      {solution.process && solution.process.length > 0 && (
+        <section className="py-24 px-4 sm:px-6 lg:px-8 bg-[#F8F9FA]">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-16">
+              <span className="text-xs text-[#DE5D26] font-bold uppercase tracking-[0.2em] mb-4 block">
+                Execution Roadmap
+              </span>
+              <h2
+                className="text-3xl md:text-5xl font-medium text-black tracking-tight"
+                style={{ fontFamily: 'var(--font-space-grotesk)' }}
+              >
+                How We Deliver Your Product
+              </h2>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {solution.process.map((step, pIdx) => (
+                <div key={pIdx} className="bg-white rounded-3xl p-7 border border-gray-200/70 shadow-sm flex flex-col justify-between">
+                  <div>
+                    <span
+                      className="text-4xl font-black text-black mb-4 block"
+                      style={{ fontFamily: 'var(--font-space-grotesk)' }}
+                    >
+                      {step.step}
+                    </span>
+                    <h3 className="text-lg font-bold text-black mb-3">{step.title}</h3>
+                    <p className="text-gray-500 text-xs leading-relaxed">{step.desc}</p>
+                  </div>
+                  <div className="mt-6 pt-4 border-t border-gray-100 text-[10px] font-bold uppercase tracking-wider text-gray-400">
+                    Phase {pIdx + 1} Milestone
+                  </div>
+                </div>
               ))}
             </div>
           </div>
         </section>
       )}
 
-      {/* ── FAQ ───────────────────────────────────────────────────────────── */}
+
+      {/* ─── 6. FAQ SECTION ─────────────────────────────────────────────── */}
       {solution.faq && solution.faq.length > 0 && (
-        <section className="py-20 px-6 bg-[#FAFAFA] border-t border-zinc-100 relative overflow-hidden">
-          <BackgroundPattern color={solution.color} />
-          <div className="relative z-10 max-w-4xl mx-auto">
-            <div className="text-center mb-12 select-none">
-              <span 
-                className="text-xs border px-3 py-1.5 rounded-full font-bold uppercase tracking-widest mb-4 inline-block shadow-sm"
-                style={{ color: solution.color, borderColor: `color-mix(in srgb, ${solution.color} 30%, transparent)`, backgroundColor: `color-mix(in srgb, ${solution.color} 10%, transparent)` }}
-              >
-                FAQ
+        <section className="py-24 px-4 sm:px-6 lg:px-8 bg-white">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-16">
+              <span className="text-xs text-[#DE5D26] font-bold uppercase tracking-[0.2em] mb-4 block">
+                Clear Answers
               </span>
-              <h2 className="text-3xl sm:text-4xl font-black text-[#0B0D17] tracking-tight" style={{ fontFamily: 'var(--font-space-grotesk)' }}>
+              <h2
+                className="text-3xl md:text-5xl font-medium text-black tracking-tight"
+                style={{ fontFamily: 'var(--font-space-grotesk)' }}
+              >
                 Frequently Asked Questions
               </h2>
             </div>
-            <div className="flex flex-col gap-3">
-              {solution.faq.map((item, i) => (
-                <FAQItem key={i} q={item.q} a={item.a} />
+
+            <div>
+              {solution.faq.map((item, fIdx) => (
+                <FAQItem key={fIdx} q={item.q} a={item.a} idx={fIdx} />
               ))}
-            </div>
-            <div className="mt-10 text-center">
-              <p className="text-zinc-500 text-sm mb-4">Have a question not listed here?</p>
-              <button
-                onClick={openConsultModal}
-                className="dynamic-hover-bg inline-flex items-center gap-2 px-7 py-3.5 bg-[#0B0D17] text-white font-bold rounded-full text-sm transition-all duration-300 cursor-pointer shadow-lg shadow-[#0B0D17]/10"
-              >
-                Ask Us Directly <ArrowRight className="w-4 h-4" />
-              </button>
             </div>
           </div>
         </section>
       )}
 
-      {/* ── CTA ───────────────────────────────────────────────────────────── */}
-      <section className="py-12 sm:py-16 px-4 sm:px-6 bg-[#FAFAFA] relative z-20">
-        <div className="max-w-[90rem] mx-auto bg-white rounded-[2rem] lg:rounded-[3rem] p-8 sm:p-12 md:p-16 text-center text-[#0B0D17] relative overflow-hidden shadow-2xl border border-zinc-200">
-          <div
-            aria-hidden
-            className="absolute inset-0 pointer-events-none bg-cover bg-center opacity-80"
-            style={{
-              backgroundImage: `url('https://images.unsplash.com/photo-1602615576820-ea14cf3e476a?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')`,
-            }}
-          />
 
-          <div className="relative z-10 max-w-3xl mx-auto flex flex-col items-center select-none">
-            <span className="inline-flex items-center gap-2 border border-black/10 bg-black/5 rounded-full px-4 py-2 text-xs font-bold uppercase tracking-widest mb-8 backdrop-blur-sm">
+      {/* ─── 7. CTA BANNER SECTION ──────────────────────────────────────── */}
+      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white max-w-[1400px] mx-auto overflow-hidden">
+        <div className="relative w-full rounded-[2.5rem] bg-[#0B0D17] overflow-hidden min-h-[380px] flex items-center p-8 lg:p-16 text-white shadow-2xl">
+          <div className="relative z-10 max-w-2xl mx-auto text-center flex flex-col items-center">
+            <span className="inline-flex items-center gap-2 bg-white/10 rounded-full px-4 py-1.5 text-xs text-[#C3F53C] font-bold uppercase tracking-widest mb-6">
               <Sparkles className="w-3.5 h-3.5" />
-              Collaborate
+              Build Your {solution.title}
             </span>
+
             <h2
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-black mb-6 sm:mb-8 leading-[1.1] tracking-tight"
+              className="text-3xl md:text-5xl font-medium leading-tight mb-6"
               style={{ fontFamily: 'var(--font-space-grotesk)' }}
             >
-              Partner on Your <br className="hidden md:inline" />
-              Next Venture
+              Ready to launch your custom platform?
             </h2>
-            <p className="text-zinc-600 font-medium text-lg md:text-xl mb-12 max-w-2xl leading-relaxed">
-              Connect with our development leads. Get a free project estimate within 24 hours and
-              engineer your solution with the best team in India.
+
+            <p className="text-gray-300 text-base mb-8 max-w-lg">
+              Get a comprehensive scope analysis, tech stack recommendations, and fixed-cost proposal within 24 hours.
             </p>
+
             <button
               onClick={openConsultModal}
-              className="relative inline-flex items-center justify-center gap-2 px-10 py-5 bg-[#0B0D17] text-white font-bold rounded-full overflow-hidden group text-sm tracking-wide shadow-xl shadow-black/10 transition-transform duration-300 hover:scale-[1.02] cursor-pointer"
+              className="flex items-center gap-4 bg-[#C3F53C] text-black rounded-full pl-6 pr-2 py-2 hover:scale-105 transition-transform duration-300 shadow-xl group"
             >
-              <span className="absolute inset-0 w-full h-full bg-zinc-800 transition-transform duration-300 ease-out transform -translate-x-full group-hover:translate-x-0" />
-              <span className="relative z-10 flex items-center gap-2">
-                Schedule a Free Consultation
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </span>
+              <span className="font-bold text-xs tracking-widest uppercase">Schedule Consultation</span>
+              <div className="w-9 h-9 rounded-full bg-black flex items-center justify-center text-white group-hover:rotate-45 transition-transform duration-300">
+                <ArrowRight className="w-4 h-4" />
+              </div>
             </button>
           </div>
         </div>
       </section>
 
-    </div>
+    </main>
   );
 }
