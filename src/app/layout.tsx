@@ -147,11 +147,10 @@ export const metadata: Metadata = {
     creator: '@twofloww',
     site: '@twofloww',
   },
-  // TODO: Replace with your real Google Search Console verification token.
-  // Go to GSC → Settings → Ownership verification → HTML tag method.
-  // verification: {
-  //   google: 'YOUR_REAL_VERIFICATION_TOKEN_HERE',
-  // },
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || 'GSC_VERIFICATION_TOKEN',
+    yandex: process.env.NEXT_PUBLIC_YANDEX_VERIFICATION || '',
+  },
   category: 'technology',
 }
 

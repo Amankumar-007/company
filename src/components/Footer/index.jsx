@@ -128,6 +128,7 @@ export default function Footer() {
               <a href="/about" className="text-gray-600 hover:text-[#DE5D26] text-[14px] transition-colors font-medium">About Us</a>
               <a href="/services" className="text-gray-600 hover:text-[#DE5D26] text-[14px] transition-colors font-medium">Services</a>
               <a href="/projects" className="text-gray-600 hover:text-[#DE5D26] text-[14px] transition-colors font-medium">Projects</a>
+              <a href="/locations" className="text-gray-600 hover:text-[#DE5D26] text-[14px] transition-colors font-medium">Locations</a>
               <a href="/blog" className="text-gray-600 hover:text-[#DE5D26] text-[14px] transition-colors font-medium">Blog</a>
               <a href="/contact" className="text-gray-600 hover:text-[#DE5D26] text-[14px] transition-colors font-medium">Contact</a>
             </div>

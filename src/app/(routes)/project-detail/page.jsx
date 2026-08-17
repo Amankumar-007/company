@@ -30,10 +30,11 @@ export async function generateMetadata({ searchParams }) {
       description: project.description || project.subtitle,
       images: [
         {
-          url: project.image || '/opengraph-image',
+          url: project.image ? `${project.image}` : `${BASE_URL}/opengraph-image`,
           width: 1200,
           height: 630,
           alt: project.title,
+          type: 'image/png',
         },
       ],
     },
@@ -44,8 +45,15 @@ export async function generateMetadata({ searchParams }) {
       images: [project.image || '/opengraph-image'],
     },
     robots: {
-      index: false,
+      index: true,
       follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
     },
   };
 }
@@ -84,11 +92,21 @@ export default async function ProjectDetailsPage({ searchParams }) {
     },
   };
 
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: BASE_URL },
+      { '@type': 'ListItem', position: 2, name: 'Projects', item: `${BASE_URL}/projects` },
+      { '@type': 'ListItem', position: 3, name: project.title, item: `${BASE_URL}/project-detail?id=${id}` },
+    ],
+  };
+
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(projectSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify([projectSchema, breadcrumbSchema]) }}
       />
       <ProjectDetailsClient project={project} />
     </>

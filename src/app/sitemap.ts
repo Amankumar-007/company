@@ -6,6 +6,9 @@ import { solutionsData } from '@/data/solutions'
 
 const BASE_URL = 'https://www.twofloww.in'
 
+import { services as servicesList } from '@/data/services'
+import { projects as projectsList } from '@/data/projects'
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const supabase = await createClient()
     const { data: blogs } = await supabase
@@ -19,6 +22,20 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         changeFrequency: 'weekly' as const,
         priority: 0.8,
     })) || []
+
+    const servicePages = servicesList.map((service) => ({
+        url: `${BASE_URL}/service-detail?id=${service.id}`,
+        lastModified: new Date(),
+        changeFrequency: 'weekly' as const,
+        priority: 0.9,
+    }))
+
+    const projectPages = projectsList.map((project) => ({
+        url: `${BASE_URL}/project-detail?id=${project.id}`,
+        lastModified: new Date(),
+        changeFrequency: 'weekly' as const,
+        priority: 0.8,
+    }))
 
     const seoServicesToGenerate = ['digital-agency', 'web-agency', 'web-development', 'seo-services', 'ecommerce-solutions']
     const programmaticSeoPages = targetLocations.flatMap(location =>
@@ -69,6 +86,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             priority: 1.0,
         },
         {
+            url: `${BASE_URL}/locations`,
+            lastModified: new Date(),
+            changeFrequency: 'monthly',
+            priority: 0.9,
+        },
+        {
             url: `${BASE_URL}/solutions`,
             lastModified: new Date(),
             changeFrequency: 'weekly',
@@ -104,13 +127,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             changeFrequency: 'daily',
             priority: 0.9,
         },
-        {
-            url: `${BASE_URL}/locations`,
-            lastModified: new Date('2025-01-01'),
-            changeFrequency: 'monthly',
-            priority: 0.7,
-        },
         ...blogPages,
+        ...servicePages,
+        ...projectPages,
         ...programmaticSeoPages,
         ...locationCompanyPages,
         ...solutionsPages,

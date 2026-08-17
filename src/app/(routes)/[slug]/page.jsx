@@ -17,6 +17,8 @@ import { generateLocalBusinessSchema, generateFAQSchema, generateBreadcrumbSchem
 import locationsData from '@/data/locations-data.json';
 import LocationPageTemplate from '@/components/LocationPageTemplate';
 
+import { targetLocations } from '@/data/seo-locations';
+
 const BASE_URL = 'https://www.twofloww.in';
 const OLD_LOC_PREFIX = 'web-development-company-';
 
@@ -36,6 +38,14 @@ export async function generateStaticParams() {
   locations.forEach(loc => {
     services.forEach(service => {
       params.push({ slug: `${service.key}-agency-in-${loc.slug}` });
+    });
+  });
+
+  // Generate legacy best-* target location pages
+  const seoServicesToGenerate = ['digital-agency', 'web-agency', 'web-development', 'seo-services', 'ecommerce-solutions'];
+  targetLocations.forEach(location => {
+    seoServicesToGenerate.forEach(service => {
+      params.push({ slug: `best-${service}-in-${location.id}` });
     });
   });
 
@@ -77,12 +87,20 @@ export async function generateMetadata({ params }) {
     const description = generateDescription(loc, service.label);
 
     return {
-      // `title` is already a fully composed string (brand included on ~half
-      // of pages by design) — use `absolute` so the root layout's "%s |
-      // Twofloww" template doesn't append the brand a second time.
       title: { absolute: title },
       description,
       alternates: { canonical: `${BASE_URL}/${slug}` },
+      robots: {
+        index: true,
+        follow: true,
+        googleBot: {
+          index: true,
+          follow: true,
+          'max-video-preview': -1,
+          'max-image-preview': 'large',
+          'max-snippet': -1,
+        },
+      },
       openGraph: {
         title,
         description,
@@ -90,14 +108,21 @@ export async function generateMetadata({ params }) {
         type: 'website',
         locale: 'en_IN',
         siteName: 'Twofloww Digital Agency',
-        images: [{ url: '/opengraph-image', width: 1200, height: 630 }],
+        images: [{
+          url: `${BASE_URL}/opengraph-image`,
+          width: 1200,
+          height: 630,
+          alt: title,
+          type: 'image/png',
+        }],
       },
       twitter: {
         card: 'summary_large_image',
         title,
         description,
-        images: ['/opengraph-image'],
+        images: [`${BASE_URL}/opengraph-image`],
         creator: '@twofloww',
+        site: '@twofloww',
       },
     };
   }
@@ -107,14 +132,45 @@ export async function generateMetadata({ params }) {
   if (!target) return { title: { absolute: 'Not Found | Twofloww' } };
 
   const { location, serviceName } = target;
+  const legacyTitle = `Best ${serviceName} in ${location.name} | Twofloww`;
+  const legacyDesc = `Top-rated ${serviceName} in ${location.name}. Expert solutions for your business. Free consultation.`;
   return {
-    title: { absolute: `Best ${serviceName} in ${location.name} | Twofloww` },
-    description: `Looking for the best ${serviceName} in ${location.name}? Twofloww is a top-rated agency providing cutting-edge digital solutions tailored for your business in ${location.name}${location.state ? `, ${location.state}` : ''}.`,
+    title: { absolute: legacyTitle },
+    description: legacyDesc,
     alternates: { canonical: `${BASE_URL}/${slug}` },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
+    },
     openGraph: {
-      title: `Top ${serviceName} Agency in ${location.name}`,
-      description: `Elevate your business with expert ${serviceName} in ${location.name}. Partner with Twofloww today.`,
+      title: legacyTitle,
+      description: legacyDesc,
       url: `${BASE_URL}/${slug}`,
+      type: 'website',
+      locale: 'en_IN',
+      siteName: 'Twofloww Digital Agency',
+      images: [{
+        url: `${BASE_URL}/opengraph-image`,
+        width: 1200,
+        height: 630,
+        alt: legacyTitle,
+        type: 'image/png',
+      }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: legacyTitle,
+      description: legacyDesc,
+      images: [`${BASE_URL}/opengraph-image`],
+      creator: '@twofloww',
+      site: '@twofloww',
     },
   };
 }

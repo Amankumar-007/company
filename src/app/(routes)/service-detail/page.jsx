@@ -30,10 +30,11 @@ export async function generateMetadata({ searchParams }) {
       description: service.heroDescription || service.overview?.description,
       images: [
         {
-          url: '/opengraph-image',
+          url: `${BASE_URL}/opengraph-image`,
           width: 1200,
           height: 630,
           alt: service.title,
+          type: 'image/png',
         },
       ],
     },
@@ -91,11 +92,21 @@ export default async function ServiceDetailsPage({ searchParams }) {
     },
   };
 
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: BASE_URL },
+      { '@type': 'ListItem', position: 2, name: 'Services', item: `${BASE_URL}/services` },
+      { '@type': 'ListItem', position: 3, name: service.title, item: `${BASE_URL}/service-detail?id=${id}` },
+    ],
+  };
+
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify([serviceSchema, breadcrumbSchema]) }}
       />
       <ServiceDetailsClient service={service} />
     </>
