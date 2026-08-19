@@ -1,6 +1,7 @@
 export const projects = [
   {
     id: 1,
+    slug: "tomatoai",
     title: "TomatoAI",
     subtitle: "AI TOOLS PLATFORM",
     status: "LIVE PROJECT",
@@ -104,6 +105,7 @@ export const projects = [
   },
   {
     id: 2,
+    slug: "awasdhara",
     title: "Awasdhara",
     subtitle: "REAL ESTATE PLATFORM",
     status: "LIVE PROJECT",
@@ -207,6 +209,7 @@ export const projects = [
   },
   {
     id: 3,
+    slug: "snippetsx",
     title: "SnippetsX",
     subtitle: "CODE SHARING WORKSPACE",
     status: "LIVE PROJECT",
@@ -310,6 +313,7 @@ export const projects = [
   },
   {
     id: 4,
+    slug: "foodfloww",
     title: "FoodFloww",
     subtitle: "FOOD DELIVERY PLATFORM",
     status: "LIVE PROJECT",
@@ -403,6 +407,7 @@ export const projects = [
   },
   {
     id: 5,
+    slug: "astroconnect",
     title: "AstroConnect",
     subtitle: "ASTROLOGY & KUNDLI PLATFORM",
     status: "LIVE PROJECT",
@@ -489,6 +494,10 @@ export const projects = [
 
 export const getProjectById = (id) => {
   return projects.find(project => project.id === parseInt(id));
+};
+
+export const getProjectBySlug = (slug) => {
+  return projects.find(project => project.slug === slug) || null;
 };
 
 export const getAllProjects = () => {

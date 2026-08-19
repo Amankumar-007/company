@@ -3,6 +3,7 @@ import { createClient } from '@/utils/supabase/server'
 import { targetLocations } from '@/data/seo-locations'
 import locationsData from '@/data/locations-data.json'
 import { solutionsData } from '@/data/solutions'
+import { industries } from '@/data/industries'
 
 const BASE_URL = 'https://www.twofloww.in'
 
@@ -30,11 +31,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: 0.9,
     }))
 
-    const projectPages = projectsList.map((project) => ({
-        url: `${BASE_URL}/project-detail?id=${project.id}`,
+    // Case studies use clean, indexable URLs — project-detail?id= is
+    // noindexed (query-param route), so it's intentionally excluded here.
+    const caseStudyPages = projectsList.map((project) => ({
+        url: `${BASE_URL}/case-studies/${project.slug}`,
         lastModified: new Date(),
         changeFrequency: 'weekly' as const,
-        priority: 0.8,
+        priority: 0.85,
     }))
 
     const seoServicesToGenerate = ['digital-agency', 'web-agency', 'web-development', 'seo-services', 'ecommerce-solutions']
@@ -71,6 +74,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         lastModified: new Date(),
         changeFrequency: 'weekly' as const,
         priority: 0.9,
+    }))
+
+    const industryPages = industries.map((industry) => ({
+        url: `${BASE_URL}/industries/${industry.slug}`,
+        lastModified: new Date(),
+        changeFrequency: 'weekly' as const,
+        priority: 0.85,
     }))
 
     // Use the most recent blog publish date as the blog index's lastModified
@@ -116,6 +126,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             priority: 0.9,
         },
         {
+            url: `${BASE_URL}/case-studies`,
+            lastModified: new Date(),
+            changeFrequency: 'weekly',
+            priority: 0.85,
+        },
+        {
+            url: `${BASE_URL}/industries`,
+            lastModified: new Date(),
+            changeFrequency: 'weekly',
+            priority: 0.85,
+        },
+        {
             url: `${BASE_URL}/contact`,
             lastModified: new Date('2024-10-01'),
             changeFrequency: 'monthly',
@@ -129,9 +151,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         },
         ...blogPages,
         ...servicePages,
-        ...projectPages,
+        ...caseStudyPages,
         ...programmaticSeoPages,
         ...locationCompanyPages,
         ...solutionsPages,
+        ...industryPages,
     ]
 }

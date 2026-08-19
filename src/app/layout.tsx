@@ -44,11 +44,11 @@ export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   applicationName: 'Twofloww',
   title: {
-    default: 'Twofloww – Web Development Company & Web Agency in Delhi NCR',
+    default: 'Twofloww | Web Development, Mobile Apps, SEO & Digital Growth',
     template: '%s | Twofloww',
   },
   description:
-    'Twofloww is a leading web development company and web agency in Delhi NCR (Noida, Delhi, Gurugram). We build websites, mobile apps, food delivery apps, taxi apps & digital products. 50+ projects. Free consultation.',
+    'Twofloww is a digital product and growth agency based in India, helping startups and businesses worldwide build websites, mobile apps, ecommerce platforms, and scalable software — plus SEO and digital marketing to grow. 50+ projects delivered. Free consultation.',
   keywords: [
     // High-volume gap keywords (from competitor analysis)
     'web development company',
@@ -126,23 +126,23 @@ export const metadata: Metadata = {
     locale: 'en_IN',
     url: BASE_URL,
     siteName: 'Twofloww',
-    title: 'Twofloww – Web Development Company & Web Agency in Delhi NCR',
+    title: 'Twofloww | Web Development, Mobile Apps, SEO & Digital Growth',
     description:
-      'Twofloww: web development company & web agency in Delhi NCR (Noida, Delhi, Gurugram). Websites, mobile apps, food delivery & on-demand apps, SEO. 50+ projects. Free consultation.',
+      'Digital product and growth agency based in India, building websites, mobile apps, ecommerce platforms & scalable software for businesses worldwide. SEO & digital marketing included. 50+ projects. Free consultation.',
     images: [
       {
         url: '/opengraph-image',
         width: 1200,
         height: 630,
-        alt: 'Twofloww Digital Agency – Web & Mobile Development India',
+        alt: 'Twofloww Digital Agency – Web & Mobile Development Worldwide',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Twofloww – Web Development Company & Web Agency in Delhi NCR',
+    title: 'Twofloww | Web Development, Mobile Apps, SEO & Digital Growth',
     description:
-      'Twofloww: web development company & web agency in Delhi NCR (Noida, Delhi, Gurugram). Websites, mobile apps, food delivery & on-demand apps, SEO. 50+ projects. Free consultation.',
+      'Digital product and growth agency based in India, building websites, mobile apps, ecommerce platforms & scalable software for businesses worldwide. SEO & digital marketing included. 50+ projects. Free consultation.',
     images: ['/opengraph-image'],
     creator: '@twofloww',
     site: '@twofloww',
@@ -243,7 +243,7 @@ const websiteSchema = {
   name: 'Twofloww',
   alternateName: 'Twofloww Digital Agency',
   url: BASE_URL,
-  description: 'Web development company in Delhi NCR. Websites, mobile apps, food delivery & on-demand apps, SEO & digital marketing.',
+  description: 'Digital product and growth agency based in India, serving clients worldwide. Websites, mobile apps, ecommerce platforms, SEO & digital marketing.',
   potentialAction: {
     '@type': 'SearchAction',
     target: {
@@ -296,6 +296,16 @@ const siteNavigationSchema = {
       position: 4,
       item: {
         '@type': 'WebPage',
+        name: 'Case Studies',
+        url: `${BASE_URL}/case-studies`,
+        description: 'In-depth case studies of real products Twofloww has shipped, with challenge, solution, and results for each.',
+      },
+    },
+    {
+      '@type': 'ListItem',
+      position: 5,
+      item: {
+        '@type': 'WebPage',
         name: 'About Twofloww',
         url: `${BASE_URL}/about`,
         description: 'Meet the Twofloww team — developers, designers, and digital architects building top-ranked products.',
@@ -303,7 +313,7 @@ const siteNavigationSchema = {
     },
     {
       '@type': 'ListItem',
-      position: 5,
+      position: 6,
       item: {
         '@type': 'WebPage',
         name: 'Blog – Web Development & Digital Marketing Insights',
@@ -313,7 +323,7 @@ const siteNavigationSchema = {
     },
     {
       '@type': 'ListItem',
-      position: 6,
+      position: 7,
       item: {
         '@type': 'WebPage',
         name: 'Contact Twofloww',

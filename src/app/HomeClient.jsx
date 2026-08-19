@@ -43,7 +43,7 @@ export default function HomeClient() {
         title="TomatoAI"
         description="All-in-one AI platform offering intelligent tools for content creation, image generation, and workflow automation."
         src="locomotive.png"
-        url="/project-detail?id=1"
+        url="/case-studies/tomatoai"
         color="#f0f0f0"
         i={0}
         progress={progress}
@@ -54,7 +54,7 @@ export default function HomeClient() {
         title="Awasdhara"
         description="Full-stack real estate platform connecting buyers, sellers, and agents across India with 360° virtual tours."
         src="google.jpg"
-        url="/project-detail?id=2"
+        url="/case-studies/awasdhara"
         color="#e8f4f8"
         i={1}
         progress={progress}
@@ -65,7 +65,7 @@ export default function HomeClient() {
         title="SnippetsX"
         description="Real-time collaborative code sharing and sandboxed execution workspace for developer teams."
         src="wix.jpg"
-        url="/project-detail?id=3"
+        url="/case-studies/snippetsx"
         color="#f8f0e8"
         i={2}
         progress={progress}
@@ -76,7 +76,7 @@ export default function HomeClient() {
         title="FoodFloww"
         description="On-demand food delivery & restaurant ecosystem with real-time driver tracking and dispatch management."
         src="maven.jpg"
-        url="/project-detail?id=4"
+        url="/case-studies/foodfloww"
         color="#e8f8e8"
         i={3}
         progress={progress}
@@ -87,7 +87,7 @@ export default function HomeClient() {
         title="AstroConnect"
         description="Live astrologer consultation, Kundli generation & AI-driven horoscope platform for global users."
         src="panda.jpg"
-        url="/project-detail?id=5"
+        url="/case-studies/astroconnect"
         color="#f8e8f8"
         i={4}
         progress={progress}

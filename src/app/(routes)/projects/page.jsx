@@ -59,8 +59,8 @@ const ProjectCard = React.memo(({ project, index }) => {
   }, [setCursorHover]);
 
   const handleClick = useCallback(() => {
-    router.push(`/project-detail?id=${project.id}`);
-  }, [router, project.id]);
+    router.push(`/case-studies/${project.slug}`);
+  }, [router, project.slug]);
 
   return (
     <div

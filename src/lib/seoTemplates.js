@@ -34,42 +34,6 @@ function pickVariant(arr, seedStr) {
 
 // ─── Title ───────────────────────────────────────────────────────────────────
 
-import locationsData from '@/data/locations-data.json';
-
-const { brand, services } = locationsData;
-
-export function getLocationBySlug(slug) {
-  return locationsData.locations.find(l => l.slug === slug) || null;
-}
-
-export function getAllLocations() {
-  return locationsData.locations;
-}
-
-export function getAllServices() {
-  return services;
-}
-
-export function getBrand() {
-  return brand;
-}
-
-/** "Noida" for cities/regions, "United States" for countries */
-function placeName(loc) {
-  return loc.type === 'country' ? loc.country : loc.city;
-}
-
-/**
- * Deterministic variant picker — same slug always picks same variant across
- * builds (stable for SSG), but different slugs get different phrasing.
- */
-function pickVariant(arr, seedStr) {
-  const hash = seedStr.split('').reduce((acc, ch) => acc + ch.charCodeAt(0), 0);
-  return arr[hash % arr.length];
-}
-
-// ─── Title ───────────────────────────────────────────────────────────────────
-
 export function generateTitle(loc, serviceLabel = 'Web Design & Development') {
   const place = placeName(loc);
 

@@ -15,6 +15,7 @@ const navItems = [
   { title: 'Services', href: '/services' },
   { title: 'Solutions', href: '/solutions', hasMegaMenu: true },
   { title: 'Projects', href: '/projects' },
+  { title: 'Case Studies', href: '/case-studies' },
   { title: 'Blog', href: '/blog' },
   { title: 'About', href: '/about' },
   { title: 'Contact', href: '/contact' },
