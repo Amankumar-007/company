@@ -11,8 +11,6 @@ import Card from '../components/Card';
 import VideoComponent from '@/components/VideoComponent';
 import HomeSeoSection from '../components/HomeSeoSection';
 import ServicesCardsSection from '../components/ServicesCardsSection';
-// import FAQSection from '../components/FAQSection';
-// import GlobalReach from '@/components/GlobalReach';
 
 export default function HomeClient() {
   const [isLoading, setIsLoading] = useState(true);
@@ -37,59 +35,52 @@ export default function HomeClient() {
       <Projects />
       <ServicesCardsSection />
       <HomeSeoSection />
-      {/* <GlobalReach lightTheme={false} /> */}
-      {/* <FAQSection /> */}
+      
+      {/* Featured Projects Stack */}
       <Card
         title="TomatoAI"
-        description="All-in-one AI platform offering intelligent tools for content creation, image generation, and workflow automation."
-        src="locomotive.png"
+        description="All-in-one AI platform offering curated intelligent tools for content creation, prompt optimization, and workflow automation."
+        src="/tomatoai.in_20260814_114450/hero_desktop.png"
+        mobileSrc="/tomatoai.in_20260814_114450/hero_mobile.png"
         url="/case-studies/tomatoai"
         color="#f0f0f0"
         i={0}
         progress={progress}
-        range={[0, 0.25]}
+        range={[0, 0.33]}
         targetScale={1.2}
       />
       <Card
         title="Awasdhara"
-        description="Full-stack real estate platform connecting buyers, sellers, and agents across India with 360° virtual tours."
-        src="google.jpg"
+        description="Full-stack luxury plotted real estate platform connecting buyers, investors, and developers across India with high-appreciation inventory."
+        src="/awasdhara.in_20260814_114713/hero_desktop.png"
+        mobileSrc="/awasdhara.in_20260814_114713/hero_mobile.png"
         url="/case-studies/awasdhara"
         color="#e8f4f8"
         i={1}
         progress={progress}
-        range={[0.25, 0.5]}
+        range={[0.33, 0.66]}
         targetScale={1.2}
       />
       <Card
         title="SnippetsX"
-        description="Real-time collaborative code sharing and sandboxed execution workspace for developer teams."
-        src="wix.jpg"
+        description="Real-time collaborative code sharing and sandboxed execution workspace for developer teams, live interviews, and rapid prototyping."
+        src="/snippetsx.com_20260814_114421/hero_desktop.png"
+        mobileSrc="/snippetsx.com_20260814_114421/hero_mobile.png"
         url="/case-studies/snippetsx"
         color="#f8f0e8"
         i={2}
         progress={progress}
-        range={[0.5, 0.75]}
+        range={[0.66, 0.9]}
         targetScale={1.2}
       />
       <Card
-        title="FoodFloww"
-        description="On-demand food delivery & restaurant ecosystem with real-time driver tracking and dispatch management."
-        src="maven.jpg"
-        url="/case-studies/foodfloww"
-        color="#e8f8e8"
-        i={3}
-        progress={progress}
-        range={[0.75, 1]}
-        targetScale={1.2}
-      />
-      <Card
-        title="AstroConnect"
-        description="Live astrologer consultation, Kundli generation & AI-driven horoscope platform for global users."
-        src="panda.jpg"
-        url="/case-studies/astroconnect"
+        title="ShockMe"
+        description="Next-generation cinema discovery and streaming entertainment platform featuring curated mood finders, trailer playback, and personalized collections."
+        src="/shockme.vercel.app_20260814_114537/hero_desktop.png"
+        mobileSrc="/shockme.vercel.app_20260814_114537/hero_mobile.png"
+        url="/case-studies/shockme"
         color="#f8e8f8"
-        i={4}
+        i={3}
         progress={progress}
         range={[0.9, 1.1]}
         targetScale={1.2}
@@ -98,4 +89,3 @@ export default function HomeClient() {
     </main>
   );
 }
-

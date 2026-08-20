@@ -1,0 +1,1061 @@
+The positioning should be:
+
+Your SEO team shouldn’t spend Monday morning making reports. We do it automatically.
+
+The system collects the client's data, analyzes what changed, turns it into a human-readable report, generates a branded PDF, and sends it automatically.
+
+1. Product concept
+Name ideas
+
+I’d keep it connected to Twofloww:
+
+Twofloww Reports
+Twofloww Insights
+Twofloww Pulse
+Twofloww SEO Intelligence
+Twofloww Monitor
+Floww Reports
+
+My favorite:
+
+Twofloww Pulse
+
+SEO performance, explained. Automatically.
+
+The client gets a dashboard like:
+
+Twofloww Pulse
+
+
+ACME Dental
+August 10 – August 16, 2026
+
+
+SEO SCORE
+92/100
+↑ 6.4%
+
+
+ORGANIC CLICKS
+12,482
+↑ 18.7%
+
+
+IMPRESSIONS
+284,921
+↑ 24.3%
+
+
+AVG. POSITION
+11.8
+↑ 2.4
+
+
+CONVERSIONS
+183
+↑ 14.3%
+
+
+
+
+WHAT HAPPENED THIS WEEK
+
+
+↑ Organic traffic increased 18.7%
+↑ 34 keywords improved
+↑ 7 keywords entered top 10
+⚠ 3 technical issues detected
+✓ 12 issues resolved
+
+
+
+
+AI INSIGHT
+
+
+Your strongest growth came from
+commercial-intent pages targeting
+"dental implants" and "emergency dentist".
+
+
+Next priority:
+Improve the three pages currently
+ranking between positions 8–15.
+2. What the product actually does
+
+The workflow should be:
+
+CLIENT
+   ↓
+Connect Website
+   ↓
+Connect Google Search Console
+   ↓
+Connect Google Analytics
+   ↓
+Optional: SEO platform
+   ↓
+Twofloww collects data
+   ↓
+Crawler / Puppeteer
+   ↓
+Data processing
+   ↓
+AI analysis
+   ↓
+Generate insights
+   ↓
+Generate report
+   ↓
+Generate PDF
+   ↓
+Send email
+   ↓
+Dashboard updated
+
+Google Search Console's API can provide search analytics data, verified sites and sitemap information.
+
+Google Analytics' Data API can generate customized reports using dimensions, metrics and date ranges.
+
+For technical/performance checks, Google's PageSpeed Insights API can provide performance, accessibility and SEO-related suggestions.
+
+3. Client onboarding
+
+Don't make clients configure complicated things.
+
+Your onboarding should look like:
+
+Step 1
+
+Add your website
+
+Website URL
+
+
+https://example.com
+
+
+[ Continue ]
+Step 2
+
+Connect Google
+
+Connect Google Search Console
+
+
+[ Connect Search Console ]
+
+
+Connect Google Analytics
+
+
+[ Connect Analytics ]
+
+OAuth handles the authorization.
+
+Step 3
+
+Ask:
+
+What is your primary goal?
+
+
+○ More organic traffic
+○ More leads
+○ More sales
+○ Local visibility
+○ Brand visibility
+Step 4
+
+Ask for competitors:
+
+Add competitors
+
+
+competitor1.com
+competitor2.com
+competitor3.com
+
+
+[ Continue ]
+Step 5
+
+Report preferences:
+
+Report frequency
+
+
+○ Weekly
+○ Monthly
+
+
+Send report every:
+
+
+Monday
+09:00 AM
+
+Then you're done.
+
+4. Data you should collect
+
+Don't depend on one API.
+
+Build a data aggregation layer.
+
+Google Search Console
+
+Collect:
+
+Clicks
+Impressions
+CTR
+Average position
+Queries
+Pages
+Countries
+Devices
+Search appearance
+Top keywords
+New keywords
+Lost keywords
+Improved keywords
+Declined keywords
+
+The Search Console API is specifically designed for programmatic access to search analytics and sitemap information.
+
+Google Analytics
+
+Collect:
+
+Users
+Sessions
+Engaged sessions
+Engagement rate
+Page views
+Landing pages
+Traffic sources
+Organic traffic
+Conversions
+Events
+Revenue where available
+Website crawler
+
+This is where Puppeteer becomes useful.
+
+For every important page:
+
+URL
+Status code
+Title
+Meta description
+H1
+H2
+Canonical
+Robots
+Noindex
+Word count
+Images
+Missing alt
+Internal links
+External links
+Schema
+OpenGraph
+Page load
+Screenshot
+
+You can also use Lighthouse/PageSpeed data for performance analysis. Google recommends the current PageSpeed Insights API for programmatic performance analysis.
+
+5. The weekly automation
+
+This is the heart of the product.
+
+Every Monday:
+
+08:00
+   ↓
+Fetch client list
+   ↓
+Create reporting jobs
+   ↓
+Queue jobs in Redis/BullMQ
+   ↓
+Fetch GSC
+   ↓
+Fetch GA4
+   ↓
+Run website crawl
+   ↓
+Run PageSpeed
+   ↓
+Compare previous period
+   ↓
+Detect important changes
+   ↓
+AI analyzes changes
+   ↓
+Generate report
+   ↓
+Generate PDF
+   ↓
+Send email
+
+Don't run everything inside one API request.
+
+Use a queue.
+
+For example:
+
+BullMQ
+   │
+   ├── gsc-job
+   ├── analytics-job
+   ├── crawler-job
+   ├── pagespeed-job
+   ├── analysis-job
+   ├── pdf-job
+   └── email-job
+
+That makes the system much more reliable when you have 100+ clients.
+
+6. The most important feature: "What changed?"
+
+Don't just show:
+
+Traffic: +18%
+
+That's boring.
+
+Instead:
+
+What changed?
+
+Organic traffic increased 18.7% this week.
+
+The AI should investigate why.
+
+For example:
+
+The increase was primarily driven by 7 pages targeting dental implant and emergency dentistry queries. These pages generated 2,840 additional organic clicks compared with the previous period.
+
+Then:
+
+Biggest wins
++420 clicks
+/dental-implants
+
+
++286 clicks
+/emergency-dentist
+
+
++174 clicks
+/cosmetic-dentistry
+
+And:
+
+Biggest losses
+-183 clicks
+/dental-crown
+
+
+-92 clicks
+/root-canal
+
+This is what makes the product feel intelligent.
+
+7. Keyword intelligence
+
+Don't just dump 1,000 keywords into a table.
+
+Create categories.
+
+Rising
+dental implants cost
+Position 18 → 9
+Falling
+emergency dentist
+Position 4 → 8
+New opportunities
+dentist near me
+Position 14
++1,200 impressions
+Quick wins
+
+These are especially valuable.
+
+Find keywords where:
+
+Position = 5–20
+AND
+Impressions are high
+AND
+CTR is relatively low
+
+Then tell the client:
+
+These 6 keywords are close to page-one visibility and represent your strongest near-term SEO opportunities.
+
+8. Technical SEO monitoring
+
+Every week your crawler checks:
+
+Broken links
+Missing title
+Duplicate title
+Missing description
+Missing H1
+Multiple H1
+Missing canonical
+Noindex pages
+Robots issues
+Sitemap issues
+Redirect chains
+404s
+500s
+Large images
+Missing alt text
+Slow pages
+Schema issues
+
+Then show:
+
+Technical health
+92/100
+
+
+✓ 43 issues fixed
+⚠ 6 warnings
+✕ 2 critical issues
+
+Don't call something an "error" unless you actually have evidence.
+
+9. AI should not invent SEO conclusions
+
+This is extremely important.
+
+Your AI should never say:
+
+Google penalized your website.
+
+unless your system has actual evidence.
+
+Instead:
+
+Organic clicks decreased 21% compared with the previous period. The largest decline occurred on five pages targeting commercial keywords. Further investigation is recommended.
+
+The AI should interpret your collected data, not manufacture explanations.
+
+10. The AI agent
+
+This is the main prompt I'd use as your SEO Reporting Agent.
+
+You are Twofloww Pulse, an expert SEO performance analyst working for Twofloww.
+- Priority
+
+
+TECHNICAL HEALTH
+
+
+Summarize:
+
+
+- Critical issues
+- Warnings
+- Fixed issues
+- New issues
+
+
+KEYWORD MOVEMENT
+
+
+Include:
+
+
+- Winners
+- Losers
+- New opportunities
+- Quick wins
+
+
+CONTENT INSIGHTS
+
+
+Identify:
+
+
+- Content that is performing well
+- Content that is declining
+- Content opportunities
+- Pages that deserve updates
+
+
+CONVERSION INSIGHTS
+
+
+If conversion data exists, analyze it.
+
+
+If not, explicitly say:
+
+
+"Conversion data was not available for this reporting period."
+
+
+COMPETITOR INSIGHTS
+
+
+Only include this section if competitor data exists.
+
+
+NEXT ACTIONS
+
+
+Give exactly 3–7 prioritized actions.
+
+
+Each action should include:
+
+
+Priority:
+High / Medium / Low
+
+
+Action:
+What should be done.
+
+
+Reason:
+Why it matters.
+
+
+Target:
+Page, keyword, or technical area.
+
+
+Expected outcome:
+What improvement this action is intended to support.
+
+
+FINAL CLIENT MESSAGE
+
+
+Finish with a short natural-language summary suitable for sending directly to the client.
+
+
+Tone:
+
+
+Clear.
+Confident.
+Professional.
+Human.
+Specific.
+Useful.
+
+
+Do not use unnecessary marketing language.
+
+
+Do not exaggerate results.
+
+
+Do not say "amazing", "incredible", "revolutionary", or similar words unless the data genuinely supports exceptional performance.
+
+
+Always prefer evidence over enthusiasm.
+11. Give the AI tools, not just data
+
+This is where I would make it an actual agent.
+
+Instead of dumping everything into one giant prompt, give the agent tools like:
+
+get_search_console_data()
+
+
+get_analytics_data()
+
+
+get_keyword_data()
+
+
+crawl_page()
+
+
+crawl_website()
+
+
+get_pagespeed()
+
+
+get_previous_report()
+
+
+get_historical_metrics()
+
+
+get_competitor_changes()
+
+
+calculate_metric_change()
+
+
+generate_pdf()
+
+
+send_email()
+
+Then the agent can reason over the data.
+
+For example:
+
+Agent
+ ↓
+"Traffic dropped"
+ ↓
+get_search_console_data()
+ ↓
+"Which pages caused this?"
+ ↓
+get_page_data()
+ ↓
+"Which keywords changed?"
+ ↓
+get_keyword_data()
+ ↓
+"Are there technical problems?"
+ ↓
+crawl_page()
+ ↓
+"Now produce explanation"
+
+That's much better than a single LLM call.
+
+12. Your database structure
+
+I'd use something roughly like:
+
+User
+ ├── id
+ ├── name
+ ├── email
+ └── plan
+
+
+Client
+ ├── id
+ ├── userId
+ ├── businessName
+ ├── website
+ ├── industry
+ ├── location
+ ├── goals
+ └── competitors[]
+
+
+Integration
+ ├── clientId
+ ├── provider
+ ├── accessToken
+ ├── refreshToken
+ └── metadata
+
+
+Report
+ ├── clientId
+ ├── periodStart
+ ├── periodEnd
+ ├── metrics
+ ├── insights
+ ├── recommendations
+ ├── score
+ ├── pdfUrl
+ └── status
+
+
+KeywordSnapshot
+ ├── clientId
+ ├── keyword
+ ├── clicks
+ ├── impressions
+ ├── ctr
+ ├── position
+ └── date
+
+
+PageSnapshot
+ ├── clientId
+ ├── url
+ ├── traffic
+ ├── clicks
+ ├── impressions
+ ├── conversions
+ └── date
+
+
+TechnicalIssue
+ ├── clientId
+ ├── url
+ ├── type
+ ├── severity
+ ├── firstDetected
+ ├── lastDetected
+ └── resolved
+
+
+ReportSchedule
+ ├── clientId
+ ├── frequency
+ ├── day
+ ├── time
+ ├── recipients[]
+ └── enabled
+13. Twofloww dashboard
+
+I'd make the dashboard extremely visual.
+
+Overview
+┌──────────────────────────────────────────────────┐
+│ ACME Dental                    Aug 10–16         │
+│                                                  │
+│ SEO SCORE                  92 ↑ 6.4%             │
+│                                                  │
+│ Organic clicks    12,482     ↑ 18.7%             │
+│ Impressions       284,921    ↑ 24.3%             │
+│ CTR               4.38%      ↓ 2.1%              │
+│ Avg position      11.8       ↑ 2.4               │
+│                                                  │
+├──────────────────────────────────────────────────┤
+│ AI SUMMARY                                       │
+│                                                  │
+│ Organic visibility improved significantly...     │
+│                                                  │
+├──────────────────────────────────────────────────┤
+│ TOP OPPORTUNITIES                                │
+│                                                  │
+│ 01  Dental implants      Position 11             │
+│ 02  Emergency dentist    Position 8              │
+│ 03  Cosmetic dentist     Position 14             │
+│                                                  │
+├──────────────────────────────────────────────────┤
+│ TECHNICAL HEALTH                                 │
+│                                                  │
+│ Critical      2                                  │
+│ Warnings      6                                  │
+│ Fixed         43                                 │
+└──────────────────────────────────────────────────┘
+14. Client report PDF
+
+The PDF should feel like an agency report, not a machine dump.
+
+Page 1
+
+Twofloww Pulse
+
+Client name
+Reporting period
+
+Large:
+
+SEO Score 92/100
+
+Then 4–5 major metrics.
+
+Page 2
+
+Executive Summary
+
+AI-generated explanation.
+
+Page 3
+
+Organic Performance
+
+Graphs:
+
+Clicks
+Impressions
+CTR
+Position
+Page 4
+
+Keyword Movement
+
+Winners / losers / opportunities.
+
+Page 5
+
+Technical SEO
+
+Issues discovered + resolved.
+
+Page 6
+
+Content Performance
+
+Top pages and declining pages.
+
+Page 7
+
+Next Month's Priorities
+
+Exactly 3–7 actions.
+
+Final page
+
+Prepared by Twofloww
+
+Your branding.
+
+15. Automated email
+
+Every Monday:
+
+Subject:
+
+Your Twofloww SEO Report | August 10–16
+
+Email:
+
+Hi Sarah,
+
+Your weekly SEO report is ready.
+
+SEO Score: 92/100
+Organic Traffic: +18.7%
+Keywords Improved: 34
+Issues Resolved: 12
+
+This week's biggest opportunity is improving three pages currently ranking between positions 8–15.
+
+[View Full Report]
+
+Your detailed PDF report is attached.
+
+You can use an email provider such as Resend for this. Its API supports sending emails, scheduling and attachments, which fits this workflow well.
+
+16. Pricing
+
+Don't make it too cheap.
+
+Starter
+
+₹2,999/month
+
+1 website
+Weekly report
+GSC
+GA4
+Technical SEO
+AI insights
+PDF reports
+Growth
+
+₹7,999/month
+
+5 websites
+Weekly reports
+Competitor monitoring
+Advanced SEO analysis
+Technical monitoring
+Custom branding
+Client dashboard
+Agency
+
+₹19,999/month
+
+20 websites
+White-label reports
+Custom domain
+Automated emails
+Client accounts
+Priority processing
+Agency branding
+
+Then you can sell:
+
+Done-for-you SEO + Twofloww Pulse
+
+for ₹15k–₹50k+ per client depending on scope.
+
+That's where the real money is.
+
+17. Your Twofloww website section
+
+I wouldn't put this under "Automation."
+
+Create a dedicated product section:
+
+Your SEO report shouldn't take 3 hours to make.
+
+Twofloww Pulse automatically turns your SEO data into clear, client-ready reports every week.
+
+Connect your website, Google Search Console and Analytics. We track what changed, find opportunities, identify technical problems and send your clients a beautifully branded report automatically.
+
+[See How It Works] [Book a Demo]
+
+Then show:
+
+01
+Connect
+
+
+Connect your website
+and analytics in minutes.
+
+
+
+
+02
+Track
+
+
+We monitor traffic,
+rankings, technical SEO
+and conversions.
+
+
+
+
+03
+Understand
+
+
+AI turns raw SEO data
+into useful insights.
+
+
+
+
+04
+Report
+
+
+A branded report is
+generated automatically.
+
+
+
+
+05
+Send
+
+
+Your client receives it
+without you lifting a finger.
+18. The killer feature I'd add later
+"Client Questions"
+
+After the report is generated, the client gets:
+
+Ask about your SEO
+
+They can type:
+
+Why did traffic increase this month?
+
+Which pages should we improve?
+
+Why did our rankings drop?
+
+What should we work on next?
+
+And your AI answers using their actual data.
+
+That's much more valuable than a static PDF.
+
+You essentially turn:
+
+SEO reporting
+
+into:
+
+an AI SEO analyst for every client.
+
+19. MVP: don't build everything
+
+Your first version should only have:
+
+✓ Authentication
+✓ Client management
+✓ Website connection
+✓ Google Search Console
+✓ Google Analytics
+✓ Website crawler
+✓ PageSpeed
+✓ Weekly comparison
+✓ AI analysis
+✓ Dashboard
+✓ PDF generation
+✓ Automated email
+✓ Report history
+
+Don't start with Ahrefs, SEMrush, backlinks, competitor scraping, WhatsApp, Slack, white-labeling, 20 integrations, etc.
+
+Get the first version working with:
+
+GSC + GA4 + Puppeteer + PageSpeed + AI + PDF + email.
+
+Then add the expensive features after people actually use it.
+
+20. The architecture I'd use
+                    TWOfloww PULSE
+                         │
+                         ▼
+                 ┌───────────────┐
+                 │   Next.js     │
+                 │   Dashboard   │
+                 └───────┬───────┘
+                         │
+                         ▼
+                 ┌───────────────┐
+                 │   API Server  │
+                 │ Node / Nest   │
+                 └───────┬───────┘
+                         │
+          ┌──────────────┼──────────────┐
+          ▼              ▼              ▼
+      MongoDB         Redis/BullMQ    Object Storage
+          │              │              │
+          │              ▼              │
+          │        ┌──────────────┐     │
+          │        │ Worker       │     │
+          │        └──────┬───────┘     │
+          │               │             │
+          │      ┌────────┼────────┐    │
+          │      ▼        ▼        ▼    │
+          │    GSC       GA4     Puppeteer
+          │      │        │        │
+          │      └────────┼────────┘
+          │               ▼
+          │        PageSpeed API
+          │               │
+          │               ▼
+          │          AI Analyst
+          │               │
+          │       ┌───────┴───────┐
+          │       ▼               ▼
+          │     Report           PDF
+          │                       │
+          │                       ▼
+          │                    Email
+          │
+          ▼
+       Report History
+The business model I'd use
+
+The smartest part is that Twofloww doesn't need to sell this as a separate SaaS initially.
+
+Use it internally.
+
+Get 5 SEO clients.
+
+Instead of spending:
+
+2 hours × 5 clients = 10 hours/week
+
+generating reports, the system does it automatically.
+
+Then you can tell prospective clients:
+
+Every week, you get a live SEO dashboard plus an automatically generated performance report showing what changed, what improved, what needs attention, and what we're doing next.

@@ -4,9 +4,10 @@ import { useCursor } from '@/components/Cursor';
 import { useRouter } from 'next/navigation';
 import FAQ from '@/components/Faq';
 import ProjectTimeline from '@/components/ProjectTimeline';
-import VideoThumbnail from '@/components/VideoThumbnail';
+import ProjectDeviceThumbnail from '@/components/ProjectDeviceThumbnail';
 import { getAllProjects } from '@/data/projects';
 import { gsap } from 'gsap';
+import { ArrowUpRight } from 'lucide-react';
 
 // Pattern Component for Projects
 const ProjectsPattern = () => (
@@ -20,7 +21,7 @@ const ProjectsPattern = () => (
   </div>
 );
 
-// Memoized ProjectCard component to prevent unnecessary re-renders
+// Memoized ProjectCard component with dual desktop + mobile device mockup
 const ProjectCard = React.memo(({ project, index }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
@@ -65,36 +66,71 @@ const ProjectCard = React.memo(({ project, index }) => {
   return (
     <div
       ref={cardRef}
-      className={`transition-all duration-700 ease-out ${
-        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-      }`}
+      className={`group transition-all duration-700 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+        }`}
       style={{
         transitionDelay: isVisible ? `${(index % 2) * 100}ms` : '0ms'
       }}
     >
-      {/* Video Thumbnail */}
+      {/* Dual Device Thumbnail (Desktop + Mobile) */}
       <div
-        className="relative mb-8 overflow-hidden rounded-2xl bg-gray-100 aspect-[4/3] group cursor-pointer"
+        className="relative mb-6 overflow-hidden rounded-3xl aspect-[16/11] sm:aspect-[4/3] cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-500"
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         onClick={handleClick}
       >
-        <VideoThumbnail
-          videoSrc={project.video}
-          posterSrc={project.screenshots[0]?.url || 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop'}
-          alt={project.title}
-          className="w-full h-full"
+        <ProjectDeviceThumbnail
+          desktopImage={project.desktopImage || project.image}
+          mobileImage={project.mobileImage}
+          title={project.title}
+          domain={project.domain || ''}
           isHovered={isHovered}
+          priority={index < 2}
+          className="w-full h-full"
         />
       </div>
 
-      {/* Text */}
-      <div className="space-y-2">
-        <p className="text-lg leading-relaxed text-gray-900">
-          <span className="font-bold text-black">{project.title}</span>
-          {" – "}
-          <span className="font-normal text-gray-600">{project.description}</span>
-        </p>
+      {/* Project Meta and Details */}
+      <div className="space-y-3 px-1">
+        <div className="flex items-center justify-between">
+          <span className="text-xs font-semibold uppercase tracking-wider text-[#DE5D26]">
+            {project.category}
+          </span>
+          <button
+            onClick={handleClick}
+            className="inline-flex items-center space-x-1 text-xs font-medium text-neutral-500 hover:text-black transition-colors"
+          >
+            <span>View Case Study</span>
+            <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+          </button>
+        </div>
+
+        <div>
+          <h3
+            onClick={handleClick}
+            className="text-2xl font-bold text-gray-900 group-hover:text-[#DE5D26] transition-colors cursor-pointer inline-block"
+          >
+            {project.title}
+          </h3>
+          <p className="mt-1 text-sm sm:text-base text-gray-600 leading-relaxed font-light line-clamp-2">
+            {project.description}
+          </p>
+        </div>
+
+        {/* Metrics Pill Grid */}
+        {project.metrics && (
+          <div className="flex flex-wrap items-center gap-2 sm:gap-3 pt-1">
+            {project.metrics.map((metric, mIndex) => (
+              <div
+                key={mIndex}
+                className="flex items-center space-x-1.5 bg-gray-50 border border-gray-200/80 rounded-full px-3 py-1 text-xs text-gray-700 font-medium"
+              >
+                <span className="font-bold text-black">{metric.value}</span>
+                <span className="text-gray-500 font-normal">{metric.label}</span>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
@@ -124,8 +160,6 @@ const CubertoProjectsPage = () => {
     }
   }, []);
 
-
-
   return (
     <div ref={containerRef} className="min-h-screen bg-white">
       {/* Header */}
@@ -139,7 +173,7 @@ const CubertoProjectsPage = () => {
               </div>
             </h1>
             <p className="projects-hero-sub text-xl text-gray-600 leading-relaxed opacity-0">
-              We help bring ideas to life and create digital products that work.
+              We engineer high-performance web applications and digital platforms engineered for scale, conversion, and world-class design.
             </p>
           </div>
         </div>
@@ -150,13 +184,14 @@ const CubertoProjectsPage = () => {
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
             {projects.map((project, index) => (
-              <div key={project.id} className={index % 2 === 1 ? 'lg:mt-20' : ''}>
+              <div key={project.id} className={index % 2 === 1 ? 'lg:mt-16' : ''}>
                 <ProjectCard project={project} index={index} />
               </div>
             ))}
           </div>
         </div>
       </main>
+
       <ProjectTimeline />
 
       <FAQ />

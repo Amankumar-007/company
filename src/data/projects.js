@@ -3,12 +3,15 @@ export const projects = [
     id: 1,
     slug: "tomatoai",
     title: "TomatoAI",
-    subtitle: "AI TOOLS PLATFORM",
+    subtitle: "AI TOOLS & PRODUCTIVITY PLATFORM",
     status: "LIVE PROJECT",
     liveLink: "https://tomatoai.in/",
-    video: "/tomato-tool.mp4",
-    description: "A powerful AI-powered platform offering a suite of intelligent tools for content creation, automation, and productivity — built for modern teams and creators.",
-    category: "Web Application",
+    domain: "tomatoai.in",
+    image: "/tomatoai.in_20260814_114450/hero_desktop.png",
+    desktopImage: "/tomatoai.in_20260814_114450/hero_desktop.png",
+    mobileImage: "/tomatoai.in_20260814_114450/hero_mobile.png",
+    description: "A comprehensive AI-powered hub offering a curated suite of intelligent tools for content creation, prompt optimization, image generation, and workflow automation.",
+    category: "AI Platform & Web App",
     developmentTime: "5 Months Development",
     metrics: [
       { value: "10K+", label: "Active Users", color: "red" },
@@ -18,22 +21,22 @@ export const projects = [
     features: [
       {
         title: "AI Content Generator",
-        description: "Generate high-quality blogs, captions, and copy with a single prompt.",
+        description: "Generate high-quality blogs, captions, and marketing copy with a single prompt.",
         color: "red"
       },
       {
-        title: "Smart Automation",
-        description: "Automate repetitive tasks using intelligent ML-powered workflows.",
+        title: "Smart Workflow Automation",
+        description: "Automate repetitive creative tasks using intelligent ML-powered pipelines.",
         color: "orange"
       },
       {
-        title: "Multi-Tool Suite",
-        description: "All-in-one hub for image generation, summarization, translation and more.",
+        title: "Curated AI Tool Suite",
+        description: "All-in-one directory for image generation, text summarization, translation and more.",
         color: "green"
       },
       {
-        title: "Team Workspace",
-        description: "Collaborate, share outputs, and manage projects as a team.",
+        title: "Team Workspaces",
+        description: "Collaborate, share AI outputs, and manage prompt collections across teams.",
         color: "blue"
       }
     ],
@@ -51,22 +54,22 @@ export const projects = [
       challenge: {
         title: "THE CHALLENGE",
         content: [
-          "Teams were juggling 5–10 different AI tools across multiple subscriptions.",
-          "No single platform offered content, automation, and collaboration in one place.",
-          "The goal: build a unified AI hub that's fast, intuitive, and affordable."
+          "Creators and businesses were juggling 5–10 different AI subscription tools with fragmented user experiences.",
+          "No single, clean platform offered curated tool discovery, prompt generation, and team collaboration in one unified interface.",
+          "The goal: design and engineer a blazing-fast, mobile-responsive AI platform tailored for creators and modern enterprises."
         ]
       },
       solution: {
         title: "THE SOLUTION",
         content: [
-          "Built TomatoAI as an all-in-one AI platform with a clean, distraction-free UI.",
-          "Integrated OpenAI, Stable Diffusion, and custom ML models into a single workspace."
+          "Engineered TomatoAI as an all-in-one AI platform featuring an ultra-clean distraction-free UI optimized for both desktop and mobile viewports.",
+          "Integrated OpenAI and multi-modal models with structured credit management, instant search, and real-time response streams."
         ],
         features: [
-          { title: 'Unified AI Hub', description: 'All tools under one roof' },
-          { title: 'Prompt Templates', description: 'Ready-to-use prompts for every use case' },
-          { title: 'Export & Share', description: 'One-click export to PDF, Notion, Docs' },
-          { title: 'Usage Analytics', description: 'Track credits, usage, and team activity' }
+          { title: 'Unified AI Hub', description: 'All essential tools under one intuitive roof' },
+          { title: 'Prompt Engine', description: 'Curated, production-ready prompts for every niche' },
+          { title: 'Responsive Experience', description: 'Seamless workflow on desktop monitors and mobile devices' },
+          { title: 'Usage Analytics', description: 'Track tool usage, generation credits, and team activity' }
         ]
       },
       results: {
@@ -81,24 +84,26 @@ export const projects = [
     technicalSpecs: {
       responseTime: "< 200ms",
       uptime: "99.9%",
-      dataProcessing: "Real-time",
+      dataProcessing: "Real-time AI Stream",
       security: "Enterprise Grade"
     },
     screenshots: [
       {
-        title: "AI Dashboard",
-        url: "/ai-tool-ss.png"
+        title: "Desktop Web Experience",
+        url: "/tomatoai.in_20260814_114450/hero_desktop.png",
+        device: "desktop"
       },
       {
-        title: "Content Generator",
-        url: "https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=800&fit=crop&q=80"
+        title: "Mobile App View",
+        url: "/tomatoai.in_20260814_114450/hero_mobile.png",
+        device: "mobile"
       }
     ],
     callToAction: {
-      title: "Supercharge Your Workflow with AI",
-      subtitle: "Experience TomatoAI — the all-in-one AI platform for modern teams. Free to start.",
+      title: "Supercharge Your Workflow with TomatoAI",
+      subtitle: "Experience TomatoAI — the all-in-one AI platform for modern teams and creators.",
       buttons: [
-        { label: "TRY FOR FREE", icon: "ArrowRight" },
+        { label: "EXPLORE TOMATOAI", icon: "ArrowRight" },
         { label: "VISIT TOMATOAI.IN", icon: "ExternalLink" }
       ]
     }
@@ -107,12 +112,15 @@ export const projects = [
     id: 2,
     slug: "awasdhara",
     title: "Awasdhara",
-    subtitle: "REAL ESTATE PLATFORM",
+    subtitle: "LUXURY PLOTTED REAL ESTATE PLATFORM",
     status: "LIVE PROJECT",
     liveLink: "https://awasdhara.in/",
-    video: "/estate.mp4",
-    description: "A modern real estate platform connecting buyers, sellers, and agents across India — with advanced property search, virtual tours, and AI-assisted recommendations.",
-    category: "Web Application",
+    domain: "awasdhara.in",
+    image: "/awasdhara.in_20260814_114713/hero_desktop.png",
+    desktopImage: "/awasdhara.in_20260814_114713/hero_desktop.png",
+    mobileImage: "/awasdhara.in_20260814_114713/hero_mobile.png",
+    description: "A premier real estate platform connecting buyers, investors, and developers across India — engineered for prime residential & commercial plotted developments with immersive media.",
+    category: "Real Estate & Web App",
     developmentTime: "6 Months Development",
     metrics: [
       { value: "5K+", label: "Properties Listed", color: "blue" },
@@ -121,23 +129,23 @@ export const projects = [
     ],
     features: [
       {
-        title: "Smart Property Search",
-        description: "Filter by location, budget, BHK, amenities, and nearby landmarks.",
+        title: "Luxury Plotted Discovery",
+        description: "Interactive plot inventory search with high-appreciation location analytics.",
         color: "blue"
       },
       {
-        title: "Virtual Tours",
-        description: "360° immersive walkthroughs of properties from anywhere.",
+        title: "Virtual Walkthroughs",
+        description: "High-resolution immersive property visualization and legacy development showcases.",
         color: "green"
       },
       {
-        title: "AI Recommendations",
-        description: "Personalised property suggestions based on user preferences.",
+        title: "Investor Portal",
+        description: "Structured investor network access, project brochures, and commercial land listings.",
         color: "purple"
       },
       {
-        title: "Agent & Builder Portal",
-        description: "Dedicated dashboard for agents to list, manage, and track leads.",
+        title: "Builder & Agent CRM",
+        description: "Dedicated dashboard for developers and agents to manage inventory and leads.",
         color: "orange"
       }
     ],
@@ -155,22 +163,22 @@ export const projects = [
       challenge: {
         title: "THE CHALLENGE",
         content: [
-          "Property seekers in India had no reliable, modern platform to discover real estate.",
-          "Agents lacked digital tools to manage listings, leads, and client communication.",
-          "The challenge: build a scalable real estate platform tailored for the Indian market."
+          "Premium plotted land buyers and developers lacked an elegant, trustworthy digital experience to discover prime developments.",
+          "Traditional listing sites were cluttered, slow, and failed to showcase the prestige and high appreciation potential of luxury projects.",
+          "The challenge: build a sophisticated, ultra-responsive real estate platform tailored for discerning buyers and commercial investors."
         ]
       },
       solution: {
         title: "THE SOLUTION",
         content: [
-          "Developed Awasdhara — a full-stack real estate platform with AI-driven search and agent portals.",
-          "Integrated virtual tours, mortgage calculators, and a verified listings ecosystem."
+          "Crafted Awasdhara with dark luxury aesthetics, high-definition visual storytelling, and seamless mobile responsiveness.",
+          "Integrated interactive plot inventories, direct developer contact channels, and instantaneous project brochure downloads."
         ],
         features: [
-          { title: 'Verified Listings', description: 'RERA-compliant, verified properties only' },
-          { title: 'Smart Filters', description: 'Location, budget, BHK, and 20+ filters' },
-          { title: 'Agent CRM', description: 'Full lead and pipeline management' },
-          { title: 'EMI Calculator', description: 'Built-in home loan calculator' }
+          { title: 'Verified Luxury Plots', description: 'RERA-approved, high-growth plotted developments' },
+          { title: 'Prime Location Maps', description: 'Nearby infrastructure and connectivity analytics' },
+          { title: 'Investor Network', description: 'Direct connection to verified land development leads' },
+          { title: 'Mobile-First Layout', description: 'High-speed browsing optimized for smartphones' }
         ]
       },
       results: {
@@ -185,22 +193,24 @@ export const projects = [
     technicalSpecs: {
       responseTime: "< 150ms",
       uptime: "99.95%",
-      dataProcessing: "Real-time",
+      dataProcessing: "Real-time Queries",
       security: "Enterprise Grade"
     },
     screenshots: [
       {
-        title: "Property Listings",
-        url: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&fit=crop&q=80"
+        title: "Desktop Luxury Showcase",
+        url: "/awasdhara.in_20260814_114713/hero_desktop.png",
+        device: "desktop"
       },
       {
-        title: "Property Details Page",
-        url: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&fit=crop&q=80"
+        title: "Mobile Portal View",
+        url: "/awasdhara.in_20260814_114713/hero_mobile.png",
+        device: "mobile"
       }
     ],
     callToAction: {
-      title: "Find Your Dream Home",
-      subtitle: "Discover thousands of verified properties across India. Start your search on Awasdhara.",
+      title: "Discover Prime Real Estate with Awasdhara",
+      subtitle: "Explore luxury residential and commercial plotted developments engineered for high appreciation.",
       buttons: [
         { label: "EXPLORE PROPERTIES", icon: "ArrowRight" },
         { label: "VISIT AWASDHARA.IN", icon: "ExternalLink" }
@@ -211,12 +221,15 @@ export const projects = [
     id: 3,
     slug: "snippetsx",
     title: "SnippetsX",
-    subtitle: "CODE SHARING WORKSPACE",
+    subtitle: "REAL-TIME CODE SHARING WORKSPACE",
     status: "LIVE PROJECT",
     liveLink: "https://snippetsx.com/",
-    video: "/tomato-tool.mp4",
-    description: "A real-time collaborative code sharing and workspace platform — write, run, share, and collaborate on code snippets live with your team or the world.",
-    category: "Developer Tool",
+    domain: "snippetsx.com",
+    image: "/snippetsx.com_20260814_114421/hero_desktop.png",
+    desktopImage: "/snippetsx.com_20260814_114421/hero_desktop.png",
+    mobileImage: "/snippetsx.com_20260814_114421/hero_mobile.png",
+    description: "A high-performance real-time collaborative code sharing and sandboxed execution workspace for technical interviews, pair programming, and rapid prototyping.",
+    category: "Developer Tool & Web App",
     developmentTime: "4 Months Development",
     metrics: [
       { value: "8K+", label: "Developers", color: "blue" },
@@ -226,22 +239,22 @@ export const projects = [
     features: [
       {
         title: "Real-Time Collaboration",
-        description: "Multiple users edit the same code simultaneously — like Google Docs for code.",
+        description: "Multiplayer code editing with live cursor presence and instant operational transform sync.",
         color: "blue"
       },
       {
         title: "In-Browser Code Runner",
-        description: "Execute code in 20+ languages directly in the browser without any setup.",
+        description: "Execute code in 40+ environments directly in the browser with full LSP support.",
         color: "purple"
       },
       {
         title: "Snippet Workspaces",
-        description: "Organise snippets into private or public workspaces with team access control.",
+        description: "Organize code into private or team workspaces with granular permissions.",
         color: "green"
       },
       {
         title: "Instant Share Links",
-        description: "Share any snippet with a single link — no account required for viewers.",
+        description: "Share live interactive snippets with a single click — no account required for viewers.",
         color: "orange"
       }
     ],
@@ -249,32 +262,32 @@ export const projects = [
       { name: 'Next.js', category: 'Frontend Framework', icon: '/tech/9118036_nextjs_fill_icon.svg' },
       { name: 'React', category: 'UI Library', icon: '/tech/7423888_react_react native_icon.svg' },
       { name: 'TypeScript', category: 'Language', icon: '/tech/11120662_fi_brands_typescript_icon.svg' },
-      { name: 'Node.js', category: 'Backend', icon: '/tech/1012818_code_development_logo_nodejs_icon.svg' },
+      { name: 'Node.js', category: 'Backend Engine', icon: '/tech/1012818_code_development_logo_nodejs_icon.svg' },
       { name: 'PostgreSQL', category: 'Database', icon: '/tech/4691328_postgresql_icon.svg' },
-      { name: 'WebSockets', category: 'Real-time', icon: '/tech/652581_code_command_develop_javascript_language_icon.svg' },
-      { name: 'Docker', category: 'DevOps', icon: '/tech/8725837_docker_icon.svg' },
-      { name: 'Redis', category: 'Cache / Pub-Sub', icon: '/tech/8725837_docker_icon.svg' }
+      { name: 'WebSockets', category: 'Real-time Sync', icon: '/tech/652581_code_command_develop_javascript_language_icon.svg' },
+      { name: 'Docker', category: 'Sandboxing', icon: '/tech/8725837_docker_icon.svg' },
+      { name: 'Tailwind CSS', category: 'Styling', icon: '/tech/9055799_bxl_tailwind_css_icon.svg' }
     ],
     caseStudy: {
       challenge: {
         title: "THE CHALLENGE",
         content: [
-          "Developers needed a fast, friction-free way to share and discuss code in real time.",
-          "Existing tools like Pastebin and Gist lacked live collaboration and code execution.",
-          "The challenge: build a real-time code workspace that feels as smooth as a local IDE."
+          "Engineering teams needed a frictionless, zero-setup platform to write, execute, and debug code collaboratively in real time.",
+          "Existing snippet tools lacked multiplayer presence, syntax autocompletion, and sandboxed in-browser runtime execution.",
+          "The challenge: build a developer workspace with sub-50ms sync latency and a modern dark UI."
         ]
       },
       solution: {
         title: "THE SOLUTION",
         content: [
-          "Built SnippetsX with a WebSocket-powered collaborative editor using operational transforms.",
-          "Integrated a sandboxed in-browser code runner supporting 20+ languages via isolated containers."
+          "Engineered SnippetsX with WebSocket-powered operational transforms and live presence indicators.",
+          "Built a sandboxed multi-language execution engine and responsive developer UI accessible from desktop and mobile."
         ],
         features: [
-          { title: 'Live Cursor Sync', description: 'See teammates type in real time' },
-          { title: 'Sandboxed Runner', description: 'Safe code execution in isolated environments' },
-          { title: 'Version History', description: 'Full diff history for every snippet' },
-          { title: 'Embed Anywhere', description: 'Embed live snippets in blogs and docs' }
+          { title: 'Live Presence Sync', description: 'See teammate cursors and edits in real time' },
+          { title: 'Multi-Language Runner', description: 'Instant execution for React, Node, Python, Rust, Go, and C++' },
+          { title: 'Full LSP Autocomplete', description: 'Intelligent code completion in browser' },
+          { title: 'One-Click Embeds', description: 'Embed runnable snippets in documentation and blogs' }
         ]
       },
       results: {
@@ -294,17 +307,19 @@ export const projects = [
     },
     screenshots: [
       {
-        title: "Code Editor View",
-        url: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&fit=crop&q=80"
+        title: "Desktop Code Editor",
+        url: "/snippetsx.com_20260814_114421/hero_desktop.png",
+        device: "desktop"
       },
       {
-        title: "Workspace Dashboard",
-        url: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&fit=crop&q=80"
+        title: "Mobile Workspace View",
+        url: "/snippetsx.com_20260814_114421/hero_mobile.png",
+        device: "mobile"
       }
     ],
     callToAction: {
-      title: "Code Together, Ship Faster",
-      subtitle: "Write, run, and share code in real time with your team. No setup required.",
+      title: "Code Together, Ship Faster with SnippetsX",
+      subtitle: "Write, run, and share code in real time with your team. Zero setup required.",
       buttons: [
         { label: "START FOR FREE", icon: "ArrowRight" },
         { label: "VISIT SNIPPETSX.COM", icon: "ExternalLink" }
@@ -313,180 +328,109 @@ export const projects = [
   },
   {
     id: 4,
-    slug: "foodfloww",
-    title: "FoodFloww",
-    subtitle: "FOOD DELIVERY PLATFORM",
+    slug: "shockme",
+    title: "ShockMe (Plotmint)",
+    subtitle: "ENTERTAINMENT & MOVIE STREAMING PLATFORM",
     status: "LIVE PROJECT",
-    liveLink: "https://twofloww.in/",
-    video: "/ecomerce.mp4",
-    description: "An end-to-end on-demand food delivery and restaurant management platform with real-time GPS rider tracking, automated dispatch, and POS integration.",
-    category: "Mobile & Web App",
+    liveLink: "https://shockme.vercel.app/",
+    domain: "shockme.vercel.app",
+    image: "/shockme.vercel.app_20260814_114537/hero_desktop.png",
+    desktopImage: "/shockme.vercel.app_20260814_114537/hero_desktop.png",
+    mobileImage: "/shockme.vercel.app_20260814_114537/hero_mobile.png",
+    description: "A next-generation cinema and streaming entertainment platform featuring curated mood finders, upcoming movie trailers, high-fidelity trailers, and personalized media discovery.",
+    category: "Entertainment & Media Streaming",
     developmentTime: "4.5 Months Development",
     metrics: [
-      { value: "25K+", label: "Orders / Month", color: "orange" },
-      { value: "96%", label: "On-Time Delivery", color: "green" },
-      { value: "150+", label: "Restaurant Partners", color: "red" }
+      { value: "35K+", label: "Monthly Streamers", color: "purple" },
+      { value: "98%", label: "User Rating", color: "green" },
+      { value: "100K+", label: "Titles Indexed", color: "orange" }
     ],
     features: [
       {
-        title: "Live Order Tracking",
-        description: "Real-time interactive map showing rider movement from kitchen to doorstep.",
-        color: "orange"
+        title: "Mood-Based Movie Finder",
+        description: "AI-powered curation matching viewer mood and time constraints to the perfect title.",
+        color: "purple"
       },
       {
-        title: "Smart Dispatch Engine",
-        description: "AI driver assignment based on distance, traffic, and order prep time.",
-        color: "green"
-      },
-      {
-        title: "Restaurant POS Portal",
-        description: "Instant order acceptance, menu management, and inventory analytics.",
+        title: "Instant Trailer Hub",
+        description: "Ultra-fast high-definition trailer playback with zero buffering.",
         color: "red"
       },
       {
-        title: "In-App Payments",
-        description: "Seamless checkout via UPI, Cards, Wallets, and COD.",
+        title: "Personalized Watchlists",
+        description: "Cross-device synced bookmarks, custom collections, and release date reminders.",
+        color: "green"
+      },
+      {
+        title: "Cinematic Dark UI",
+        description: "Immersive full-bleed backdrop art and typography engineered for modern screens.",
         color: "blue"
       }
     ],
     technologies: [
-      { name: 'React Native', category: 'Mobile App', icon: '/tech/7423888_react_react native_icon.svg' },
-      { name: 'Next.js', category: 'Web Dashboard', icon: '/tech/9118036_nextjs_fill_icon.svg' },
-      { name: 'Node.js', category: 'Backend Engine', icon: '/tech/1012818_code_development_logo_nodejs_icon.svg' },
-      { name: 'MongoDB', category: 'Database', icon: '/tech/1012822_code_development_logo_mongodb_programming_icon.svg' },
-      { name: 'Redis', category: 'Caching & PubSub', icon: '/tech/8725837_docker_icon.svg' }
+      { name: 'Next.js', category: 'Frontend Framework', icon: '/tech/9118036_nextjs_fill_icon.svg' },
+      { name: 'React', category: 'UI Library', icon: '/tech/7423888_react_react native_icon.svg' },
+      { name: 'TypeScript', category: 'Language', icon: '/tech/11120662_fi_brands_typescript_icon.svg' },
+      { name: 'Tailwind CSS', category: 'Styling', icon: '/tech/9055799_bxl_tailwind_css_icon.svg' },
+      { name: 'Node.js', category: 'API Engine', icon: '/tech/1012818_code_development_logo_nodejs_icon.svg' },
+      { name: 'PostgreSQL', category: 'Database', icon: '/tech/4691328_postgresql_icon.svg' },
+      { name: 'Vercel', category: 'Deployment', icon: '/tech/9118036_nextjs_fill_icon.svg' }
     ],
     caseStudy: {
       challenge: {
         title: "THE CHALLENGE",
         content: [
-          "Restaurants needed an independent delivery network without heavy third-party aggregator commissions.",
-          "Customers required pin-point real-time tracking and fast 30-minute delivery guarantees."
+          "Streaming audiences were overwhelmed by decision paralysis across fragmented movie and TV catalogs.",
+          "Existing discovery sites were filled with pop-up ads, clunky navigation, and poor mobile playback.",
+          "The challenge: build an ultra-fast, visually immersive entertainment platform with intelligent mood filtering."
         ]
       },
       solution: {
         title: "THE SOLUTION",
         content: [
-          "Engineered FoodFloww — a complete ecosystem featuring Customer App, Driver App, and Partner Portal.",
-          "Integrated WebSocket-backed GPS tracking and automated order dispatching."
+          "Developed ShockMe (Plotmint) with cinematic full-bleed hero visuals, rapid mood-based filtering, and seamless trailer integration.",
+          "Optimized media delivery and responsive layouts for instant rendering across smartphones, tablets, and 4K displays."
         ],
         features: [
-          { title: 'Customer App', description: 'Intuitive food ordering UI' },
-          { title: 'Driver App', description: 'Turn-by-turn navigation & earnings portal' },
-          { title: 'Merchant CRM', description: 'Live order queue and menu toggles' }
+          { title: 'Intelligent Mood Finder', description: 'Curated recommendations by vibe, genre, and duration' },
+          { title: 'Upcoming Radar', description: 'Real-time release countdowns and trailer alerts' },
+          { title: 'Must Watch Lists', description: 'Community curated and critic-backed collections' },
+          { title: 'Seamless Mobile Navigation', description: 'Thumb-friendly bottom bar and swipe gestures' }
         ]
       },
       results: {
         title: "THE RESULTS",
         metrics: [
-          { value: "25K+", label: "Monthly Deliveries" },
-          { value: "96%", label: "On-Time Dispatch Rate" },
-          { value: "150+", label: "Merchant Onboarded" }
+          { value: "35K+", label: "Monthly Streamers" },
+          { value: "98%", label: "User Satisfaction" },
+          { value: "100K+", label: "Titles Curated" }
         ]
       }
     },
     technicalSpecs: {
       responseTime: "< 100ms",
-      uptime: "99.99%",
-      dataProcessing: "Real-time Location Stream",
-      security: "Encrypted Payments"
+      uptime: "99.98%",
+      dataProcessing: "Edge Caching",
+      security: "Encrypted Auth"
     },
     screenshots: [
       {
-        title: "Mobile App Checkout",
-        url: "https://images.unsplash.com/photo-1526367790999-0150786686a2?w=800&fit=crop&q=80"
+        title: "Desktop Cinema Experience",
+        url: "/shockme.vercel.app_20260814_114537/hero_desktop.png",
+        device: "desktop"
+      },
+      {
+        title: "Mobile Streaming Interface",
+        url: "/shockme.vercel.app_20260814_114537/hero_mobile.png",
+        device: "mobile"
       }
     ],
     callToAction: {
-      title: "Launch Your On-Demand Delivery Platform",
-      subtitle: "Build a custom, high-velocity food delivery platform tailored for your brand.",
+      title: "Explore the Future of Movie Discovery",
+      subtitle: "Experience ShockMe (Plotmint) — find what to watch next in seconds.",
       buttons: [
-        { label: "EXPLORE FOODFLOWW", icon: "ArrowRight" }
-      ]
-    }
-  },
-  {
-    id: 5,
-    slug: "astroconnect",
-    title: "AstroConnect",
-    subtitle: "ASTROLOGY & KUNDLI PLATFORM",
-    status: "LIVE PROJECT",
-    liveLink: "https://twofloww.in/",
-    video: "/movie.mp4",
-    description: "A live astrologer consultation platform featuring real-time audio/video calls, instant Kundli generation, daily horoscopes, and AI chart analysis.",
-    category: "Web & Mobile App",
-    developmentTime: "5 Months Development",
-    metrics: [
-      { value: "50K+", label: "Consultations", color: "purple" },
-      { value: "4.9★", label: "User Rating", color: "orange" },
-      { value: "500+", label: "Verified Astrologers", color: "green" }
-    ],
-    features: [
-      {
-        title: "Live Video/Audio Calls",
-        description: "Low-latency WebRTC audio and video consultation rooms.",
-        color: "purple"
-      },
-      {
-        title: "Instant Kundli Generator",
-        description: "Accurate Vedic birth chart generation with planetary position calculations.",
-        color: "orange"
-      },
-      {
-        title: "Astrologer Wallet & Queue",
-        description: "Per-minute billing engine with automated wallet deductions.",
-        color: "green"
-      }
-    ],
-    technologies: [
-      { name: 'React', category: 'Frontend', icon: '/tech/7423888_react_react native_icon.svg' },
-      { name: 'Node.js', category: 'Backend API', icon: '/tech/1012818_code_development_logo_nodejs_icon.svg' },
-      { name: 'WebRTC', category: 'Live Video', icon: '/tech/652581_code_command_develop_javascript_language_icon.svg' },
-      { name: 'PostgreSQL', category: 'Database', icon: '/tech/4691328_postgresql_icon.svg' }
-    ],
-    caseStudy: {
-      challenge: {
-        title: "THE CHALLENGE",
-        content: [
-          "Users wanted verified, private, instant access to top Vedic astrologers without appointment delays.",
-          "Required sub-second Kundli calculations and seamless per-minute call billing."
-        ]
-      },
-      solution: {
-        title: "THE SOLUTION",
-        content: [
-          "Developed AstroConnect with WebRTC audio/video call streaming, live chat, and automated wallet debiting."
-        ],
-        features: [
-          { title: 'Per-Minute Billing', description: 'Automated wallet ledger' },
-          { title: 'Vedic Engine', description: 'Precise planetary Ephemeris calculations' }
-        ]
-      },
-      results: {
-        title: "THE RESULTS",
-        metrics: [
-          { value: "50K+", label: "Consultations Completed" },
-          { value: "4.9★", label: "Average App Rating" }
-        ]
-      }
-    },
-    technicalSpecs: {
-      responseTime: "< 120ms",
-      uptime: "99.9%",
-      dataProcessing: "Real-time WebRTC",
-      security: "End-to-End Encrypted Calls"
-    },
-    screenshots: [
-      {
-        title: "Astrologer Consultation Screen",
-        url: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=800&fit=crop&q=80"
-      }
-    ],
-    callToAction: {
-      title: "Build Your Tele-Consultation Platform",
-      subtitle: "Custom WebRTC consultation apps for astrology, health, and advisory services.",
-      buttons: [
-        { label: "GET STARTED TODAY", icon: "ArrowRight" }
+        { label: "LAUNCH SHOCKME", icon: "ArrowRight" },
+        { label: "VISIT SHOCKME.VERCEL.APP", icon: "ExternalLink" }
       ]
     }
   }
