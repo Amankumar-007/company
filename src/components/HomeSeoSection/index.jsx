@@ -458,7 +458,7 @@ export default function HomeSeoSection() {
 
       {/* ── Why Choose TwoFloww ────────────────────────────────── */}
       <section
-        className="py-16 lg:py-20 bg-white"
+        className="py-16 lg:py-20 bg-white overflow-x-hidden"
         aria-label="Why choose TwoFloww as your web development partner"
       >
         <div className="max-w-7xl mx-auto px-6 lg:px-8">

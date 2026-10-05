@@ -88,6 +88,48 @@ export const industries = [
       'Developer-facing tooling: CLIs, SDKs, internal platforms',
     ],
   },
+  {
+    slug: 'healthcare-healthtech',
+    name: 'Healthcare & HealthTech',
+    tagline: 'Mission-critical hospital, telemedicine, and emergency care systems',
+    caseStudySlug: 'getbeds',
+    caseStudyName: 'GetBeds',
+    heroStat: { value: '500+', label: 'partner hospitals on GetBeds' },
+    summary: 'We build mission-critical healthcare ecosystems — from GetBeds (real-time ICU/hospital bed tracking & emergency booking) to ICBR Wellness (omnichannel holistic care & doorstep home clinician dispatch).',
+    whatWeBuild: [
+      { title: 'Real-Time Bed & Facility Tracking', description: 'Low-latency live telemetry across ICU, ventilator, and ward bed allocations.' },
+      { title: 'Doctor Discovery & Telemedicine', description: 'Encrypted HD video consultations with verified doctor scheduling and digital prescriptions.' },
+      { title: 'Emergency Intake & Admission Routing', description: 'High-availability triaged booking workflows for urgent hospital admissions.' },
+      { title: 'Surgical Package Cost Transparency', description: 'Upfront verified elective surgery pricing calculators with zero hidden hospital fees.' },
+    ],
+    commonAsks: [
+      'Emergency admission routing and real-time bed discovery platforms',
+      'Doctor appointment scheduling with teleconsultation and clinic visits',
+      'Doorstep clinician dispatch and home healthcare delivery systems',
+      'Hospital network dashboards with verified credentialing and pricing',
+    ],
+  },
+  {
+    slug: 'gaming-esports',
+    name: 'Gaming & Esports',
+    tagline: 'High-octane P2P marketplaces and community platforms for gamers',
+    caseStudySlug: 'gamersground',
+    caseStudyName: 'GamersGround',
+    heroStat: { value: '25K+', label: 'registered gamers on GamersGround' },
+    summary: 'We built GamersGround, India\'s #1 gaming classifieds platform for peer-to-peer buying and selling of verified gaming accounts with real-time chat, zero middlemen fees, and anti-scam safeguards.',
+    whatWeBuild: [
+      { title: 'Zero-Fee P2P Classifieds', description: 'Direct marketplaces connecting buyers and sellers without heavy platform cuts.' },
+      { title: 'Real-Time Negotiation Chat', description: 'Low-latency WebSocket messaging enabling instant deals and safe credential transfer.' },
+      { title: 'Anti-Scam Trust Scoring', description: 'Community seller ratings, inventory screenshot proofs, and dispute resolution pipelines.' },
+      { title: 'Game Asset & Inventory Indexing', description: 'Deep game-specific filtering by rank, tiers, mythic items, and weapon skins.' },
+    ],
+    commonAsks: [
+      'A gaming marketplace or digital asset classifieds platform',
+      'Real-time P2P chat and negotiation architecture',
+      'Esports tournament management and community hub portals',
+      'High-performance dark-mode mobile web apps for competitive gamers',
+    ],
+  },
 ];
 
 export function getIndustryBySlug(slug) {

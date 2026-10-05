@@ -7,9 +7,9 @@ export const projects = [
     status: "LIVE PROJECT",
     liveLink: "https://tomatoai.in/",
     domain: "tomatoai.in",
-    image: "/tomatoai.in_20260814_114450/hero_desktop.png",
-    desktopImage: "/tomatoai.in_20260814_114450/hero_desktop.png",
-    mobileImage: "/tomatoai.in_20260814_114450/hero_mobile.png",
+    image: "/tomatoai.in_20261005_152514/hero_desktop.png",
+    desktopImage: "/tomatoai.in_20261005_152514/hero_desktop.png",
+    mobileImage: "/tomatoai.in_20261005_152514/hero_mobile.png",
     description: "A comprehensive AI-powered hub offering a curated suite of intelligent tools for content creation, prompt optimization, image generation, and workflow automation.",
     category: "AI Platform & Web App",
     developmentTime: "5 Months Development",
@@ -90,12 +90,12 @@ export const projects = [
     screenshots: [
       {
         title: "Desktop Web Experience",
-        url: "/tomatoai.in_20260814_114450/hero_desktop.png",
+        url: "/tomatoai.in_20261005_152514/hero_desktop.png",
         device: "desktop"
       },
       {
         title: "Mobile App View",
-        url: "/tomatoai.in_20260814_114450/hero_mobile.png",
+        url: "/tomatoai.in_20261005_152514/hero_mobile.png",
         device: "mobile"
       }
     ],
@@ -225,9 +225,9 @@ export const projects = [
     status: "LIVE PROJECT",
     liveLink: "https://snippetsx.com/",
     domain: "snippetsx.com",
-    image: "/snippetsx.com_20260814_114421/hero_desktop.png",
-    desktopImage: "/snippetsx.com_20260814_114421/hero_desktop.png",
-    mobileImage: "/snippetsx.com_20260814_114421/hero_mobile.png",
+    image: "/snippetsx.com_20261005_152434/hero_desktop.png",
+    desktopImage: "/snippetsx.com_20261005_152434/hero_desktop.png",
+    mobileImage: "/snippetsx.com_20261005_152434/hero_mobile.png",
     description: "A high-performance real-time collaborative code sharing and sandboxed execution workspace for technical interviews, pair programming, and rapid prototyping.",
     category: "Developer Tool & Web App",
     developmentTime: "4 Months Development",
@@ -308,12 +308,12 @@ export const projects = [
     screenshots: [
       {
         title: "Desktop Code Editor",
-        url: "/snippetsx.com_20260814_114421/hero_desktop.png",
+        url: "/snippetsx.com_20261005_152434/hero_desktop.png",
         device: "desktop"
       },
       {
         title: "Mobile Workspace View",
-        url: "/snippetsx.com_20260814_114421/hero_mobile.png",
+        url: "/snippetsx.com_20261005_152434/hero_mobile.png",
         device: "mobile"
       }
     ],
@@ -431,6 +431,329 @@ export const projects = [
       buttons: [
         { label: "LAUNCH SHOCKME", icon: "ArrowRight" },
         { label: "VISIT SHOCKME.VERCEL.APP", icon: "ExternalLink" }
+      ]
+    }
+  },
+  {
+    id: 5,
+    slug: "icbrwellness",
+    title: "ICBR Wellness",
+    subtitle: "HOLISTIC HEALTHCARE & TELEMEDICINE ECOSYSTEM",
+    status: "LIVE PROJECT",
+    liveLink: "https://icbrwellness.com/",
+    domain: "icbrwellness.com",
+    image: "/icbrwellness.com_20261005_152557/hero_desktop.png",
+    desktopImage: "/icbrwellness.com_20261005_152557/hero_desktop.png",
+    mobileImage: "/icbrwellness.com_20261005_152557/hero_mobile.png",
+    description: "An integrated holistic healthcare platform offering doorstep home visits, in-clinic consultations, and encrypted telemedicine across Ayurveda, Physiotherapy, Homeopathy, Mental Health, and Naturopathy.",
+    category: "HealthTech & Wellness Platform",
+    developmentTime: "4 Months Development",
+    metrics: [
+      { value: "15K+", label: "Consultations", color: "green" },
+      { value: "98%", label: "Patient Satisfaction", color: "blue" },
+      { value: "< 15min", label: "Specialist Matching", color: "purple" }
+    ],
+    features: [
+      {
+        title: "Omnichannel Care Delivery",
+        description: "Seamlessly schedule doorstep home visits, verified clinic appointments, or encrypted HD video calls.",
+        color: "green"
+      },
+      {
+        title: "Certified Practitioner Directory",
+        description: "Verified BAMS doctors, clinical physiotherapists, psychologists, and certified nutritionists.",
+        color: "blue"
+      },
+      {
+        title: "Condition-Targeted Care Protocols",
+        description: "Specialized outcome-driven therapy pathways for back pain, anxiety, chronic fatigue, and weight loss.",
+        color: "purple"
+      },
+      {
+        title: "Corporate Wellness Audits",
+        description: "Enterprise posture assessments, stress mitigation workshops, and preventative team health plans.",
+        color: "orange"
+      }
+    ],
+    technologies: [
+      { name: 'Next.js', category: 'Frontend Framework', icon: '/tech/9118036_nextjs_fill_icon.svg' },
+      { name: 'React', category: 'UI Library', icon: '/tech/7423888_react_react native_icon.svg' },
+      { name: 'TypeScript', category: 'Language', icon: '/tech/11120662_fi_brands_typescript_icon.svg' },
+      { name: 'Tailwind CSS', category: 'Styling', icon: '/tech/9055799_bxl_tailwind_css_icon.svg' },
+      { name: 'Node.js', category: 'Backend Engine', icon: '/tech/1012818_code_development_logo_nodejs_icon.svg' },
+      { name: 'PostgreSQL', category: 'Database', icon: '/tech/4691328_postgresql_icon.svg' },
+      { name: 'AWS S3', category: 'Cloud Storage', icon: '/tech/4923041_aws_icon.svg' }
+    ],
+    caseStudy: {
+      challenge: {
+        title: "THE CHALLENGE",
+        content: [
+          "Patients seeking holistic healthcare (Ayurveda, Physiotherapy, Homeopathy, Naturopathy) faced scattered practitioner listings, unverified credentials, and a total absence of standardized home-visit care.",
+          "Alternative medicine practitioners lacked modern scheduling tools, secure electronic medical history, and geo-radius dispatching for at-home visits.",
+          "The mission: engineer a trustworthy, clinical-grade omnichannel wellness platform uniting verified practitioners, clinic hubs, and doorstep patient appointments."
+        ]
+      },
+      solution: {
+        title: "THE SOLUTION",
+        content: [
+          "Architected ICBR Wellness with instant condition-based triage, automated doctor matching, and geo-localized appointment booking for doorstep and in-clinic care.",
+          "Built a secure practitioner onboarding pipeline with license verification, calendar sync, real-time availability slots, and automated patient communication via SMS and WhatsApp."
+        ],
+        features: [
+          { title: 'Doorstep Care Dispatch', description: 'Real-time clinician dispatch within service radius for home therapy' },
+          { title: 'Triage by Medical Concern', description: 'Instant routing by symptoms: sciatica, stress, insomnia, metabolic disorders' },
+          { title: 'Encrypted Telemedicine', description: 'Browser-based HD audio/video consultations with automated prescription notes' },
+          { title: 'Multi-Discipline Directory', description: 'Comprehensive profiles with verified degrees, reviews, and clinical expertise' }
+        ]
+      },
+      results: {
+        title: "THE RESULTS",
+        metrics: [
+          { value: "15K+", label: "Sessions Delivered" },
+          { value: "98%", label: "Satisfaction Rate" },
+          { value: "4.9/5", label: "Average Doctor Rating" }
+        ]
+      }
+    },
+    technicalSpecs: {
+      responseTime: "< 90ms",
+      uptime: "99.95%",
+      dataProcessing: "HIPAA-Compliant Protocols",
+      security: "End-to-End Encryption"
+    },
+    screenshots: [
+      {
+        title: "Holistic Wellness Portal",
+        url: "/icbrwellness.com_20261005_152557/hero_desktop.png",
+        device: "desktop"
+      },
+      {
+        title: "Mobile Appointment Flow",
+        url: "/icbrwellness.com_20261005_152557/hero_mobile.png",
+        device: "mobile"
+      }
+    ],
+    callToAction: {
+      title: "Ready to Experience Holistic Care?",
+      subtitle: "Discover certified doctors, clinics, and doorstep wellness therapies on ICBR Wellness.",
+      buttons: [
+        { label: "EXPLORE ICBR WELLNESS", icon: "ArrowRight" },
+        { label: "VISIT ICBRWELLNESS.COM", icon: "ExternalLink" }
+      ]
+    }
+  },
+  {
+    id: 6,
+    slug: "getbeds",
+    title: "GetBeds",
+    subtitle: "REAL-TIME HOSPITAL BED & SURGERY BOOKING PLATFORM",
+    status: "LIVE PROJECT",
+    liveLink: "https://www.getbeds.in/",
+    domain: "getbeds.in",
+    image: "/getbeds.in_20261005_152532/hero_desktop.png",
+    desktopImage: "/getbeds.in_20261005_152532/hero_desktop.png",
+    mobileImage: "/getbeds.in_20261005_152532/hero_mobile.png",
+    description: "India's emergency healthcare infrastructure platform enabling real-time ICU/hospital bed discovery, surgery package price comparisons, top doctor appointments, and instant emergency admission routing.",
+    category: "Emergency HealthTech & Hospital Network",
+    developmentTime: "5 Months Development",
+    metrics: [
+      { value: "500+", label: "Partner Hospitals", color: "blue" },
+      { value: "< 60s", label: "Emergency Bed Lock", color: "red" },
+      { value: "40K+", label: "Patients Served", color: "green" }
+    ],
+    features: [
+      {
+        title: "Real-Time Bed Tracker",
+        description: "Live tracking of ICU, CCU, Ventilator, and General Ward beds across NABH/JCI accredited hospitals.",
+        color: "red"
+      },
+      {
+        title: "Transparent Surgery Pricing",
+        description: "Upfront, all-inclusive elective surgery packages (Knee, Bypass, Gallbladder) with verified cost bands.",
+        color: "blue"
+      },
+      {
+        title: "3-Step Emergency Booking",
+        description: "Rapid friction-free admission booking designed for urgent clinical care and immediate bed reservation.",
+        color: "green"
+      },
+      {
+        title: "Multi-City Discovery Engine",
+        description: "Geo-indexed coverage across Delhi NCR, Mumbai, Bangalore, Hyderabad, and Kolkata.",
+        color: "orange"
+      }
+    ],
+    technologies: [
+      { name: 'Next.js', category: 'Frontend Framework', icon: '/tech/9118036_nextjs_fill_icon.svg' },
+      { name: 'React', category: 'UI Library', icon: '/tech/7423888_react_react native_icon.svg' },
+      { name: 'TypeScript', category: 'Language', icon: '/tech/11120662_fi_brands_typescript_icon.svg' },
+      { name: 'Tailwind CSS', category: 'Styling', icon: '/tech/9055799_bxl_tailwind_css_icon.svg' },
+      { name: 'Node.js', category: 'Backend Engine', icon: '/tech/1012818_code_development_logo_nodejs_icon.svg' },
+      { name: 'MongoDB', category: 'Database', icon: '/tech/1012822_code_development_logo_mongodb_programming_icon.svg' },
+      { name: 'Docker', category: 'DevOps', icon: '/tech/8725837_docker_icon.svg' }
+    ],
+    caseStudy: {
+      challenge: {
+        title: "THE CHALLENGE",
+        content: [
+          "Finding an available ICU or emergency hospital bed in Indian metropolitan cities has historically been opaque, chaotic, and agonizing for families in critical situations.",
+          "Patients and caregivers had to call dozens of hospital reception desks manually with no visibility into actual real-time bed inventory or upfront procedure expenses.",
+          "The challenge: build a resilient, high-availability platform uniting hospital bed allocations, emergency admission pipelines, and transparent surgery pricing into a single interface."
+        ]
+      },
+      solution: {
+        title: "THE SOLUTION",
+        content: [
+          "Engineered GetBeds with a dual-sided architecture: a low-latency hospital administration portal for continuous bed inventory syncing and a streamlined consumer booking portal.",
+          "Implemented automated emergency helpline routing, upfront surgery price transparency, and one-tap doctor consultation booking across top private hospitals."
+        ],
+        features: [
+          { title: 'Live Bed Inventory Sync', description: 'Real-time telemetry showing available ICU, Oxygen, and General beds' },
+          { title: 'Transparent Cost Calculator', description: 'Clear surgical package pricing avoiding surprise discharge billing' },
+          { title: 'Emergency One-Touch Call', description: 'Direct priority routing to 24/7 hospital admission desks' },
+          { title: 'Specialist Doctor Appointments', description: 'Search and schedule consultations by medical specialty and doctor credentials' }
+        ]
+      },
+      results: {
+        title: "THE RESULTS",
+        metrics: [
+          { value: "500+", label: "Hospitals Onboarded" },
+          { value: "< 60s", label: "Bed Allocation Time" },
+          { value: "40K+", label: "Patients Assisted" }
+        ]
+      }
+    },
+    technicalSpecs: {
+      responseTime: "< 75ms",
+      uptime: "99.99%",
+      dataProcessing: "Real-time WebSockets & Redis",
+      security: "Encrypted Patient Telemetry"
+    },
+    screenshots: [
+      {
+        title: "Hospital & Bed Discovery Portal",
+        url: "/getbeds.in_20261005_152532/hero_desktop.png",
+        device: "desktop"
+      },
+      {
+        title: "Mobile Emergency Flow",
+        url: "/getbeds.in_20261005_152532/hero_mobile.png",
+        device: "mobile"
+      }
+    ],
+    callToAction: {
+      title: "Find Beds & Surgeries Instantly with GetBeds",
+      subtitle: "Experience real-time hospital bed discovery, transparent surgical pricing, and top doctor consultations.",
+      buttons: [
+        { label: "FIND A BED ON GETBEDS", icon: "ArrowRight" },
+        { label: "VISIT GETBEDS.IN", icon: "ExternalLink" }
+      ]
+    }
+  },
+  {
+    id: 7,
+    slug: "gamersground",
+    title: "GamersGround",
+    subtitle: "P2P GAMING ACCOUNT CLASSIFIEDS & SECURE MARKETPLACE",
+    status: "LIVE PROJECT",
+    liveLink: "https://www.gamersground.in/",
+    domain: "gamersground.in",
+    image: "/gamersground.in_20261005_153500/hero_desktop.png",
+    desktopImage: "/gamersground.in_20261005_153500/hero_desktop.png",
+    mobileImage: "/gamersground.in_20261005_153500/hero_mobile.png",
+    description: "India's #1 gaming classifieds platform for peer-to-peer buying and selling of verified gaming accounts (BGMI, Clash of Clans, Valorant, Free Fire) with direct buyer-to-seller chat, zero middlemen fees, and anti-scam protection.",
+    category: "Gaming Marketplace & Web App",
+    developmentTime: "3.5 Months Development",
+    metrics: [
+      { value: "25K+", label: "Registered Gamers", color: "green" },
+      { value: "100%", label: "Zero Commission", color: "blue" },
+      { value: "< 5min", label: "Listing to Chat Time", color: "purple" }
+    ],
+    features: [
+      {
+        title: "Zero-Commission P2P Trading",
+        description: "Direct marketplace allowing gamers to buy and sell accounts with zero hidden cuts or seller commissions.",
+        color: "green"
+      },
+      {
+        title: "Direct Buyer-Seller Chat",
+        description: "Real-time in-browser messaging facilitating instant negotiations and safe credential transfers.",
+        color: "blue"
+      },
+      {
+        title: "Anti-Scam Verification Shield",
+        description: "Community trust scoring, account inventory verification, and dispute resolution mechanisms.",
+        color: "purple"
+      },
+      {
+        title: "Multi-Game Category Filtering",
+        description: "Deep indexing across BGMI, Valorant, Clash of Clans, and Free Fire with rank & skin filters.",
+        color: "orange"
+      }
+    ],
+    technologies: [
+      { name: 'React', category: 'Frontend Library', icon: '/tech/7423888_react_react native_icon.svg' },
+      { name: 'TypeScript', category: 'Language', icon: '/tech/11120662_fi_brands_typescript_icon.svg' },
+      { name: 'Tailwind CSS', category: 'Styling', icon: '/tech/9055799_bxl_tailwind_css_icon.svg' },
+      { name: 'Node.js', category: 'Backend Engine', icon: '/tech/1012818_code_development_logo_nodejs_icon.svg' },
+      { name: 'MongoDB', category: 'Database', icon: '/tech/1012822_code_development_logo_mongodb_programming_icon.svg' },
+      { name: 'Docker', category: 'Containerization', icon: '/tech/8725837_docker_icon.svg' }
+    ],
+    caseStudy: {
+      challenge: {
+        title: "THE CHALLENGE",
+        content: [
+          "Indian esports and gaming enthusiasts lacked a secure, dedicated marketplace to exchange and sell game accounts, relying on unverified Telegram channels and WhatsApp groups where fraud was rampant.",
+          "Foreign marketplaces imposed 20-30% platform cuts and lacked integration with Indian payment methods (UPI), discouraging authentic players from monetizing their gaming accounts.",
+          "The challenge: build a high-performance, dark-themed gaming classifieds portal tailored for Indian gamers with zero fees and real-time P2P chat."
+        ]
+      },
+      solution: {
+        title: "THE SOLUTION",
+        content: [
+          "Developed GamersGround with an aggressive, modern gaming aesthetic, fast search indexing by title/rank/skins, and a real-time chat architecture.",
+          "Implemented account verification protocols, seller trust ratings, and anti-scam safeguards that protect buyer transactions while keeping listing free."
+        ],
+        features: [
+          { title: 'Instant Account Classifieds', description: 'Publish verified gaming accounts with photo proofs in under 2 minutes' },
+          { title: 'Live Chat Negotiation', description: 'Low-latency messaging with notifications so buyers and sellers never miss an offer' },
+          { title: 'Rank & Tier Filter Engine', description: 'Filter by BGMI Conqueror/Ace, Valorant Radiant, CoC Town Hall, or skin rarity' },
+          { title: 'Mobile-Optimized PWA', description: 'Fast, app-like responsiveness designed for mobile gamers across India' }
+        ]
+      },
+      results: {
+        title: "THE RESULTS",
+        metrics: [
+          { value: "25K+", label: "Gamers Onboarded" },
+          { value: "12K+", label: "Accounts Listed" },
+          { value: "99.4%", label: "Safe Deal Rate" }
+        ]
+      }
+    },
+    technicalSpecs: {
+      responseTime: "< 80ms",
+      uptime: "99.98%",
+      dataProcessing: "WebSocket Real-Time Messaging",
+      security: "Anti-Fraud Screening & Verified Badges"
+    },
+    screenshots: [
+      {
+        title: "Gaming Classifieds Marketplace",
+        url: "/gamersground.in_20261005_153500/hero_desktop.png",
+        device: "desktop"
+      },
+      {
+        title: "Mobile Marketplace Feed",
+        url: "/gamersground.in_20261005_153500/hero_mobile.png",
+        device: "mobile"
+      }
+    ],
+    callToAction: {
+      title: "Join India's Fastest Growing Gaming Marketplace",
+      subtitle: "Trade verified BGMI, Valorant, CoC, and Free Fire accounts directly with real gamers on GamersGround.",
+      buttons: [
+        { label: "EXPLORE GAMERSGROUND", icon: "ArrowRight" },
+        { label: "VISIT GAMERSGROUND.IN", icon: "ExternalLink" }
       ]
     }
   }

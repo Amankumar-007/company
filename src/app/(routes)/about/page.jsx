@@ -36,9 +36,9 @@ const HeroSection = () => {
             <div className="flex items-center gap-4 mb-8 lg:mb-12">
               <span className="text-sm font-medium text-gray-800">Trusted over 5,000+</span>
               <div className="flex -space-x-3">
-                <img src="/anshu.jpg" alt="User" className="w-8 h-8 rounded-full border-2 border-[#F6F6F6] object-cover" />
-                <img src="/mahak.jpg" alt="User" className="w-8 h-8 rounded-full border-2 border-[#F6F6F6] object-cover" />
-                <img src="/hariom.jpg" alt="User" className="w-8 h-8 rounded-full border-2 border-[#F6F6F6] object-cover" />
+                <img src="/WhatsApp Image 2026-08-26 at 5.23.57 PM.jpeg" alt="User" className="w-8 h-8 rounded-full border-2 border-[#F6F6F6] object-cover" />
+                <img src="https://i.pravatar.cc/150?img=32" alt="User" className="w-8 h-8 rounded-full border-2 border-[#F6F6F6] object-cover" />
+                <img src="https://i.pravatar.cc/150?img=12" alt="User" className="w-8 h-8 rounded-full border-2 border-[#F6F6F6] object-cover" />
               </div>
             </div>
 
@@ -232,8 +232,7 @@ const TeamMemberCard = ({ member }) => {
 // Team Section Component
 const TeamSection = () => {
   const team = [
-    { name: "Aman Kumar", role: "Founder & CEO", image: "/about.PNG" },
-    { name: "Anshu Kumar", role: "Co-Founder & CTO", image: "https://i.pravatar.cc/300?img=11" },
+    { name: "Aman Kumar", role: "Founder & CEO", image: "/WhatsApp Image 2026-08-26 at 5.23.57 PM.jpeg" },
     { name: "Mahak Kushwah", role: "Chief Operating Officer", image: "https://i.pravatar.cc/300?img=5" },
     { name: "Hariom", role: "Product Designer", image: "https://i.pravatar.cc/300?img=60" },
     { name: "Sarthak Bhatnagar", role: "Marketing Manager", image: "https://i.pravatar.cc/300?img=12" },

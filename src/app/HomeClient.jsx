@@ -1,16 +1,29 @@
 'use client';
 import styles from './page.module.scss'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useMemo } from 'react'
 import { AnimatePresence, motionValue } from 'framer-motion';
 import Preloader from '../components/Preloader';
-import Projects from '../components/Projects';
-import Description from '../components/Description';
-import SlidingImages from '../components/SlidingImages';
-import HeroSection from '@/components/HeroSection';
 import Card from '../components/Card';
-import VideoComponent from '@/components/VideoComponent';
-import HomeSeoSection from '../components/HomeSeoSection';
-import ServicesCardsSection from '../components/ServicesCardsSection';
+import dynamic from 'next/dynamic';
+const HeroSection = dynamic(() => import('@/components/HeroSection'));
+const Projects = dynamic(() => import('../components/Projects'));
+const Description = dynamic(() => import('../components/Description'));
+const SlidingImages = dynamic(() => import('../components/SlidingImages'));
+const VideoComponent = dynamic(() => import('@/components/VideoComponent'));
+const HomeSeoSection = dynamic(() => import('../components/HomeSeoSection'));
+const ServicesCardsSection = dynamic(() => import('../components/ServicesCardsSection'));
+import { projects } from '../data/projects';
+
+const HOME_PROJECT_SLUGS = ['tomatoai', 'snippetsx', 'awasdhara', 'gamersground'];
+
+const cardRanges = [
+  [0, 0.33],
+  [0.33, 0.66],
+  [0.66, 0.9],
+  [0.9, 1.1]
+];
+
+const cardColors = ['#f0f0f0', '#e8f4f8', '#f8f0e8', '#ecfdf5'];
 
 export default function HomeClient() {
   const [isLoading, setIsLoading] = useState(true);
@@ -24,6 +37,12 @@ export default function HomeClient() {
     return () => clearTimeout(timer);
   }, []);
 
+  const featuredProjects = useMemo(() =>
+    HOME_PROJECT_SLUGS
+      .map((slug) => projects.find((p) => p.slug === slug))
+      .filter(Boolean),
+  []);
+
   return (
     <main className={styles.main}>
       <AnimatePresence mode='wait'>
@@ -35,56 +54,29 @@ export default function HomeClient() {
       <Projects />
       <ServicesCardsSection />
       <HomeSeoSection />
-      
+
       {/* Featured Projects Stack */}
-      <Card
-        title="TomatoAI"
-        description="All-in-one AI platform offering curated intelligent tools for content creation, prompt optimization, and workflow automation."
-        src="/tomatoai.in_20260814_114450/hero_desktop.png"
-        mobileSrc="/tomatoai.in_20260814_114450/hero_mobile.png"
-        url="/case-studies/tomatoai"
-        color="#f0f0f0"
-        i={0}
-        progress={progress}
-        range={[0, 0.33]}
-        targetScale={1.2}
-      />
-      <Card
-        title="Awasdhara"
-        description="Full-stack luxury plotted real estate platform connecting buyers, investors, and developers across India with high-appreciation inventory."
-        src="/awasdhara.in_20260814_114713/hero_desktop.png"
-        mobileSrc="/awasdhara.in_20260814_114713/hero_mobile.png"
-        url="/case-studies/awasdhara"
-        color="#e8f4f8"
-        i={1}
-        progress={progress}
-        range={[0.33, 0.66]}
-        targetScale={1.2}
-      />
-      <Card
-        title="SnippetsX"
-        description="Real-time collaborative code sharing and sandboxed execution workspace for developer teams, live interviews, and rapid prototyping."
-        src="/snippetsx.com_20260814_114421/hero_desktop.png"
-        mobileSrc="/snippetsx.com_20260814_114421/hero_mobile.png"
-        url="/case-studies/snippetsx"
-        color="#f8f0e8"
-        i={2}
-        progress={progress}
-        range={[0.66, 0.9]}
-        targetScale={1.2}
-      />
-      <Card
-        title="ShockMe"
-        description="Next-generation cinema discovery and streaming entertainment platform featuring curated mood finders, trailer playback, and personalized collections."
-        src="/shockme.vercel.app_20260814_114537/hero_desktop.png"
-        mobileSrc="/shockme.vercel.app_20260814_114537/hero_mobile.png"
-        url="/case-studies/shockme"
-        color="#f8e8f8"
-        i={3}
-        progress={progress}
-        range={[0.9, 1.1]}
-        targetScale={1.2}
-      />
+      {featuredProjects.map((project, i) => (
+        <Card
+          key={project.slug || i}
+          title={project.title}
+          subtitle={project.subtitle}
+          category={project.category}
+          description={project.description}
+          metrics={project.metrics}
+          technologies={project.technologies}
+          features={project.features}
+          src={project.desktopImage || project.image}
+          mobileSrc={project.mobileImage}
+          url={`/case-studies/${project.slug}`}
+          liveLink={project.liveLink}
+          color={cardColors[i] || '#f0f0f0'}
+          i={i}
+          progress={progress}
+          range={cardRanges[i] || [i * 0.25, (i + 1) * 0.25]}
+          targetScale={1.2}
+        />
+      ))}
       <SlidingImages />
     </main>
   );

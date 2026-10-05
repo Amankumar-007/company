@@ -10,6 +10,7 @@ import ExtensionErrorSuppressor from '../components/ExtensionErrorSuppressor';
 import ConsultModal from '../components/ConsultModal';
 import type { Metadata, Viewport } from 'next';
 import Script from 'next/script';
+import localFont from 'next/font/local';
 import { Analytics } from '@vercel/analytics/next';
 
 const inter = Inter({
@@ -30,6 +31,16 @@ const unbounded = Unbounded({
   variable: '--font-unbounded',
   display: 'swap',
 })
+
+const suisseIntl = localFont({
+  src: [{
+    path: '../../public/fonts/SuisseIntlTrial-Regular.otf',
+    weight: '400',
+    style: 'normal',
+  }],
+  variable: '--font-suisse',
+  display: 'swap',
+});
 
 const BASE_URL = 'https://www.twofloww.in';
 
@@ -150,6 +161,14 @@ export const metadata: Metadata = {
   verification: {
     google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || 'GSC_VERIFICATION_TOKEN',
     yandex: process.env.NEXT_PUBLIC_YANDEX_VERIFICATION || '',
+  },
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/icon.png', type: 'image/png' },
+    ],
+    shortcut: '/favicon.ico',
+    apple: '/apple-touch-icon.png',
   },
   category: 'technology',
 }
@@ -351,7 +370,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(siteNavigationSchema) }}
         />
       </head>
-      <body className={`${inter.className} ${spaceGrotesk.variable} ${unbounded.variable} bg-white text-black min-h-screen`} suppressHydrationWarning>
+      <body className={`${inter.className} ${spaceGrotesk.variable} ${unbounded.variable} ${suisseIntl.variable} bg-white text-black min-h-screen`} suppressHydrationWarning>
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-2MQFRMEMPT"
           strategy="afterInteractive"

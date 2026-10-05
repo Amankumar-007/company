@@ -38,17 +38,24 @@
 .cardContent {
   flex: 1;
   display: grid;
-  grid-template-columns: 1fr 1.2fr;
+  grid-template-columns: 1fr 1.15fr;
   min-height: 0;
 }
 
 .textSection {
-  padding: 4rem 3rem;
+  padding: 3.5rem 3rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  gap: 1.5rem;
   background: linear-gradient(135deg, #fafafa 0%, #f5f5f5 100%);
   position: relative;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.textSection::-webkit-scrollbar {
+  display: none;
 }
 
 .textSection::before {
@@ -65,79 +72,245 @@
       transparent 100%);
 }
 
+/* Header */
 .cardHeader {
-  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.metaRow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.25rem;
 }
 
 .projectNumber {
-  display: block;
-  font-size: 0.875rem;
-  font-weight: 600;
+  font-size: 0.85rem;
+  font-weight: 700;
   color: #6b7280;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  margin-bottom: 1rem;
-  position: relative;
 }
 
-.projectNumber::after {
-  content: '';
-  position: absolute;
-  bottom: -8px;
-  left: 0;
-  width: 40px;
-  height: 2px;
-  background: linear-gradient(90deg, #3b82f6, #1d4ed8);
-  border-radius: 1px;
+.metaCategory {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #9ca3af;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.statusDotWrapper {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.pulseDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+  animation: pulseDot 2s infinite;
+}
+
+@keyframes pulseDot {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 6px rgba(34, 197, 94, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
+  }
+}
+
+.statusText {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #16a34a;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .title {
-  font-size: clamp(1.75rem, 3vw, 2.5rem);
-  font-weight: 700;
+  font-size: clamp(2rem, 3.2vw, 2.75rem);
+  font-weight: 800;
   color: #111827;
-  line-height: 1.2;
+  line-height: 1.1;
+  margin: 0.2rem 0;
+  letter-spacing: -0.035em;
+}
+
+.subtitle {
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: #6366f1;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
   margin: 0;
-  letter-spacing: -0.025em;
+}
+
+/* Minimalist Typographic Metrics (No Boxes) */
+.minimalStats {
+  display: flex;
+  align-items: flex-start;
+  gap: 2.25rem;
+  padding: 0.25rem 0;
+}
+
+.statItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.statValue {
+  font-size: 1.55rem;
+  font-weight: 800;
+  color: #111827;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.statLabel {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  line-height: 1.2;
+}
+
+/* Minimalist Highlights (Clean lines with dash) */
+.minimalFeatures {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.featureItem {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+}
+
+.featureDash {
+  color: #6366f1;
+  font-weight: 700;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+}
+
+.featureTitle {
+  font-size: 0.88rem;
+  font-weight: 450;
+  color: #374151;
+  line-height: 1.4;
+}
+
+/* Minimalist Inline Stack */
+.minimalTech {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.techLabel {
+  font-weight: 700;
+  color: #9ca3af;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.72rem;
+}
+
+.techList {
+  font-weight: 500;
+  color: #4b5563;
+  letter-spacing: 0.01em;
+}
+
+/* Bottom Area: Description & Links */
+.bottomArea {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
 }
 
 .description {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
-
-.description p {
-  font-size: 1.125rem;
-  line-height: 1.7;
+  font-size: 0.95rem;
+  line-height: 1.65;
   color: #4b5563;
   margin: 0;
   font-weight: 400;
 }
 
-.ctaLink {
+.linksGroup {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.primaryLink {
   display: inline-flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.6rem;
   color: #111827;
   text-decoration: none;
   font-weight: 600;
   font-size: 0.95rem;
   letter-spacing: 0.01em;
-  padding: 0.75rem 0;
-  border-bottom: 2px solid transparent;
-  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  width: fit-content;
+  transition: color 0.2s ease;
+  cursor: pointer;
 }
 
-.ctaLink:hover {
+.primaryLink:hover {
   color: #3b82f6;
-  border-bottom-color: #3b82f6;
 }
 
-.ctaLink svg {
-  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+.primaryLink svg {
+  transition: transform 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
+.primaryLink:hover svg {
+  transform: translateX(4px);
+}
+
+.secondaryLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: #6b7280;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.88rem;
+  transition: color 0.2s ease;
+  cursor: pointer;
+}
+
+.secondaryLink:hover {
+  color: #111827;
+}
+
+.secondaryLink svg {
+  transition: transform 0.25s ease;
+}
+
+.secondaryLink:hover svg {
+  transform: translate(2px, -2px);
+}
+
+/* Image Section */
 .imageSection {
   position: relative;
   overflow: hidden;
@@ -205,15 +378,24 @@
   }
 
   .textSection {
-    padding: 3rem 2.5rem;
+    padding: 2.5rem 2rem;
+    gap: 1.25rem;
   }
 
   .title {
-    font-size: clamp(1.5rem, 4vw, 2rem);
+    font-size: clamp(1.75rem, 3.5vw, 2.2rem);
   }
 
-  .description p {
-    font-size: 1rem;
+  .minimalStats {
+    gap: 1.5rem;
+  }
+
+  .statValue {
+    font-size: 1.35rem;
+  }
+
+  .description {
+    font-size: 0.9rem;
   }
 }
 
@@ -241,9 +423,10 @@
   }
 
   .textSection {
-    padding: 2.5rem 2rem;
+    padding: 2.25rem 1.5rem;
     background: #ffffff;
     order: 2;
+    overflow-y: visible;
   }
 
   .textSection::before {
@@ -252,31 +435,24 @@
 
   .imageSection {
     order: 1;
-    min-height: 300px;
+    min-height: 280px;
     position: relative;
-  }
-
-  .projectNumber::after {
-    width: 30px;
   }
 
   .title {
     font-size: 1.75rem;
-    margin-bottom: 1rem;
+  }
+
+  .minimalStats {
+    gap: 1.25rem;
   }
 
   .description {
-    gap: 1.5rem;
-  }
-
-  .description p {
-    font-size: 1rem;
-    line-height: 1.6;
-  }
-
-  .ctaLink {
     font-size: 0.9rem;
-    gap: 0.5rem;
+  }
+
+  .linksGroup {
+    gap: 1.5rem;
   }
 }
 
@@ -293,23 +469,46 @@
   }
 
   .textSection {
-    padding: 1.5rem 1rem;
-  }
-
-  .cardHeader {
-    margin-bottom: 1.5rem;
+    padding: 1.75rem 1.15rem;
+    gap: 1rem;
   }
 
   .title {
     font-size: 1.5rem;
   }
 
-  .description p {
-    font-size: 0.95rem;
+  .minimalStats {
+    gap: 1rem;
+  }
+
+  .statValue {
+    font-size: 1.25rem;
+  }
+
+  .statLabel {
+    font-size: 0.65rem;
+  }
+
+  .featureTitle {
+    font-size: 0.82rem;
+  }
+
+  .techList {
+    font-size: 0.75rem;
+  }
+
+  .description {
+    font-size: 0.85rem;
+  }
+
+  .linksGroup {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
   }
 
   .imageSection {
-    min-height: 250px;
+    min-height: 220px;
   }
 }
 
@@ -326,9 +525,9 @@
 
   .textSection {
     background: linear-gradient(135deg,
-        rgba(30, 27, 75, 0.9) 0%,
-        rgba(49, 46, 129, 0.8) 50%,
-        rgba(55, 48, 163, 0.7) 100%);
+        rgba(30, 27, 75, 0.95) 0%,
+        rgba(49, 46, 129, 0.9) 50%,
+        rgba(55, 48, 163, 0.85) 100%);
   }
 
   .textSection::before {
@@ -341,30 +540,72 @@
   }
 
   .title {
-    background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 50%, #a5b4fc 100%);
+    background: linear-gradient(135deg, #ffffff 0%, #e0e7ff 60%, #c7d2fe 100%);
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-  }
-
-  .description p {
-    color: #c7d2fe;
   }
 
   .projectNumber {
     color: #a5b4fc;
   }
 
-  .ctaLink {
-    color: #e0e7ff;
+  .metaCategory {
+    color: #a5b4fc;
+    opacity: 0.75;
   }
 
-  .ctaLink:hover {
+  .subtitle {
     color: #a5b4fc;
   }
 
-  .ctaLink::before {
-    background: linear-gradient(90deg, #a5b4fc, #c7d2fe);
+  .statusText {
+    color: #4ade80;
+  }
+
+  .statValue {
+    color: #ffffff;
+  }
+
+  .statLabel {
+    color: #a5b4fc;
+  }
+
+  .featureDash {
+    color: #a5b4fc;
+  }
+
+  .featureTitle {
+    color: #e0e7ff;
+  }
+
+  .techLabel {
+    color: #a5b4fc;
+    opacity: 0.75;
+  }
+
+  .techList {
+    color: #c7d2fe;
+  }
+
+  .description {
+    color: #c7d2fe;
+  }
+
+  .primaryLink {
+    color: #ffffff;
+  }
+
+  .primaryLink:hover {
+    color: #a5b4fc;
+  }
+
+  .secondaryLink {
+    color: #a5b4fc;
+  }
+
+  .secondaryLink:hover {
+    color: #ffffff;
   }
 
   .cardFooter {
