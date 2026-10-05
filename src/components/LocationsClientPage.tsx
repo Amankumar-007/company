@@ -298,7 +298,7 @@ export default function LocationsClientPage({ locations, brand }: LocationsClien
 
                             <div className="flex gap-4">
                               <Link
-                                href={`/web-development-company-${loc.slug}`}
+                                href={`/web-development-agency-in-${loc.slug}`}
                                 className="inline-flex items-center gap-1 text-xs font-bold text-[#0B0D17] hover:text-[#DE5D26] transition-colors cursor-pointer"
                                 onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                               >

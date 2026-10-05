@@ -1,8 +1,4 @@
 import { notFound } from 'next/navigation';
-import { getSeoTarget } from '@/data/seo-locations';
-import SeoLandingHero from '@/components/SeoLandingHero';
-import SeoContent from '@/components/SeoContent';
-import FAQ from '@/components/Faq';
 import {
   getLocationBySlug,
   getAllLocations,
@@ -14,129 +10,54 @@ import {
   generateFAQs,
 } from '@/lib/seoTemplates';
 import { generateLocalBusinessSchema, generateFAQSchema, generateBreadcrumbSchema } from '@/lib/schema';
+import { getLocationServiceContent } from '@/data/location-service-content';
 import locationsData from '@/data/locations-data.json';
 import LocationPageTemplate from '@/components/LocationPageTemplate';
 
-import { targetLocations } from '@/data/seo-locations';
-
 const BASE_URL = 'https://www.twofloww.in';
-const OLD_LOC_PREFIX = 'web-development-company-';
 
-// Pre-generate every location page at build time (SSG)
+// Legacy URL shapes — `web-development-company-{loc}` and `best-{service}-in-{loc}` —
+// are 301-redirected to `{service}-agency-in-{loc}` in next.config.ts. They used
+// to render duplicate pages here, which Semrush/Google flagged as duplicate content.
+
+// Pre-generate every location × service page at build time (SSG)
 export async function generateStaticParams() {
-  const locations = getAllLocations();
   const services = getAllServices();
-  
-  const params = [];
-  
-  // Generate old format for backward compatibility
-  locations.forEach(loc => {
-    params.push({ slug: `${OLD_LOC_PREFIX}${loc.slug}` });
-  });
-
-  // Generate new SEO optimized format: /[service]-agency-in-[location]
-  locations.forEach(loc => {
-    services.forEach(service => {
-      params.push({ slug: `${service.key}-agency-in-${loc.slug}` });
-    });
-  });
-
-  // Generate legacy best-* target location pages
-  const seoServicesToGenerate = ['digital-agency', 'web-agency', 'web-development', 'seo-services', 'ecommerce-solutions'];
-  targetLocations.forEach(location => {
-    seoServicesToGenerate.forEach(service => {
-      params.push({ slug: `best-${service}-in-${location.id}` });
-    });
-  });
-
-  return params;
+  return getAllLocations().flatMap((loc) =>
+    services.map((service) => ({ slug: `${service.key}-agency-in-${loc.slug}` }))
+  );
 }
 
 function parseSlug(slug) {
-  // 1. Check old format
-  if (slug.startsWith(OLD_LOC_PREFIX)) {
-    const locationSlug = slug.slice(OLD_LOC_PREFIX.length);
-    const loc = getLocationBySlug(locationSlug);
-    const service = getAllServices().find(s => s.key === 'web-development');
-    if (loc && service) return { loc, service };
-  }
-
-  // 2. Check new format: [service]-agency-in-[location]
+  // Format: [service]-agency-in-[location]
   const match = slug.match(/^(.+)-agency-in-(.+)$/);
-  if (match) {
-    const serviceKey = match[1];
-    const locationSlug = match[2];
-    const loc = getLocationBySlug(locationSlug);
-    const service = getAllServices().find(s => s.key === serviceKey);
-    if (loc && service) return { loc, service };
-  }
+  if (!match) return null;
+  const loc = getLocationBySlug(match[2]);
+  const service = getAllServices().find((s) => s.key === match[1]);
+  return loc && service ? { loc, service } : null;
+}
 
-  return null;
+// Location FAQs + service-specific FAQs, shared by the page and its FAQPage schema
+function buildFaqs(loc, service) {
+  const place = loc.type === 'country' ? loc.country : loc.city;
+  const serviceFaqs = getLocationServiceContent(service.key).faqs(place);
+  return [...serviceFaqs, ...generateFAQs(loc, service.label)];
 }
 
 // ─── Metadata ────────────────────────────────────────────────────────────────
 
 export async function generateMetadata({ params }) {
   const { slug } = await params;
-
-  // ── New Location + Service company pages ─────────────────────────────────
   const parsed = parseSlug(slug);
-  if (parsed) {
-    const { loc, service } = parsed;
-    const title = generateTitle(loc, service.label);
-    const description = generateDescription(loc, service.label);
+  if (!parsed) return { title: { absolute: 'Not Found | Twofloww' } };
 
-    return {
-      title: { absolute: title },
-      description,
-      alternates: { canonical: `${BASE_URL}/${slug}` },
-      robots: {
-        index: true,
-        follow: true,
-        googleBot: {
-          index: true,
-          follow: true,
-          'max-video-preview': -1,
-          'max-image-preview': 'large',
-          'max-snippet': -1,
-        },
-      },
-      openGraph: {
-        title,
-        description,
-        url: `${BASE_URL}/${slug}`,
-        type: 'website',
-        locale: 'en_IN',
-        siteName: 'Twofloww Digital Agency',
-        images: [{
-          url: `${BASE_URL}/opengraph-image`,
-          width: 1200,
-          height: 630,
-          alt: title,
-          type: 'image/png',
-        }],
-      },
-      twitter: {
-        card: 'summary_large_image',
-        title,
-        description,
-        images: [`${BASE_URL}/opengraph-image`],
-        creator: '@twofloww',
-        site: '@twofloww',
-      },
-    };
-  }
+  const { loc, service } = parsed;
+  const title = generateTitle(loc, service.label);
+  const description = generateDescription(loc, service.label);
 
-  // ── Existing SEO target pages (best-*-in-*) ──────────────────────────────
-  const target = getSeoTarget(slug);
-  if (!target) return { title: { absolute: 'Not Found | Twofloww' } };
-
-  const { location, serviceName } = target;
-  const legacyTitle = `Best ${serviceName} in ${location.name} | Twofloww`;
-  const legacyDesc = `Top-rated ${serviceName} in ${location.name}. Expert solutions for your business. Free consultation.`;
   return {
-    title: { absolute: legacyTitle },
-    description: legacyDesc,
+    title: { absolute: title },
+    description,
     alternates: { canonical: `${BASE_URL}/${slug}` },
     robots: {
       index: true,
@@ -150,8 +71,8 @@ export async function generateMetadata({ params }) {
       },
     },
     openGraph: {
-      title: legacyTitle,
-      description: legacyDesc,
+      title,
+      description,
       url: `${BASE_URL}/${slug}`,
       type: 'website',
       locale: 'en_IN',
@@ -160,14 +81,14 @@ export async function generateMetadata({ params }) {
         url: `${BASE_URL}/opengraph-image`,
         width: 1200,
         height: 630,
-        alt: legacyTitle,
+        alt: title,
         type: 'image/png',
       }],
     },
     twitter: {
       card: 'summary_large_image',
-      title: legacyTitle,
-      description: legacyDesc,
+      title,
+      description,
       images: [`${BASE_URL}/opengraph-image`],
       creator: '@twofloww',
       site: '@twofloww',
@@ -179,65 +100,34 @@ export async function generateMetadata({ params }) {
 
 export default async function SeoPage({ params }) {
   const { slug } = await params;
-
-  // ── New Location + Service company pages ─────────────────────────────────
   const parsed = parseSlug(slug);
-  if (parsed) {
-    const { loc, service } = parsed;
+  if (!parsed) notFound();
 
-    const faqs = generateFAQs(loc, service.label);
-    const jsonLd = [
-      generateLocalBusinessSchema(loc, locationsData.brand),
-      generateFAQSchema(faqs),
-      generateBreadcrumbSchema(loc),
-    ];
-
-    return (
-      <>
-        {jsonLd.map((schema, i) => (
-          <script
-            key={i}
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-          />
-        ))}
-        <LocationPageTemplate
-          loc={loc}
-          serviceLabel={service.label}
-          h1={generateH1(loc, service.label)}
-          intro={generateIntro(loc, service.label)}
-          faqs={faqs}
-        />
-      </>
-    );
-  }
-
-  // ── Existing SEO target pages (best-*-in-*) ──────────────────────────────
-  const target = getSeoTarget(slug);
-  if (!target) notFound();
-
-  const { location, serviceName } = target;
-  // These legacy pages predate locations-data.json and don't carry lat/lng
-  // or country_code — reuse the richer location record when the city also
-  // exists there so we can emit LocalBusiness/Breadcrumb schema.
-  const richLoc = getLocationBySlug(location.id);
+  const { loc, service } = parsed;
+  const faqs = buildFaqs(loc, service);
+  const jsonLd = [
+    generateLocalBusinessSchema(loc, locationsData.brand),
+    generateFAQSchema(faqs),
+    generateBreadcrumbSchema(loc, service),
+  ];
 
   return (
-    <div className="min-h-screen bg-white">
-      {richLoc && (
+    <>
+      {jsonLd.map((schema, i) => (
         <script
+          key={i}
           type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify([
-              generateLocalBusinessSchema(richLoc, locationsData.brand),
-              generateBreadcrumbSchema(richLoc),
-            ]),
-          }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
         />
-      )}
-      <SeoLandingHero location={location} serviceName={serviceName} />
-      <SeoContent location={location} serviceName={serviceName} />
-      <FAQ />
-    </div>
+      ))}
+      <LocationPageTemplate
+        loc={loc}
+        serviceKey={service.key}
+        serviceLabel={service.label}
+        h1={generateH1(loc, service.label)}
+        intro={generateIntro(loc, service.label)}
+        faqs={faqs}
+      />
+    </>
   );
 }

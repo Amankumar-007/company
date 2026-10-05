@@ -51,6 +51,22 @@ const nextConfig: NextConfig = {
         destination: 'https://www.twofloww.in/:path*',
         permanent: true, // 301 redirect — tells Google definitively which is canonical
       },
+
+      // Consolidate legacy location URLs into `{service}-agency-in-{location}`.
+      // These used to render duplicate (or >85% identical) pages competing with
+      // the canonical ones — see src/app/(routes)/[slug]/page.jsx.
+      ...[
+        ['web-development-company-', 'web-development'],
+        ['best-web-development-in-', 'web-development'],
+        ['best-digital-agency-in-', 'web-development'],
+        ['best-web-agency-in-', 'web-design'],
+        ['best-seo-services-in-', 'seo-services'],
+        ['best-ecommerce-solutions-in-', 'ecommerce-development'],
+      ].map(([prefix, service]) => ({
+        source: `/${prefix}:location`,
+        destination: `/${service}-agency-in-:location`,
+        permanent: true,
+      })),
     ];
   },
 

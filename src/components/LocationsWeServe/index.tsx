@@ -31,7 +31,7 @@ export default function LocationsWeServe() {
               {indian.map(loc => (
                 <Link
                   key={loc.slug}
-                  href={`/web-development-company-${loc.slug}`}
+                  href={`/web-development-agency-in-${loc.slug}`}
                   className="px-4 py-2 text-sm text-neutral-400 hover:text-white border border-neutral-800 hover:border-[#ea580c]/50 rounded-full transition-all duration-200"
                 >
                   {loc.city}
@@ -49,7 +49,7 @@ export default function LocationsWeServe() {
               {international.map(loc => (
                 <Link
                   key={loc.slug}
-                  href={`/web-development-company-${loc.slug}`}
+                  href={`/web-development-agency-in-${loc.slug}`}
                   className="px-4 py-2 text-sm text-neutral-400 hover:text-white border border-neutral-800 hover:border-[#ea580c]/50 rounded-full transition-all duration-200"
                 >
                   {loc.city ?? loc.country}

@@ -142,16 +142,31 @@ export default async function CaseStudyPage({ params }) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify([caseStudySchema, breadcrumbSchema]) }}
       />
       <ProjectDetailsClient project={project} />
-      {relatedIndustry && (
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 pb-16 sm:pb-24 text-center">
+      <nav aria-label="Related case studies" className="max-w-4xl mx-auto px-4 sm:px-6 pb-16 sm:pb-24 text-center">
+        {relatedIndustry && (
           <Link
             href={`/industries/${relatedIndustry.slug}`}
-            className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 underline underline-offset-4"
+            className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 underline underline-offset-4 mb-10"
           >
             See more {relatedIndustry.name} projects we build →
           </Link>
-        </div>
-      )}
+        )}
+        <h2 className="text-2xl font-bold mb-6">More case studies</h2>
+        <ul className="flex flex-wrap justify-center gap-3">
+          {getAllProjects()
+            .filter((p) => p.slug !== slug)
+            .map((p) => (
+              <li key={p.slug}>
+                <Link
+                  href={`/case-studies/${p.slug}`}
+                  className="inline-block px-5 py-2.5 rounded-full border border-gray-200 text-sm font-medium text-gray-700 hover:border-black hover:text-black transition-colors"
+                >
+                  {p.title}
+                </Link>
+              </li>
+            ))}
+        </ul>
+      </nav>
     </>
   );
 }

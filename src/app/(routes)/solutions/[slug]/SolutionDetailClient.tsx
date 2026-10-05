@@ -122,7 +122,7 @@ function FAQItem({ q, a, idx }: FAQ & { idx: number }) {
   );
 }
 
-export default function SolutionDetailClient({ solution }: { solution: Solution }) {
+export default function SolutionDetailClient({ solution, related = [] }: { solution: Solution; related?: { slug: string; title: string }[] }) {
   const IconComponent = iconMap[solution.icon] || Rocket;
 
   // JSON-LD Schema for SEO
@@ -499,6 +499,27 @@ export default function SolutionDetailClient({ solution }: { solution: Solution 
           </div>
         </div>
       </section>
+
+      {/* ─── 8. OTHER SOLUTIONS (internal linking) ───────────────────────── */}
+      {related.length > 0 && (
+        <nav aria-label="Other solutions" className="py-16 px-4 sm:px-6 lg:px-8 max-w-[1200px] mx-auto">
+          <h2 className="text-2xl md:text-3xl font-medium mb-8" style={{ fontFamily: 'var(--font-space-grotesk)' }}>
+            Explore other solutions
+          </h2>
+          <ul className="flex flex-wrap gap-3">
+            {related.map((r) => (
+              <li key={r.slug}>
+                <Link
+                  href={`/solutions/${r.slug}`}
+                  className="inline-block px-5 py-2.5 rounded-full border border-gray-200 text-sm font-medium text-gray-700 hover:border-black hover:text-black transition-colors"
+                >
+                  {r.title}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      )}
 
     </main>
   );

@@ -55,15 +55,18 @@ export function generateFAQSchema(faqs) {
   };
 }
 
-export function generateBreadcrumbSchema(loc) {
-  const name = loc.type === 'country' ? loc.country : loc.city;
+export function generateBreadcrumbSchema(loc, service) {
+  const place = loc.type === 'country' ? loc.country : loc.city;
+  const last = service
+    ? { name: `${service.label} in ${place}`, item: `${BASE_URL}/${service.key}-agency-in-${loc.slug}` }
+    : { name: place };
   return {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'Home', item: BASE_URL },
       { '@type': 'ListItem', position: 2, name: 'Locations', item: `${BASE_URL}/locations` },
-      { '@type': 'ListItem', position: 3, name },
+      { '@type': 'ListItem', position: 3, ...last },
     ],
   };
 }

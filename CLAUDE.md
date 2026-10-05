@@ -31,14 +31,17 @@ The codebase mixes `.jsx` and `.tsx` throughout — new files don't need to stri
 
 ### Programmatic SEO (the trickiest part of this codebase)
 
-There are **two parallel, overlapping systems** generating location/service landing pages, both served through the single catch-all route `src/app/(routes)/[slug]/page.jsx`:
+Location × service landing pages (`/{service}-agency-in-{location}`, ~186 SSG pages) are served by the catch-all route `src/app/(routes)/[slug]/page.jsx` and rendered with `LocationPageTemplate`. Sources:
+- `src/data/locations-data.json` — locations, `brand` facts (phone, email, project counts), and the `services` list (`key`/`label`/`short`).
+- `src/lib/seoTemplates.js` — titles/H1/intro/FAQs, varied deterministically via `pickVariant` (hashed off the slug, stable across builds). Titles are capped at 60 chars with a fallback chain.
+- `src/data/location-service-content.js` — per-service copy (overview, deliverables, process, tech, FAQs). This is what keeps the 6 service pages in a city from being near-duplicates; give any new service its own entry.
+- `src/lib/schema.js` — JSON-LD builders.
 
-1. **Legacy system** — `src/data/seo-locations.js` (`targetLocations`, ~9 cities) + `getSeoTarget(slug)`, which regex-parses slugs like `best-{service}-in-{location}` or `{service}-in-{location}`. Renders via `SeoLandingHero` / `SeoContent` / `Faq`.
-2. **Newer system** — `src/data/locations-data.json` (larger location list + `brand` + `services` metadata) + `src/lib/seoTemplates.js` (deterministic-but-varied copy generation via `pickVariant`, hashed off the slug so output is stable across builds) + `src/lib/schema.js` (JSON-LD builders). Handles two slug formats: `web-development-company-{location}` (back-compat) and `{service}-agency-in-{location}` (current). Renders via `LocationPageTemplate`.
+Legacy URL shapes (`web-development-company-{loc}`, `best-{service}-in-{loc}`) used to render duplicate pages; they are now 301/308-redirected to `{service}-agency-in-{loc}` in `next.config.ts` `redirects()`. `src/data/seo-locations.js`, `SeoLandingHero`, and `SeoContent` are no longer rendered by any route. When adding a location/service, `sitemap.ts` derives URLs from `locations-data.json`, so it needs no separate change — but always link internally to the canonical `-agency-in-` URL, never a redirected one.
 
-`page.jsx`'s `parseSlug()` tries the newer format first, then falls back to `getSeoTarget`. `generateStaticParams()` pre-renders all combinations from both systems at build time (SSG) — hundreds of static pages. `src/app/sitemap.ts` independently re-encodes both slug formats, so if you add a location/service you must update it in `locations-data.json` / `seo-locations.js` **and** confirm `sitemap.ts` still reflects the right URL shape.
+Tech logos are self-hosted in `public/tech-icons/` via `src/lib/techIcons.ts` + `TechLogo` — don't hotlink `cdn.simpleicons.org` (it drops brands, which caused dozens of broken images).
 
-Other data-driven sections following a simpler single-source pattern: `src/data/services.js` (services + service-detail pages), `src/data/solutions.js` (solutions + `solutions/[slug]`), `src/data/projects.js` (projects + `projects/[id]`). These don't have the dual-system complexity above.
+Other data-driven sections following a simpler single-source pattern: `src/data/services.js` (services + service-detail pages, noindexed), `src/data/solutions.js` (solutions + `solutions/[slug]`), `src/data/projects.js` (projects + `case-studies/[slug]`).
 
 ### Data layer — Supabase
 

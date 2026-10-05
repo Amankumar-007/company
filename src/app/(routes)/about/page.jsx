@@ -5,6 +5,10 @@ import { Globe, Smartphone, Palette, ShieldCheck, Clock, Lightbulb, Monitor, Pen
 import { gsap } from 'gsap';
 import { motion } from 'framer-motion';
 
+const initials = (name) => name.split(' ').map((n) => n[0]).join('');
+// Team members without photos yet — shown as initials in the avatar stacks
+const TEAM_INITIALS = ['Mahak Kushwah', 'Hariom', 'Sarthak Bhatnagar', 'Mohit Kumar'].map(initials);
+
 // Navbar Component
 
 // Hero Section Component
@@ -37,8 +41,11 @@ const HeroSection = () => {
               <span className="text-sm font-medium text-gray-800">Trusted over 5,000+</span>
               <div className="flex -space-x-3">
                 <img src="/WhatsApp Image 2026-08-26 at 5.23.57 PM.jpeg" alt="User" className="w-8 h-8 rounded-full border-2 border-[#F6F6F6] object-cover" />
-                <img src="https://i.pravatar.cc/150?img=32" alt="User" className="w-8 h-8 rounded-full border-2 border-[#F6F6F6] object-cover" />
-                <img src="https://i.pravatar.cc/150?img=12" alt="User" className="w-8 h-8 rounded-full border-2 border-[#F6F6F6] object-cover" />
+                {TEAM_INITIALS.slice(0, 2).map((ini, i) => (
+                  <span key={i} aria-hidden="true" className="w-8 h-8 rounded-full border-2 border-[#F6F6F6] bg-gray-200 text-gray-600 text-[10px] font-semibold flex items-center justify-center">
+                    {ini}
+                  </span>
+                ))}
               </div>
             </div>
 
@@ -168,11 +175,11 @@ const AboutTaglineSection = () => {
         viewport={{ once: true }}
       >
         <div className="flex -space-x-3 mb-4">
-          <img src="https://i.pravatar.cc/150?img=32" alt="Team" className="w-10 h-10 md:w-12 md:h-12 rounded-full border-[3px] border-white object-cover" />
-          <img src="https://i.pravatar.cc/150?img=12" alt="Team" className="w-10 h-10 md:w-12 md:h-12 rounded-full border-[3px] border-white object-cover" />
-          <img src="https://i.pravatar.cc/150?img=47" alt="Team" className="w-10 h-10 md:w-12 md:h-12 rounded-full border-[3px] border-white object-cover" />
-          <img src="https://i.pravatar.cc/150?img=5" alt="Team" className="w-10 h-10 md:w-12 md:h-12 rounded-full border-[3px] border-white object-cover" />
-          <img src="https://i.pravatar.cc/150?img=49" alt="Team" className="w-10 h-10 md:w-12 md:h-12 rounded-full border-[3px] border-white object-cover" />
+          {TEAM_INITIALS.map((ini, i) => (
+            <span key={i} aria-hidden="true" className="w-10 h-10 md:w-12 md:h-12 rounded-full border-[3px] border-white bg-gray-200 text-gray-600 text-xs md:text-sm font-semibold flex items-center justify-center">
+              {ini}
+            </span>
+          ))}
           <div className="w-10 h-10 md:w-12 md:h-12 rounded-full border-[3px] border-white bg-[#C3F53C] flex items-center justify-center text-black font-medium text-lg z-10 relative">
             +
           </div>
@@ -212,18 +219,17 @@ const TeamMemberCard = ({ member }) => {
       
       {/* Image Section */}
       <div className="relative w-full aspect-[1/1.1] rounded-[1.5rem] overflow-hidden mt-auto bg-gray-200">
-        <img
-          src={member.image}
-          alt={member.name}
-          className="absolute inset-0 w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500 ease-out"
-          onError={(e) => {
-            e.currentTarget.style.display = 'none';
-            e.currentTarget.nextSibling.style.display = 'flex';
-          }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-200 to-gray-300 items-center justify-center text-gray-500 text-6xl font-bold group-hover:scale-105 transition-transform duration-500 ease-out hidden">
-          {member.name.split(' ').map(n => n[0]).join('')}
-        </div>
+        {member.image ? (
+          <img
+            src={member.image}
+            alt={member.name}
+            className="absolute inset-0 w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500 ease-out"
+          />
+        ) : (
+          <div className="absolute inset-0 bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center text-gray-500 text-6xl font-bold group-hover:scale-105 transition-transform duration-500 ease-out">
+            {initials(member.name)}
+          </div>
+        )}
       </div>
     </div>
   );
@@ -233,10 +239,10 @@ const TeamMemberCard = ({ member }) => {
 const TeamSection = () => {
   const team = [
     { name: "Aman Kumar", role: "Founder & CEO", image: "/WhatsApp Image 2026-08-26 at 5.23.57 PM.jpeg" },
-    { name: "Mahak Kushwah", role: "Chief Operating Officer", image: "https://i.pravatar.cc/300?img=5" },
-    { name: "Hariom", role: "Product Designer", image: "https://i.pravatar.cc/300?img=60" },
-    { name: "Sarthak Bhatnagar", role: "Marketing Manager", image: "https://i.pravatar.cc/300?img=12" },
-    { name: "Mohit Kumar", role: "Customer Success Lead", image: "https://i.pravatar.cc/300?img=33" }
+    { name: "Mahak Kushwah", role: "Chief Operating Officer", image: null },
+    { name: "Hariom", role: "Product Designer", image: null },
+    { name: "Sarthak Bhatnagar", role: "Marketing Manager", image: null },
+    { name: "Mohit Kumar", role: "Customer Success Lead", image: null }
   ];
 
   return (
@@ -492,13 +498,13 @@ const AboutPage = () => {
   }, []);
 
   return (
-    <div className={`${styles.main} min-h-screen bg-white`}>
+    <main className={`${styles.main} min-h-screen bg-white`}>
       <HeroSection />
       <AboutTaglineSection />
       <TeamSection />
       <WhatWeDoSection />
       <CTABannerSection />
-    </div>
+    </main>
   );
 };
 

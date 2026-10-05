@@ -10,7 +10,18 @@ function locationLabel(loc: (typeof locations)[number]) {
   return loc.city ?? loc.country;
 }
 
-export default function LocationsWeServe() {
+interface Props {
+  /** Link each location to this service's page there (defaults to web development). */
+  serviceKey?: string;
+  serviceLabel?: string;
+  /** Location to leave out — the page we're already on. */
+  excludeSlug?: string;
+}
+
+export default function LocationsWeServe({ serviceKey = 'web-development', serviceLabel, excludeSlug }: Props) {
+  const india = indiaLocations.filter((l) => l.slug !== excludeSlug);
+  const intl = intlLocations.filter((l) => l.slug !== excludeSlug);
+
   return (
     <section className="py-16 px-6 bg-white border-t border-gray-100">
       <div className="max-w-6xl mx-auto">
@@ -20,7 +31,7 @@ export default function LocationsWeServe() {
             className="text-2xl sm:text-3xl font-black text-[#0B0D17]"
             style={{ fontFamily: 'var(--font-space-grotesk)' }}
           >
-            Locations We Serve
+            {serviceLabel ? `${serviceLabel} in Other Locations` : 'Locations We Serve'}
           </h2>
         </div>
 
@@ -28,10 +39,10 @@ export default function LocationsWeServe() {
         <div className="mb-10">
           <p className="text-xs font-bold uppercase tracking-widest text-gray-400 mb-4">India</p>
           <div className="flex flex-wrap gap-2">
-            {indiaLocations.map((loc) => (
+            {india.map((loc) => (
               <Link
                 key={loc.slug}
-                href={`/web-development-company-${loc.slug}`}
+                href={`/${serviceKey}-agency-in-${loc.slug}`}
                 className="px-4 py-2 text-sm font-medium bg-[#FAFAFA] border border-gray-200 text-gray-600 rounded-full hover:border-[#DE5D26]/40 hover:text-[#DE5D26] hover:bg-[#DE5D26]/5 transition-all duration-200"
               >
                 {locationLabel(loc)}
@@ -47,10 +58,10 @@ export default function LocationsWeServe() {
         <div>
           <p className="text-xs font-bold uppercase tracking-widest text-gray-400 mb-4">International</p>
           <div className="flex flex-wrap gap-2">
-            {intlLocations.map((loc) => (
+            {intl.map((loc) => (
               <Link
                 key={loc.slug}
-                href={`/web-development-company-${loc.slug}`}
+                href={`/${serviceKey}-agency-in-${loc.slug}`}
                 className="px-4 py-2 text-sm font-medium bg-[#FAFAFA] border border-gray-200 text-gray-600 rounded-full hover:border-[#DE5D26]/40 hover:text-[#DE5D26] hover:bg-[#DE5D26]/5 transition-all duration-200"
               >
                 {locationLabel(loc)}

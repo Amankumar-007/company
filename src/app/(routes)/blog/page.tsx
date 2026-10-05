@@ -8,6 +8,33 @@ import { getRelativeTime } from '@/lib/utils'
 
 const BASE_URL = 'https://www.twofloww.in'
 
+const blogTopics = [
+  {
+    title: 'Web development',
+    description: 'How we build fast, maintainable websites and web apps with Next.js and React, from architecture decisions to deployment and performance tuning.',
+    href: '/services',
+    linkText: 'Explore our development services.',
+  },
+  {
+    title: 'UI/UX design',
+    description: 'Design processes that turn complex products into interfaces people understand, including research, prototyping, and design systems.',
+    href: '/case-studies',
+    linkText: 'See designs in our case studies.',
+  },
+  {
+    title: 'SEO & growth',
+    description: 'Technical SEO, content strategy, and conversion fixes that turn website traffic into enquiries and customers.',
+    href: '/seo-services-agency-in-noida',
+    linkText: 'Learn about our SEO services.',
+  },
+  {
+    title: 'Building digital products',
+    description: 'Lessons from shipping marketplaces, booking platforms, and SaaS tools for startups and businesses across industries.',
+    href: '/industries',
+    linkText: 'Browse the industries we build for.',
+  },
+]
+
 export const metadata: Metadata = {
   title: 'Blog – Digital Agency Insights & Engineering',
   description: 'Fresh insights on web development, UI/UX design, SEO, and digital marketing from the Twofloww team. Practical guides for developers and founders in India.',
@@ -278,6 +305,27 @@ export default async function BlogListingPage(props: Props) {
             </p>
           </div>
         )}
+
+        {/* What we write about — gives every blog view (incl. ?category= filters) real content */}
+        <section className="mt-20 md:mt-28 border-t border-black/10 pt-12 md:pt-16">
+          <h2 className="text-3xl md:text-4xl font-bold text-[#c2410c] font-space-grotesk tracking-tight mb-4">
+            What we write about
+          </h2>
+          <p className="text-gray-600 text-lg max-w-3xl mb-10">
+            The Twofloww blog shares what we learn building websites, apps, and growth campaigns for clients — practical lessons you can apply to your own product, not generic trend pieces.
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 lg:gap-12">
+            {blogTopics.map((topic) => (
+              <div key={topic.title}>
+                <h3 className="text-xl font-bold font-space-grotesk mb-2">{topic.title}</h3>
+                <p className="text-gray-600 leading-relaxed">
+                  {topic.description}{' '}
+                  <Link href={topic.href} className="underline text-[#c2410c] hover:opacity-80">{topic.linkText}</Link>
+                </p>
+              </div>
+            ))}
+          </div>
+        </section>
       </div>
     </main>
     </>

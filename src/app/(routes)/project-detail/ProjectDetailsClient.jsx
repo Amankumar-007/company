@@ -4,45 +4,13 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { ArrowRight, ExternalLink, Monitor, Smartphone } from 'lucide-react';
 import ProjectShowcase from '@/components/ProjectShowcase';
+import TechLogo from '@/components/TechLogo';
 
 export default function ProjectDetailsClient({ project }) {
 
-  const getFaviconUrl = (techName) => {
-    const slugMap = {
-      'React': 'react',
-      'Next.js': 'nextdotjs',
-      'TypeScript': 'typescript',
-      'Node.js': 'nodedotjs',
-      'MongoDB': 'mongodb',
-      'PostgreSQL': 'postgresql',
-      'GraphQL': 'graphql',
-      'AWS': 'amazonwebservices',
-      'AWS S3': 'amazons3',
-      'Docker': 'docker',
-      'JavaScript': 'javascript',
-      'HTML5': 'html5',
-      'Angular': 'angular',
-      'Tailwind CSS': 'tailwindcss',
-      'Flutter': 'flutter',
-      'React Native': 'react',
-      'Swift': 'swift',
-      'Kotlin': 'kotlin',
-      'Firebase': 'firebase',
-      'Google Analytics': 'googleanalytics',
-      'Figma': 'figma',
-      'Shopify': 'shopify',
-      'Stripe': 'stripe',
-      'OpenAI API': 'openai',
-      'WebSockets': 'socketdotio',
-      'Vercel': 'vercel',
-    };
-
-    const slug = slugMap[techName] || techName.toLowerCase().replace(/[^a-z0-9]/g, '');
-    return `https://cdn.simpleicons.org/${slug}`;
-  };
 
   return (
-    <div className="min-h-screen bg-white">
+    <main className="min-h-screen bg-white">
       {/* Minimal Hero Section */}
       <div className="max-w-6xl mx-auto px-4 sm:px-6 pt-10 pb-6 sm:pt-14 sm:pb-8">
         <div className="text-center space-y-5 sm:space-y-7">
@@ -259,14 +227,7 @@ export default function ProjectDetailsClient({ project }) {
                 <div key={index} className="bg-white rounded-2xl p-5 sm:p-6 shadow-sm hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1.5 border border-gray-100 group">
                   <div className="flex flex-col items-center text-center space-y-3">
                     <div className="w-12 h-12 group-hover:scale-110 transition-transform duration-300 flex items-center justify-center">
-                      <img 
-                        src={getFaviconUrl(tech.name)} 
-                        alt={tech.name} 
-                        className="w-full h-full object-contain"
-                        onError={(e) => {
-                          e.target.style.display = 'none';
-                        }}
-                      />
+                      <TechLogo name={tech.name} className="w-full h-full object-contain" />
                     </div>
                     <div className="space-y-1">
                       <h3 className="font-bold text-black text-sm sm:text-base">{tech.name}</h3>
@@ -313,6 +274,6 @@ export default function ProjectDetailsClient({ project }) {
           </div>
         </div>
       )}
-    </div>
+    </main>
   );
 }

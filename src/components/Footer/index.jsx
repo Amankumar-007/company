@@ -127,6 +127,7 @@ export default function Footer() {
               <h4 className="text-[#0B0D17] font-semibold text-[15px] tracking-wide mb-2">Sitemap</h4>
               <a href="/about" className="text-gray-600 hover:text-[#DE5D26] text-[14px] transition-colors font-medium">About Us</a>
               <a href="/services" className="text-gray-600 hover:text-[#DE5D26] text-[14px] transition-colors font-medium">Services</a>
+              <a href="/solutions" className="text-gray-600 hover:text-[#DE5D26] text-[14px] transition-colors font-medium">Solutions</a>
               <a href="/projects" className="text-gray-600 hover:text-[#DE5D26] text-[14px] transition-colors font-medium">Projects</a>
               <a href="/case-studies" className="text-gray-600 hover:text-[#DE5D26] text-[14px] transition-colors font-medium">Case Studies</a>
               <a href="/industries" className="text-gray-600 hover:text-[#DE5D26] text-[14px] transition-colors font-medium">Industries</a>
@@ -167,19 +168,20 @@ export default function Footer() {
             {/* Services */}
             <div className="flex flex-col gap-3">
               <h4 className="text-[#0B0D17] font-semibold text-[15px] tracking-wide mb-2">Services</h4>
-              <a href="#" className="text-gray-600 hover:text-[#DE5D26] text-[14px] transition-colors font-medium">Web Development</a>
-              <a href="#" className="text-gray-600 hover:text-[#DE5D26] text-[14px] transition-colors font-medium">Mobile Apps</a>
-              <a href="#" className="text-gray-600 hover:text-[#DE5D26] text-[14px] transition-colors font-medium">UI/UX Design</a>
-              <a href="#" className="text-gray-600 hover:text-[#DE5D26] text-[14px] transition-colors font-medium">SEO & Marketing</a>
+              <Link href="/web-development-agency-in-noida" className="text-gray-600 hover:text-[#DE5D26] text-[14px] transition-colors font-medium">Web Development</Link>
+              <Link href="/app-development-agency-in-noida" className="text-gray-600 hover:text-[#DE5D26] text-[14px] transition-colors font-medium">Mobile Apps</Link>
+              <Link href="/ui-ux-design-agency-in-noida" className="text-gray-600 hover:text-[#DE5D26] text-[14px] transition-colors font-medium">UI/UX Design</Link>
+              <Link href="/seo-services-agency-in-noida" className="text-gray-600 hover:text-[#DE5D26] text-[14px] transition-colors font-medium">SEO & Marketing</Link>
+              <Link href="/ecommerce-development-agency-in-noida" className="text-gray-600 hover:text-[#DE5D26] text-[14px] transition-colors font-medium">eCommerce Development</Link>
             </div>
 
             {/* Areas We Serve */}
             <div className="flex flex-col gap-3">
               <h4 className="text-[#0B0D17] font-semibold text-[15px] tracking-wide mb-2">Areas We Serve</h4>
-              <Link href="/web-development-company-noida" className="text-gray-600 hover:text-[#DE5D26] text-[14px] transition-colors font-medium">Noida</Link>
-              <Link href="/web-development-company-delhi" className="text-gray-600 hover:text-[#DE5D26] text-[14px] transition-colors font-medium">Delhi</Link>
-              <Link href="/web-development-company-mumbai" className="text-gray-600 hover:text-[#DE5D26] text-[14px] transition-colors font-medium">Mumbai</Link>
-              <Link href="/web-development-company-bangalore" className="text-gray-600 hover:text-[#DE5D26] text-[14px] transition-colors font-medium">Bangalore</Link>
+              <Link href="/web-development-agency-in-noida" className="text-gray-600 hover:text-[#DE5D26] text-[14px] transition-colors font-medium">Noida</Link>
+              <Link href="/web-development-agency-in-delhi" className="text-gray-600 hover:text-[#DE5D26] text-[14px] transition-colors font-medium">Delhi</Link>
+              <Link href="/web-development-agency-in-mumbai" className="text-gray-600 hover:text-[#DE5D26] text-[14px] transition-colors font-medium">Mumbai</Link>
+              <Link href="/web-development-agency-in-bangalore" className="text-gray-600 hover:text-[#DE5D26] text-[14px] transition-colors font-medium">Bangalore</Link>
               <Link href="/locations" className="text-[#DE5D26] hover:underline text-[13px] font-semibold mt-1" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>View all &rarr;</Link>
             </div>
 

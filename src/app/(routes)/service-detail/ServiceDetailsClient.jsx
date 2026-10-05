@@ -4,6 +4,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, Check, Star, Award, Zap, Code, Smartphone, Users, ChevronDown, Sparkles, CheckCircle2 } from 'lucide-react';
 import { openConsultModal } from '@/components/ConsultModal';
+import TechLogo from '@/components/TechLogo';
 
 export default function ServiceDetailsClient({ service }) {
   const [activeTab, setActiveTab] = useState('overview');
@@ -21,53 +22,6 @@ export default function ServiceDetailsClient({ service }) {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  const getTechIconUrl = (techName) => {
-    const slugMap = {
-      'React': 'react',
-      'Next.js': 'nextdotjs',
-      'TypeScript': 'typescript',
-      'Node.js': 'nodedotjs',
-      'MongoDB': 'mongodb',
-      'PostgreSQL': 'postgresql',
-      'GraphQL': 'graphql',
-      'AWS': 'amazonwebservices',
-      'Docker': 'docker',
-      'JavaScript': 'javascript',
-      'HTML5': 'html5',
-      'Angular': 'angular',
-      'Tailwind CSS': 'tailwindcss',
-      'Flutter': 'flutter',
-      'React Native': 'react',
-      'Swift': 'swift',
-      'Kotlin': 'kotlin',
-      'Firebase': 'firebase',
-      'Google Analytics': 'googleanalytics',
-      'SEMrush': 'semrush',
-      'Ahrefs': 'ahrefs',
-      'Google Ads': 'googleads',
-      'Facebook Ads': 'meta',
-      'Figma': 'figma',
-      'Adobe XD': 'adobexd',
-      'Sketch': 'sketch',
-      'Principle': 'framer',
-      'InVision': 'invision',
-      'Zeplin': 'zeplin',
-      'Google Cloud': 'googlecloud',
-      'Azure': 'microsoftazure',
-      'Kubernetes': 'kubernetes',
-      'Terraform': 'terraform',
-      'Shopify': 'shopify',
-      'WooCommerce': 'woocommerce',
-      'Magento': 'magento',
-      'Stripe': 'stripe',
-      'PayPal': 'paypal',
-      'Inventory APIs': 'postman',
-      'Content CMS': 'strapi',
-    };
-
-    const slug = slugMap[techName] || techName.toLowerCase().replace(/[^a-z0-9]/g, '');
-    return `https://cdn.simpleicons.org/${slug}`;
-  };
 
   const getServiceImages = (sId) => {
     const imageMap = {
@@ -145,7 +99,7 @@ export default function ServiceDetailsClient({ service }) {
   };
 
   return (
-    <div className="min-h-screen bg-white text-black font-sans selection:bg-[#C3F53C] selection:text-black">
+    <main className="min-h-screen bg-white text-black font-sans selection:bg-[#C3F53C] selection:text-black">
 
       {/* ── UNCHANGED: HERO SECTION ────────────────────────────────────────── */}
       <section className="relative min-h-[60vh] flex flex-col justify-center overflow-hidden bg-white">
@@ -570,14 +524,7 @@ export default function ServiceDetailsClient({ service }) {
                   className="bg-[#F8F9FA] rounded-3xl p-6 border border-gray-200/60 shadow-sm hover:shadow-xl hover:bg-white hover:border-black transition-all duration-300 flex flex-col items-center text-center group cursor-default"
                 >
                   <div className="w-14 h-14 rounded-2xl bg-white border border-gray-200/60 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 shadow-sm">
-                    <img
-                      src={getTechIconUrl(techName)}
-                      alt={techName}
-                      className="w-7 h-7 object-contain"
-                      onError={(e) => {
-                        e.currentTarget.style.display = 'none';
-                      }}
-                    />
+                    <TechLogo name={techName} className="w-7 h-7 object-contain" />
                   </div>
                   <h4 className="font-bold text-base text-black mb-1" style={{ fontFamily: 'var(--font-space-grotesk)' }}>
                     {techName}
@@ -626,6 +573,6 @@ export default function ServiceDetailsClient({ service }) {
         </div>
       </section>
 
-    </div>
+    </main>
   );
 }

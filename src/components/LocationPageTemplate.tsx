@@ -4,7 +4,6 @@ import { useState } from 'react';
 import Link from 'next/link';
 import {
   ChevronDown,
-  CheckCircle2,
   Cpu,
   Layers,
   UserCheck,
@@ -14,19 +13,24 @@ import {
   PenTool,
   Megaphone,
   Globe,
-  Cloud,
   Lightbulb,
   Clock,
 } from 'lucide-react';
 import { motion, Variants } from 'framer-motion';
 import LocationsWeServe from '@/components/LocationsWeServe';
 import GlobalReach from '@/components/GlobalReach';
+import TechLogo from '@/components/TechLogo';
 import { openConsultModal } from '@/components/ConsultModal';
+import { getLocationServiceContent } from '@/data/location-service-content';
+import locationsData from '@/data/locations-data.json';
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 
+// `key` matches locations-data.json services, so each card links to that
+// service's page in the same location (internal linking across the cluster).
 const SERVICES = [
   {
+    key: 'web-development',
     icon: <Monitor className="w-7 h-7 text-black group-hover:text-white transition-colors duration-300" strokeWidth={1.5} />,
     label: 'Web Development',
     desc: 'Fast, scalable websites & web apps engineered to convert visitors into customers.',
@@ -35,6 +39,7 @@ const SERVICES = [
     features: ['Frontend', 'Backend', 'E-commerce'],
   },
   {
+    key: 'app-development',
     icon: <Smartphone className="w-7 h-7 text-black transition-colors duration-300" strokeWidth={1.5} />,
     label: 'Mobile App Dev',
     desc: 'Native & cross-platform iOS and Android apps built with React Native and Flutter.',
@@ -43,6 +48,7 @@ const SERVICES = [
     features: ['iOS', 'Android', 'Cross-Platform'],
   },
   {
+    key: 'ui-ux-design',
     icon: <PenTool className="w-7 h-7 text-black group-hover:text-white transition-colors duration-300" strokeWidth={1.5} />,
     label: 'UI/UX Design',
     desc: 'Research-backed, pixel-perfect interfaces that users love and that drive measurable results.',
@@ -51,6 +57,7 @@ const SERVICES = [
     features: ['Wireframing', 'Prototyping', 'Design Systems'],
   },
   {
+    key: 'ecommerce-development',
     icon: <Globe className="w-7 h-7 text-black group-hover:text-white transition-colors duration-300" strokeWidth={1.5} />,
     label: 'eCommerce',
     desc: 'Custom Shopify, WooCommerce & headless storefronts built to sell at scale.',
@@ -59,6 +66,7 @@ const SERVICES = [
     features: ['Shopify', 'WooCommerce', 'Headless'],
   },
   {
+    key: 'seo-services',
     icon: <Megaphone className="w-7 h-7 text-black group-hover:text-white transition-colors duration-300" strokeWidth={1.5} />,
     label: 'SEO Services',
     desc: 'Rank higher, drive qualified organic traffic, and grow revenue sustainably.',
@@ -67,12 +75,13 @@ const SERVICES = [
     features: ['On-Page SEO', 'Technical SEO', 'Link Building'],
   },
   {
-    icon: <Cloud className="w-7 h-7 text-black group-hover:text-white transition-colors duration-300" strokeWidth={1.5} />,
-    label: 'Cloud Solutions',
-    desc: 'Scalable, cost-effective infrastructure on AWS, GCP, and Azure.',
-    bgImage: '/services/cloud.png',
+    key: 'web-design',
+    icon: <Layers className="w-7 h-7 text-black group-hover:text-white transition-colors duration-300" strokeWidth={1.5} />,
+    label: 'Web Design',
+    desc: 'Conversion-focused, responsive website designs that make your business look credible.',
+    bgImage: '/services/web.jpg',
     hoverColor: 'group-hover:bg-[#1A1A1A]',
-    features: ['AWS', 'GCP', 'Azure'],
+    features: ['Redesigns', 'Landing Pages', 'Responsive'],
   },
 ];
 
@@ -101,8 +110,14 @@ interface Props {
   h1: string;
   intro: string;
   faqs: FAQ[];
+  serviceKey?: string;
   serviceLabel?: string;
 }
+
+// Nearby-area names that are also location pages, so we can link to them
+const LOCATION_SLUG_BY_NAME = new Map(
+  locationsData.locations.map((l) => [(l.city ?? l.country).toLowerCase(), l.slug])
+);
 
 // ─── Motion Variants ─────────────────────────────────────────────────────────
 
@@ -181,8 +196,12 @@ function FAQItem({ q, a, idx }: FAQ & { idx: number }) {
 
 // ─── Main Component ───────────────────────────────────────────────────────────
 
-export default function LocationPageTemplate({ loc, h1, intro, faqs, serviceLabel = 'Web Development' }: Props) {
+export default function LocationPageTemplate({ loc, h1, intro, faqs, serviceKey = 'web-development', serviceLabel = 'Web Development' }: Props) {
   const place = loc.type === 'country' ? loc.country : loc.city!;
+  const content = getLocationServiceContent(serviceKey);
+  const overview: string[] = content.overview(place);
+  // Mid-sentence form: "SEO", "UI/UX design" (not "seo services", "ui/ux design")
+  const serviceShort = locationsData.services.find((s) => s.key === serviceKey)?.short ?? serviceLabel;
 
   return (
     <main
@@ -320,7 +339,7 @@ export default function LocationPageTemplate({ loc, h1, intro, faqs, serviceLabe
           style={{ fontFamily: 'var(--font-space-grotesk), sans-serif' }}
         >
           <span className="block mb-2 md:mb-4">
-            <RenderAnimatedText text={`A premium ${serviceLabel.toLowerCase()} partner`} />
+            <RenderAnimatedText text={`A premium ${serviceShort} partner`} />
           </span>
           <span className="flex items-center justify-center flex-wrap gap-2 md:gap-3 mb-2 md:mb-4">
             <RenderAnimatedText text="dedicated to engineering" />
@@ -379,11 +398,13 @@ export default function LocationPageTemplate({ loc, h1, intro, faqs, serviceLabe
             variants={staggerContainer}
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
           >
-            {SERVICES.map((service, index) => (
+            {SERVICES.map((service) => {
+              const isCurrent = service.key === serviceKey;
+              return (
               <motion.div
-                key={index}
+                key={service.key}
                 variants={fadeInUp}
-                className={`group bg-white rounded-[2rem] p-8 lg:p-10 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] transition-all duration-500 border border-gray-100 flex flex-col cursor-pointer transform hover:-translate-y-2`}
+                className={`group relative bg-white rounded-[2rem] p-8 lg:p-10 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] transition-all duration-500 border flex flex-col transform hover:-translate-y-2 ${isCurrent ? 'border-black' : 'border-gray-100'}`}
               >
                 <div className="flex justify-between items-start mb-8">
                   <div className={`w-14 h-14 rounded-2xl bg-gray-50 flex items-center justify-center ${service.hoverColor} transition-colors duration-500`}>
@@ -396,7 +417,16 @@ export default function LocationPageTemplate({ loc, h1, intro, faqs, serviceLabe
                     </svg>
                   </div>
                 </div>
-                <h3 className="text-2xl font-semibold mb-4 text-black tracking-tight">{service.label}</h3>
+                <h3 className="text-2xl font-semibold mb-4 text-black tracking-tight">
+                  {isCurrent ? (
+                    service.label
+                  ) : (
+                    // Stretched link: the whole card is clickable, one anchor per card
+                    <Link href={`/${service.key}-agency-in-${loc.slug}`} className="after:absolute after:inset-0 after:content-['']">
+                      {service.label} in {place}
+                    </Link>
+                  )}
+                </h3>
                 <p className="text-gray-500 mb-8 leading-relaxed text-sm">{service.desc}</p>
                 <div className="flex flex-wrap gap-2 mt-auto">
                   {service.features.map((feature, fIndex) => (
@@ -409,7 +439,8 @@ export default function LocationPageTemplate({ loc, h1, intro, faqs, serviceLabe
                   ))}
                 </div>
               </motion.div>
-            ))}
+              );
+            })}
           </motion.div>
         </div>
       </section>
@@ -542,7 +573,7 @@ export default function LocationPageTemplate({ loc, h1, intro, faqs, serviceLabe
               Why choose TwoFloww
             </h2>
             <p className="text-gray-500 max-w-2xl text-base md:text-lg leading-relaxed">
-              With proven expertise, we are a trusted {serviceLabel.toLowerCase()} agency, offering customized digital solutions for {place} businesses and global clients.
+              With proven expertise, we are a trusted {serviceShort} agency, offering customized digital solutions for {place} businesses and global clients.
             </p>
           </div>
 
@@ -627,33 +658,20 @@ export default function LocationPageTemplate({ loc, h1, intro, faqs, serviceLabe
               className="text-4xl md:text-5xl lg:text-[4rem] font-medium text-black tracking-tight mb-8"
               style={{ fontFamily: 'var(--font-space-grotesk), sans-serif', letterSpacing: '-0.03em' }}
             >
-              How we execute your project
+              How we deliver {serviceShort} projects
             </h2>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
-            {/* Steps list */}
-            <motion.ul
+            <motion.div
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.1 }}
               variants={staggerContainer}
-              className="space-y-5"
             >
-              {[
-                `Rigorous discovery mapping out requirements in ${place}`,
-                'High-fidelity UX design & prototyping phase',
-                'Next.js & React engineering for lightning-fast speeds',
-                'Comprehensive QA testing before launch',
-                'Ongoing support, monitoring & traffic growth services',
-              ].map((item) => (
-                <motion.li key={item} variants={fadeInUp} className="flex items-start gap-4 text-gray-600 text-base font-medium">
-                  <div className="w-6 h-6 rounded-full bg-[#C3F53C] flex items-center justify-center shrink-0 mt-0.5">
-                    <CheckCircle2 className="w-4 h-4 text-black" />
-                  </div>
-                  <span>{item}</span>
-                </motion.li>
-              ))}
+              <motion.p variants={fadeInUp} className="text-gray-600 text-base md:text-lg leading-relaxed">
+                {overview[2]}
+              </motion.p>
               <motion.div variants={fadeInUp}>
                 <Link
                   href="/projects"
@@ -667,7 +685,7 @@ export default function LocationPageTemplate({ loc, h1, intro, faqs, serviceLabe
                   </div>
                 </Link>
               </motion.div>
-            </motion.ul>
+            </motion.div>
 
             {/* 4-step staircase cards */}
             <motion.div
@@ -677,12 +695,9 @@ export default function LocationPageTemplate({ loc, h1, intro, faqs, serviceLabe
               variants={staggerContainer}
               className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6"
             >
-              {[
-                { n: '01', t: 'Discovery', d: `We map your goals and the competitive landscape in ${place}.` },
-                { n: '02', t: 'Design', d: 'Wireframes and high-fidelity prototypes approved before we code.' },
-                { n: '03', t: 'Build', d: 'Clean, tested code with full-stack engineers on every project.' },
-                { n: '04', t: 'Launch', d: 'Go-live, monitor, iterate. Your growth is the KPI.' },
-              ].map(({ n, t, d }) => (
+              {content.process.map(({ t, d }: { t: string; d: string }, i: number) => {
+                const n = String(i + 1).padStart(2, '0');
+                return (
                 <motion.div
                   variants={fadeInUp}
                   key={n}
@@ -695,7 +710,7 @@ export default function LocationPageTemplate({ loc, h1, intro, faqs, serviceLabe
                     >
                       {n}
                     </p>
-                    <h4 className="font-bold text-black text-lg mb-2">{t}</h4>
+                    <h3 className="font-bold text-black text-lg mb-2">{t}</h3>
                     <p className="text-gray-500 text-sm leading-relaxed">{d}</p>
                   </div>
                   <div className="mt-6 w-8 h-8 rounded-full bg-white border border-gray-200 flex items-center justify-center text-gray-400 group-hover:bg-[#C3F53C] group-hover:border-[#C3F53C] group-hover:text-black transition-all duration-300">
@@ -704,7 +719,8 @@ export default function LocationPageTemplate({ loc, h1, intro, faqs, serviceLabe
                     </svg>
                   </div>
                 </motion.div>
-              ))}
+                );
+              })}
             </motion.div>
           </div>
         </div>
@@ -724,73 +740,21 @@ export default function LocationPageTemplate({ loc, h1, intro, faqs, serviceLabe
             Technologies
           </h2>
           <p className="text-gray-500 text-base leading-relaxed max-w-3xl mx-auto">
-            At our {serviceLabel.toLowerCase()} company in {place}, we offer custom and scalable solutions integrating advanced technology to automate workflows, improve user experience, and enhance performance.
+            The tools our {serviceShort} team in {place} uses day to day — chosen for reliability, performance, and how easily your own team can maintain the result.
           </p>
         </div>
 
-        <style>{`
-          @keyframes marqueeLeft { 0% { transform: translateX(0); } 100% { transform: translateX(calc(-100% - 1.5rem)); } }
-          @keyframes marqueeRight { 0% { transform: translateX(calc(-100% - 1.5rem)); } 100% { transform: translateX(0); } }
-          .animate-marquee-left { animation: marqueeLeft 30s linear infinite; }
-          .animate-marquee-right { animation: marqueeRight 30s linear infinite; }
-          .mask-gradient {
-            mask-image: linear-gradient(to right, transparent, white 15%, white 85%, transparent);
-            -webkit-mask-image: linear-gradient(to right, transparent, white 15%, white 85%, transparent);
-          }
-        `}</style>
-
-        {/* Marquee Track 1 */}
-        <div className="relative w-full overflow-hidden mask-gradient mb-6 py-2 flex gap-6">
-          {[0, 1].map((dup) => (
-            <div key={dup} className={`flex gap-6 shrink-0 animate-marquee-left`} aria-hidden={dup === 1}>
-              {[
-                { slug: 'nextdotjs', color: '000000', name: 'Next.js' },
-                { slug: 'react', color: '61DAFB', name: 'React' },
-                { slug: 'typescript', color: '3178C6', name: 'TypeScript' },
-                { slug: 'flutter', color: '02569B', name: 'Flutter' },
-                { slug: 'html5', color: 'E34F26', name: 'HTML5' },
-                { slug: 'css3', color: '1572B6', name: 'CSS3' },
-                { slug: 'bootstrap', color: '7952B3', name: 'Bootstrap' },
-                { slug: 'javascript', color: 'F7DF1E', name: 'JavaScript' },
-                { slug: 'figma', color: 'F24E1E', name: 'Figma' },
-              ].map((tech, idx) => (
-                <div
-                  key={`t1-${dup}-${idx}`}
-                  className="w-16 h-16 sm:w-24 sm:h-24 bg-white border border-gray-100 rounded-[1.5rem] shadow-[0_8px_30px_rgba(0,0,0,0.02)] flex items-center justify-center hover:shadow-[0_15px_30px_rgba(0,0,0,0.08)] hover:border-gray-300 hover:scale-105 transition-all duration-300 group shrink-0"
-                >
-                  <img src={`https://cdn.simpleicons.org/${tech.slug}/${tech.color}`} alt={tech.name} className="w-10 h-10 sm:w-12 sm:h-12 object-contain group-hover:rotate-12 transition-transform duration-300" loading="lazy" />
-                </div>
-              ))}
-            </div>
+        <ul className="max-w-5xl mx-auto flex flex-wrap justify-center gap-4 sm:gap-6">
+          {content.tech.map((name: string) => (
+            <li
+              key={name}
+              className="w-28 sm:w-32 bg-white border border-gray-100 rounded-[1.5rem] p-4 flex flex-col items-center gap-3 shadow-[0_8px_30px_rgba(0,0,0,0.02)]"
+            >
+              <TechLogo name={name} className="w-10 h-10 object-contain" />
+              <span className="text-xs font-semibold text-gray-700 text-center">{name}</span>
+            </li>
           ))}
-        </div>
-
-        {/* Marquee Track 2 */}
-        <div className="relative w-full overflow-hidden mask-gradient py-2 flex gap-6">
-          {[0, 1].map((dup) => (
-            <div key={dup} className={`flex gap-6 shrink-0 animate-marquee-right`} aria-hidden={dup === 1}>
-              {[
-                { slug: 'woocommerce', color: '96588A', name: 'WooCommerce' },
-                { slug: 'mysql', color: '4479A1', name: 'MySQL' },
-                { slug: 'mongodb', color: '47A248', name: 'MongoDB' },
-                { slug: 'laravel', color: 'FF2D20', name: 'Laravel' },
-                { slug: 'php', color: '777BB4', name: 'PHP' },
-                { slug: 'vuedotjs', color: '4FC08D', name: 'Vue.js' },
-                { slug: 'angular', color: 'DD0031', name: 'Angular' },
-                { slug: 'supabase', color: '3ECF8E', name: 'Supabase' },
-                { slug: 'tailwindcss', color: '06B6D4', name: 'Tailwind CSS' },
-                { slug: 'nodedotjs', color: '339933', name: 'Node.js' },
-              ].map((tech, idx) => (
-                <div
-                  key={`t2-${dup}-${idx}`}
-                  className="w-16 h-16 sm:w-24 sm:h-24 bg-white border border-gray-100 rounded-[1.5rem] shadow-[0_8px_30px_rgba(0,0,0,0.02)] flex items-center justify-center hover:shadow-[0_15px_30px_rgba(0,0,0,0.08)] hover:border-gray-300 hover:scale-105 transition-all duration-300 group shrink-0"
-                >
-                  <img src={`https://cdn.simpleicons.org/${tech.slug}/${tech.color}`} alt={tech.name} className="w-10 h-10 sm:w-12 sm:h-12 object-contain group-hover:-rotate-12 transition-transform duration-300" loading="lazy" />
-                </div>
-              ))}
-            </div>
-          ))}
-        </div>
+        </ul>
       </section>
 
       {/* ── FAQ ──────────────────────────────────────────────────────────── */}
@@ -836,14 +800,17 @@ export default function LocationPageTemplate({ loc, h1, intro, faqs, serviceLabe
               <span className="text-xs font-bold tracking-[0.2em] uppercase">Also serving nearby areas</span>
             </div>
             <div className="flex flex-wrap justify-center gap-3 max-w-3xl mx-auto">
-              {loc.nearby_areas.map((area) => (
-                <span
-                  key={area}
-                  className="px-6 py-3 text-sm font-medium bg-white border border-gray-200 text-gray-600 rounded-full shadow-sm hover:bg-black hover:text-white hover:border-black transition-all duration-300 cursor-default"
-                >
-                  {area}
-                </span>
-              ))}
+              {loc.nearby_areas.map((area) => {
+                const chip = 'px-6 py-3 text-sm font-medium bg-white border border-gray-200 text-gray-600 rounded-full shadow-sm hover:bg-black hover:text-white hover:border-black transition-all duration-300';
+                const areaSlug = LOCATION_SLUG_BY_NAME.get(area.toLowerCase());
+                return areaSlug ? (
+                  <Link key={area} href={`/${serviceKey}-agency-in-${areaSlug}`} className={chip}>
+                    {serviceLabel} in {area}
+                  </Link>
+                ) : (
+                  <span key={area} className={`${chip} cursor-default`}>{area}</span>
+                );
+              })}
             </div>
           </div>
         </section>
@@ -875,26 +842,21 @@ export default function LocationPageTemplate({ loc, h1, intro, faqs, serviceLabe
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 text-gray-500 text-base leading-relaxed">
               <div className="space-y-5">
+                <p>{overview[0]}</p>
+                <p>{overview[1]}</p>
                 <p>
-                  TwoFloww is a full-service {serviceLabel.toLowerCase()} company serving businesses in {place} and across India. Since our founding, we have delivered over 150 digital projects — from sleek corporate websites to complex multi-vendor e-commerce platforms and on-demand mobile applications.
-                </p>
-                <p>
-                  Our {serviceLabel.toLowerCase()} team based in Noida, Delhi NCR understands the competitive local business landscape. Whether you are a startup looking to launch your first product or an established enterprise modernising your digital presence, we design and build solutions that are fast, scalable, and conversion-optimised.
-                </p>
-                <p>
-                  Businesses in {place} trust TwoFloww for our transparent pricing, milestone-based delivery, and commitment to long-term partnership — not just one-off projects. Every engagement includes full source-code ownership, post-launch support, and dedicated project management.
+                  Our team is based in {locationsData.brand.address_india} and works with clients in {place} on milestone-based engagements, with full source-code ownership and post-launch support included. Book a free consultation and we will outline an approach tailored to your goals and budget.
                 </p>
               </div>
-              <div className="space-y-5">
-                <p>
-                  Our technology stack is built for performance. We use Next.js and React for blazing-fast web experiences, Flutter and React Native for cross-platform mobile apps, and Supabase, Node.js, and PostgreSQL for robust back-end infrastructure.
-                </p>
-                <p>
-                  For {place} businesses requiring SEO and digital marketing, our strategies are grounded in technical excellence. We conduct comprehensive audits, implement structured data, optimise Core Web Vitals, and build authoritative link profiles that drive sustainable organic traffic growth.
-                </p>
-                <p>
-                  Ready to take your {place} business to the next level? Our team offers a free 30-minute consultation where we analyse your current digital presence and outline a custom strategy tailored to your market, budget, and growth goals.
-                </p>
+              <div>
+                <h3 className="text-xl font-semibold text-black mb-5">What our {serviceShort} service includes</h3>
+                <ul className="space-y-4">
+                  {content.deliverables.map(({ title, desc }: { title: string; desc: string }) => (
+                    <li key={title}>
+                      <strong className="text-black font-semibold">{title}</strong> — {desc}
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
           </motion.div>
@@ -903,7 +865,7 @@ export default function LocationPageTemplate({ loc, h1, intro, faqs, serviceLabe
 
       {/* ── All Locations ────────────────────────────────────────────────── */}
       <div className="bg-white">
-        <LocationsWeServe />
+        <LocationsWeServe serviceKey={serviceKey} serviceLabel={serviceLabel} excludeSlug={loc.slug} />
       </div>
 
       {/* ── CTA Banner ───────────────────────────────────────────────────── */}

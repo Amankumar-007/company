@@ -178,7 +178,10 @@ export default async function SolutionPage({ params }) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
         />
       )}
-      <SolutionDetailClient solution={safeSolution} />
+      <SolutionDetailClient
+        solution={safeSolution}
+        related={solutionsData.filter((s) => s.slug !== solution.slug).map((s) => ({ slug: s.slug, title: s.title }))}
+      />
     </>
   );
 }

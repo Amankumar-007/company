@@ -1,13 +1,11 @@
 import { MetadataRoute } from 'next'
 import { createClient } from '@/utils/supabase/server'
-import { targetLocations } from '@/data/seo-locations'
 import locationsData from '@/data/locations-data.json'
 import { solutionsData } from '@/data/solutions'
 import { industries } from '@/data/industries'
 
 const BASE_URL = 'https://www.twofloww.in'
 
-import { services as servicesList } from '@/data/services'
 import { projects as projectsList } from '@/data/projects'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -24,12 +22,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: 0.8,
     })) || []
 
-    const servicePages = servicesList.map((service) => ({
-        url: `${BASE_URL}/service-detail?id=${service.id}`,
-        lastModified: new Date(),
-        changeFrequency: 'weekly' as const,
-        priority: 0.9,
-    }))
+    // service-detail?id= pages are noindexed via X-Robots-Tag (next.config.ts),
+    // so they are deliberately left out — listing noindexed URLs here sends
+    // Google conflicting signals.
 
     // Case studies use clean, indexable URLs — project-detail?id= is
     // noindexed (query-param route), so it's intentionally excluded here.
@@ -40,34 +35,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: 0.85,
     }))
 
-    const seoServicesToGenerate = ['digital-agency', 'web-agency', 'web-development', 'seo-services', 'ecommerce-solutions']
-    const programmaticSeoPages = targetLocations.flatMap(location =>
-        seoServicesToGenerate.map(service => ({
-            url: `${BASE_URL}/best-${service}-in-${location.id}`,
-            lastModified: new Date(),
-            changeFrequency: 'weekly' as const,
-            priority: 0.8,
-        }))
-    )
-
-    // Location company pages — one per city/country in locations-data.json
-    const locationCompanyPages = locationsData.locations.flatMap(loc => {
-        const oldPage = {
-            url: `${BASE_URL}/web-development-company-${loc.slug}`,
-            lastModified: new Date(),
-            changeFrequency: 'monthly' as const,
-            priority: loc.is_home_base ? 1.0 : 0.8,
-        };
-        
-        const newPages = locationsData.services.map(service => ({
+    // One page per location × service. Legacy web-development-company-* and
+    // best-*-in-* URLs 301 to these (next.config.ts), so they're not listed.
+    const locationServicePages = locationsData.locations.flatMap(loc =>
+        locationsData.services.map(service => ({
             url: `${BASE_URL}/${service.key}-agency-in-${loc.slug}`,
             lastModified: new Date(),
             changeFrequency: 'monthly' as const,
             priority: loc.is_home_base ? 1.0 : 0.8,
-        }));
-
-        return [oldPage, ...newPages];
-    })
+        }))
+    )
 
     const solutionsPages = solutionsData.map((solution) => ({
         url: `${BASE_URL}/solutions/${solution.slug}`,
@@ -150,10 +127,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             priority: 0.9,
         },
         ...blogPages,
-        ...servicePages,
         ...caseStudyPages,
-        ...programmaticSeoPages,
-        ...locationCompanyPages,
+        ...locationServicePages,
         ...solutionsPages,
         ...industryPages,
     ]

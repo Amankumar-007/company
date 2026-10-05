@@ -5,6 +5,7 @@ import { useState, useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Image from 'next/image'
+import TechLogo from '@/components/TechLogo';
 
 // Register GSAP plugins
 if (typeof window !== 'undefined') {
@@ -131,54 +132,6 @@ const ServicesPage = () => {
     }
   ]
 
-  // Tech icon mapping function - fetches crisp icons from internet CDN
-  const getTechIcon = (techName: string) => {
-    const slugMap: Record<string, string> = {
-      'React': 'react',
-      'Next.js': 'nextdotjs',
-      'TypeScript': 'typescript',
-      'Node.js': 'nodedotjs',
-      'MongoDB': 'mongodb',
-      'PostgreSQL': 'postgresql',
-      'GraphQL': 'graphql',
-      'AWS': 'amazonwebservices',
-      'Docker': 'docker',
-      'JavaScript': 'javascript',
-      'HTML5': 'html5',
-      'Angular': 'angular',
-      'Tailwind CSS': 'tailwindcss',
-      'Flutter': 'flutter',
-      'React Native': 'react',
-      'Swift': 'swift',
-      'Kotlin': 'kotlin',
-      'Firebase': 'firebase',
-      'Google Analytics': 'googleanalytics',
-      'SEMrush': 'semrush',
-      'Ahrefs': 'ahrefs',
-      'Google Ads': 'googleads',
-      'Facebook Ads': 'meta',
-      'Figma': 'figma',
-      'Adobe XD': 'adobexd',
-      'Sketch': 'sketch',
-      'Principle': 'framer',
-      'InVision': 'invision',
-      'Zeplin': 'zeplin',
-      'Google Cloud': 'googlecloud',
-      'Azure': 'microsoftazure',
-      'Kubernetes': 'kubernetes',
-      'Terraform': 'terraform',
-      'Shopify': 'shopify',
-      'WooCommerce': 'woocommerce',
-      'Magento': 'magento',
-      'Stripe': 'stripe',
-      'PayPal': 'paypal',
-      'Inventory APIs': 'postman',
-      'Content CMS': 'strapi',
-    };
-
-    const slug = slugMap[techName] || techName.toLowerCase().replace(/[^a-z0-9]/g, '');
-    return `https://cdn.simpleicons.org/${slug}`;
-  };
 
   useEffect(() => {
     if (heroRef.current) {
@@ -254,7 +207,7 @@ const ServicesPage = () => {
 
 
   return (
-    <div className="min-h-screen bg-white text-black relative">
+    <main className="min-h-screen bg-white text-black relative">
       {/* Hero Section */}
       <section ref={heroRef} className="relative py-16 px-4 md:px-12 lg:px-24 overflow-hidden flex flex-col items-center justify-center text-center">
         <ServicesPattern />
@@ -366,14 +319,7 @@ const ServicesPage = () => {
                         className="w-10 h-10 flex items-center justify-center bg-gray-50 rounded-xl border border-gray-200 hover:border-black transition-all duration-300 group/icon"
                         title={tech}
                       >
-                        <img
-                          src={getTechIcon(tech)}
-                          alt={tech}
-                          className="w-5 h-5 object-contain transition-transform duration-300 group-hover/icon:scale-110"
-                          onError={(e) => {
-                            (e.currentTarget as HTMLImageElement).style.display = 'none';
-                          }}
-                        />
+                        <TechLogo name={tech} className="w-5 h-5 object-contain transition-transform duration-300 group-hover/icon:scale-110" />
                       </div>
                     ))}
                     {service.technologies.length > 4 && (
@@ -460,7 +406,7 @@ const ServicesPage = () => {
           </div>
         </div>
       </section>
-    </div>
+    </main>
   )
 }
 

@@ -94,7 +94,7 @@ export default async function IndustryPage({ params }) {
   };
 
   return (
-    <div className="min-h-screen bg-white">
+    <main className="min-h-screen bg-white">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify([breadcrumbSchema, serviceSchema]) }}
@@ -185,6 +185,24 @@ export default async function IndustryPage({ params }) {
           Book a Free Consultation
         </Link>
       </div>
-    </div>
+
+      <nav aria-label="Other industries" className="max-w-4xl mx-auto px-6 pb-24 border-t border-gray-100 pt-12">
+        <h2 className="text-2xl font-bold mb-6">Other industries we build for</h2>
+        <ul className="flex flex-wrap gap-3">
+          {getAllIndustries()
+            .filter((i) => i.slug !== industry.slug)
+            .map((i) => (
+              <li key={i.slug}>
+                <Link
+                  href={`/industries/${i.slug}`}
+                  className="inline-block px-5 py-2.5 rounded-full border border-gray-200 text-sm font-medium text-gray-700 hover:border-gray-900 hover:text-gray-900 transition-colors"
+                >
+                  {i.name}
+                </Link>
+              </li>
+            ))}
+        </ul>
+      </nav>
+    </main>
   );
 }

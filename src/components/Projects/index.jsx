@@ -83,7 +83,7 @@ export default function Home() {
   }
 
   return (
-    <main onMouseMove={(e) => { moveItems(e.clientX, e.clientY) }} className={styles.projects}>
+    <section onMouseMove={(e) => { moveItems(e.clientX, e.clientY) }} className={styles.projects}>
       <h2 className={styles.title}>Our Services</h2>
       <div className={styles.body}>
         {
@@ -119,6 +119,6 @@ export default function Home() {
         </motion.div>
         <motion.div ref={cursorLabel} className={styles.cursorLabel} variants={scaleAnimation} initial="initial" animate={active ? "enter" : "closed"}>Explore</motion.div>
       </>
-    </main>
+    </section>
   )
 }
