@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getIndustryBySlug, getAllIndustries } from '@/data/industries';
+import { getProjectBySlug } from '@/data/projects';
 
 const BASE_URL = 'https://www.twofloww.in';
 
@@ -68,6 +69,11 @@ export default async function IndustryPage({ params }) {
 
   if (!industry) notFound();
 
+  const project = getProjectBySlug(industry.caseStudySlug);
+  const challenge = project?.caseStudy?.challenge?.content || [];
+  const solution = project?.caseStudy?.solution?.content || [];
+  const techStack = project?.technologies?.map((t) => t.name) || [];
+
   const breadcrumbSchema = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
@@ -127,6 +133,35 @@ export default async function IndustryPage({ params }) {
           ))}
         </div>
       </div>
+
+      {(challenge.length > 0 || solution.length > 0) && (
+        <div className="max-w-4xl mx-auto px-6 py-12">
+          <h2 className="text-3xl font-bold mb-8">How We Built {industry.caseStudyName}</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+            {challenge.length > 0 && (
+              <section>
+                <h3 className="text-lg font-bold mb-4">The challenge</h3>
+                {challenge.map((p) => (
+                  <p key={p} className="text-gray-600 mb-3 leading-relaxed">{p}</p>
+                ))}
+              </section>
+            )}
+            {solution.length > 0 && (
+              <section>
+                <h3 className="text-lg font-bold mb-4">Our solution</h3>
+                {solution.map((p) => (
+                  <p key={p} className="text-gray-600 mb-3 leading-relaxed">{p}</p>
+                ))}
+              </section>
+            )}
+          </div>
+          {techStack.length > 0 && (
+            <p className="text-gray-600 mt-8">
+              <strong className="text-gray-900">Tech stack:</strong> {techStack.join(', ')}.
+            </p>
+          )}
+        </div>
+      )}
 
       <div className="max-w-4xl mx-auto px-6 py-12 bg-gray-50 rounded-2xl mb-16">
         <h2 className="text-2xl font-bold mb-6">Common Requests We Get in {industry.name}</h2>

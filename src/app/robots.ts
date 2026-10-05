@@ -6,9 +6,12 @@ export default function robots(): MetadataRoute.Robots {
     return {
         rules: [
             {
+                // Never disallow /_next/ — it serves the CSS, JS and optimized
+                // images (/_next/image) crawlers need to render pages. Blocking it
+                // made every page look broken to non-Google crawlers.
                 userAgent: '*',
                 allow: '/',
-                disallow: ['/api/', '/_next/', '/admin/'],
+                disallow: ['/api/', '/admin/'],
             },
             {
                 userAgent: 'Googlebot',

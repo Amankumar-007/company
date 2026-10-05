@@ -4,7 +4,7 @@ import { ReactNode } from 'react'
 const BASE_URL = 'https://www.twofloww.in'
 
 export const metadata: Metadata = {
-    title: 'Web Development Services & Web Agency in Delhi NCR',
+    title: 'Web Development Services & Agency in Delhi NCR',
     description:
         'TwoFloww is a web agency offering website development, mobile app development, UI/UX design, SEO & digital marketing in Delhi NCR (Noida, Delhi, Gurugram). Expert team, 5+ years experience. Free consultation.',
     keywords: [

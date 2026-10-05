@@ -10,6 +10,34 @@ export async function generateStaticParams() {
   return getAllProjects().map((project) => ({ slug: project.slug }));
 }
 
+const ACRONYMS = new Set(['AI', 'P2P', 'UI', 'UX', 'B2B', 'B2C', 'SAAS']);
+
+// Project subtitles are ALL-CAPS display copy — title-case them for the <title>.
+function toTitleCase(str = '') {
+  return str
+    .split(' ')
+    .map((word) =>
+      ACRONYMS.has(word.toUpperCase())
+        ? word.toUpperCase()
+        : word.toLowerCase().replace(/(^|-)([a-z])/g, (_, sep, ch) => sep + ch.toUpperCase())
+    )
+    .join(' ');
+}
+
+// Keep titles <= 60 chars so Google doesn't truncate them in search results.
+function buildCaseStudyTitle(project) {
+  const subtitle = toTitleCase(project.subtitle);
+  const shortSubtitle = subtitle.split(' & ')[0];
+  const candidates = [
+    `${project.title} Case Study – ${subtitle} | Twofloww`,
+    `${project.title}: ${subtitle} | Twofloww`,
+    `${project.title} Case Study – ${shortSubtitle} | Twofloww`,
+    `${project.title}: ${shortSubtitle} | Twofloww`,
+    `${project.title} Case Study | Twofloww`,
+  ];
+  return candidates.find((t) => t.length <= 60) || candidates[candidates.length - 1];
+}
+
 export async function generateMetadata({ params }) {
   const { slug } = await params;
   const project = getProjectBySlug(slug);
@@ -18,7 +46,7 @@ export async function generateMetadata({ params }) {
     return { title: { absolute: 'Case Study Not Found | Twofloww' } };
   }
 
-  const title = `${project.title} Case Study – ${project.subtitle} | Twofloww`;
+  const title = buildCaseStudyTitle(project);
   const description = project.description || project.subtitle;
 
   return {

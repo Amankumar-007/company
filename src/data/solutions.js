@@ -157,7 +157,7 @@ export const solutionsData = [
       { q: "Can you migrate my existing store without losing SEO rankings?", a: "Yes. We implement 301 redirects, maintain URL structures where possible, transfer structured data, and run pre/post-launch SEO audits to protect your rankings." }
     ],
     seo: {
-      title: "Custom E-Commerce Development & Headless Solutions | Twofloww",
+      title: "Custom E-Commerce & Headless Store Development | Twofloww",
       description: "Build high-converting, scalable e-commerce platforms. Headless commerce, custom checkout experiences, and lightning-fast load times for maximum ROI.",
       keywords: ["ecommerce development", "headless commerce", "custom online store", "conversion rate optimization", "omnichannel retail tech", "ecommerce performance optimization", "Shopify Plus development", "custom checkout integration"],
       ogTitle: "High-Performance E-Commerce Architectures",
@@ -212,7 +212,7 @@ export const solutionsData = [
       { q: "Do you build crypto wallets and DeFi platforms?", a: "Yes. Our blockchain team builds custodial and non-custodial crypto wallets, DEX interfaces, smart contracts, and DeFi yield platforms on Ethereum and Solana." }
     ],
     seo: {
-      title: "FinTech App Development & Secure Financial Solutions | Twofloww",
+      title: "FinTech App Development & Payment Solutions | Twofloww",
       description: "Develop secure, compliant fintech apps — payment gateways, digital wallets, AI fraud detection & blockchain. PCI-DSS & RBI compliant fintech development company.",
       keywords: ["fintech development", "financial technology apps", "secure payment gateways", "blockchain integration", "Web3 solutions", "AI fraud detection", "banking software development", "regulatory compliance tech"],
       ogTitle: "Next-Generation FinTech Solutions",
@@ -267,7 +267,7 @@ export const solutionsData = [
       { q: "Do you build apps for patients or doctors?", a: "We build both — patient-facing apps for booking appointments and accessing records, and clinician dashboards for managing appointments, prescriptions, and notes." }
     ],
     seo: {
-      title: "Healthcare Technology & HIPAA-Compliant App Development | Twofloww",
+      title: "HIPAA-Compliant Healthcare App Development | Twofloww",
       description: "Build HIPAA-compliant healthcare apps, telemedicine platforms, EHR systems & patient portals. Secure healthtech development for clinics, hospitals & startups.",
       keywords: ["healthcare tech", "HIPAA compliant software", "telemedicine app development", "EHR integration", "patient portal development", "wearable device integration", "healthtech solutions", "medical data security"],
       ogTitle: "Secure Healthcare & Telemedicine Platforms",

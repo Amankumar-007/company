@@ -4,7 +4,7 @@ import { solutionsData } from '@/data/solutions';
 const BASE_URL = 'https://www.twofloww.in';
 
 export const metadata = {
-  title: 'On-Demand App & Software Development Solutions | Twofloww India',
+  title: 'On-Demand App & Software Development Solutions',
   description:
     'Twofloww is India\'s top on-demand app development company. We build food delivery apps, taxi booking platforms, grocery delivery, fitness apps, FinTech, AI automation, enterprise digital transformation & e-commerce solutions. Free consultation. Serving Delhi NCR, Mumbai, Bangalore, USA, UK, UAE, Canada & Australia.',
   keywords: [
@@ -83,7 +83,7 @@ export const metadata = {
     },
   },
   openGraph: {
-    title: 'On-Demand App & Software Development Solutions | Twofloww India',
+    title: 'On-Demand App & Software Development Solutions | Twofloww',
     description:
       'India\'s leading on-demand app development company. Food delivery, taxi, grocery, fintech, AI & enterprise solutions. 50+ apps shipped. Free consultation.',
     type: 'website',
@@ -101,7 +101,7 @@ export const metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'On-Demand App & Software Development Solutions | Twofloww India',
+    title: 'On-Demand App & Software Development Solutions | Twofloww',
     description:
       'India\'s leading on-demand app development company. Food delivery, taxi, grocery, fintech, AI & enterprise solutions. 50+ apps shipped.',
     images: ['/opengraph-image'],

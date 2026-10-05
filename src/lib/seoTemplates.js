@@ -23,6 +23,14 @@ function placeName(loc) {
   return loc.type === 'country' ? loc.country : loc.city;
 }
 
+/** "Noida's", but "United Arab Emirates'" (no trailing 's after an s) */
+function possessive(place) {
+  return place.endsWith('s') ? `${place}'` : `${place}'s`;
+}
+
+// Google truncates titles around 60 chars (~580px); Semrush flags anything > 70.
+const MAX_TITLE_LENGTH = 60;
+
 /**
  * Deterministic variant picker — same slug always picks same variant across
  * builds (stable for SSG), but different slugs get different phrasing.
@@ -45,11 +53,22 @@ export function generateTitle(loc, serviceLabel = 'Web Design & Development') {
     `${serviceLabel} Company in ${place} | ${brand.name}`,
     `Best ${serviceLabel} Agency in ${place} – ${brand.name}`,
     `${place} ${serviceLabel} Experts | ${brand.name}`,
-    `Top-Rated ${serviceLabel} Agency in ${place} | Custom Digital Solutions`,
-    `${place}'s Premier ${serviceLabel} Specialists – ${brand.name}`,
+    `Top-Rated ${serviceLabel} Agency in ${place} | ${brand.name}`,
+    `${possessive(place)} Premier ${serviceLabel} Specialists – ${brand.name}`,
     `Hire Expert ${serviceLabel} Team in ${place} | ${brand.name}`,
   ];
-  return pickVariant(variants, loc.slug + serviceLabel);
+  const picked = pickVariant(variants, loc.slug + serviceLabel);
+  if (picked.length <= MAX_TITLE_LENGTH) return picked;
+
+  // Too long for this place/service combo — fall back to progressively shorter
+  // phrasings so the title is never truncated in the SERP.
+  const fallbacks = [
+    `${serviceLabel} Company in ${place} | ${brand.name}`,
+    `${serviceLabel} Agency in ${place} | ${brand.name}`,
+    `${serviceLabel} in ${place} | ${brand.name}`,
+    `${serviceLabel} in ${place}`,
+  ];
+  return fallbacks.find(t => t.length <= MAX_TITLE_LENGTH) || fallbacks[fallbacks.length - 1];
 }
 
 // ─── Meta description ────────────────────────────────────────────────────────
@@ -79,7 +98,7 @@ export function generateH1(loc, serviceLabel = 'Web Design & Development Company
   const variants = [
     `${serviceLabel} in ${place}`,
     `Trusted ${serviceLabel} Serving ${place} & Surrounding Hubs`,
-    `${place}'s Preferred Agency for ${serviceLabel}`,
+    `${possessive(place)} Preferred Agency for ${serviceLabel}`,
     `Best-in-Class ${serviceLabel} Solutions in ${place}`,
     `High-Performance ${serviceLabel} Agency in ${place}`,
   ];

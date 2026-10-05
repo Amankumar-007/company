@@ -5,7 +5,7 @@ const BASE_URL = 'https://www.twofloww.in';
 
 export const metadata = {
   title: { absolute: 'Industries We Build For | Twofloww' },
-  description: 'Real estate, food delivery & logistics, AI/SaaS, developer tools, and consultation marketplaces — see the real products Twofloww has shipped in each.',
+  description: 'Real estate, healthcare, gaming, entertainment, AI/SaaS, and developer tools — see the real products Twofloww has shipped in each industry.',
   alternates: {
     canonical: `${BASE_URL}/industries`,
   },
@@ -26,7 +26,7 @@ export const metadata = {
     url: `${BASE_URL}/industries`,
     siteName: 'Twofloww Digital Agency',
     title: 'Industries We Build For | Twofloww',
-    description: 'Real products shipped for real-estate, delivery & logistics, AI/SaaS, developer tools, and consultation marketplaces.',
+    description: 'Real products shipped for real estate, healthcare, gaming, entertainment, AI/SaaS, and developer tools.',
     images: [{
       url: `${BASE_URL}/opengraph-image`,
       width: 1200,
@@ -38,7 +38,7 @@ export const metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Industries We Build For | Twofloww',
-    description: 'Real products shipped for real-estate, delivery & logistics, AI/SaaS, developer tools, and consultation marketplaces.',
+    description: 'Real products shipped for real estate, healthcare, gaming, entertainment, AI/SaaS, and developer tools.',
     images: [`${BASE_URL}/opengraph-image`],
     creator: '@twofloww',
     site: '@twofloww',
@@ -66,7 +66,8 @@ export default function IndustriesPage() {
               className="group border border-gray-200 rounded-2xl p-8 hover:border-gray-900 hover:shadow-lg transition-all"
             >
               <h2 className="text-2xl font-bold mb-2 group-hover:underline">{industry.name}</h2>
-              <p className="text-gray-600 mb-4">{industry.tagline}</p>
+              <p className="text-gray-900 font-medium mb-3">{industry.tagline}</p>
+              <p className="text-gray-600 text-sm leading-relaxed mb-4">{industry.summary}</p>
               <div className="flex items-baseline gap-2 text-sm text-gray-500">
                 <span className="text-lg font-bold text-gray-900">{industry.heroStat.value}</span>
                 <span>{industry.heroStat.label}</span>
@@ -74,6 +75,19 @@ export default function IndustriesPage() {
             </Link>
           ))}
         </div>
+
+        <section className="mt-20 max-w-3xl">
+          <h2 className="text-3xl font-bold mb-6">How We Approach Industry Projects</h2>
+          <p className="text-gray-600 mb-4 leading-relaxed">
+            Every industry has its own users, workflows, and edge cases. A property buyer comparing plots, a patient booking a hospital bed, and a gamer trading an account all expect different things from the product in front of them. Before we write code, we map who uses the platform, what they need to get done, and where existing tools let them down.
+          </p>
+          <p className="text-gray-600 mb-4 leading-relaxed">
+            From there we design and build in short, reviewable milestones — usually on Next.js, React, and Node.js — so you can see working software early and steer it as we go. Performance, mobile responsiveness, and search visibility are built in from day one rather than bolted on before launch.
+          </p>
+          <p className="text-gray-600 leading-relaxed">
+            Don&apos;t see your industry listed? The patterns behind these products — marketplaces, booking systems, dashboards, and content platforms — carry over well. <Link href="/contact" className="underline hover:text-black">Tell us what you&apos;re building</Link> and we&apos;ll be upfront about whether we&apos;re the right fit.
+          </p>
+        </section>
       </div>
     </main>
   );
