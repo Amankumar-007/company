@@ -51,20 +51,6 @@ export const metadata: Metadata = {
     title: 'Contact Us – Start Your Project Today',
     description:
         'Contact Twofloww for web development, mobile apps, design, or marketing. We respond within 24 hours. Tell us about your project and get a free consultation.',
-    keywords: [
-        'contact twofloww',
-        'hire digital agency',
-        'web development inquiry',
-        'get a quote digital agency',
-        'start a project',
-        'contact us digital agency India',
-        'hire web developers USA',
-        'contact app developers UK',
-        'hire digital agency Australia',
-        'web development consultation Dubai',
-        'software development agency Canada',
-        'best web agency UAE',
-    ],
     alternates: {
         canonical: `${BASE_URL}/contact`,
     },

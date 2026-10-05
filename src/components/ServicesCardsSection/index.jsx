@@ -134,20 +134,15 @@ export default function ServicesCardsSection() {
             ))}
           </h2>
           
-          <p className="text-neutral-600 text-lg lg:text-xl font-light leading-relaxed max-w-3xl mb-10 flex flex-wrap justify-center">
-            {"Whether you're optimizing your online presence or building custom platforms for tomorrow, as a leading web development company in Delhi NCR, we help you scale with confidence.".split(" ").map((word, i) => (
-              <span key={i} className="relative overflow-hidden inline-flex mr-1.5">
-                <motion.span
-                  custom={i + 8}
-                  variants={slideUpText}
-                  initial="initial"
-                  animate={isHeaderInView ? "open" : "closed"}
-                >
-                  {word}
-                </motion.span>
-              </span>
-            ))}
-          </p>
+          {/* Paragraphs animate as one block — per-word spans bloated the markup */}
+          <motion.p
+            className="text-neutral-600 text-lg lg:text-xl font-light leading-relaxed max-w-3xl mb-10 text-center"
+            initial={{ opacity: 0, y: 16 }}
+            animate={isHeaderInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
+            transition={{ duration: 0.6, delay: 0.15, ease: [0.25, 1, 0.5, 1] }}
+          >
+            Whether you&apos;re optimizing your online presence or building custom platforms for tomorrow, as a leading web development company in Delhi NCR, we help you scale with confidence.
+          </motion.p>
 
           <Link
             href="/contact"
@@ -225,20 +220,14 @@ export default function ServicesCardsSection() {
                             ? 'max-h-[120px] mt-2.5'
                             : 'max-h-0 mt-0'
                           }`}>
-                          <p className="text-neutral-500 text-xs lg:text-sm font-normal leading-relaxed max-w-md flex flex-wrap">
-                            {service.description.split(" ").map((word, i) => (
-                              <span key={i} className="relative overflow-hidden inline-flex mr-1">
-                                <motion.span
-                                  custom={i}
-                                  variants={slideUpText}
-                                  initial="initial"
-                                  animate={isHovered ? "open" : "closed"}
-                                >
-                                  {word}
-                                </motion.span>
-                              </span>
-                            ))}
-                          </p>
+                          <motion.p
+                            className="text-neutral-500 text-xs lg:text-sm font-normal leading-relaxed max-w-md"
+                            initial={{ opacity: 0, y: 8 }}
+                            animate={isHovered ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 }}
+                            transition={{ duration: 0.4, ease: [0.25, 1, 0.5, 1] }}
+                          >
+                            {service.description}
+                          </motion.p>
                         </div>
                       </div>
                     </div>

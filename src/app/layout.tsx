@@ -60,61 +60,6 @@ export const metadata: Metadata = {
   },
   description:
     'Twofloww is a digital product and growth agency based in India, helping startups and businesses worldwide build websites, mobile apps, ecommerce platforms, and scalable software — plus SEO and digital marketing to grow. 50+ projects delivered. Free consultation.',
-  keywords: [
-    // High-volume gap keywords (from competitor analysis)
-    'web development company',
-    'website development company',
-    'website development',
-    'web development services',
-    'web development agency',
-    'web agency',
-    'web agency in noida',
-    'web agency in delhi ncr',
-    'web agency in delhi',
-    'best web agency in noida',
-    'best web agency in delhi ncr',
-    'digital agency in noida',
-    'digital agency in delhi ncr',
-    'web development company in delhi',
-    'web development company in noida',
-    'website development company in noida',
-    'website development company in delhi ncr',
-    'website designing company in delhi',
-    'digital marketing agency in delhi',
-    'digital marketing company in delhi',
-    'seo company in delhi',
-    'mobile app development services',
-    'it companies in delhi',
-    'food delivery app development company',
-    'on demand app development company',
-    'grocery delivery app development company',
-    'taxi booking app development company',
-    // Core brand/service keywords
-    'Twofloww',
-    'digital agency India',
-    'web development company India',
-    'mobile app development India',
-    'UI UX design agency',
-    'SEO services India',
-    'on demand app development company in india',
-    'Next.js development company',
-    'React development company',
-    'e-commerce development India',
-    'best web development company in delhi',
-    'web design agency Delhi NCR',
-    'startup digital agency India',
-    'affordable web development India',
-    'custom software development India',
-    // Newly requested keywords for better ranking
-    'two flow',
-    'twoflow',
-    'twofloww solution',
-    'two flow solutio',
-    'twoflow solution',
-    'website build',
-    'website build agency',
-    'custom website build',
-  ],
   authors: [{ name: 'Twofloww', url: BASE_URL }],
   creator: 'Twofloww',
   publisher: 'Twofloww',
@@ -158,9 +103,11 @@ export const metadata: Metadata = {
     creator: '@twofloww',
     site: '@twofloww',
   },
+  // Only emit verification tags when configured — the old fallback rendered a
+  // bogus google-site-verification="GSC_VERIFICATION_TOKEN" tag on every page.
   verification: {
-    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || 'GSC_VERIFICATION_TOKEN',
-    yandex: process.env.NEXT_PUBLIC_YANDEX_VERIFICATION || '',
+    ...(process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION && { google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION }),
+    ...(process.env.NEXT_PUBLIC_YANDEX_VERIFICATION && { yandex: process.env.NEXT_PUBLIC_YANDEX_VERIFICATION }),
   },
   icons: {
     icon: [
@@ -173,203 +120,9 @@ export const metadata: Metadata = {
   category: 'technology',
 }
 
-const organizationSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'Organization',
-  name: 'Twofloww',
-  alternateName: 'Twofloww Digital Agency',
-  url: BASE_URL,
-  logo: {
-    '@type': 'ImageObject',
-    url: `${BASE_URL}/logo.png`,
-    width: 400,
-    height: 400,
-  },
-  sameAs: [
-    'https://www.linkedin.com/company/twofloww',
-    'https://twitter.com/twofloww',
-    'https://www.instagram.com/twofloww',
-  ],
-  contactPoint: [
-    {
-      '@type': 'ContactPoint',
-      contactType: 'customer service',
-      url: `${BASE_URL}/contact`,
-      availableLanguage: ['English', 'Hindi'],
-      areaServed: 'IN',
-    },
-    {
-      '@type': 'ContactPoint',
-      contactType: 'sales',
-      url: `${BASE_URL}/contact`,
-      availableLanguage: ['English'],
-      areaServed: ['IN', 'US', 'GB', 'AU', 'CA'],
-    },
-  ],
-  address: {
-    '@type': 'PostalAddress',
-    addressCountry: 'IN',
-    addressRegion: 'Uttar Pradesh',
-    addressLocality: 'Noida',
-  },
-  areaServed: [
-    { '@type': 'Country', name: 'India' },
-    { '@type': 'Place', name: 'Delhi NCR' },
-    { '@type': 'City', name: 'Noida' },
-    { '@type': 'City', name: 'Delhi' },
-    { '@type': 'City', name: 'Gurugram' },
-    { '@type': 'City', name: 'Mumbai' },
-    { '@type': 'City', name: 'Bangalore' },
-    { '@type': 'City', name: 'Hyderabad' },
-    { '@type': 'City', name: 'Chennai' },
-    { '@type': 'City', name: 'Pune' },
-    { '@type': 'Country', name: 'United States' },
-    { '@type': 'Country', name: 'United Kingdom' },
-  ],
-  description:
-    'Premium digital agency in India specializing in web development, mobile apps, UI/UX design, SEO, and digital marketing for startups and enterprises.',
-  foundingDate: '2023',
-  knowsAbout: [
-    'Web Development',
-    'Next.js Development',
-    'React Development',
-    'Mobile App Development',
-    'UI/UX Design',
-    'Search Engine Optimization',
-    'Digital Marketing',
-    'Cloud Solutions',
-    'E-commerce Development',
-    'Custom Software Development',
-  ],
-  hasOfferCatalog: {
-    '@type': 'OfferCatalog',
-    name: 'Digital Agency Services',
-    itemListElement: [
-      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Web Development' } },
-      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Mobile App Development' } },
-      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'UI/UX Design' } },
-      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'SEO Services' } },
-      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Digital Marketing' } },
-      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'E-commerce Solutions' } },
-    ],
-  },
-}
-
-const websiteSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'WebSite',
-  // "name" is what Google displays instead of the raw domain in search results
-  name: 'Twofloww',
-  alternateName: 'Twofloww Digital Agency',
-  url: BASE_URL,
-  description: 'Digital product and growth agency based in India, serving clients worldwide. Websites, mobile apps, ecommerce platforms, SEO & digital marketing.',
-  potentialAction: {
-    '@type': 'SearchAction',
-    target: {
-      '@type': 'EntryPoint',
-      urlTemplate: `${BASE_URL}/search?q={search_term_string}`,
-    },
-    'query-input': 'required name=search_term_string',
-  },
-}
-
-// Sitelinks navigation schema — signals main pages to Google so sitelinks
-// appear under branded searches (similar to how ICBR Wellness shows sub-pages)
-const siteNavigationSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'ItemList',
-  name: 'Twofloww Main Navigation',
-  itemListElement: [
-    {
-      '@type': 'ListItem',
-      position: 1,
-      item: {
-        '@type': 'WebPage',
-        name: 'Services – Web Development, Mobile Apps & SEO',
-        url: `${BASE_URL}/services`,
-        description: 'Web development, mobile app development, UI/UX design, SEO & digital marketing by Twofloww.',
-      },
-    },
-    {
-      '@type': 'ListItem',
-      position: 2,
-      item: {
-        '@type': 'WebPage',
-        name: 'Solutions – Food Delivery, Taxi & On-Demand Apps',
-        url: `${BASE_URL}/solutions`,
-        description: 'Food delivery app, grocery delivery, taxi booking, fitness, astrology & dating app development.',
-      },
-    },
-    {
-      '@type': 'ListItem',
-      position: 3,
-      item: {
-        '@type': 'WebPage',
-        name: 'Projects – Portfolio',
-        url: `${BASE_URL}/projects`,
-        description: 'Explore Twofloww\'s portfolio of web apps, mobile applications, and digital products.',
-      },
-    },
-    {
-      '@type': 'ListItem',
-      position: 4,
-      item: {
-        '@type': 'WebPage',
-        name: 'Case Studies',
-        url: `${BASE_URL}/case-studies`,
-        description: 'In-depth case studies of real products Twofloww has shipped, with challenge, solution, and results for each.',
-      },
-    },
-    {
-      '@type': 'ListItem',
-      position: 5,
-      item: {
-        '@type': 'WebPage',
-        name: 'About Twofloww',
-        url: `${BASE_URL}/about`,
-        description: 'Meet the Twofloww team — developers, designers, and digital architects building top-ranked products.',
-      },
-    },
-    {
-      '@type': 'ListItem',
-      position: 6,
-      item: {
-        '@type': 'WebPage',
-        name: 'Blog – Web Development & Digital Marketing Insights',
-        url: `${BASE_URL}/blog`,
-        description: 'Practical guides on web development, SEO, UI/UX design and digital marketing from Twofloww.',
-      },
-    },
-    {
-      '@type': 'ListItem',
-      position: 7,
-      item: {
-        '@type': 'WebPage',
-        name: 'Contact Twofloww',
-        url: `${BASE_URL}/contact`,
-        description: 'Get in touch with Twofloww for web development, mobile apps, and digital marketing. Free consultation.',
-      },
-    },
-  ],
-}
-
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
-      <head>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(siteNavigationSchema) }}
-        />
-      </head>
       <body className={`${inter.className} ${spaceGrotesk.variable} ${unbounded.variable} ${suisseIntl.variable} bg-white text-black min-h-screen`} suppressHydrationWarning>
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-2MQFRMEMPT"

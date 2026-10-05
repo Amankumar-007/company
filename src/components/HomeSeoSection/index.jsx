@@ -480,20 +480,15 @@ export default function HomeSeoSection() {
                 ))}
               </h2>
               
-              <p className="text-lg text-gray-600 mb-8 leading-relaxed flex flex-wrap">
-                {"We are not just another web development company in Delhi NCR. TwoFloww is a results-driven digital agency that blends technical excellence with business strategy to deliver measurable outcomes — faster time-to-market, higher search rankings, and better ROI.".split(" ").map((word, i) => (
-                  <span key={i} className="relative overflow-hidden inline-flex mr-1">
-                    <motion.span
-                      custom={i + 10}
-                      variants={slideUpText}
-                      initial="initial"
-                      animate={isWhyInView ? "open" : "closed"}
-                    >
-                      {word}
-                    </motion.span>
-                  </span>
-                ))}
-              </p>
+              {/* Paragraphs animate as one block — per-word spans bloated the markup */}
+              <motion.p
+                className="text-lg text-gray-600 mb-8 leading-relaxed"
+                initial={{ opacity: 0, y: 16 }}
+                animate={isWhyInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
+                transition={{ duration: 0.6, delay: 0.2, ease: [0.25, 1, 0.5, 1] }}
+              >
+                We are not just another web development company in Delhi NCR. TwoFloww is a results-driven digital agency that blends technical excellence with business strategy to deliver measurable outcomes — faster time-to-market, higher search rankings, and better ROI.
+              </motion.p>
               
               {/* Interactive Accordion for reasons (saves space on mobile and looks high-end) */}
               <div className="space-y-4 lg:space-y-5">

@@ -34,7 +34,7 @@ export default function HeroSection({ isLoading = true }) {
     return () => clearTimeout(timer);
   }, [isLoading]);
   return (
-    <div
+    <section
       ref={heroRef}
       className="relative min-h-[90vh] -mb-[25vh] flex items-center justify-center px-4 sm:px-5 lg:px-7 pt-32 pb-[32vh]"
     >
@@ -94,6 +94,6 @@ export default function HeroSection({ isLoading = true }) {
         <div className="absolute top-1/2 right-20 w-8 h-8 bg-gradient-to-br from-green-400 to-blue-500 rounded-full opacity-20 pointer-events-none"></div>
 
       </div>
-    </div>
+    </section>
   );
 }

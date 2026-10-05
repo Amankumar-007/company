@@ -68,7 +68,7 @@ export default async function ServiceDetailsPage({ searchParams }) {
       '@type': 'Organization',
       name: 'Twofloww',
       url: BASE_URL,
-      logo: `${BASE_URL}/logo.png`,
+      logo: `${BASE_URL}/brandlogo.png`,
     },
     offers: {
       '@type': 'AggregateOffer',

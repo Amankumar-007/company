@@ -311,81 +311,6 @@ export default function SolutionsClient() {
       </section>
 
 
-      {/* ─── 4. SEO DEEP-DIVE KEYWORD SECTION ──────────────────────────── */}
-      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-white border-t border-gray-100">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <span className="text-xs text-[#DE5D26] font-bold uppercase tracking-[0.2em] mb-4 inline-block">
-              Custom Software Engineering
-            </span>
-            <h2
-              className="text-3xl md:text-5xl font-medium text-black mb-6 tracking-tight"
-              style={{ fontFamily: 'var(--font-space-grotesk)' }}
-            >
-              On-Demand App & Platform Development Company
-            </h2>
-            <p className="text-gray-500 text-base md:text-lg max-w-3xl mx-auto leading-relaxed">
-              Twofloww is a full-service software development agency delivering high-performance mobile and web solutions. We specialize in building scalable on-demand applications, enterprise cloud architectures, and AI-driven business platforms tailored to your growth objectives.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[
-              {
-                title: 'Food Delivery Apps',
-                desc: 'Multi-vendor marketplaces, driver GPS tracking, real-time order dispatching, and restaurant management portals.',
-                slug: 'food-delivery-app-development',
-              },
-              {
-                title: 'Grocery & Quick Commerce',
-                desc: '10-minute delivery apps, dark store inventory control, slot scheduling, and real-time stock sync.',
-                slug: 'grocery-delivery-app-development',
-              },
-              {
-                title: 'Ride-Hailing & Taxi Platforms',
-                desc: 'Real-time dispatch algorithms, surge pricing, driver onboarding workflows, and trip analytics.',
-                slug: 'taxi-app-development',
-              },
-              {
-                title: 'Fitness & Health Tech',
-                desc: 'AI workout personalization, wearable sensor integration (Apple HealthKit, Google Fit), and trainer video portals.',
-                slug: 'fitness-gym-app-development',
-              },
-              {
-                title: 'FinTech & Digital Wallets',
-                desc: 'RBI & PCI-DSS compliant payment gateways, instant money transfers, lending algorithms, and Web3 solutions.',
-                slug: 'fintech-innovation',
-              },
-              {
-                title: 'Enterprise AI & Automation',
-                desc: 'Custom LLM fine-tuning, workflow automation pipelines, predictive analytics, and legacy microservices refactoring.',
-                slug: 'ai-machine-learning',
-              },
-            ].map((item, idx) => (
-              <Link
-                key={idx}
-                href={`/solutions/${item.slug}`}
-                className="group bg-[#F8F9FA] rounded-2xl p-7 border border-gray-100 hover:bg-white hover:border-gray-300 hover:shadow-lg transition-all duration-300 flex flex-col justify-between"
-              >
-                <div>
-                  <h3
-                    className="text-lg font-bold text-black mb-3 group-hover:text-[#DE5D26] transition-colors"
-                    style={{ fontFamily: 'var(--font-space-grotesk)' }}
-                  >
-                    {item.title}
-                  </h3>
-                  <p className="text-gray-500 text-sm leading-relaxed mb-6">{item.desc}</p>
-                </div>
-                <span className="text-xs font-bold text-black flex items-center gap-2 group-hover:text-[#DE5D26] transition-colors">
-                  Learn More Architecture <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-                </span>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-
       {/* ─── 5. WHY CHOOSE US ───────────────────────────────────────────── */}
       <section className="py-24 px-4 sm:px-6 lg:px-8 bg-[#F8F9FA]">
         <div className="max-w-[1200px] mx-auto">
@@ -497,7 +422,7 @@ export default function SolutionsClient() {
               <div className="w-[300px] bg-white text-black rounded-3xl p-7 shadow-2xl border border-gray-100 transform rotate-3 hover:rotate-0 transition-transform duration-500">
                 <div className="flex justify-between items-start mb-6">
                   <div>
-                    <h4 className="font-bold text-base">Growth Engine</h4>
+                    <p className="font-bold text-base">Growth Engine</p>
                     <p className="text-[10px] text-gray-500 font-medium uppercase tracking-wider">Enterprise Performance</p>
                   </div>
                   <div className="w-8 h-8 rounded-full bg-[#C3F53C] flex items-center justify-center text-black">
@@ -533,7 +458,10 @@ export default function SolutionsClient() {
             India&rsquo;s Leading On-Demand App &amp; Software Development Company
           </h2>
           <p className="text-gray-600 text-base md:text-lg leading-relaxed mb-8">
-            Twofloww is a full-service on-demand app development company based in India, serving clients across Delhi NCR, Mumbai, Bangalore, Noida, the USA, UK, UAE, Canada, and Australia. We specialize in building production-ready digital products — from food delivery apps and taxi booking platforms to enterprise-grade AI automation and FinTech solutions. With 50+ shipped apps and platforms, our engineering team delivers end-to-end product development at startup speed with enterprise reliability.
+            Twofloww is a full-service on-demand app development company based in India, serving clients across Delhi NCR, Mumbai, Bangalore, Noida, the USA, UK, UAE, Canada, and Australia.
+          </p>
+          <p className="text-gray-600 text-base md:text-lg leading-relaxed mb-8">
+            We specialize in building production-ready digital products — from food delivery apps and taxi booking platforms to enterprise-grade AI automation and FinTech solutions. With 50+ shipped apps and platforms, our engineering team delivers end-to-end product development at startup speed with enterprise reliability.
           </p>
 
           <h2

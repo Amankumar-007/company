@@ -50,7 +50,7 @@ Only blogs (`blogs` table), authors (`authors` table), and contact form submissi
 Three separate Supabase client factories exist for different runtimes — use the right one, don't cross-wire them:
 - `src/utils/supabase/client.ts` — browser client, memoized as a module-level singleton (`_client`) specifically to avoid re-registering `onAuthStateChange` listeners on every render, which was previously causing render storms.
 - `src/utils/supabase/server.ts` — server client for Server Components/Route Handlers, wired to Next's `cookies()`.
-- `src/utils/supabase/middleware.ts` — exports `updateSession()` for session refresh, but there is **no `src/middleware.ts`** invoking it — auth redirect-on-`/admin` is currently disabled inline (see the comment in that file about Supabase rate limits). Don't assume `/admin` routes are actually gated at the middleware level.
+- `src/utils/supabase/middleware.ts` — exports `updateSession()` for session refresh. `src/proxy.ts` (Next 16's name for middleware) calls it **only** for `/admin/*` and `/api/*` — keep it scoped; running it on every request added a Supabase auth round-trip to every public page load. The auth redirect-on-`/admin` inside `updateSession` is currently disabled (see the comment there about Supabase rate limits), so don't assume `/admin` is actually gated. The proxy also 308-redirects legacy `/project-detail?id=N` to `/case-studies/{slug}`.
 
 Admin CRUD (`src/app/admin/**`, `src/components/Admin/*`) talks to Supabase directly from Server/Client Components via the client factories above — there's no REST API layer in front of it for blogs/authors.
 
@@ -61,9 +61,9 @@ Admin CRUD (`src/app/admin/**`, `src/components/Admin/*`) talks to Supabase dire
 
 ### SEO/metadata conventions
 
-Root metadata, JSON-LD (`organizationSchema`, `websiteSchema`, `siteNavigationSchema`), and favicon/icons config all live in `src/app/layout.tsx`. `BASE_URL` (`https://www.twofloww.in`) is hardcoded per-file rather than centralized — when changing the domain or brand schema, grep for `BASE_URL` and `twofloww.in` across `src/app` rather than editing one file.
+Root metadata and favicon/icons config live in `src/app/layout.tsx`. Organization + WebSite JSON-LD live in `src/lib/siteSchema.ts` and are rendered **on the homepage only** (Google's recommendation; emitting them site-wide added ~15KB per page). Don't add `keywords` metadata — Google ignores it and it was removed site-wide. `BASE_URL` (`https://www.twofloww.in`) is hardcoded per-file rather than centralized — when changing the domain or brand schema, grep for `BASE_URL` and `twofloww.in` across `src/app` rather than editing one file.
 
-Icon/favicon setup: `src/app/favicon.ico` is the real logo, referenced via `metadata.icons` in `layout.tsx`, `public/apple-touch-icon.png`, and `manifest.ts` — keep these three in sync if the logo changes. `public/logo.png` (used in several JSON-LD `logo` fields for schema.org Organization/Article markup) is a separate, unrelated placeholder image, not the brand logo — treat as a known issue rather than the source of truth for the brand mark.
+Icon/favicon setup: `src/app/favicon.ico` is the real logo, referenced via `metadata.icons` in `layout.tsx`, `public/apple-touch-icon.png`, and `manifest.ts` — keep these three in sync if the logo changes. JSON-LD `logo` fields use `/brandlogo.png` (the real brand mark, also used by the Header); `public/logo.png` is an unrelated placeholder — don't reference it.
 
 ### Environment variables
 

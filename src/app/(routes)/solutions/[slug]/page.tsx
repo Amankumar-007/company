@@ -24,7 +24,6 @@ export async function generateMetadata({ params }) {
     // the root layout's title template doesn't append the brand again.
     title: { absolute: solution.seo.title },
     description: solution.seo.description,
-    keywords: solution.seo.keywords,
     openGraph: {
       title: solution.seo.ogTitle || solution.seo.title,
       description: solution.seo.ogDescription || solution.seo.description,
@@ -84,7 +83,7 @@ export default async function SolutionPage({ params }) {
       '@type': 'Organization',
       name: 'Twofloww',
       url: BASE_URL,
-      logo: `${BASE_URL}/logo.png`,
+      logo: `${BASE_URL}/brandlogo.png`,
       sameAs: [
         'https://www.linkedin.com/company/twofloww',
         'https://twitter.com/twofloww',

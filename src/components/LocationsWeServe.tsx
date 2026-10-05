@@ -43,7 +43,7 @@ export default function LocationsWeServe({ serviceKey = 'web-development', servi
               <Link
                 key={loc.slug}
                 href={`/${serviceKey}-agency-in-${loc.slug}`}
-                className="px-4 py-2 text-sm font-medium bg-[#FAFAFA] border border-gray-200 text-gray-600 rounded-full hover:border-[#DE5D26]/40 hover:text-[#DE5D26] hover:bg-[#DE5D26]/5 transition-all duration-200"
+                className="location-chip"
               >
                 {locationLabel(loc)}
                 {loc.is_home_base && (
@@ -62,7 +62,7 @@ export default function LocationsWeServe({ serviceKey = 'web-development', servi
               <Link
                 key={loc.slug}
                 href={`/${serviceKey}-agency-in-${loc.slug}`}
-                className="px-4 py-2 text-sm font-medium bg-[#FAFAFA] border border-gray-200 text-gray-600 rounded-full hover:border-[#DE5D26]/40 hover:text-[#DE5D26] hover:bg-[#DE5D26]/5 transition-all duration-200"
+                className="location-chip"
               >
                 {locationLabel(loc)}
               </Link>

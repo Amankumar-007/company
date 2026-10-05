@@ -90,7 +90,7 @@ const VideoComponent = ({ videoSrc = '/video1.mp4' }) => {
     };
   }, []);
   return (
-    <div className="relative w-full max-w-7xl mx-auto px-3 sm:px-6">
+    <section className="relative w-full max-w-7xl mx-auto px-3 sm:px-6">
       {/* Video container with curved corners and shadow */}
       <div 
         className="relative overflow-hidden rounded-3xl shadow-2xl cursor-pointer h-[55vh] md:h-auto"
@@ -121,7 +121,7 @@ const VideoComponent = ({ videoSrc = '/video1.mp4' }) => {
         </video>
         
       </div>
-    </div>
+    </section>
   );
 };
 

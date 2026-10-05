@@ -119,7 +119,7 @@ export default async function CaseStudyPage({ params }) {
       name: 'Twofloww',
       logo: {
         '@type': 'ImageObject',
-        url: `${BASE_URL}/logo.png`,
+        url: `${BASE_URL}/brandlogo.png`,
       },
     },
     mainEntityOfPage: `${BASE_URL}/case-studies/${slug}`,

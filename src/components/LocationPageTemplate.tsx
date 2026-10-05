@@ -112,6 +112,7 @@ interface Props {
   faqs: FAQ[];
   serviceKey?: string;
   serviceLabel?: string;
+  localContext: { paragraphs: string[]; sameRegion: { slug: string; name: string }[] };
 }
 
 // Nearby-area names that are also location pages, so we can link to them
@@ -196,11 +197,19 @@ function FAQItem({ q, a, idx }: FAQ & { idx: number }) {
 
 // ─── Main Component ───────────────────────────────────────────────────────────
 
-export default function LocationPageTemplate({ loc, h1, intro, faqs, serviceKey = 'web-development', serviceLabel = 'Web Development' }: Props) {
+export default function LocationPageTemplate({ loc, h1, intro, faqs, localContext, serviceKey = 'web-development', serviceLabel = 'Web Development' }: Props) {
   const place = loc.type === 'country' ? loc.country : loc.city!;
   const content = getLocationServiceContent(serviceKey);
   const overview: string[] = content.overview(place);
   // Mid-sentence form: "SEO", "UI/UX design" (not "seo services", "ui/ux design")
+  // Nearby areas that have their own page, plus other cities in the same state
+  const nearbyLinks = [
+    ...loc.nearby_areas.flatMap((area) => {
+      const slug = LOCATION_SLUG_BY_NAME.get(area.toLowerCase());
+      return slug ? [{ slug, name: area }] : [];
+    }),
+    ...localContext.sameRegion,
+  ].filter((l, i, all) => l.slug !== loc.slug && all.findIndex((x) => x.slug === l.slug) === i);
   const serviceShort = locationsData.services.find((s) => s.key === serviceKey)?.short ?? serviceLabel;
 
   return (
@@ -404,14 +413,14 @@ export default function LocationPageTemplate({ loc, h1, intro, faqs, serviceKey 
               <motion.div
                 key={service.key}
                 variants={fadeInUp}
-                className={`group relative bg-white rounded-[2rem] p-8 lg:p-10 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] transition-all duration-500 border flex flex-col transform hover:-translate-y-2 ${isCurrent ? 'border-black' : 'border-gray-100'}`}
+                className={`group lp-card relative${isCurrent ? ' border-black' : ''}`}
               >
                 <div className="flex justify-between items-start mb-8">
                   <div className={`w-14 h-14 rounded-2xl bg-gray-50 flex items-center justify-center ${service.hoverColor} transition-colors duration-500`}>
                     {service.icon}
                   </div>
                   {/* Arrow */}
-                  <div className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center text-gray-400 group-hover:bg-black group-hover:border-black group-hover:text-white transition-all duration-300 transform group-hover:rotate-45">
+                  <div className="lp-arrow-btn">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M5 19L19 5M19 5H7M19 5V17" />
                     </svg>
@@ -432,7 +441,7 @@ export default function LocationPageTemplate({ loc, h1, intro, faqs, serviceKey 
                   {service.features.map((feature, fIndex) => (
                     <span
                       key={fIndex}
-                      className="px-4 py-1.5 bg-gray-50 rounded-full text-[11px] font-semibold text-gray-600 border border-gray-100 group-hover:bg-black group-hover:text-white group-hover:border-black transition-colors duration-300 tracking-wide"
+                      className="lp-pill"
                     >
                       {feature}
                     </span>
@@ -530,21 +539,21 @@ export default function LocationPageTemplate({ loc, h1, intro, faqs, serviceKey 
               <motion.div
                 variants={fadeInUp}
                 key={title}
-                className="relative w-[280px] sm:w-[320px] h-[380px] sm:h-[440px] shrink-0 rounded-[2rem] overflow-hidden group snap-start cursor-pointer shadow-sm hover:shadow-2xl transition-all duration-500 bg-gray-100"
+                className="lp-industry-card group"
               >
                 <img
                   src={image}
                   alt={title}
-                  className="absolute inset-0 w-full h-full object-cover opacity-90 transition-transform duration-[1.5s] ease-out group-hover:scale-[1.08] group-hover:opacity-100"
+                  className="lp-industry-img"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-95 transition-opacity duration-500 group-hover:opacity-80" />
-                <div className="absolute inset-0 p-6 sm:p-8 flex flex-col justify-end z-10 pointer-events-none pb-12 sm:pb-14">
-                  <h3 className="text-xl sm:text-2xl font-bold text-white max-w-[85%] leading-tight group-hover:text-[#C3F53C] transition-colors duration-300">
+                <div className="lp-industry-shade" />
+                <div className="lp-industry-body">
+                  <h3 className="lp-industry-title">
                     {title}
                   </h3>
                 </div>
                 <div className="corner-cutout">
-                  <div className="absolute inset-2.5 bg-black group-hover:bg-[#C3F53C] rounded-full flex items-center justify-center transition-colors duration-300 shadow-md">
+                  <div className="lp-industry-arrow">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-white group-hover:text-black transition-colors duration-300">
                       <path d="M5 19L19 5M19 5H7M19 5V17" />
                     </svg>
@@ -618,13 +627,13 @@ export default function LocationPageTemplate({ loc, h1, intro, faqs, serviceKey 
               <motion.div
                 key={title}
                 variants={fadeInUp}
-                className="group bg-white rounded-[2rem] p-8 lg:p-10 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] transition-all duration-500 border border-gray-100 flex flex-col cursor-pointer transform hover:-translate-y-2"
+                className="lp-card group"
               >
                 <div className="flex justify-between items-start mb-8">
                   <div className={`w-14 h-14 rounded-2xl bg-gray-50 flex items-center justify-center ${hoverColor} transition-colors duration-500`}>
                     {icon}
                   </div>
-                  <div className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center text-gray-400 group-hover:bg-black group-hover:border-black group-hover:text-white transition-all duration-300 transform group-hover:rotate-45">
+                  <div className="lp-arrow-btn">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M5 19L19 5M19 5H7M19 5V17" />
                     </svg>
@@ -634,7 +643,7 @@ export default function LocationPageTemplate({ loc, h1, intro, faqs, serviceKey 
                 <p className="text-gray-500 mb-8 leading-relaxed text-sm flex-1">{desc}</p>
                 <div className="flex flex-wrap gap-2 mt-auto">
                   {features.map((f, i) => (
-                    <span key={i} className="px-4 py-1.5 bg-gray-50 rounded-full text-[11px] font-semibold text-gray-600 border border-gray-100 group-hover:bg-black group-hover:text-white group-hover:border-black transition-colors duration-300 tracking-wide">
+                    <span key={i} className="lp-pill">
                       {f}
                     </span>
                   ))}
@@ -748,7 +757,7 @@ export default function LocationPageTemplate({ loc, h1, intro, faqs, serviceKey 
           {content.tech.map((name: string) => (
             <li
               key={name}
-              className="w-28 sm:w-32 bg-white border border-gray-100 rounded-[1.5rem] p-4 flex flex-col items-center gap-3 shadow-[0_8px_30px_rgba(0,0,0,0.02)]"
+              className="lp-tech-tile"
             >
               <TechLogo name={name} className="w-10 h-10 object-contain" />
               <span className="text-xs font-semibold text-gray-700 text-center">{name}</span>
@@ -791,30 +800,40 @@ export default function LocationPageTemplate({ loc, h1, intro, faqs, serviceKey 
         </div>
       </section>
 
-      {/* ── Nearby areas ─────────────────────────────────────────────────── */}
-      {loc.nearby_areas.length > 0 && (
-        <section className="py-20 px-4 sm:px-6 bg-[#F8F9FA]">
-          <div className="max-w-6xl mx-auto text-center">
-            <div className="flex items-center justify-center gap-2 mb-8">
-              <span className="w-1.5 h-1.5 bg-black rounded-sm" />
-              <span className="text-xs font-bold tracking-[0.2em] uppercase">Also serving nearby areas</span>
-            </div>
-            <div className="flex flex-wrap justify-center gap-3 max-w-3xl mx-auto">
-              {loc.nearby_areas.map((area) => {
-                const chip = 'px-6 py-3 text-sm font-medium bg-white border border-gray-200 text-gray-600 rounded-full shadow-sm hover:bg-black hover:text-white hover:border-black transition-all duration-300';
-                const areaSlug = LOCATION_SLUG_BY_NAME.get(area.toLowerCase());
-                return areaSlug ? (
-                  <Link key={area} href={`/${serviceKey}-agency-in-${areaSlug}`} className={chip}>
-                    {serviceLabel} in {area}
-                  </Link>
-                ) : (
-                  <span key={area} className={`${chip} cursor-default`}>{area}</span>
-                );
-              })}
-            </div>
-          </div>
-        </section>
-      )}
+      {/* ── Working in this location (location-specific facts + nearby links) ── */}
+      <section className="py-20 px-4 sm:px-6 bg-[#F8F9FA]">
+        <div className="max-w-4xl mx-auto">
+          <h2
+            className="text-3xl md:text-4xl font-medium text-black tracking-tight mb-6"
+            style={{ fontFamily: 'var(--font-space-grotesk), sans-serif', letterSpacing: '-0.02em' }}
+          >
+            Working with businesses in {place}
+          </h2>
+          {localContext.paragraphs.map((p) => (
+            <p key={p} className="text-gray-600 text-base md:text-lg leading-relaxed mb-4">{p}</p>
+          ))}
+
+          {nearbyLinks.length > 0 && (
+            <>
+              <h3 className="text-sm font-bold tracking-[0.2em] uppercase text-gray-500 mt-10 mb-4">
+                {serviceLabel} near {place}
+              </h3>
+              <ul className="flex flex-wrap gap-3">
+                {nearbyLinks.map(({ slug, name }) => (
+                  <li key={slug}>
+                    <Link
+                      href={`/${serviceKey}-agency-in-${slug}`}
+                      className="inline-block px-5 py-2.5 text-sm font-medium bg-white border border-gray-200 text-gray-600 rounded-full hover:bg-black hover:text-white hover:border-black transition-colors"
+                    >
+                      {serviceLabel} in {name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
+        </div>
+      </section>
 
       {/* ── Global Reach ─────────────────────────────────────────────────── */}
       <GlobalReach lightTheme={true} />
@@ -928,9 +947,9 @@ export default function LocationPageTemplate({ loc, h1, intro, faqs, serviceKey 
                 transition={{ duration: 0.8, ease: 'easeOut' }}
                 className="absolute right-32 top-8 w-[260px] bg-[#111] rounded-2xl p-6 text-white shadow-2xl border border-white/10"
               >
-                <h4 className="text-lg font-medium mb-4 flex items-center gap-2">
+                <p className="text-lg font-medium mb-4 flex items-center gap-2">
                   {serviceLabel} <span className="w-2 h-2 rounded-full bg-[#C3F53C]" />
-                </h4>
+                </p>
                 <p className="text-gray-400 text-sm leading-relaxed font-medium">
                   Design<br />Development<br />
                   <span className="text-white text-base">Strategy, Growth</span><br />
@@ -947,7 +966,7 @@ export default function LocationPageTemplate({ loc, h1, intro, faqs, serviceKey 
               >
                 <div className="flex justify-between items-start mb-6">
                   <div>
-                    <h4 className="font-semibold text-sm">Performance</h4>
+                    <p className="font-semibold text-sm">Performance</p>
                     <p className="text-[10px] text-gray-500">In the past 7 days</p>
                   </div>
                   <svg className="w-5 h-5 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

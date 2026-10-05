@@ -8,6 +8,7 @@ import {
   generateH1,
   generateIntro,
   generateFAQs,
+  generateLocalContext,
 } from '@/lib/seoTemplates';
 import { generateLocalBusinessSchema, generateFAQSchema, generateBreadcrumbSchema } from '@/lib/schema';
 import { getLocationServiceContent } from '@/data/location-service-content';
@@ -127,6 +128,7 @@ export default async function SeoPage({ params }) {
         h1={generateH1(loc, service.label)}
         intro={generateIntro(loc, service.label)}
         faqs={faqs}
+        localContext={generateLocalContext(loc)}
       />
     </>
   );

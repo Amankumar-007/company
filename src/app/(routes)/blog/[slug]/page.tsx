@@ -138,7 +138,7 @@ export default async function BlogPostPage({ params }: Props) {
       name: 'Twofloww',
       logo: {
         '@type': 'ImageObject',
-        url: `https://www.twofloww.in/logo.png`
+        url: `https://www.twofloww.in/brandlogo.png`
       }
     },
     mainEntityOfPage: {

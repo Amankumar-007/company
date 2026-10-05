@@ -7,20 +7,6 @@ export const metadata: Metadata = {
     title: 'Our Projects – Portfolio & Case Studies',
     description:
         'Browse Twofloww\'s portfolio — web apps, mobile applications, UI/UX designs, and marketing campaigns. See our work and what we can build for you.',
-    keywords: [
-        'twofloww portfolio',
-        'web development projects',
-        'digital agency case studies',
-        'mobile app projects',
-        'design portfolio',
-        'agency work examples',
-        'web development portfolio USA',
-        'app development case studies UK',
-        'software projects Australia',
-        'digital agency work Dubai',
-        'best web designs UAE',
-        'UI UX portfolio Canada',
-    ],
     alternates: {
         canonical: `${BASE_URL}/projects`,
     },

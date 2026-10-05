@@ -88,6 +88,58 @@ export function generateDescription(loc, serviceLabel = 'web development') {
 
 // ─── H1 ──────────────────────────────────────────────────────────────────────
 
+// ─── Location context ────────────────────────────────────────────────────────
+// Facts that genuinely differ per location (distance from HQ, time zones,
+// neighbouring cities) so pages for the same service in different cities
+// aren't near-duplicates of each other.
+
+const TIMEZONE_NOTES = {
+  'united-states': 'US time zones run 9.5 to 13.5 hours behind India. We overlap with your mornings or late afternoons for calls, and work continues during your night, so you often start the day with progress to review.',
+  canada: 'Canadian time zones run 9.5 to 13.5 hours behind India. We schedule calls in your morning or late afternoon, and development continues overnight your time, so each day starts with fresh progress to review.',
+  'united-kingdom': 'The UK is 4.5 to 5.5 hours behind India, so your morning is our afternoon — giving us several hours of shared working time every day for calls and quick decisions.',
+  uae: 'The UAE is only 1.5 hours behind India, so our working days almost completely overlap and Dubai is a short flight from Delhi when meeting in person matters.',
+  australia: 'Sydney and Melbourne are 4.5 to 5.5 hours ahead of India, so our morning overlaps with your afternoon for calls and reviews, with work continuing after your day ends.',
+};
+
+function distanceKm(a, b) {
+  const rad = (d) => (d * Math.PI) / 180;
+  const h =
+    Math.sin(rad(b.lat - a.lat) / 2) ** 2 +
+    Math.cos(rad(a.lat)) * Math.cos(rad(b.lat)) * Math.sin(rad(b.lng - a.lng) / 2) ** 2;
+  return 2 * 6371 * Math.asin(Math.sqrt(h));
+}
+
+export function generateLocalContext(loc) {
+  const place = placeName(loc);
+  const home = locationsData.locations.find((l) => l.is_home_base);
+  const paragraphs = [];
+
+  if (loc.type === 'country') {
+    paragraphs.push(`${brand.name} works with startups and businesses in ${place}${loc.nearby_areas?.length ? `, including clients in ${loc.nearby_areas.join(', ')}` : ''}, from our team in ${brand.address_india}.`);
+    if (TIMEZONE_NOTES[loc.slug]) paragraphs.push(TIMEZONE_NOTES[loc.slug]);
+    paragraphs.push('Projects run on shared boards, written weekly updates, and recorded demos, so nothing depends on being online at the same moment.');
+  } else if (loc.is_home_base) {
+    paragraphs.push(`Our office is in ${place}, so meeting in person for workshops, reviews, or launch planning is easy to arrange.`);
+    paragraphs.push(`We work with businesses across ${loc.nearby_areas.join(', ')} and the wider Delhi NCR region, as well as clients elsewhere in India and abroad.`);
+  } else {
+    const km = Math.round(distanceKm(home, loc) / 10) * 10;
+    paragraphs.push(
+      km <= 80
+        ? `${place} is roughly ${km} km from our ${placeName(home)} office, close enough that meeting in person is practical whenever a project needs it.`
+        : `${place} is about ${km.toLocaleString('en-IN')} km from our ${placeName(home)} office. We work with ${place} teams remotely in the same time zone and working hours, using video calls, shared project boards, and weekly demos.`
+    );
+    if (loc.nearby_areas?.length) {
+      paragraphs.push(`Alongside ${place}, we work with businesses in ${loc.nearby_areas.join(', ')}.`);
+    }
+  }
+
+  const sameRegion = locationsData.locations
+    .filter((l) => l.slug !== loc.slug && l.type !== 'country' && loc.type !== 'country' && l.state === loc.state)
+    .map((l) => ({ slug: l.slug, name: placeName(l) }));
+
+  return { paragraphs, sameRegion, region: loc.state };
+}
+
 export function generateH1(loc, serviceLabel = 'Web Design & Development Company') {
   const place = placeName(loc);
 

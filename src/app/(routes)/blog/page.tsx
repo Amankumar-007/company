@@ -38,20 +38,6 @@ const blogTopics = [
 export const metadata: Metadata = {
   title: 'Blog – Digital Agency Insights & Engineering',
   description: 'Fresh insights on web development, UI/UX design, SEO, and digital marketing from the Twofloww team. Practical guides for developers and founders in India.',
-  keywords: [
-    'web development blog India',
-    'digital agency blog',
-    'UI UX design tips',
-    'SEO guides for startups',
-    'Next.js tutorials',
-    'React development tips',
-    'digital marketing India',
-    'Twofloww blog',
-    'web engineering insights',
-    'product development blog',
-    'startup tech blog',
-    'design systems guide',
-  ],
   alternates: {
     canonical: `${BASE_URL}/blog`,
   },
@@ -103,7 +89,7 @@ export default async function BlogListingPage(props: Props) {
       name: 'Twofloww',
       logo: {
         '@type': 'ImageObject',
-        url: `${BASE_URL}/logo.png`
+        url: `${BASE_URL}/brandlogo.png`
       }
     }
   }

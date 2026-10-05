@@ -52,3 +52,45 @@ html.lenis body {
   scrollbar-width: none;
   /* Firefox */
 }
+
+/* Shared component classes for markup repeated many times per page.
+   Long inline Tailwind strings repeated 10–30× per page inflated the HTML
+   (Semrush "low text-to-HTML ratio"); these keep the same styles. */
+@layer components {
+  .lp-arrow-btn {
+    @apply w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center text-gray-400 group-hover:bg-black group-hover:border-black group-hover:text-white transition-all duration-300 transform group-hover:rotate-45;
+  }
+  .lp-pill {
+    @apply px-4 py-1.5 bg-gray-50 rounded-full text-[11px] font-semibold text-gray-600 border border-gray-100 group-hover:bg-black group-hover:text-white group-hover:border-black transition-colors duration-300 tracking-wide;
+  }
+  .lp-industry-card {
+    @apply relative w-[280px] sm:w-[320px] h-[380px] sm:h-[440px] shrink-0 rounded-[2rem] overflow-hidden snap-start cursor-pointer shadow-sm hover:shadow-2xl transition-all duration-500 bg-gray-100;
+  }
+  .lp-industry-img {
+    @apply absolute inset-0 w-full h-full object-cover opacity-90 transition-transform duration-[1.5s] ease-out group-hover:scale-[1.08] group-hover:opacity-100;
+  }
+  .lp-industry-shade {
+    @apply absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-95 transition-opacity duration-500 group-hover:opacity-80;
+  }
+  .lp-industry-body {
+    @apply absolute inset-0 p-6 sm:p-8 flex flex-col justify-end z-10 pointer-events-none pb-12 sm:pb-14;
+  }
+  .lp-industry-title {
+    @apply text-xl sm:text-2xl font-bold text-white max-w-[85%] leading-tight group-hover:text-[#C3F53C] transition-colors duration-300;
+  }
+  .lp-industry-arrow {
+    @apply absolute inset-2.5 bg-black group-hover:bg-[#C3F53C] rounded-full flex items-center justify-center transition-colors duration-300 shadow-md;
+  }
+  .lp-card {
+    @apply bg-white rounded-[2rem] p-8 lg:p-10 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] transition-all duration-500 border border-gray-100 flex flex-col cursor-pointer transform hover:-translate-y-2;
+  }
+  .lp-tech-tile {
+    @apply w-28 sm:w-32 bg-white border border-gray-100 rounded-[1.5rem] p-4 flex flex-col items-center gap-3 shadow-[0_8px_30px_rgba(0,0,0,0.02)];
+  }
+  .footer-link {
+    @apply text-gray-600 hover:text-[#DE5D26] text-[14px] transition-colors font-medium;
+  }
+  .location-chip {
+    @apply px-4 py-2 text-sm font-medium bg-[#FAFAFA] border border-gray-200 text-gray-600 rounded-full hover:border-[#DE5D26]/40 hover:text-[#DE5D26] hover:bg-[#DE5D26]/5 transition-all duration-200;
+  }
+}

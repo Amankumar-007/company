@@ -67,6 +67,12 @@ const nextConfig: NextConfig = {
         destination: `/${service}-agency-in-:location`,
         permanent: true,
       })),
+
+      // Old pages that no longer exist but Google still crawls (reported as 404s
+      // in Search Console). Send them to the closest current page.
+      { source: '/career', destination: '/about', permanent: true },
+      { source: '/careers', destination: '/about', permanent: true },
+      { source: '/roadmap', destination: '/services', permanent: true },
     ];
   },
 
@@ -86,12 +92,6 @@ const nextConfig: NextConfig = {
         // These pages use ?id= query params — not proper indexable URLs.
         // Noindex them at the HTTP level too (belt-and-suspenders with metadata).
         source: '/service-detail',
-        headers: [
-          { key: 'X-Robots-Tag', value: 'noindex, follow' },
-        ],
-      },
-      {
-        source: '/project-detail',
         headers: [
           { key: 'X-Robots-Tag', value: 'noindex, follow' },
         ],

@@ -48,7 +48,7 @@ const Card = ({
 
   return (
     <div ref={container} className={styles.cardContainer}>
-      <motion.div
+      <motion.article
         className={styles.card}
         style={{
           scale,
@@ -163,7 +163,7 @@ const Card = ({
             <div className={styles.progressBar} style={{ width: `${((i + 1) / 4) * 100}%` }} />
           </div>
         </div>
-      </motion.div>
+      </motion.article>
     </div>
   );
 };

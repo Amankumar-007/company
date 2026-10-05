@@ -7,22 +7,6 @@ export const metadata: Metadata = {
     title: { absolute: 'About Twofloww | Premium Digital Agency & Technology Partner' },
     description:
         'Learn about Twofloww, a premium technology partner blending creative design with cutting-edge technology. We offer web development, mobile apps, UI/UX design, and digital marketing to help your business scale globally.',
-    keywords: [
-        'about twofloww',
-        'premium technology partner',
-        'creative digital agency',
-        'web development team India',
-        'UI/UX design agency',
-        'digital transformation consulting',
-        'Aman Kumar founder',
-        'Twofloww founders',
-        'global digital agency',
-        'web development agency USA',
-        'app development team UK',
-        'tech startup founders Dubai',
-        'best digital marketing team Australia',
-        'global web development Canada',
-    ],
     alternates: {
         canonical: `${BASE_URL}/about`,
     },

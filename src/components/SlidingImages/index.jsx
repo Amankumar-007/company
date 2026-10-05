@@ -73,7 +73,7 @@ export default function index() {
     const x2 = useTransform(scrollYProgress, [0, 1], shouldAnimate ? [0, -150] : [0, 0])
 
     return (
-        <div ref={container} className={styles.slidingImages}>
+        <section ref={container} className={styles.slidingImages}>
             <motion.div 
                 style={{
                     x: shouldAnimate ? x1 : 0,
@@ -116,6 +116,6 @@ export default function index() {
                         })
                     }
                 </motion.div>
-        </div>
+        </section>
     )
 }

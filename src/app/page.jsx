@@ -1,4 +1,5 @@
 import HomeClient from './HomeClient';
+import { organizationSchema, websiteSchema } from '@/lib/siteSchema';
 
 const BASE_URL = 'https://www.twofloww.in';
 
@@ -164,95 +165,6 @@ export const metadata = {
   },
   description:
     'Twofloww is a top web agency and web development company in Delhi NCR (Noida, Delhi, Gurugram). Website development, mobile apps, food delivery apps, on-demand apps, SEO & digital marketing. 50+ projects delivered. Free consultation & wireframe.',
-  keywords: [
-    // ── Primary geo + service keywords ──────────────────────────
-    'web agency in noida',
-    'web agency in delhi ncr',
-    'web agency in delhi',
-    'best web agency in noida',
-    'best web agency in delhi ncr',
-    'website development',
-    'website development company',
-    'website development company in delhi ncr',
-    'web development company in delhi ncr',
-    'web development company in delhi',
-    'web development company in noida',
-    'web development company in gurgaon',
-    'website development company in delhi',
-    'website development company in noida',
-    'website designing company in delhi',
-    'website designing company in noida',
-    'web development services in delhi',
-    'web development agency in delhi',
-    'web development agency in india',
-    'best web development company in delhi',
-    'best web development company in noida',
-    'top web development company delhi ncr',
-    // ── Generic high-volume ──────────────────────────────────────
-    'web development company',
-    'web development services',
-    'web development agency',
-    'software development company india',
-    'custom software development india',
-    'it company in noida',
-    'it companies in delhi ncr',
-    // ── Mobile App ───────────────────────────────────────────────
-    'mobile app development company',
-    'mobile app development company in delhi',
-    'mobile app development company in noida',
-    'mobile app development company in india',
-    'mobile app development services',
-    'android app development company india',
-    'ios app development company india',
-    'react native app development company',
-    'flutter app development company india',
-    // ── On-demand & Food Delivery ─────────────────────────────────
-    'food delivery app development company',
-    'food delivery app development company in india',
-    'zomato clone app development',
-    'swiggy clone app development',
-    'on demand app development company',
-    'on demand app development company in india',
-    'grocery delivery app development company',
-    'taxi booking app development company',
-    'uber clone app development india',
-    'hyperlocal delivery app development',
-    // ── Digital Marketing & SEO ───────────────────────────────────
-    'digital marketing agency in delhi',
-    'digital marketing agency in noida',
-    'digital marketing company in delhi',
-    'digital marketing company in india',
-    'seo company in delhi',
-    'seo company in noida',
-    'seo services in delhi',
-    'seo services in noida',
-    'seo agency delhi ncr',
-    'local seo services india',
-    'google ads agency delhi',
-    'social media marketing agency delhi',
-    'content marketing agency india',
-    // ── E-commerce ────────────────────────────────────────────────
-    'ecommerce website development company',
-    'ecommerce development company india',
-    'shopify development company india',
-    'woocommerce development company india',
-    'headless ecommerce development',
-    // ── UI/UX ─────────────────────────────────────────────────────
-    'ui ux design company india',
-    'ui ux design agency delhi',
-    'web design company delhi',
-    'product design agency india',
-    // ── Tech stack ────────────────────────────────────────────────
-    'nextjs development company india',
-    'react development company india',
-    'nodejs development company india',
-    // ── Brand ─────────────────────────────────────────────────────
-    'Twofloww',
-    'twofloww digital agency',
-    'digital agency india',
-    'startup digital agency india',
-    'affordable web development india',
-  ],
   alternates: {
     canonical: BASE_URL,
   },
@@ -291,11 +203,7 @@ export default function Home() {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify([organizationSchema, websiteSchema, faqSchema, localBusinessSchema]) }}
       />
       <HomeClient />
     </>
