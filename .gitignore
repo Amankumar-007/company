@@ -39,3 +39,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# large media files (>50MB GitHub limit)
+public/[Compressed] Excited Showreel 2025.mp4
+*[Compressed]*
+*Showreel*.mp4
+

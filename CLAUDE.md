@@ -65,6 +65,23 @@ Root metadata and favicon/icons config live in `src/app/layout.tsx`. Organizatio
 
 Icon/favicon setup: `src/app/favicon.ico` is the real logo, referenced via `metadata.icons` in `layout.tsx`, `public/apple-touch-icon.png`, and `manifest.ts` — keep these three in sync if the logo changes. JSON-LD `logo` fields use `/brandlogo.png` (the real brand mark, also used by the Header); `public/logo.png` is an unrelated placeholder — don't reference it.
 
+### Performance conventions (Core Web Vitals)
+
+These were the causes of 11–20s mobile LCP and 0.8 CLS — don't reintroduce them:
+- **Never hide above-the-fold content until JS runs.** Hero text uses the CSS-only `.hero-line` / `.hero-fade` classes in `globals.css` (stagger with `[animation-delay:…]`), not GSAP `fromTo` from `opacity-0` after hydration. Framer Motion heroes use `initial={false}`. No full-screen preloader on the homepage.
+- **Use `next/image` with `sizes`** for anything in `public/` — many source images are 1–2MB PNG/JPG. Only the LCP image gets `priority`.
+- **Reserve space for media** (e.g. `aspect-video`) so loading video/images doesn't shift layout, and don't let large videos download before they're near the viewport (`VideoComponent` uses an IntersectionObserver).
+- Keep `src/app/icon.png` small (it's linked on every page) and only preload fonts that render above the fold.
+
+### Page-weight conventions (text-to-HTML ratio)
+
+The 186 location pages were flagged by Semrush for ≤10% text-to-HTML; they're now ~10.6–11.9%, with little headroom. To keep them there:
+- `LocationPageTemplate` styles live in `LocationPageTemplate.css` (and the footer's in `Footer/footer.css`) as `@apply` rules named `lp-<section>-<n>` / `ft-<section>-<n>`. Edit the `@apply` lists there; don't paste long utility strings back into the JSX of repeated elements.
+- The template receives only `locSlug` + `serviceKey` and derives its copy and JSON-LD itself — don't pass large text/props from `[slug]/page.jsx` (props are serialized into the RSC payload, duplicating the text).
+- No Framer Motion in the template: scroll reveals use the CSS-only `.reveal` class (scroll-driven animation, content visible without JS). Repeated icons use the SVG `<use>` sprite; section icons are `.ico .ico-<name>` CSS masks over files in `public/icons/`.
+- `src/app/not-found.tsx` renders the client `NotFoundContent` so its tree isn't embedded in every page's RSC payload.
+- Check after template changes: build, then compare text vs total bytes of a few `.next/server/app/*-agency-in-*.html` files.
+
 ### Environment variables
 
 `.env.local` (not committed) defines: `ADMIN_EMAIL`, `ADMIN_PASSWORD`, `CLOUDINARY_CLOUD_NAME`/`CLOUDINARY_API_KEY`/`CLOUDINARY_API_SECRET`, `NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME`/`NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET`, `GMAIL_APP_PASSWORD`, `NEXT_PUBLIC_SUPABASE_URL`/`NEXT_PUBLIC_SUPABASE_ANON_KEY`/`NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`.
