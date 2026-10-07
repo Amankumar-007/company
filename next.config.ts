@@ -118,12 +118,13 @@ const nextConfig: NextConfig = {
             key: 'Content-Security-Policy',
             value: [
               "default-src 'self'",
-              "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
+              // Google Analytics (gtag) must be allowed here or it is silently blocked
+              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com",
               "style-src 'self' 'unsafe-inline'",
-              "img-src 'self' data: blob: https://res.cloudinary.com https://images.unsplash.com https://api.iconify.design https://cdn.simpleicons.org",
+              "img-src 'self' data: blob: https://res.cloudinary.com https://images.unsplash.com https://api.iconify.design https://www.googletagmanager.com https://*.google-analytics.com",
               "font-src 'self' data:",
               "media-src 'self' https://res.cloudinary.com",
-              "connect-src 'self' https://*.supabase.co",
+              "connect-src 'self' https://*.supabase.co https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com",
               "frame-src 'none'",
               "frame-ancestors 'none'",
               "base-uri 'self'",

@@ -41,7 +41,9 @@ yarn-error.log*
 next-env.d.ts
 
 # large media files (>50MB GitHub limit)
-public/[Compressed] Excited Showreel 2025.mp4
-*[Compressed]*
+# Brackets must be escaped: in .gitignore "[Compressed]" is a character class
+# (any ONE of C,o,m,p,r,e,s,d), which matched nearly every file — including
+# src/, so Tailwind (which skips gitignored files) generated no utility CSS.
+*\[Compressed\]*
 *Showreel*.mp4
 
