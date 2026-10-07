@@ -1,11 +1,10 @@
 'use client';
 import styles from './page.module.scss'
-import { useEffect, useState, useMemo } from 'react'
-import { AnimatePresence, motionValue } from 'framer-motion';
-import Preloader from '../components/Preloader';
+import { useMemo } from 'react'
+import { motionValue } from 'framer-motion';
 import Card from '../components/Card';
 import dynamic from 'next/dynamic';
-const HeroSection = dynamic(() => import('@/components/HeroSection'));
+import HeroSection from '@/components/HeroSection';
 const Projects = dynamic(() => import('../components/Projects'));
 const Description = dynamic(() => import('../components/Description'));
 const SlidingImages = dynamic(() => import('../components/SlidingImages'));
@@ -26,16 +25,7 @@ const cardRanges = [
 const cardColors = ['#f0f0f0', '#e8f4f8', '#f8f0e8', '#ecfdf5'];
 
 export default function HomeClient() {
-  const [isLoading, setIsLoading] = useState(true);
   const progress = motionValue(0);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-      document.body.style.cursor = 'default';
-    }, 2000);
-    return () => clearTimeout(timer);
-  }, []);
 
   const featuredProjects = useMemo(() =>
     HOME_PROJECT_SLUGS
@@ -45,10 +35,9 @@ export default function HomeClient() {
 
   return (
     <main className={styles.main}>
-      <AnimatePresence mode='wait'>
-        {isLoading && <Preloader />}
-      </AnimatePresence>
-      <HeroSection isLoading={isLoading} />
+      {/* The 2s "Hello / Bonjour…" preloader used to cover the page on every
+          visit, pushing LCP past 11s on mobile. The hero now renders immediately. */}
+      <HeroSection />
       <VideoComponent />
       <Description />
       <Projects />

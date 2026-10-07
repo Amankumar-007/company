@@ -68,6 +68,7 @@ const TECH_ICONS: Record<string, string> = {
   "Vercel": "/tech-icons/vercel.svg",
   "WebSockets": "/tech-icons/websockets.svg",
   "WooCommerce": "/tech-icons/woocommerce.svg",
+  "WordPress": "/tech-icons/wordpress.svg",
   "Zeplin": "/tech-icons/zeplin.svg",
   "Content CMS": "/tech-icons/contentcms.svg",
   "Inventory APIs": "/tech-icons/inventoryapis.svg",

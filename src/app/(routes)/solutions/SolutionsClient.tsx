@@ -5,7 +5,6 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import {
   ArrowRight,
-  Sparkles,
   CheckCircle2,
   Rocket,
   Building2,
@@ -391,7 +390,7 @@ export default function SolutionsClient() {
             {/* Left Content */}
             <div className="max-w-xl">
               <span className="inline-flex items-center gap-2 bg-white/10 border border-white/10 rounded-full px-4 py-1.5 text-xs text-[#C3F53C] font-bold uppercase tracking-widest mb-6">
-                <Sparkles className="w-3.5 h-3.5" />
+                <Rocket className="w-3.5 h-3.5" />
                 Let's Build
               </span>
 

@@ -5,14 +5,7 @@ import {
   getAllServices,
   generateTitle,
   generateDescription,
-  generateH1,
-  generateIntro,
-  generateFAQs,
-  generateLocalContext,
 } from '@/lib/seoTemplates';
-import { generateLocalBusinessSchema, generateFAQSchema, generateBreadcrumbSchema } from '@/lib/schema';
-import { getLocationServiceContent } from '@/data/location-service-content';
-import locationsData from '@/data/locations-data.json';
 import LocationPageTemplate from '@/components/LocationPageTemplate';
 
 const BASE_URL = 'https://www.twofloww.in';
@@ -36,13 +29,6 @@ function parseSlug(slug) {
   const loc = getLocationBySlug(match[2]);
   const service = getAllServices().find((s) => s.key === match[1]);
   return loc && service ? { loc, service } : null;
-}
-
-// Location FAQs + service-specific FAQs, shared by the page and its FAQPage schema
-function buildFaqs(loc, service) {
-  const place = loc.type === 'country' ? loc.country : loc.city;
-  const serviceFaqs = getLocationServiceContent(service.key).faqs(place);
-  return [...serviceFaqs, ...generateFAQs(loc, service.label)];
 }
 
 // ─── Metadata ────────────────────────────────────────────────────────────────
@@ -104,32 +90,9 @@ export default async function SeoPage({ params }) {
   const parsed = parseSlug(slug);
   if (!parsed) notFound();
 
+  // Only the slugs cross the server→client boundary. The template derives its
+  // copy and JSON-LD from the same deterministic generators, so the text isn't
+  // serialized a second time into the RSC payload (page-weight / text-to-HTML).
   const { loc, service } = parsed;
-  const faqs = buildFaqs(loc, service);
-  const jsonLd = [
-    generateLocalBusinessSchema(loc, locationsData.brand),
-    generateFAQSchema(faqs),
-    generateBreadcrumbSchema(loc, service),
-  ];
-
-  return (
-    <>
-      {jsonLd.map((schema, i) => (
-        <script
-          key={i}
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-        />
-      ))}
-      <LocationPageTemplate
-        loc={loc}
-        serviceKey={service.key}
-        serviceLabel={service.label}
-        h1={generateH1(loc, service.label)}
-        intro={generateIntro(loc, service.label)}
-        faqs={faqs}
-        localContext={generateLocalContext(loc)}
-      />
-    </>
-  );
+  return <LocationPageTemplate locSlug={loc.slug} serviceKey={service.key} />;
 }

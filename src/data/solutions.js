@@ -322,8 +322,8 @@ export const solutionsData = [
       { q: "Can AI replace my customer support team?", a: "AI can handle 70–80% of routine queries with high accuracy, dramatically reducing support costs. We recommend a human-in-the-loop for edge cases and complex complaints." }
     ],
     seo: {
-      title: "AI & Machine Learning Solutions for Business | Twofloww",
-      description: "Custom AI & machine learning development — LLM integration, predictive analytics, computer vision & NLP. Automate workflows and drive smarter decisions.",
+      title: "AI & ML Development Company in India | Twofloww",
+      description: "AI development company in India building AI applications, LLM integrations, predictive analytics, computer vision and NLP solutions for businesses.",
       keywords: ["AI development", "machine learning solutions", "custom LLM integration", "predictive analytics models", "computer vision applications", "natural language processing", "AI automation", "intelligent business software"],
       ogTitle: "Intelligent AI & Machine Learning Architectures",
       ogDescription: "Smart solutions that learn, adapt, and drive your business forward using custom AI models."

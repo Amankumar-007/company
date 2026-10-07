@@ -2,26 +2,33 @@
 
 import React, { useState, useRef } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useInView, motion } from 'framer-motion';
-import { Sparkles, MonitorSmartphone, TrendingUp, ArrowUpRight } from 'lucide-react';
+import { Cpu, MonitorSmartphone, TrendingUp, ArrowUpRight } from 'lucide-react';
 
 const services = [
   {
     title: "AI Strategy & Custom Solutions",
     description: "Empower your business with AI integration. As a top web development company, we craft custom software solutions that automate operations and accelerate growth.",
     image: "/ai.png",
-    icon: Sparkles,
+    href: "/solutions/ai-machine-learning",
+    linkText: "AI development services",
+    icon: Cpu,
   },
   {
     title: "Web & Mobile App Development",
     description: "High-performance website design and hybrid mobile application development in Delhi NCR. Built with Next.js, React, and Flutter for maximum speed and scalability.",
     image: "/wb.png",
+    href: "/services/web-development",
+    linkText: "Web development services",
     icon: MonitorSmartphone,
   },
   {
     title: "SEO Services & Growth Marketing",
     description: "Optimize your search rankings with our expert SEO agency. Drive organic traffic, optimize Core Web Vitals, and convert leads into revenue with data-driven strategies.",
     image: "/seoo.png",
+    href: "/services/seo",
+    linkText: "SEO services",
     icon: TrendingUp,
   }
 ];
@@ -217,7 +224,7 @@ export default function ServicesCardsSection() {
                         </h3>
                         
                         <div className={`transition-[max-height,margin] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] overflow-hidden ${isHovered
-                            ? 'max-h-[120px] mt-2.5'
+                            ? 'max-h-[170px] mt-2.5'
                             : 'max-h-0 mt-0'
                           }`}>
                           <motion.p
@@ -228,6 +235,9 @@ export default function ServicesCardsSection() {
                           >
                             {service.description}
                           </motion.p>
+                          <Link href={service.href} className="inline-flex items-center gap-1 mt-3 text-sm font-semibold text-black underline underline-offset-4 hover:text-orange-500">
+                            {service.linkText} <ArrowUpRight className="w-4 h-4" />
+                          </Link>
                         </div>
                       </div>
                     </div>
@@ -239,10 +249,12 @@ export default function ServicesCardsSection() {
                           : 'h-0 lg:h-full w-full lg:w-0 opacity-0 translate-x-3 scale-95 pointer-events-none'
                         }`}
                     >
-                      <img
+                      <Image
                         src={service.image}
                         alt={service.title}
-                        className={`absolute inset-0 w-full h-full object-cover transition-transform duration-1000 ease-out transform-gpu will-change-transform ${isHovered ? 'scale-100' : 'scale-110'
+                        fill
+                        sizes="(min-width: 1024px) 25vw, 100vw"
+                        className={`object-cover transition-transform duration-1000 ease-out transform-gpu will-change-transform ${isHovered ? 'scale-100' : 'scale-110'
                           }`}
                       />
                     </div>

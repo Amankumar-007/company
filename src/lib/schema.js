@@ -8,7 +8,7 @@ export function generateLocalBusinessSchema(loc, brand) {
     name: brand.name,
     url: BASE_URL,
     logo: `${BASE_URL}/brandlogo.png`,
-    image: `${BASE_URL}/opengraph-image`,
+    image: `${BASE_URL}/send.png`,
     telephone: loc.country_code === 'IN' ? brand.phone_india : brand.phone_intl,
     email: brand.email,
     areaServed: {

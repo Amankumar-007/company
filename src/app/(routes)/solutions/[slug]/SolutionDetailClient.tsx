@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import {
   ArrowRight,
-  Sparkles,
+  Cpu,
   ChevronDown,
   CheckCircle2,
   Rocket,
@@ -365,7 +365,7 @@ export default function SolutionDetailClient({ solution, related = [] }: { solut
               {solution.techStack && solution.techStack.length > 0 && (
                 <div className="bg-[#0B0D17] text-white rounded-[2.5rem] p-8 lg:p-12 shadow-2xl">
                   <div className="flex items-center gap-2 mb-6">
-                    <Sparkles className="w-4 h-4 text-[#C3F53C]" />
+                    <Cpu className="w-4 h-4 text-[#C3F53C]" />
                     <span className="text-xs font-bold uppercase tracking-widest text-gray-400">Battle-Tested Tech Stack</span>
                   </div>
 
@@ -472,7 +472,7 @@ export default function SolutionDetailClient({ solution, related = [] }: { solut
         <div className="relative w-full rounded-[2.5rem] bg-[#0B0D17] overflow-hidden min-h-[380px] flex items-center p-8 lg:p-16 text-white shadow-2xl">
           <div className="relative z-10 max-w-2xl mx-auto text-center flex flex-col items-center">
             <span className="inline-flex items-center gap-2 bg-white/10 rounded-full px-4 py-1.5 text-xs text-[#C3F53C] font-bold uppercase tracking-widest mb-6">
-              <Sparkles className="w-3.5 h-3.5" />
+              <Cpu className="w-3.5 h-3.5" />
               Build Your {solution.title}
             </span>
 

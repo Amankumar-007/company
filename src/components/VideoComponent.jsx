@@ -4,7 +4,26 @@ import { useCursor } from './Cursor/index';
 const VideoComponent = ({ videoSrc = '/video1.mp4' }) => {
   const { setCursorHover } = useCursor();
   const videoRef = useRef(null);
+  const containerRef = useRef(null);
   const [isMobileOrTablet, setIsMobileOrTablet] = useState(false);
+  const [shouldLoad, setShouldLoad] = useState(false);
+
+  // Start downloading the video only when it's about to scroll into view
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShouldLoad(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: '200px' }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
   
   // Memoize device detection to avoid recalculating
   const checkIsMobileOrTablet = useCallback(() => {
@@ -92,33 +111,29 @@ const VideoComponent = ({ videoSrc = '/video1.mp4' }) => {
   return (
     <section className="relative w-full max-w-7xl mx-auto px-3 sm:px-6">
       {/* Video container with curved corners and shadow */}
-      <div 
-        className="relative overflow-hidden rounded-3xl shadow-2xl cursor-pointer h-[55vh] md:h-auto"
+      {/* md:aspect-video reserves the 16:9 box up front — with h-auto the height
+          was 0 until the video's metadata loaded, shifting the page (CLS). */}
+      <div
+        ref={containerRef}
+        className="relative overflow-hidden rounded-3xl shadow-2xl cursor-pointer h-[55vh] md:h-auto md:aspect-video bg-neutral-900"
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         onClick={handleClick}
       >
+        {/* src is only set once the player is near the viewport, so this ~6MB
+            video no longer competes with the page's critical resources. */}
         <video
           ref={videoRef}
-          className="w-full h-full md:h-auto object-cover"
+          className="w-full h-full object-cover"
+          src={shouldLoad ? videoSrc : undefined}
           autoPlay
           loop
           muted
           playsInline
-          preload="metadata"
+          preload="none"
           disablePictureInPicture
           onContextMenu={(e) => isMobileOrTablet && e.preventDefault()}
-        >
-          {/* Dynamic video source based on current page */}
-          <source
-            src={videoSrc}
-            type="video/mp4"
-          />
-          {/* Fallback for browsers that don't support video */}
-          <div className="bg-gradient-to-br from-purple-500 to-pink-500 h-full min-h-[360px] md:min-h-[500px] flex items-center justify-center text-white text-xl font-semibold">
-            Video Preview
-          </div>
-        </video>
+        />
         
       </div>
     </section>

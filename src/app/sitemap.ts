@@ -3,6 +3,7 @@ import { createClient } from '@/utils/supabase/server'
 import locationsData from '@/data/locations-data.json'
 import { solutionsData } from '@/data/solutions'
 import { industries } from '@/data/industries'
+import { servicePages } from '@/data/service-pages'
 
 const BASE_URL = 'https://www.twofloww.in'
 
@@ -22,9 +23,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: 0.8,
     })) || []
 
-    // service-detail?id= pages are noindexed via X-Robots-Tag (next.config.ts),
-    // so they are deliberately left out — listing noindexed URLs here sends
-    // Google conflicting signals.
+    // Core national service pages (legacy service-detail?id= URLs 308 here)
+    const servicePageEntries = servicePages.map((page) => ({
+        url: BASE_URL + '/services/' + page.slug,
+        lastModified: new Date(),
+        changeFrequency: 'weekly' as const,
+        priority: 0.95,
+    }))
 
     // Case studies use clean, indexable URLs — project-detail?id= is
     // noindexed (query-param route), so it's intentionally excluded here.
@@ -127,6 +132,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             priority: 0.9,
         },
         ...blogPages,
+        ...servicePageEntries,
         ...caseStudyPages,
         ...locationServicePages,
         ...solutionsPages,

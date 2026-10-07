@@ -10,7 +10,6 @@ import ExtensionErrorSuppressor from '../components/ExtensionErrorSuppressor';
 import ConsultModal from '../components/ConsultModal';
 import type { Metadata, Viewport } from 'next';
 import Script from 'next/script';
-import localFont from 'next/font/local';
 import { Analytics } from '@vercel/analytics/next';
 
 const inter = Inter({
@@ -30,17 +29,10 @@ const unbounded = Unbounded({
   weight: ['900'],
   variable: '--font-unbounded',
   display: 'swap',
+  // Only used in the footer wordmark and 404 page — don't preload it on every page
+  preload: false,
 })
 
-const suisseIntl = localFont({
-  src: [{
-    path: '../../public/fonts/SuisseIntlTrial-Regular.otf',
-    weight: '400',
-    style: 'normal',
-  }],
-  variable: '--font-suisse',
-  display: 'swap',
-});
 
 const BASE_URL = 'https://www.twofloww.in';
 
@@ -87,10 +79,12 @@ export const metadata: Metadata = {
       'Digital product and growth agency based in India, building websites, mobile apps, ecommerce platforms & scalable software for businesses worldwide. SEO & digital marketing included. 50+ projects. Free consultation.',
     images: [
       {
-        url: '/opengraph-image',
-        width: 1200,
-        height: 630,
-        alt: 'Twofloww Digital Agency – Web & Mobile Development Worldwide',
+        url: `${BASE_URL}/send.png`,
+        secureUrl: `${BASE_URL}/send.png`,
+        width: 1100,
+        height: 576,
+        type: 'image/png',
+        alt: 'Twofloww – Web Development & Digital Growth Agency',
       },
     ],
   },
@@ -99,7 +93,7 @@ export const metadata: Metadata = {
     title: 'Twofloww | Web Development, Mobile Apps, SEO & Digital Growth',
     description:
       'Digital product and growth agency based in India, building websites, mobile apps, ecommerce platforms & scalable software for businesses worldwide. SEO & digital marketing included. 50+ projects. Free consultation.',
-    images: ['/opengraph-image'],
+    images: [`${BASE_URL}/send.png`],
     creator: '@twofloww',
     site: '@twofloww',
   },
@@ -123,7 +117,15 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
-      <body className={`${inter.className} ${spaceGrotesk.variable} ${unbounded.variable} ${suisseIntl.variable} bg-white text-black min-h-screen`} suppressHydrationWarning>
+      <head>
+        <link rel="image_src" href={`${BASE_URL}/send.png`} />
+        <meta property="og:image" content={`${BASE_URL}/send.png`} />
+        <meta property="og:image:secure_url" content={`${BASE_URL}/send.png`} />
+        <meta property="og:image:type" content="image/png" />
+        <meta property="og:image:width" content="1100" />
+        <meta property="og:image:height" content="576" />
+      </head>
+      <body className={`${inter.className} ${spaceGrotesk.variable} ${unbounded.variable} bg-white text-black min-h-screen`} suppressHydrationWarning>
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-2MQFRMEMPT"
           strategy="afterInteractive"

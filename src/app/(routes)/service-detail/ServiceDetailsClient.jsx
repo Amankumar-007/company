@@ -2,9 +2,10 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, Check, Star, Award, Zap, Code, Smartphone, Users, ChevronDown, Sparkles, CheckCircle2 } from 'lucide-react';
+import { ArrowRight, Check, Star, Award, Zap, Code, Smartphone, Users, ChevronDown, CheckCircle2, Repeat, ShieldCheck, Globe, FileCode2, Terminal } from 'lucide-react';
 import { openConsultModal } from '@/components/ConsultModal';
 import TechLogo from '@/components/TechLogo';
+import Image from 'next/image';
 
 export default function ServiceDetailsClient({ service }) {
   const [activeTab, setActiveTab] = useState('overview');
@@ -21,7 +22,6 @@ export default function ServiceDetailsClient({ service }) {
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
-
 
   const getServiceImages = (sId) => {
     const imageMap = {
@@ -65,6 +65,7 @@ export default function ServiceDetailsClient({ service }) {
     overview: useRef(null),
     provide: useRef(null),
     process: useRef(null),
+    agile: useRef(null),
     technologies: useRef(null)
   };
 
@@ -230,6 +231,7 @@ export default function ServiceDetailsClient({ service }) {
                     { key: 'overview', label: 'OVERVIEW' },
                     { key: 'provide', label: 'WHAT WE PROVIDE' },
                     { key: 'process', label: 'HOW WE DO IT' },
+                    { key: 'agile', label: 'AGILE METHODOLOGY' },
                     { key: 'technologies', label: 'TECHNOLOGIES' }
                   ].find(tab => tab.key === activeTab)?.label || 'OVERVIEW'}
                 </span>
@@ -249,6 +251,7 @@ export default function ServiceDetailsClient({ service }) {
                       { key: 'overview', label: 'OVERVIEW' },
                       { key: 'provide', label: 'WHAT WE PROVIDE' },
                       { key: 'process', label: 'HOW WE DO IT' },
+                      { key: 'agile', label: 'AGILE METHODOLOGY' },
                       { key: 'technologies', label: 'TECHNOLOGIES' }
                     ].map((tab) => (
                       <button
@@ -274,6 +277,7 @@ export default function ServiceDetailsClient({ service }) {
               { key: 'overview', label: 'OVERVIEW' },
               { key: 'provide', label: 'WHAT WE PROVIDE' },
               { key: 'process', label: 'HOW WE DO IT' },
+              { key: 'agile', label: 'AGILE METHODOLOGY' },
               { key: 'technologies', label: 'TECHNOLOGIES' }
             ].map((tab) => (
               <button
@@ -407,11 +411,15 @@ export default function ServiceDetailsClient({ service }) {
                     ))}
                   </div>
                 </div>
-                <img
-                  src={serviceImages[index] || '/service-png/frontend.png'}
-                  alt={`${serviceItem.title}`}
-                  className="w-full h-[28rem] object-contain"
-                />
+                <div className="relative w-full h-[28rem]">
+                  <Image
+                    src={serviceImages[index] || '/service-png/frontend.png'}
+                    alt={`${serviceItem.title}`}
+                    fill
+                    sizes="(min-width: 1024px) 50vw, 100vw"
+                    className="object-contain"
+                  />
+                </div>
               </motion.div>
             ))}
           </div>
@@ -485,6 +493,83 @@ export default function ServiceDetailsClient({ service }) {
         </div>
       </section>
 
+      {/* ── ELEVATED: AGILE METHODOLOGY SECTION ("THE AGILE WAY") ─────────── */}
+      <section ref={sectionRefs.agile} className="py-24 px-6 md:px-12 lg:px-24 bg-white border-t border-gray-100">
+        <div className="max-w-7xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-mono font-semibold tracking-wider uppercase mb-4">
+              <Repeat className="w-3.5 h-3.5 text-emerald-600" />
+              <span>THE AGILE WAY • ZERO SURPRISE DELIVERY</span>
+            </div>
+            <h2
+              className="text-3xl md:text-5xl font-medium tracking-tight text-black mb-4"
+              style={{ fontFamily: 'var(--font-space-grotesk)' }}
+            >
+              How We Work: Agile Sprints & Continuous Delivery
+            </h2>
+            <p className="text-gray-500 text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
+              We eliminate traditional agency delays through fast 2-week agile sprints, working software demos every Friday, and zero-penalty backlog flexibility.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+            <div className="p-8 rounded-3xl bg-[#F8F9FA] border border-gray-200/80 hover:border-black transition-colors duration-300">
+              <div className="w-12 h-12 rounded-2xl bg-black text-[#C3F53C] flex items-center justify-center mb-5 shadow-sm">
+                <Repeat className="w-6 h-6" />
+              </div>
+              <h3 className="font-bold text-xl text-black mb-2.5">2-Week Sprint Cadence</h3>
+              <p className="text-sm text-gray-600 leading-relaxed">Work is broken into predictable 14-day cycles with defined story points, clear acceptance criteria, and transparent milestone commitments.</p>
+            </div>
+
+            <div className="p-8 rounded-3xl bg-[#F8F9FA] border border-gray-200/80 hover:border-black transition-colors duration-300">
+              <div className="w-12 h-12 rounded-2xl bg-black text-[#C3F53C] flex items-center justify-center mb-5 shadow-sm">
+                <FileCode2 className="w-6 h-6" />
+              </div>
+              <h3 className="font-bold text-xl text-black mb-2.5">Free First Wireframe</h3>
+              <p className="text-sm text-gray-600 leading-relaxed">We de-risk your investment by delivering your initial wireframe and architecture roadmap for free before any long-term contract is signed.</p>
+            </div>
+
+            <div className="p-8 rounded-3xl bg-[#F8F9FA] border border-gray-200/80 hover:border-black transition-colors duration-300">
+              <div className="w-12 h-12 rounded-2xl bg-black text-[#C3F53C] flex items-center justify-center mb-5 shadow-sm">
+                <Globe className="w-6 h-6" />
+              </div>
+              <h3 className="font-bold text-xl text-black mb-2.5">Live Staging & Weekly Demos</h3>
+              <p className="text-sm text-gray-600 leading-relaxed">You test real, working software every week on a private staging link. No static slide decks — see actual progress in real time.</p>
+            </div>
+
+            <div className="p-8 rounded-3xl bg-[#F8F9FA] border border-gray-200/80 hover:border-black transition-colors duration-300">
+              <div className="w-12 h-12 rounded-2xl bg-black text-[#C3F53C] flex items-center justify-center mb-5 shadow-sm">
+                <Zap className="w-6 h-6" />
+              </div>
+              <h3 className="font-bold text-xl text-black mb-2.5">Adaptive Scope Flexibility</h3>
+              <p className="text-sm text-gray-600 leading-relaxed">Market conditions change. Re-prioritize your product backlog at the start of any sprint without painful change orders or penalties.</p>
+            </div>
+
+            <div className="p-8 rounded-3xl bg-[#F8F9FA] border border-gray-200/80 hover:border-black transition-colors duration-300">
+              <div className="w-12 h-12 rounded-2xl bg-black text-[#C3F53C] flex items-center justify-center mb-5 shadow-sm">
+                <Users className="w-6 h-6" />
+              </div>
+              <h3 className="font-bold text-xl text-black mb-2.5">Direct Engineer Access</h3>
+              <p className="text-sm text-gray-600 leading-relaxed">Collaborate directly with your dedicated Scrum Master and engineers in a shared Slack or Teams channel. Zero middlemen.</p>
+            </div>
+
+            <div className="p-8 rounded-3xl bg-[#F8F9FA] border border-gray-200/80 hover:border-black transition-colors duration-300">
+              <div className="w-12 h-12 rounded-2xl bg-black text-[#C3F53C] flex items-center justify-center mb-5 shadow-sm">
+                <ShieldCheck className="w-6 h-6" />
+              </div>
+              <h3 className="font-bold text-xl text-black mb-2.5">100% Code Ownership</h3>
+              <p className="text-sm text-gray-600 leading-relaxed">Every commit belongs to you. Complete Git repository, documentation, deployment scripts, and credentials handed over.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ── ELEVATED: TECHNOLOGIES SECTION ─────────────────────────────── */}
       <section ref={sectionRefs.technologies} className="py-24 px-4 sm:px-6 lg:px-8 bg-white border-t border-gray-100">
         <div className="max-w-7xl mx-auto">
@@ -545,7 +630,7 @@ export default function ServiceDetailsClient({ service }) {
 
           <div className="relative z-10 max-w-2xl mx-auto text-center flex flex-col items-center">
             <span className="inline-flex items-center gap-2 bg-white/10 rounded-full px-4 py-1.5 text-xs text-[#C3F53C] font-bold uppercase tracking-widest mb-6">
-              <Sparkles className="w-3.5 h-3.5" />
+              <Terminal className="w-3.5 h-3.5" />
               Build With TwoFloww
             </span>
 

@@ -4,6 +4,7 @@ import styles from './page.module.scss';
 import { Globe, Smartphone, Palette, ShieldCheck, Clock, Lightbulb, Monitor, PenTool, Megaphone, Briefcase } from 'lucide-react';
 import { gsap } from 'gsap';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 const initials = (name) => name.split(' ').map((n) => n[0]).join('');
 // Team members without photos yet — shown as initials in the avatar stacks
@@ -17,16 +18,7 @@ const HeroSection = () => {
 
   useEffect(() => {
     if (heroRef.current) {
-      const tl = gsap.timeline({ delay: 0.1 });
-      tl.fromTo('.about-hero-content > *',
-        { opacity: 0, y: 30 },
-        { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out', stagger: 0.15 }
-      );
-      tl.fromTo('.about-hero-image-overlay',
-        { opacity: 0, x: 20 },
-        { opacity: 1, x: 0, duration: 1, ease: 'power3.out' },
-        "-=0.5"
-      );
+      // Hero entrance now runs via CSS (.hero-fade) so the text paints immediately
     }
   }, []);
 
@@ -35,12 +27,12 @@ const HeroSection = () => {
       <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6 h-full min-h-[650px] lg:h-[80vh]">
         {/* Left Column - Content */}
         <div className="bg-[#F6F6F6] rounded-[2rem] p-8 lg:p-16 flex flex-col justify-center items-center text-center relative overflow-hidden h-full">
-          <div className="about-hero-content relative z-10 max-w-xl mx-auto flex flex-col items-center">
+          <div className="about-hero-content hero-fade [animation-delay:0.1s] relative z-10 max-w-xl mx-auto flex flex-col items-center">
             {/* Trusted Label */}
             <div className="flex items-center gap-4 mb-8 lg:mb-12">
               <span className="text-sm font-medium text-gray-800">Trusted over 5,000+</span>
               <div className="flex -space-x-3">
-                <img src="/WhatsApp Image 2026-08-26 at 5.23.57 PM.jpeg" alt="User" className="w-8 h-8 rounded-full border-2 border-[#F6F6F6] object-cover" />
+                <Image src="/WhatsApp Image 2026-08-26 at 5.23.57 PM.jpeg" alt="Aman Kumar" width={32} height={32} className="w-8 h-8 rounded-full border-2 border-[#F6F6F6] object-cover" />
                 {TEAM_INITIALS.slice(0, 2).map((ini, i) => (
                   <span key={i} aria-hidden="true" className="w-8 h-8 rounded-full border-2 border-[#F6F6F6] bg-gray-200 text-gray-600 text-[10px] font-semibold flex items-center justify-center">
                     {ini}
@@ -73,15 +65,18 @@ const HeroSection = () => {
 
         {/* Right Column - Image & Typography Overlay */}
         <div className="relative rounded-[2rem] overflow-hidden h-full min-h-[400px] lg:min-h-full group">
-          <img
+          <Image
             src="/about1.png"
             alt="About TwoFloww"
-            className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+            fill
+            priority
+            sizes="(min-width: 1024px) 50vw, 100vw"
+            className="object-cover transition-transform duration-1000 group-hover:scale-105"
           />
 
           {/* Aesthetic Typography Overlay */}
           <div className="absolute inset-0 flex items-start justify-end pt-10 px-8 lg:pt-12 lg:px-12">
-            <div className="about-hero-image-overlay text-white max-w-sm text-right">
+            <div className="about-hero-image-overlay hero-fade [animation-delay:0.4s] text-white max-w-sm text-right">
               <h2
                 className="text-2xl md:text-3xl lg:text-4xl leading-snug font-light mb-3 text-white drop-shadow-md"
                 style={{ fontFamily: 'var(--font-space-grotesk), sans-serif', letterSpacing: '-0.01em' }}
@@ -220,10 +215,12 @@ const TeamMemberCard = ({ member }) => {
       {/* Image Section */}
       <div className="relative w-full aspect-[1/1.1] rounded-[1.5rem] overflow-hidden mt-auto bg-gray-200">
         {member.image ? (
-          <img
+          <Image
             src={member.image}
             alt={member.name}
-            className="absolute inset-0 w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500 ease-out"
+            fill
+            sizes="(min-width: 1024px) 20vw, 50vw"
+            className="object-cover object-top group-hover:scale-105 transition-transform duration-500 ease-out"
           />
         ) : (
           <div className="absolute inset-0 bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center text-gray-500 text-6xl font-bold group-hover:scale-105 transition-transform duration-500 ease-out">
@@ -289,10 +286,12 @@ const CTABannerSection = () => {
     <section className="py-10 px-4 sm:px-6 lg:px-8 bg-white max-w-[1400px] mx-auto overflow-hidden">
       <div className="relative w-full rounded-[2rem] overflow-hidden min-h-[400px] lg:min-h-[450px] flex items-center">
         {/* Background Image */}
-        <img 
-          src="/bg.jpg" 
-          alt="CTA Background" 
-          className="absolute inset-0 w-full h-full object-cover"
+        <Image
+          src="/bg.jpg"
+          alt=""
+          fill
+          sizes="(min-width: 1400px) 1400px, 100vw"
+          className="object-cover"
         />
         {/* Subtle overlay for text readability if needed */}
         <div className="absolute inset-0 bg-black/10"></div>

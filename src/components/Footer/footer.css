@@ -1,0 +1,62 @@
+/* Styles for the site Footer. Long Tailwind utility lists live here (via @apply)
+   instead of inline in the markup, because these elements repeat on every page
+   and the class strings were bloating page HTML (Semrush "low text-to-HTML
+   ratio"). Edit the @apply lists exactly as you would edit className utilities. */
+@reference "../../app/globals.css";
+
+@layer components {
+  .ft-footer-1 {
+    @apply w-full text-[#0B0D17] font-sans;
+  }
+  .ft-main-content-container-1 {
+    @apply max-w-[1400px] mx-auto px-4 md:px-12 pt-20 pb-16 relative z-10;
+  }
+  .ft-become-an-affiliate-card-1 {
+    @apply grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-start justify-between;
+  }
+  .ft-become-an-affiliate-card-2 {
+    @apply lg:col-span-5 flex flex-col gap-6 w-full;
+  }
+  .ft-become-an-affiliate-card-3 {
+    @apply text-[#0B0D17] font-semibold text-[16px] md:text-[17px] leading-tight max-w-[340px];
+  }
+  .ft-newsletter-input-form-1 {
+    @apply flex items-center bg-white rounded-full p-1.5 border border-gray-200/50 shadow-sm max-w-[420px] w-full relative;
+  }
+  .ft-newsletter-input-form-2 {
+    @apply w-full pl-5 pr-32 py-3 text-[14px] bg-transparent outline-none text-[#0B0D17] placeholder-gray-400 font-sans;
+  }
+  .ft-newsletter-input-form-3 {
+    @apply absolute right-1.5 top-1.5 bottom-1.5 bg-[#0A2535] hover:bg-[#12364c] text-white px-6 rounded-full font-medium text-[13px] tracking-wide transition-all duration-300 active:scale-95;
+  }
+  .ft-disclaimer-text-1 {
+    @apply text-[12px] text-gray-500/90 leading-relaxed max-w-[380px] -mt-2;
+  }
+  .ft-social-icons-with-border-outline-1 {
+    @apply flex items-center gap-3.5 mt-2;
+  }
+  .ft-facebook-1 {
+    @apply w-9 h-9 rounded-full border border-gray-300 hover:border-[#DE5D26] hover:text-[#DE5D26] flex items-center justify-center text-gray-600 hover:scale-105 transition-all duration-300;
+  }
+  .ft-x-twitter-1 {
+    @apply lg:col-span-7 grid grid-cols-2 md:grid-cols-4 gap-8 justify-between w-full;
+  }
+  .ft-sitemap-1 {
+    @apply text-[#0B0D17] font-semibold text-[15px] tracking-wide mb-2;
+  }
+  .ft-contact-info-1 {
+    @apply text-gray-600 hover:text-[#DE5D26] text-[14px] transition-colors font-medium flex items-center gap-2;
+  }
+  .ft-contact-info-2 {
+    @apply text-gray-600 text-[14px] font-medium flex items-start gap-2;
+  }
+  .ft-areas-we-serve-1 {
+    @apply text-[#DE5D26] hover:underline text-[13px] font-semibold mt-1;
+  }
+  .ft-bottom-logo-section-1 {
+    @apply w-full overflow-hidden select-none pointer-events-none mt-16 flex items-center justify-center relative z-10;
+  }
+  .ft-bottom-logo-section-2 {
+    @apply text-center font-black relative flex items-center justify-center;
+  }
+}

@@ -1,4 +1,5 @@
 import locationsData from '@/data/locations-data.json';
+import { getLocationServiceContent } from '@/data/location-service-content';
 
 const { brand, services } = locationsData;
 
@@ -44,31 +45,16 @@ function pickVariant(arr, seedStr) {
 
 export function generateTitle(loc, serviceLabel = 'Web Design & Development') {
   const place = placeName(loc);
-
-  if (loc.is_home_base && serviceLabel === 'Web Development') {
-    return `Best Web Development Agency in ${place} | ${brand.name}`;
-  }
-
-  const variants = [
-    `${serviceLabel} Company in ${place} | ${brand.name}`,
-    `Best ${serviceLabel} Agency in ${place} – ${brand.name}`,
-    `${place} ${serviceLabel} Experts | ${brand.name}`,
-    `Top-Rated ${serviceLabel} Agency in ${place} | ${brand.name}`,
-    `${possessive(place)} Premier ${serviceLabel} Specialists – ${brand.name}`,
-    `Hire Expert ${serviceLabel} Team in ${place} | ${brand.name}`,
-  ];
-  const picked = pickVariant(variants, loc.slug + serviceLabel);
-  if (picked.length <= MAX_TITLE_LENGTH) return picked;
-
-  // Too long for this place/service combo — fall back to progressively shorter
-  // phrasings so the title is never truncated in the SERP.
-  const fallbacks = [
+  // Lead with the phrasing people actually search (keyword-gap data):
+  // "{service} company in {city}". Variety lives in the H1/intro/FAQs instead.
+  // Fall back to shorter forms so the title is never truncated in the SERP.
+  const candidates = [
     `${serviceLabel} Company in ${place} | ${brand.name}`,
     `${serviceLabel} Agency in ${place} | ${brand.name}`,
     `${serviceLabel} in ${place} | ${brand.name}`,
     `${serviceLabel} in ${place}`,
   ];
-  return fallbacks.find(t => t.length <= MAX_TITLE_LENGTH) || fallbacks[fallbacks.length - 1];
+  return candidates.find((t) => t.length <= MAX_TITLE_LENGTH) || candidates[candidates.length - 1];
 }
 
 // ─── Meta description ────────────────────────────────────────────────────────
@@ -176,6 +162,12 @@ export function generateIntro(loc, serviceLabel = 'web design and development') 
 }
 
 // ─── FAQs — four comprehensive, human-written sets ───────────────────────────
+
+/** Service-specific FAQs followed by the location FAQ set — used for both the page and its FAQPage schema. */
+export function generateLocationPageFaqs(loc, service) {
+  const serviceFaqs = getLocationServiceContent(service.key).faqs(placeName(loc));
+  return [...serviceFaqs, ...generateFAQs(loc, service.label)];
+}
 
 export function generateFAQs(loc, serviceLabel = 'web development') {
   const place = placeName(loc);

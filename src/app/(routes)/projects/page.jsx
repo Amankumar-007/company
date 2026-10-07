@@ -6,7 +6,6 @@ import FAQ from '@/components/Faq';
 import ProjectTimeline from '@/components/ProjectTimeline';
 import ProjectDeviceThumbnail from '@/components/ProjectDeviceThumbnail';
 import { getAllProjects } from '@/data/projects';
-import { gsap } from 'gsap';
 import { ArrowUpRight } from 'lucide-react';
 
 // Pattern Component for Projects
@@ -145,21 +144,6 @@ const CubertoProjectsPage = () => {
   // Memoize projects data to load only once
   const projects = useMemo(() => getAllProjects(), []);
 
-  useEffect(() => {
-    if (heroRef.current) {
-      const tl = gsap.timeline({ delay: 0.1 })
-      tl.fromTo('.projects-hero-title-line',
-        { opacity: 0, y: '110%' },
-        { opacity: 1, y: '0%', duration: 1.2, ease: 'power4.out', stagger: 0.12 }
-      )
-      tl.fromTo('.projects-hero-sub',
-        { opacity: 0, y: 30 },
-        { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out' },
-        '-=0.7'
-      )
-    }
-  }, []);
-
   return (
     <div ref={containerRef} className="min-h-screen bg-white">
       {/* Header */}
@@ -169,10 +153,10 @@ const CubertoProjectsPage = () => {
           <div className="text-center max-w-3xl mx-auto">
             <h1 className="text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
               <div className="overflow-hidden pb-2 -mb-2">
-                <div className="projects-hero-title-line inline-block opacity-0 translate-y-[110%]">Our Projects</div>
+                <div className="hero-line">Our Projects</div>
               </div>
             </h1>
-            <p className="projects-hero-sub text-xl text-gray-600 leading-relaxed opacity-0">
+            <p className="hero-fade text-xl text-gray-600 leading-relaxed">
               We engineer high-performance web applications and digital platforms engineered for scale, conversion, and world-class design.
             </p>
           </div>

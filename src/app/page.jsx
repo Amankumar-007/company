@@ -97,7 +97,7 @@ const localBusinessSchema = {
   '@type': 'ProfessionalService',
   name: 'Twofloww',
   alternateName: 'Twofloww Digital Agency',
-  image: `${BASE_URL}/opengraph-image`,
+  image: `${BASE_URL}/send.png`,
   '@id': BASE_URL,
   url: BASE_URL,
   description:
@@ -179,9 +179,11 @@ export const metadata = {
       'Twofloww: top web agency & web development company in Delhi NCR (Noida, Delhi, Gurugram). Website development, mobile apps, food delivery & on-demand apps, SEO & digital marketing. 50+ projects. Free consultation.',
     images: [
       {
-        url: '/opengraph-image',
-        width: 1200,
-        height: 630,
+        url: `${BASE_URL}/send.png`,
+        secureUrl: `${BASE_URL}/send.png`,
+        width: 1100,
+        height: 576,
+        type: 'image/png',
         alt: 'Twofloww – Web Development Company & Web Agency in Delhi NCR',
       },
     ],
@@ -192,7 +194,7 @@ export const metadata = {
       'Twofloww – Web Development Company & Web Agency in Delhi NCR',
     description:
       'Twofloww: top web agency & web development company in Delhi NCR (Noida, Delhi, Gurugram). Website development, mobile apps, food delivery & on-demand apps, SEO & digital marketing. 50+ projects. Free consultation.',
-    images: ['/opengraph-image'],
+    images: [`${BASE_URL}/send.png`],
     creator: '@twofloww',
     site: '@twofloww',
   },

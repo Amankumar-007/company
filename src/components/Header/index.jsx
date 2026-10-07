@@ -65,11 +65,30 @@ export default function Header() {
     return () => document.removeEventListener('click', handleClickOutside);
   }, []);
 
-  // Scroll listener removed — header is static
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  // Shrink navbar on scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY || document.documentElement.scrollTop;
+      setIsScrolled(scrollY > 25);
+    };
+
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   // GSAP entrance animation — homepage only, after preloader exits
   useEffect(() => {
     if (isAdmin || !headerRef.current) return;
+
+    // On mobile, let pure CSS control the floating pill so transforms are never overwritten
+    if (window.innerWidth < 769) {
+      gsap.killTweensOf([headerRef.current, '.nav-link-inner', '.nav-logo-inner', '.nav-cta-inner']);
+      gsap.set([headerRef.current, '.nav-link-inner', '.nav-logo-inner', '.nav-cta-inner'], { clearProps: 'all' });
+      return;
+    }
 
     if (!isHome) {
       // Kill any in-flight home-page tweens and remove their inline styles
@@ -78,20 +97,19 @@ export default function Header() {
       return;
     }
 
-    // Homepage only: hide everything, wait for preloader to finish, then reveal
+    // Homepage desktop only: quick staggered reveal on load
     gsap.set(headerRef.current, { y: -60, opacity: 0 });
     gsap.set('.nav-link-inner', { y: '110%', opacity: 0 });
     gsap.set('.nav-logo-inner', { y: '110%', opacity: 0 });
     gsap.set('.nav-cta-inner', { opacity: 0, y: 10 });
 
-    // Preloader: 2000ms state + ~800ms exit animation
     const timer = setTimeout(() => {
       const tl = gsap.timeline();
       tl.to(headerRef.current, { y: 0, opacity: 1, duration: 0.8, ease: 'power4.out' })
         .to('.nav-logo-inner', { y: '0%', opacity: 1, duration: 0.9, ease: 'power4.out' }, '-=0.5')
         .to('.nav-link-inner', { y: '0%', opacity: 1, duration: 0.8, ease: 'power4.out', stagger: 0.07 }, '-=0.6')
         .to('.nav-cta-inner', { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' }, '-=0.5');
-    }, 2800);
+    }, 100);
 
     return () => clearTimeout(timer);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -100,30 +118,32 @@ export default function Header() {
   // ─── Early return AFTER all hooks ───
   if (isAdmin) return null;
 
-  // Header requires absolute styling on specific pages
-  const needsAbsoluteHeader = isHome || pathname?.startsWith('/blog') || isLocationPage || isSolutionsPage;
-  const needsWhiteText = isHome; // Only homepage has dark background hero
+  const isServicesPage = pathname === '/services' || pathname?.startsWith('/services/');
+  const isServicesHub = pathname === '/services';
+
+  // Header requires absolute styling on specific pages (transparent overlay on dark heroes)
+  const needsAbsoluteHeader = isHome || pathname?.startsWith('/blog') || isLocationPage || isSolutionsPage || isServicesPage;
+  const needsWhiteText = isHome;
 
   return (
     <>
-      {/* Plain header — no motion wrapper, GSAP handles entrance */}
+      {/* Plain header — no motion wrapper, GSAP handles entrance on desktop */}
       <header
         ref={headerRef}
-        style={isHome ? { opacity: 0 } : undefined}
-        className={`${styles.header} ${needsAbsoluteHeader ? styles.absoluteHeader : ''}`}
+        className={`${styles.header} ${needsAbsoluteHeader ? styles.absoluteHeader : ''} ${isScrolled ? styles.scrolled : ''} ${isMobileMenuOpen ? styles.headerMenuOpen : ''}`}
       >
         {/* Logo */}
         <div className={styles.logo}>
           <Link href="/" className={styles.logoLink}>
             <div style={{ overflow: 'hidden', display: 'flex', alignItems: 'center' }}>
-              <div className={`nav-logo-inner ${styles.logoContainer}`} style={isHome ? { opacity: 0, transform: 'translateY(110%)' } : undefined}>
+              <div className={`nav-logo-inner ${styles.logoContainer}`}>
                 <Image
-                  src="/brandlogo.png"
-                  alt="FlowW Logo"
-                  width={88}
-                  height={88}
+                  src="/brandlogo-clean.png"
+                  alt="TW2 Logo"
+                  width={977}
+                  height={275}
                   priority
-                  className={styles.logoImage}
+                  className={`${styles.logoImage} ${needsWhiteText ? styles.logoImageInverted : ''}`}
                 />
                 <span
                   className={styles.logoText}
@@ -219,31 +239,17 @@ export default function Header() {
           ))}
         </nav>
 
-        {/* Mobile Menu Button — keep motion only for hamburger toggle */}
+        {/* Mobile Menu Button — Minimalist 2-line pill hamburger */}
         <motion.button
           className={`${styles.mobileMenuButton} nav-cta-inner`}
-          style={isHome ? { opacity: 0 } : undefined}
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          onClick={() => setIsMobileMenuOpen(true)}
           whileTap={{ scale: 0.9 }}
-          aria-label="Toggle mobile menu"
+          aria-label="Open mobile menu"
         >
-          <motion.div
-            className={`${styles.hamburger} ${isMobileMenuOpen ? styles.active : ''}`}
-            animate={isMobileMenuOpen ? 'open' : 'closed'}
-          >
-            <motion.span
-              variants={{ closed: { rotate: 0, y: 0 }, open: { rotate: 45, y: 8 } }}
-              transition={{ duration: 0.3 }}
-            />
-            <motion.span
-              variants={{ closed: { opacity: 1 }, open: { opacity: 0 } }}
-              transition={{ duration: 0.3 }}
-            />
-            <motion.span
-              variants={{ closed: { rotate: 0, y: 0 }, open: { rotate: -45, y: -8 } }}
-              transition={{ duration: 0.3 }}
-            />
-          </motion.div>
+          <div className={styles.hamburger}>
+            <span className={styles.hamburgerLine} />
+            <span className={styles.hamburgerLine} />
+          </div>
         </motion.button>
       </header>
 

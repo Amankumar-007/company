@@ -3,7 +3,6 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Calendar, ArrowRight } from 'lucide-react'
 import type { Metadata } from 'next'
-import BlogHeroReveal from './BlogHeroReveal'
 import { getRelativeTime } from '@/lib/utils'
 
 const BASE_URL = 'https://www.twofloww.in'
@@ -134,13 +133,12 @@ export default async function BlogListingPage(props: Props) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
         <div className="relative mb-6 md:mb-8">
-          <BlogHeroReveal />
           <h1 className="text-4xl md:text-6xl font-bold text-[#c2410c] font-space-grotesk tracking-tight">
             <div className="overflow-hidden pb-2 -mb-2">
-              <div className="blog-hero-title-line inline-block opacity-0 translate-y-[110%]">Blog</div>
+              <div className="hero-line">Blog</div>
             </div>
           </h1>
-          <p className="blog-hero-sub text-lg text-gray-600 mt-2 opacity-0 max-w-xl">
+          <p className="hero-fade text-lg text-gray-600 mt-2 max-w-xl">
             Insights, thoughts, and stories from the Twofloww team.
           </p>
         </div>

@@ -91,6 +91,8 @@ export default function GlobalReach({ lightTheme = true }: Props) {
             <img
               src="/vecteezy_globe-map-icon-with-black-color_7941182.svg"
               alt="Global Reach Map"
+              loading="lazy"
+              decoding="async"
               className="absolute inset-0 w-full h-full object-contain select-none"
               style={{
                 filter: lightTheme

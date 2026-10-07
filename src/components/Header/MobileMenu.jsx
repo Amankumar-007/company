@@ -1,67 +1,65 @@
 'use client';
+
 import { motion, AnimatePresence } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import Magnetic from '../../common/Magnetic';
+import Image from 'next/image';
+import { ChevronDown } from 'lucide-react';
 import styles from './MobileMenu.module.scss';
 import { solutionsData } from '@/data/solutions';
 
-const MotionLink = motion.create ? motion.create(Link) : motion(Link);
-
-const menuVariants = {
-  initial: { opacity: 0 },
-  animate: {
-    opacity: 1,
-    transition: { staggerChildren: 0.04, delayChildren: 0.1 }
-  },
-  exit: {
-    opacity: 0,
-    transition: { staggerChildren: 0.02, staggerDirection: -1 }
-  }
-};
-
 const overlayVariants = {
   initial: { opacity: 0 },
-  animate: { opacity: 1, transition: { duration: 0.2, ease: 'easeOut' } },
-  exit: { opacity: 0, transition: { duration: 0.2, ease: 'easeIn' } }
+  animate: { opacity: 1, transition: { duration: 0.28, ease: 'easeOut' } },
+  exit: { opacity: 0, transition: { duration: 0.22, ease: 'easeIn' } }
 };
 
-const mobileMenuVariants = {
-  initial: { x: '100%' },
+const cardVariants = {
+  initial: {
+    opacity: 0,
+    scale: 0.9,
+    y: -8,
+    transformOrigin: 'top center'
+  },
   animate: {
-    x: 0,
-    transition: { 
-      duration: 0.3, 
-      ease: [0.25, 0.46, 0.45, 0.94],
-      staggerChildren: 0.05,
-      delayChildren: 0.1
+    opacity: 1,
+    scale: 1,
+    y: 0,
+    transformOrigin: 'top center',
+    transition: {
+      duration: 0.38,
+      ease: [0.16, 1, 0.3, 1],
+      staggerChildren: 0.035,
+      delayChildren: 0.06
     }
   },
   exit: {
-    x: '100%',
-    transition: { 
-      duration: 0.25, 
-      ease: [0.55, 0, 1, 0.45],
-      staggerChildren: 0.02,
-      staggerDirection: -1
+    opacity: 0,
+    scale: 0.92,
+    y: -8,
+    transformOrigin: 'top center',
+    transition: {
+      duration: 0.22,
+      ease: [0.22, 1, 0.36, 1]
     }
   }
 };
 
-const menuItemVariants = {
-  initial: { opacity: 0, x: 12 },
+const itemVariants = {
+  initial: { opacity: 0, y: 12 },
   animate: {
     opacity: 1,
-    x: 0,
-    transition: { duration: 0.22, ease: 'easeOut' }
+    y: 0,
+    transition: { duration: 0.28, ease: [0.16, 1, 0.3, 1] }
   },
   exit: {
     opacity: 0,
+    y: -4,
     transition: { duration: 0.15 }
   }
 };
 
-export default function MobileMenu({ navItems, onClose, pathname, isDesktop = false }) {
+export default function MobileMenu({ navItems, onClose, pathname }) {
   const [openSubmenus, setOpenSubmenus] = useState({});
 
   useEffect(() => {
@@ -72,108 +70,24 @@ export default function MobileMenu({ navItems, onClose, pathname, isDesktop = fa
     };
 
     document.addEventListener('keydown', handleEscape);
-    
-    // Only prevent body scroll on mobile, not desktop overlay
-    if (!isDesktop) {
-      document.body.style.overflow = 'hidden';
-    }
+    document.body.style.overflow = 'hidden';
 
     return () => {
       document.removeEventListener('keydown', handleEscape);
-      if (!isDesktop) {
-        document.body.style.overflow = 'unset';
-      }
+      document.body.style.overflow = 'unset';
     };
-  }, [onClose, isDesktop]);
+  }, [onClose]);
 
   const handleLinkClick = () => {
     onClose();
   };
 
-  if (isDesktop) {
-    // Desktop overlay menu
-    return (
-      <>
-        {/* Desktop Overlay */}
-        <motion.div
-          className={styles.desktopOverlay}
-          variants={overlayVariants}
-          initial="initial"
-          animate="animate"
-          exit="exit"
-          onClick={onClose}
-        />
-        
-        {/* Desktop Menu Panel */}
-        <motion.div
-          className={styles.desktopMenuPanel}
-          variants={menuVariants}
-          initial="initial"
-          animate="animate"
-          exit="exit"
-          onClick={(e) => e.stopPropagation()}
-        >
-          <motion.div 
-            className={styles.desktopMenuHeader}
-            variants={menuItemVariants}
-          >
-            <h2 className={styles.desktopMenuTitle}>Navigation</h2>
-            <motion.button
-              className={styles.desktopCloseButton}
-              onClick={onClose}
-              whileHover={{ scale: 1.1, rotate: 90 }}
-              whileTap={{ scale: 0.9 }}
-            >
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <line x1="18" y1="6" x2="6" y2="18"></line>
-                <line x1="6" y1="6" x2="18" y2="18"></line>
-              </svg>
-            </motion.button>
-          </motion.div>
+  // Main links excluding "Contact" (Contact is rendered as the black pill button at the bottom)
+  const links = navItems.filter((item) => item.href !== '/contact');
 
-          <nav className={styles.desktopNavItems}>
-            {navItems.map((item, index) => (
-              <Magnetic key={item.title}>
-                <MotionLink
-                  href={item.href}
-                  className={`${styles.desktopNavItem} ${pathname === item.href ? styles.active : ''}`}
-                  variants={menuItemVariants}
-                  custom={index}
-                  onClick={handleLinkClick}
-                  whileHover={{ 
-                    scale: 1.05,
-                    x: 10,
-                    transition: { type: 'spring', stiffness: 400, damping: 10 }
-                  }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <motion.span
-                    className={styles.desktopNavText}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: index * 0.1 + 0.3 }}
-                  >
-                    {item.title}
-                  </motion.span>
-                  <motion.div
-                    className={styles.desktopNavIndicator}
-                    initial={{ scaleX: 0 }}
-                    animate={{ scaleX: pathname === item.href ? 1 : 0 }}
-                    transition={{ delay: index * 0.1 + 0.4, duration: 0.3 }}
-                  />
-                </MotionLink>
-              </Magnetic>
-            ))}
-          </nav>
-        </motion.div>
-      </>
-    );
-  }
-
-  // Mobile menu (existing functionality)
   return (
     <>
-      {/* Mobile Overlay */}
+      {/* Backdrop Dimmer Overlay */}
       <motion.div
         className={styles.overlay}
         variants={overlayVariants}
@@ -181,167 +95,158 @@ export default function MobileMenu({ navItems, onClose, pathname, isDesktop = fa
         animate="animate"
         exit="exit"
         onClick={onClose}
+        aria-hidden="true"
       />
 
-      {/* Mobile Menu Container */}
+      {/* Floating Rounded Menu Card */}
       <motion.div
-        className={styles.mobileMenu}
-        variants={mobileMenuVariants}
+        className={styles.menuCard}
+        variants={cardVariants}
         initial="initial"
         animate="animate"
         exit="exit"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Mobile Navigation"
+        onClick={(e) => e.stopPropagation()}
       >
-        {/* Glow Blobs */}
-        <div className={styles.glowBlob1} />
-        <div className={styles.glowBlob2} />
+        {/* Top Header: Logo + Close Button */}
+        <div className={styles.cardHeader}>
+          <Link href="/" className={styles.cardLogo} onClick={handleLinkClick}>
+            <Image
+              src="/brandlogo-clean.png"
+              alt="TW2 Logo"
+              width={977}
+              height={275}
+              priority
+              className={styles.cardLogoImage}
+            />
+          </Link>
 
-        {/* Mobile Menu Header */}
-        <motion.div 
-          className={styles.menuHeader}
-          variants={menuItemVariants}
-        >
-          <h2 className={styles.menuTitle}>Navigation</h2>
           <motion.button
             className={styles.closeButton}
             onClick={onClose}
-            whileHover={{ scale: 1.1, rotate: 90 }}
             whileTap={{ scale: 0.9 }}
+            aria-label="Close navigation menu"
           >
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <line x1="18" y1="6" x2="6" y2="18"></line>
-              <line x1="6" y1="6" x2="18" y2="18"></line>
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#0b0d17"
+              strokeWidth="2.2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <line x1="18" y1="6" x2="6" y2="18" />
+              <line x1="6" y1="6" x2="18" y2="18" />
             </svg>
           </motion.button>
+        </div>
+
+        {/* Section Label: "Menu" */}
+        <motion.div className={styles.menuLabel} variants={itemVariants}>
+          Menu
         </motion.div>
 
-        {/* Mobile Navigation Items */}
-        <nav className={styles.navItems} data-lenis-prevent="true">
-          {navItems.map((item, index) => (
-            <motion.div key={item.title} variants={menuItemVariants}>
-              <MotionLink
-                  href={item.href}
-                  className={`${styles.navItem} ${pathname === item.href ? styles.active : ''}`}
-                  custom={index}
-                  onClick={(e) => {
-                    if (item.hasMegaMenu) {
-                      e.preventDefault();
-                      setOpenSubmenus(prev => ({ ...prev, [item.title]: !prev[item.title] }));
-                    } else {
-                      handleLinkClick();
-                    }
-                  }}
-                  whileTap={{ scale: 0.97 }}
-                >
-                  <span className={styles.navNumber}>0{index + 1}.</span>
-                  <span className={styles.navText}>{item.title}</span>
-                  <span className={styles.navArrow}>
-                    <svg 
-                      width="16" 
-                      height="16" 
-                      viewBox="0 0 24 24" 
-                      fill="none" 
-                      stroke="currentColor" 
-                      strokeWidth="2.5"
-                      style={{ 
-                        transform: openSubmenus[item.title] ? 'rotate(90deg)' : (item.hasMegaMenu ? 'rotate(0deg)' : 'rotate(-45deg)'),
-                        transition: 'transform 0.3s ease' 
-                      }}
-                    >
-                      <line x1="5" y1="12" x2="19" y2="12"></line>
-                      <polyline points="12 5 19 12 12 19"></polyline>
-                    </svg>
-                  </span>
-                </MotionLink>
+        {/* Links List */}
+        <nav className={styles.navLinks}>
+          {links.map((item) => {
+            const isActive = pathname === item.href;
+            const isSubmenuOpen = openSubmenus[item.title];
 
-              {/* Mobile Submenu Dropdown */}
-              {item.hasMegaMenu && (
-                <AnimatePresence>
-                  {openSubmenus[item.title] && (
-                    <motion.div
-                      className={styles.mobileSubmenu}
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: 'auto', opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.3, ease: 'easeInOut' }}
-                      style={{ overflow: 'hidden' }}
+            return (
+              <motion.div key={item.title} variants={itemVariants} className={styles.navItemWrapper}>
+                <div className={styles.navItemRow}>
+                  <Link
+                    href={item.href}
+                    className={`${styles.navLink} ${isActive ? styles.active : ''}`}
+                    onClick={() => {
+                      if (!item.hasMegaMenu) {
+                        handleLinkClick();
+                      }
+                    }}
+                  >
+                    <span>{item.title}</span>
+                  </Link>
+
+                  {item.hasMegaMenu && (
+                    <button
+                      type="button"
+                      className={styles.submenuToggle}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        setOpenSubmenus((prev) => ({
+                          ...prev,
+                          [item.title]: !prev[item.title]
+                        }));
+                      }}
+                      aria-label="Toggle solutions submenu"
                     >
-                      <div className={styles.mobileSubmenuGrid}>
-                        {solutionsData.map(solution => (
-                          <Link 
-                            key={solution.id} 
-                            href={`/solutions/${solution.slug}`}
-                            className={styles.mobileSubmenuItem}
+                      <ChevronDown
+                        size={20}
+                        className={`${styles.chevron} ${isSubmenuOpen ? styles.chevronOpen : ''}`}
+                      />
+                    </button>
+                  )}
+                </div>
+
+                {/* Optional Expandable Solutions Submenu */}
+                {item.hasMegaMenu && (
+                  <AnimatePresence>
+                    {isSubmenuOpen && (
+                      <motion.div
+                        className={styles.submenuContainer}
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                      >
+                        <div className={styles.submenuList}>
+                          {solutionsData.map((sol) => (
+                            <Link
+                              key={sol.id}
+                              href={`/solutions/${sol.slug}`}
+                              className={styles.submenuItem}
+                              onClick={handleLinkClick}
+                            >
+                              <span
+                                className={styles.submenuDot}
+                                style={{ backgroundColor: sol.color || '#455ce9' }}
+                              />
+                              <span className={styles.submenuTitle}>{sol.title}</span>
+                            </Link>
+                          ))}
+                          <Link
+                            href="/solutions"
+                            className={styles.submenuAllLink}
                             onClick={handleLinkClick}
                           >
-                            <span className={styles.mobileSubmenuDot} style={{ backgroundColor: solution.color }}></span>
-                            {solution.title}
+                            View All Solutions &rarr;
                           </Link>
-                        ))}
-                        <Link 
-                          href="/solutions"
-                          className={styles.mobileSubmenuAllLink}
-                          onClick={handleLinkClick}
-                        >
-                          View All Solutions
-                        </Link>
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              )}
-            </motion.div>
-          ))}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                )}
+              </motion.div>
+            );
+          })}
         </nav>
 
-        {/* Mobile Menu Footer */}
-        <motion.div 
-          className={styles.menuFooter}
-          variants={menuItemVariants}
-        >
-          <div className={styles.contactInfo}>
-            <p className={styles.contactLabel}>Get in Touch</p>
-            <a href="mailto:hello@company.com" className={styles.contactLink}>
-              hello@company.com
-            </a>
-          </div>
-          <div className={styles.socialLinks}>
-            <Magnetic>
-              <motion.a
-                href="https://facebook.com"
-                className={styles.socialLink}
-                whileHover={{ scale: 1.15, y: -3 }}
-                whileTap={{ scale: 0.9 }}
-              >
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                </svg>
-              </motion.a>
-            </Magnetic>
-            <Magnetic>
-              <motion.a
-                href="https://twitter.com"
-                className={styles.socialLink}
-                whileHover={{ scale: 1.15, y: -3 }}
-                whileTap={{ scale: 0.9 }}
-              >
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
-                </svg>
-              </motion.a>
-            </Magnetic>
-            <Magnetic>
-              <motion.a
-                href="https://linkedin.com"
-                className={styles.socialLink}
-                whileHover={{ scale: 1.15, y: -3 }}
-                whileTap={{ scale: 0.9 }}
-              >
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                </svg>
-              </motion.a>
-            </Magnetic>
-          </div>
+        {/* Contacts Pill Button */}
+        <motion.div className={styles.cardFooter} variants={itemVariants}>
+          <motion.div whileTap={{ scale: 0.95 }} whileHover={{ scale: 1.02 }} style={{ display: 'inline-block' }}>
+            <Link
+              href="/contact"
+              className={styles.contactsButton}
+              onClick={handleLinkClick}
+            >
+              Contacts
+            </Link>
+          </motion.div>
         </motion.div>
       </motion.div>
     </>

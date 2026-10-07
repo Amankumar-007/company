@@ -22,6 +22,10 @@ const nextConfig: NextConfig = {
   // Image optimization config
   images: {
     formats: ['image/avif', 'image/webp'],
+    // Fewer candidate widths than Next's defaults (8 + 8): every width becomes a
+    // srcset entry in the HTML for every image, which bloated page size.
+    deviceSizes: [640, 828, 1200, 1920, 2560],
+    imageSizes: [64, 128, 256, 384],
     minimumCacheTTL: 86400, // 1 day
     dangerouslyAllowSVG: true,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
@@ -76,6 +80,16 @@ const nextConfig: NextConfig = {
     ];
   },
 
+  // Rewrite legacy opengraph-image requests directly to send.png
+  async rewrites() {
+    return [
+      {
+        source: '/opengraph-image',
+        destination: '/send.png',
+      },
+    ];
+  },
+
   // Security + performance HTTP headers
   async headers() {
     const isProd = process.env.NODE_ENV === 'production';
@@ -86,14 +100,6 @@ const nextConfig: NextConfig = {
         source: '/admin/:path*',
         headers: [
           { key: 'X-Robots-Tag', value: 'noindex, nofollow' },
-        ],
-      },
-      {
-        // These pages use ?id= query params — not proper indexable URLs.
-        // Noindex them at the HTTP level too (belt-and-suspenders with metadata).
-        source: '/service-detail',
-        headers: [
-          { key: 'X-Robots-Tag', value: 'noindex, follow' },
         ],
       },
       {

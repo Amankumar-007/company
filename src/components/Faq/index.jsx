@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Plus, Minus, Search, HelpCircle, ArrowRight, Sparkles, MessageCircle } from 'lucide-react';
+import { Plus, Minus, Search, HelpCircle, ArrowRight, MessageCircle } from 'lucide-react';
 import { openConsultModal } from '@/components/ConsultModal';
 
 const defaultFaqData = [
@@ -89,7 +89,7 @@ const FAQ = ({ customFaqs = null, title = "Frequently Asked Questions", subtitle
             viewport={{ once: true }}
             className="inline-flex items-center gap-2 bg-[#F6F6F6] border border-gray-200/80 rounded-full px-4 py-1.5 mb-6"
           >
-            <Sparkles className="w-3.5 h-3.5 text-[#DE5D26]" />
+            <HelpCircle className="w-3.5 h-3.5 text-[#DE5D26]" />
             <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-700">
               Got Questions?
             </span>

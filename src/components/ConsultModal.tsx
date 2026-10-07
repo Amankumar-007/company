@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Check } from 'lucide-react';
+import { X, Check, ArrowRight, User, Phone, Mail } from 'lucide-react';
 
 /* ─── Global Open/Close Helper ───────────────────────────────────────────── */
 type Listener = () => void;
@@ -11,7 +11,7 @@ export function openConsultModal() {
   listeners.forEach(fn => fn());
 }
 
-/* ─── Ultra-Minimal Input Field ───────────────────────────────────────────── */
+/* ─── Minimal Clean Field Component ──────────────────────────────────────── */
 function MinimalField({
   label,
   type,
@@ -19,6 +19,7 @@ function MinimalField({
   value,
   onChange,
   error,
+  icon: Icon,
 }: {
   label: string;
   type: string;
@@ -26,34 +27,40 @@ function MinimalField({
   value: string;
   onChange: (v: string) => void;
   error?: string;
+  icon: React.ElementType;
 }) {
   return (
-    <div className="relative flex flex-col group pb-1">
-      <label className="text-[10px] font-semibold uppercase tracking-wider text-zinc-400 mb-1 transition-colors group-focus-within:text-zinc-900">
-        {label}
-      </label>
-      <input
-        type={type}
-        placeholder={placeholder}
-        value={value}
-        onChange={e => onChange(e.target.value)}
-        className={`w-full bg-transparent border-b py-2 text-[14px] text-zinc-900 placeholder:text-zinc-300 outline-none transition-all duration-300 ${error
-            ? 'border-red-400 focus:border-red-500'
-            : 'border-zinc-200 focus:border-zinc-900'
-          }`}
-      />
-      <AnimatePresence>
+    <div className="relative flex flex-col group">
+      <div className="flex items-center justify-between mb-1.5">
+        <label className="text-[11px] font-medium tracking-wide uppercase text-zinc-500 transition-colors group-focus-within:text-black">
+          {label}
+        </label>
         {error && (
-          <motion.span
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="absolute -bottom-3.5 left-0 text-[10px] font-medium text-red-500 tracking-wide"
-          >
+          <span className="text-[10px] font-medium text-zinc-900 tracking-tight">
             {error}
-          </motion.span>
+          </span>
         )}
-      </AnimatePresence>
+      </div>
+
+      <div
+        className={`relative flex items-center bg-zinc-50/80 hover:bg-zinc-50 border rounded-xl px-3.5 py-3 transition-all duration-200 ${
+          error
+            ? 'border-black ring-1 ring-black'
+            : 'border-zinc-200 group-focus-within:border-black group-focus-within:bg-white group-focus-within:ring-1 group-focus-within:ring-black'
+        }`}
+      >
+        <Icon
+          className="w-4 h-4 text-zinc-400 group-focus-within:text-black transition-colors shrink-0 mr-3"
+          strokeWidth={1.5}
+        />
+        <input
+          type={type}
+          placeholder={placeholder}
+          value={value}
+          onChange={e => onChange(e.target.value)}
+          className="w-full bg-transparent text-sm font-normal text-black placeholder:text-zinc-400 outline-none"
+        />
+      </div>
     </div>
   );
 }
@@ -121,7 +128,7 @@ export default function ConsultModal() {
         setErrors({ email: data.message || 'Something went wrong.' });
       }
     } catch {
-      setErrors({ email: 'Network error.' });
+      setErrors({ email: 'Network error. Please try again.' });
     } finally {
       setLoading(false);
     }
@@ -131,35 +138,35 @@ export default function ConsultModal() {
     <AnimatePresence>
       {open && (
         <>
-          {/* Backdrop */}
+          {/* Minimal Backdrop */}
           <motion.div
             key="backdrop"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 bg-black/10 backdrop-blur-md z-[9998]"
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[9998]"
             onClick={handleClose}
           />
 
           {/* Modal Container */}
           <motion.div
             key="panel"
-            initial={{ opacity: 0, scale: 0.98, y: 8 }}
+            initial={{ opacity: 0, scale: 0.96, y: 12 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.98, y: 8 }}
-            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed inset-0 z-[9999] flex items-center justify-center p-4 pointer-events-none"
+            exit={{ opacity: 0, scale: 0.96, y: 12 }}
+            transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+            className="fixed inset-0 z-[9999] flex items-center justify-center p-4 sm:p-6 pointer-events-none"
           >
             <div
-              className="relative w-full max-w-[380px] bg-white rounded-2xl shadow-[0_32px_64px_-16px_rgba(0,0,0,0.08)] border border-zinc-100 overflow-hidden pointer-events-auto"
+              className="relative w-full max-w-[420px] bg-white rounded-2xl shadow-[0_24px_60px_-12px_rgba(0,0,0,0.18)] border border-zinc-200 overflow-hidden pointer-events-auto"
               onClick={e => e.stopPropagation()}
             >
               {/* Close Button */}
               <button
                 onClick={handleClose}
-                className="absolute top-5 right-5 text-zinc-400 hover:text-zinc-900 transition-colors duration-200 z-10"
-                aria-label="Close"
+                className="absolute top-5 right-5 w-8 h-8 rounded-full bg-zinc-100 hover:bg-zinc-200 text-zinc-500 hover:text-black flex items-center justify-center transition-colors duration-150 z-10 cursor-pointer"
+                aria-label="Close modal"
               >
                 <X className="w-4 h-4" strokeWidth={1.5} />
               </button>
@@ -168,20 +175,28 @@ export default function ConsultModal() {
                 {success ? (
                   <motion.div
                     key="success"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0 }}
-                    className="flex flex-col items-center justify-center text-center px-8 py-14"
+                    transition={{ duration: 0.2 }}
+                    className="flex flex-col items-center justify-center text-center px-8 py-12"
                   >
-                    <div className="w-10 h-10 rounded-full bg-zinc-50 border border-zinc-100 text-zinc-900 flex items-center justify-center mb-4">
-                      <Check className="w-4 h-4" strokeWidth={2} />
+                    <div className="w-12 h-12 rounded-full bg-black text-white flex items-center justify-center mb-4 shadow-sm">
+                      <Check className="w-5 h-5" strokeWidth={2} />
                     </div>
-                    <h2 className="text-lg font-semibold text-zinc-900 tracking-tight mb-1">
-                      Request Received
+                    <h2 className="text-xl font-bold text-black tracking-tight mb-2">
+                      Request Confirmed
                     </h2>
-                    <p className="text-zinc-500 text-[13px] leading-relaxed">
-                      Thanks, <span className="font-medium text-zinc-900">{name.split(' ')[0]}</span>. We'll speak with you shortly.
+                    <p className="text-zinc-500 text-sm leading-relaxed max-w-xs mb-6">
+                      Thanks, <strong className="font-semibold text-black">{name.split(' ')[0]}</strong>. We&apos;ll be in touch shortly to schedule your call.
                     </p>
+                    <button
+                      type="button"
+                      onClick={handleClose}
+                      className="px-6 py-2.5 rounded-xl bg-black hover:bg-zinc-800 text-white font-medium text-xs transition-colors cursor-pointer"
+                    >
+                      Done
+                    </button>
                   </motion.div>
                 ) : (
                   <motion.div
@@ -189,39 +204,78 @@ export default function ConsultModal() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    className="p-6 pt-7"
+                    className="p-6 sm:p-7"
                   >
-                    {/* Header Group */}
-                    <div className="mb-6">
-                      <h2 className="text-xl font-bold text-zinc-900 tracking-tight mb-1">
+                    {/* Minimal Header */}
+                    <div className="mb-6 pr-6">
+                      <h2 className="text-xl sm:text-[22px] font-bold text-black tracking-tight mb-1.5">
                         Free Consultation
                       </h2>
-                      <p className="text-[13px] text-zinc-400 leading-normal pr-4">
-                        Provide your contact details below to secure a meeting slot.
+                      <p className="text-xs sm:text-[13px] text-zinc-500 leading-normal">
+                        Share your contact details below to secure a meeting slot.
                       </p>
                     </div>
 
                     {/* Form Layout */}
-                    <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-5">
-                      <MinimalField label="Full Name" type="text" placeholder="Jane Doe" value={name} onChange={setName} error={errors.name} />
-                      <MinimalField label="Phone" type="tel" placeholder="+91 98765 43210" value={phone} onChange={setPhone} error={errors.phone} />
-                      <MinimalField label="Email" type="email" placeholder="jane@company.com" value={email} onChange={setEmail} error={errors.email} />
+                    <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-3.5">
+                      <MinimalField
+                        label="Full Name"
+                        type="text"
+                        placeholder="e.g. Alex Morgan"
+                        value={name}
+                        onChange={setName}
+                        error={errors.name}
+                        icon={User}
+                      />
+                      <MinimalField
+                        label="Phone Number"
+                        type="tel"
+                        placeholder="+91 98765 43210"
+                        value={phone}
+                        onChange={setPhone}
+                        error={errors.phone}
+                        icon={Phone}
+                      />
+                      <MinimalField
+                        label="Work Email"
+                        type="email"
+                        placeholder="alex@company.com"
+                        value={email}
+                        onChange={setEmail}
+                        error={errors.email}
+                        icon={Mail}
+                      />
 
-                      {/* Unified Submit Button */}
+                      {/* Clean Black Button */}
                       <button
                         type="submit"
                         disabled={loading}
-                        className="mt-2 flex items-center justify-center w-full h-11 bg-zinc-950 text-white text-[13px] font-medium rounded-xl hover:bg-zinc-900 disabled:opacity-50 disabled:hover:bg-zinc-950 transition-all active:scale-[0.99]"
+                        className="mt-2 flex items-center justify-center gap-2 w-full h-11 bg-black hover:bg-zinc-800 text-white text-sm font-medium rounded-xl transition-all duration-150 active:scale-[0.99] disabled:opacity-50 cursor-pointer"
                       >
                         {loading ? (
-                          <svg className="animate-spin w-4 h-4 text-white" viewBox="0 0 24 24" fill="none">
-                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z" />
-                          </svg>
+                          <div className="flex items-center gap-2">
+                            <svg className="animate-spin w-4 h-4 text-white" viewBox="0 0 24 24" fill="none">
+                              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z" />
+                            </svg>
+                            <span>Submitting...</span>
+                          </div>
                         ) : (
-                          'Confirm Request'
+                          <>
+                            <span>Confirm Request</span>
+                            <ArrowRight className="w-3.5 h-3.5" />
+                          </>
                         )}
                       </button>
+
+                      {/* Minimal Monochrome Trust Signals */}
+                      <div className="mt-1 pt-3 border-t border-zinc-100 flex items-center justify-between text-[11px] text-zinc-400 font-normal">
+                        <span>100% Confidential</span>
+                        <span>•</span>
+                        <span>Fast Response</span>
+                        <span>•</span>
+                        <span>Zero Obligations</span>
+                      </div>
                     </form>
                   </motion.div>
                 )}

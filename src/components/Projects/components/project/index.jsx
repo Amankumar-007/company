@@ -3,7 +3,7 @@ import React from 'react'
 import styles from './style.module.scss';
 import { useRouter } from 'next/navigation';
 
-export default function index({index, title, manageModal}) {
+export default function index({index, title}) {
     const router = useRouter();
     
     // Map project titles to service IDs
@@ -24,8 +24,6 @@ export default function index({index, title, manageModal}) {
 
     return (
         <div 
-            onMouseEnter={(e) => {manageModal(true, index, e.clientX, e.clientY)}} 
-            onMouseLeave={(e) => {manageModal(false, index, e.clientX, e.clientY)}} 
             onClick={handleClick}
             className={styles.project}
             style={{ cursor: 'pointer' }}
